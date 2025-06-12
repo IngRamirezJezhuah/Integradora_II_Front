@@ -11,7 +11,7 @@ function Pacientes() {
             <div className='caja_1'>
                 <div className='prueba_tabla'>
                     <img src="/prueba-de-sangre.png" alt="prueba imagen" className='imagenes' />
-                    <p className='prueba-name'>Quimica Sangiunea</p>
+                    <p className='prueba-name'>Mario Lira Zamora</p>
                     <img src="/borrar.png" alt="editar" className='iconos' />
                     <img src="/editar.png" alt="borrar" className='iconos' />
                 </div>
@@ -19,7 +19,7 @@ function Pacientes() {
             </div>
             <div className='caja_2'>
                 <h1 className='titulo'>Detalles</h1>
-                <div className='prueba_tabla'>
+                <div className='tabla-detalles'>
                     <img src="/prueba-de-sangre.png" alt="prueba imagen" className='imagenes' />
                     <p className='prueba-name'>Quimica Sangiunea</p>
                     <p>(qt)</p>

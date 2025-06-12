@@ -1,4 +1,21 @@
+.margen{
+    margin: 0%;
+    background: white;
+    color: black;
+    display: flex;
+    align-items: flex-end;
+}
 .prueba{
     font-size: medium;
     color: #ba3e11;
 }
+
+.div-graficas{
+    padding: 2vw;
+    margin: 1rem;
+    width: 32vw;
+    height: 15vw;
+    background-color: #FF4E4E;
+    border-radius: 2rem;
+}
+
