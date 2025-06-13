@@ -4,7 +4,7 @@ import React from 'react'
 //import { Outlet } from 'react-router-dom'
 
 
-function Pedidos() {
+const Pedidos =() => {
     return (
         <div className='margen'>
             <div className='buscador'>

@@ -2,7 +2,7 @@ import React from 'react'
 import { Outlet, Link } from 'react-router-dom'
 //import styles from './Component.module.css';
 
-function Component() {
+const Component=() => {
     return (
         <div className='contenedor'>
             <div className='tabNavigator'>

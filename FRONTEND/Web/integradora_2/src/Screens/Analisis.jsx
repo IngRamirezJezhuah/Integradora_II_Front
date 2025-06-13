@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Analisis() {
+const Analisis=()=> {
     return (
         <div className='margen'>
             <div className='buscador'>

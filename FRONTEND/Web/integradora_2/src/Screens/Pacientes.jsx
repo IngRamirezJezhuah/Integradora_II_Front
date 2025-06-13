@@ -1,7 +1,7 @@
 //rfce para hacer una plantilla
 import React from 'react'
 
-function Pacientes() {
+const Pacientes =() => {
     return (
         <div className='margen'>
             <div className='buscador'>

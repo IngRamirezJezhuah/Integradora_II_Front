@@ -1,7 +1,8 @@
 //rafc para hacer una plantilla rapida
 import React from 'react'
+import { MuestrasHechas, SampleChart } from '../Components';
 
-function Dashboard() {
+const Dashboard=()=> {
     return (
         <div className='margen'>
             <div >
@@ -9,14 +10,14 @@ function Dashboard() {
                     <h2>Temperatura del Laboratorio</h2>
                     <h1>25% c</h1>
                     <div>
-                        grafica
+                        < MuestrasHechas/>
                     </div>
                 </div>
                 <div className='div-graficas'>
                     <h2>Temperatura del Laboratorio</h2>
                     <h1>25% c</h1>
                     <div>
-                        grafica
+                        <SampleChart/>
                     </div>
                 </div>
             </div>

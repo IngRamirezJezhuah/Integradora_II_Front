@@ -28,7 +28,6 @@ function App() {
         <Route path="/Recuperacion" element={<Recuperacion />} />
         
         */}
-
           
           <Route path="/" element={<Component />} >
           <Route path="/Dashboard" element={<Dashboard />} />
