@@ -19,7 +19,7 @@ const MuestrasHechas = () => {
         datasets: [
             {
                 label: "Análisis por día",
-                data: [32, 45, 38, 50, 47, 43, 39], // máximo 50
+                data: [20, 49, 38, 37, 22, 27, 30], // máximo 50
                 borderColor: "rgba(54, 162, 235, 1)",
                 backgroundColor: "rgba(54, 162, 235, 0.2)",
                 tension: 0.4, // curva suave

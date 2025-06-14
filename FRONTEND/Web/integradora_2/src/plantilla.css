@@ -65,7 +65,7 @@
     border-color: #c1bfbf;
 }
 
-button{
+.btn-agregar{
     color: #ffffff;
     background-color: #ff4242;
     border-style: none;
@@ -76,25 +76,31 @@ button{
     margin-left: 60vw;
 }
 .prueba_tabla{
-    padding: 1rem;
+    padding: 10px;
     display: flex;
     align-items: flex-end;
+    background-color: #c1bfbf;
 }
 
-.imagenes{width: 2vw;height: 2vw;}
-.iconos{
+.imagen-prueba{
     width: 2vw;
     height: 2vw;
-    margin-left: 1rem;
-    padding-right: 3rem;
-    padding: 10px;
 }
 
+.iconos{
+    width: 2vw;
+    height: vw;
+    padding: 5px;
+}
+.icono-user{
+    width: 2vw;
+    height: 2vw;
+    padding: 5px;
+}
 .prueba-name{
-    padding: 7px;
+    padding: 1rem;
     padding-left: 1.5vw;
     padding-right: 8vw;
-    margin-bottom: .5vw;
 }
 
 .detall-tex{

@@ -21,14 +21,13 @@ function App() {
     <Router>
       <Routes>
         {/* Layout principal
-        <Route path="/" element={<Login />}>
+        <Route path="/login" element={<Login />}>
 
           Páginas que usan ese layout
         <Route path="/Login" element={<Login />} />
         <Route path="/Recuperacion" element={<Recuperacion />} />
         
         */}
-          
           <Route path="/" element={<Component />} >
           <Route path="/Dashboard" element={<Dashboard />} />
           <Route path="/Pacientes" element={<Pacientes />} />

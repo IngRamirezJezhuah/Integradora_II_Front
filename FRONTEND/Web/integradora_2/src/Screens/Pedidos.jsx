@@ -9,7 +9,7 @@ const Pedidos =() => {
         <div className='margen'>
             <div className='buscador'>
             <input type="text" placeholder='Buscar muestras' className='buscador' />
-            <button> +agregar</button>
+            <button className='btn-agregar'> +agregar</button>
             </div>
             <div className='scale-up-ver-center'>
                 <div className='caja_1'>

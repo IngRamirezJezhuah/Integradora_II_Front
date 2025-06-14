@@ -18,4 +18,44 @@
     background-color: #FF4E4E;
     border-radius: 2rem;
 }
+.div-grafica{
+    padding: 1vw;
+    margin: 1vw;
+}
+.div-muestra{
+    padding: 2vw;
+    margin: 1rem;
+    width: 20vw;
+    height: 6vw;
+    background-color: #FD908B;
+    border-radius: 2rem;
+}
+.div-muestra-2{
+    padding: 2vw;
+    margin: 1rem;
+    width: 20vw;
+    height: 6vw;
+    background-color: #FFC7BC;
+    border-radius: 2rem;
+}
+.div-muestra-3{
+    padding: 2vw;
+    margin: 1rem;
+    width: 20vw;
+    height: 6vw;
+    background-color: #f9dda3;
+    border-radius: 2rem;
+}
+.div-muestra-4{
+    padding: 2vw;
+    margin: 1rem;
+    width: 20vw;
+    height: 6vw;
+    background-color: #bef2af;
+    border-radius: 2rem;
+}
 
+.centrar{
+    padding: .5vw;
+    text-align: center;
+}

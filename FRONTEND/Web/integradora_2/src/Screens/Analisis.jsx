@@ -5,16 +5,16 @@ const Analisis=()=> {
         <div className='margen'>
             <div className='buscador'>
                 <input type="text" placeholder='Buscar Analisis' className='buscador' />
-                <button>+Agregar</button>
+                <button className='btn-agregar'>+Agregar</button>
             </div>
             <div className='scale-in-hor-center'>
                 <div className='caja_1'>
                     <h1 className='titulo'>Pruebas</h1>
                     <div className='prueba_tabla'>
-                        <img src="/prueba-de-sangre.png" alt="prueba imagen" className='imagenes' />
+                        <img src="/prueba-de-sangre.png" alt="prueba imagen" className='imagen-prueba' />
                         <p className='prueba-name'>Quimica Sangiunea</p>
-                        <img src="/borrar.png" alt="editar" className='iconos' />
-                        <img src="/editar.png" alt="borrar" className='iconos' />
+                        <img src="/ajustes.png" alt="borrar" className='iconos' />
+                        <img src="/basura.png" alt="editar" className='iconos' />
                     </div>
                     <hr />
                 </div>
