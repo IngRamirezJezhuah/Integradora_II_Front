@@ -3,33 +3,44 @@ import React from 'react'
 
 const Pacientes =() => {
     return (
-        <div className='margen'>
-            <div className='buscador'>
-            <input type="text" placeholder='Buscar Analisis' className='buscador' />
-            <button>+Agregar</button>
-            </div>
-            <div className='caja_1'>
-                <div className='prueba_tabla'>
-                    <img src="/user-nat.png" alt="prueba imagen" className='imagenes' />
-                    <p className='prueba-name'>Mario Lira Zamora</p>
-                    <img src="/ajustes-deslizadores.png" alt="editar" className='iconos' />
-                    <img src="/basura.png" alt="borrar" className='iconos' />
+            <div className='margen'>
+                <div className='buscador'>
+                    <input type="text" placeholder='Buscar Paciente' className='buscador' />
+                    <button>+Agregar</button>
                 </div>
-                <hr />
-            </div>
-            <div className='caja_2'>
-                <h1 className='titulo'>Detalles</h1>
-                <div className='tabla-detalles'>
-                    <img src="/prueba-de-sangre.png" alt="prueba imagen" className='imagenes' />
-                    <p className='prueba-name'>Quimica Sangiunea</p>
-                    <div>
-                        <img src="/email.png" alt="editar" className='iconos' />
-                        <img src="/descargas.png" alt="borrar" className='iconos' />
+                <div className='scale-up-ver-center'>
+                    <div className='caja_1'>
+                        <div className='prueba_tabla'>
+                            <img src="/user-nat.png" alt="prueba imagen" className='imagenes' />
+                            <p className='prueba-name'>Mario Lira Zamora</p>
+                            <img src="/ajustes-deslizadores.png" alt="editar" className='iconos' />
+                            <img src="/basura.png" alt="borrar" className='iconos' />
+                        </div>
+                        <hr />
                     </div>
                 </div>
-                
+                <div className='scale-up-ver-center'>
+                    <div className='caja_2'>
+                        <h1 className='titulo'>Detalles</h1>
+                        <div className='tabla-detalles'>
+                            <img src="/prueba-de-sangre.png" alt="prueba imagen" className='imagenes' />
+                            <p className='prueba-name'>Quimica Sangiunea</p>
+                            <div>
+                                <img src="/email.png" alt="editar" className='iconos' />
+                                <img src="/descargas.png" alt="borrar" className='iconos' />
+                            </div>
+                        </div>
+                        <div className='tabla-detalles'>
+                            <img src="/prueba-de-sangre.png" alt="prueba imagen" className='imagenes' />
+                            <p className='prueba-name'>Quimica Sangiunea</p>
+                            <div>
+                                <img src="/email.png" alt="editar" className='iconos' />
+                                <img src="/descargas.png" alt="borrar" className='iconos' />
+                            </div>
+                        </div>
+                </div>
+                </div>
             </div>
-        </div>
     )
 }
 

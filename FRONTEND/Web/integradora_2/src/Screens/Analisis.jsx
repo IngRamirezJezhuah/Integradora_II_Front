@@ -4,19 +4,22 @@ const Analisis=()=> {
     return (
         <div className='margen'>
             <div className='buscador'>
-            <input type="text" placeholder='Buscar Analisis' className='buscador' />
-            <button>+Agregar</button>
+                <input type="text" placeholder='Buscar Analisis' className='buscador' />
+                <button>+Agregar</button>
             </div>
-            <div className='caja_1'>
-                <h1 className='titulo'>Pruebas</h1>
-                <div className='prueba_tabla'>
-                    <img src="/prueba-de-sangre.png" alt="prueba imagen" className='imagenes' />
-                    <p className='prueba-name'>Quimica Sangiunea</p>
-                    <img src="/borrar.png" alt="editar" className='iconos' />
-                    <img src="/editar.png" alt="borrar" className='iconos' />
+            <div className='scale-in-hor-center'>
+                <div className='caja_1'>
+                    <h1 className='titulo'>Pruebas</h1>
+                    <div className='prueba_tabla'>
+                        <img src="/prueba-de-sangre.png" alt="prueba imagen" className='imagenes' />
+                        <p className='prueba-name'>Quimica Sangiunea</p>
+                        <img src="/borrar.png" alt="editar" className='iconos' />
+                        <img src="/editar.png" alt="borrar" className='iconos' />
+                    </div>
+                    <hr />
                 </div>
-                <hr />
             </div>
+            <div className='scale-in-hor-center'>
             <div className='caja_2'>
                 <h1 className='titulo'>Detalles</h1>
                 <p className='detall-tex'>Quimica sanguinea</p>
@@ -32,7 +35,7 @@ const Analisis=()=> {
                 Totam minima culpa alias quisquam suscipit hic reiciendis eos, ullam obcaecati optio tempora sequi aperiam vero. Expedita ea aut voluptatum molestiae beatae dolores, illo eum eveniet ex est, porro nesciunt?
                 Blanditiis nulla ex, maxime perferendis dolore voluptas nisi asperiores ratione quos ipsum repellendus ut pariatur. Adipisci delectus blanditiis error quibusdam voluptas, hic, tempore deleniti deserunt ullam esse sunt ipsam aliquid!
                 </text>
-                
+            </div>
             </div>
         </div>
     )

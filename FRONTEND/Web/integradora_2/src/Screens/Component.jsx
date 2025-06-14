@@ -21,14 +21,16 @@ const Component=() => {
                         <li>Pedido</li>
                     </Link>
                     <Link to="/Muestras">
-                        <li className="bordes"><img src="/mues.png" alt="" /></li>
+                        <li className="bordes"><img src="/muestras.png" alt="" /></li>
                         <li>Muestras</li>
                     </Link>
                     <Link to="/Analisis">
-                        <li className="bordes"></li>
+                        <li className="bordes"><img src="/analisis.png" alt="" /></li>
                         <li>analisis</li>
                     </Link>
-                        <div className='cerrar-sesion'></div>
+                        <div className='cerrar-sesion'>
+                            <li className="bordes"><img src="/salida.png" alt="" /></li>
+                        </div>
                 </div>
                 <div className='plantilla'>
                     <Outlet />

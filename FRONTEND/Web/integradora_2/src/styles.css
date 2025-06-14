@@ -5,7 +5,7 @@
 }
 .contenedor{
     background-color: #FEF7FF;
-    padding: auto;
+    padding: 1vw;
     margin: auto;
 }
 
@@ -51,11 +51,10 @@ a{
 /*_______Coso de las imagenes_______*/
 .bordes{
     background-color: #bf1616;
-    padding: 1.5rem;
+    padding: 1vw;
     border-radius: 2vw;
 }
 
 .cerrar-sesion{ 
-    margin-top: 20vw;
-
+    margin-top: 16vw;
 }
