@@ -27,12 +27,12 @@
 }
 
 .buscador{
+    position: absolute;
     width:50vw;
     padding: 1rem;
-    margin-bottom: 37vw;
+    margin-bottom: 40vw;
     border-radius: 3rem;
     border-color: #c1bfbf;
-    position: absolute;
 }
 
 button{
@@ -57,17 +57,18 @@ button{
 }
 
 .iconos{
-    width: 2rem;
-    height: 2rem;
-    padding-left: 2rem;
-    padding-right: 2rem;
-    padding: 7px;
+    width: 2vw;
+    height: 2vw;
+    margin-left: 1rem;
+    padding-right: 3rem;
+    padding: 10px;
 }
 
 .prueba-name{
     padding: 7px;
-    padding-left: 2rem;
-    padding-right: 9rem;
+    padding-left: 1.5vw;
+    padding-right: 8vw;
+    margin-bottom: .5vw;
 }
 
 .detall-tex{

@@ -28,11 +28,11 @@
 
 /*___________tab navigator___________*/
 .menu{
-    width: 4vw;
-    height: 2.5vw;
+    width: 3vw;
+    height: 3vw;
     margin: 1vw;
     margin-top: 0vw;
-    margin-bottom: 4rem;
+
 }
 
 li{
