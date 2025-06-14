@@ -51,11 +51,6 @@
     background-color: #f0f0f0;
     border-radius: 2rem;
 }
-
-.titulo{
-    text-align: center;
-}
-
 .buscador{
     position: absolute;
     width:50vw;
@@ -65,6 +60,20 @@
     border-color: #c1bfbf;
 }
 
+.scroll{
+    padding:0%;
+    margin:0%;
+    width: 30vw;
+    height: 33vw;
+    overflow: auto;
+}
+
+.prueba_tabla{
+    padding: 10px;
+    display: flex;
+    align-items: flex-end;
+}
+/*________Botones________*/
 .btn-agregar{
     color: #ffffff;
     background-color: #ff4242;
@@ -75,32 +84,37 @@
     padding-right: 1rem;
     margin-left: 60vw;
 }
-.prueba_tabla{
-    padding: 10px;
-    display: flex;
-    align-items: flex-end;
-    background-color: #c1bfbf;
-}
-
+/*________iconos e imagenes________*/
 .imagen-prueba{
     width: 2vw;
     height: 2vw;
 }
-
 .iconos{
     width: 2vw;
-    height: vw;
+    height: 2vw;
     padding: 5px;
+    display:flex;
+
 }
 .icono-user{
     width: 2vw;
     height: 2vw;
     padding: 5px;
 }
+
+.acomodar-iconos{
+    position: absolute;
+    margin-left: 25vw;
+}
+.acomodar-iconos-2{
+    position: absolute;
+    margin-left: 22vw;
+}
+/*________textos________*/
 .prueba-name{
-    padding: 1rem;
-    padding-left: 1.5vw;
-    padding-right: 8vw;
+    padding: 7px;
+    margin-left: 2vw;
+    font-size:1vmax;
 }
 
 .detall-tex{
@@ -116,4 +130,22 @@
     align-items: flex-end;
     background-color: #d5d4d5;
     border-radius: 2rem;
+}
+
+.titulo{
+    text-align: center;
+}
+
+.inicial-circulo {
+    width: 2.5rem;
+    height: 2.5rem;
+    background-color: #E7757A;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 18px;
+    text-transform: uppercase;
 }

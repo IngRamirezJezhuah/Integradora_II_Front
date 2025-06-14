@@ -14,6 +14,7 @@ import  Muestras  from './Screens/Muestras.jsx';
 //import Login from './Screens/Login.jsx';
 import Pedidos from './Screens/Pedidos.jsx';
 import Analisis from './Screens/Analisis.jsx';
+import { RegistrarPaceinte } from './Components/index.js';
 
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
           <Route path="/Pedidos" element={<Pedidos />} />
           <Route path="/Muestras" element={<Muestras />} />
           <Route path='/Analisis' element={<Analisis />} />
+          <Route path='/Registrar-paciente' element={<RegistrarPaceinte />} />
           </Route>
         {/*</Route>*/}
       </Routes>

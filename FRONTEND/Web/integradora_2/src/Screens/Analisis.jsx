@@ -13,8 +13,12 @@ const Analisis=()=> {
                     <div className='prueba_tabla'>
                         <img src="/prueba-de-sangre.png" alt="prueba imagen" className='imagen-prueba' />
                         <p className='prueba-name'>Quimica Sangiunea</p>
-                        <img src="/ajustes.png" alt="borrar" className='iconos' />
-                        <img src="/basura.png" alt="editar" className='iconos' />
+                        <div  className='acomodar-iconos'>
+                            <img src="/basura.png" alt="editar" className='iconos' />
+                        </div>
+                        <div className='acomodar-iconos-2'>
+                            <img src="/ajustes.png" alt="borrar" className='iconos' />
+                        </div>
                     </div>
                     <hr />
                 </div>
