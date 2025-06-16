@@ -32,14 +32,25 @@
         opacity: 1;
     }
 }
-
+/*__________del centro hacia afuera__________*/
+.scale-up-center {
+	animation: scale-up-center 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+} 
+@keyframes scale-up-center {
+    0% {
+        transform: scale(0.5);
+    }
+    100% {
+        transform: scale(1);
+    }
+    }
 
 /*__________estilos de las cajas de contenido__________ */
 .caja_1{
     padding: 2vw;
     margin: 1rem;
     width: 30vw;
-    height: 33vw;
+    height: 30vw;
     background-color: #f0f0f0;
     border-radius: 2rem;
 }
@@ -47,7 +58,7 @@
     padding: 2vw;
     margin: 1rem;
     width: 30vw;
-    height: 33vw;
+    height: 30vw;
     background-color: #f0f0f0;
     border-radius: 2rem;
 }
@@ -67,11 +78,21 @@
     height: 33vw;
     overflow: auto;
 }
-
 .prueba_tabla{
     padding: 10px;
     display: flex;
     align-items: flex-end;
+}
+.pedidos-form{
+    padding: 2vw;
+    margin: 1rem;
+    width: 30vw;
+    height: 30vw;   
+}
+
+.registrar-user{
+    margin-left: 20vw;
+    margin-top: 12vw;
 }
 /*________Botones________*/
 .btn-agregar{
@@ -84,6 +105,27 @@
     padding-right: 1rem;
     margin-left: 60vw;
 }
+.btn{
+    color: #ffffff;
+    background-color: #ff4242;
+    border-style: none;
+    border-radius: 2rem;
+    padding: .8rem;
+    margin: 1vw;
+}
+
+/*________inputs________*/
+.label-form{
+    padding: 20px;
+    padding-right: 15vw;
+    margin-right: 30vw;
+    border-radius: 1rem;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px; /* 150% */
+}
+
 /*________iconos e imagenes________*/
 .imagen-prueba{
     width: 2vw;
@@ -148,4 +190,16 @@
     font-weight: bold;
     font-size: 18px;
     text-transform: uppercase;
+}
+
+.precios{
+    font-size: 2vmin;
+    padding-right: 18vw;
+}
+
+.acomodar{
+    margin: 0%; 
+    display: flex;
+    align-items: flex-end; 
+
 }

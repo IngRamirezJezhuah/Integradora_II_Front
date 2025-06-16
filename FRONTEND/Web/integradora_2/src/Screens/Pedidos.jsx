@@ -13,11 +13,22 @@ const Pedidos =() => {
             </div>
             <div className='scale-up-ver-center'>
                 <div className='caja_1'>
-                    <h1 className='titulo'>Pedidos</h1>
+                    <div className='acomodar'>
+                        <p className='precios'>pruebas</p>
+                        <p className='precios'>precio</p>
+                    </div>
+                    <div className='prueba_tabla'>
+                        <img src="/prueba-de-sangre.png" alt="prueba imagen" className='imagen-prueba' />
+                        <p className='prueba-name'>Quimica Sangiunea</p>
+                        <div  className='acomodar-iconos'>
+                            <p>100 $</p>
+                        </div>
+                    </div>
+                    <hr />
                 </div>
             </div>
             <div className='scale-up-ver-center'>
-                <div className='caja_2'>
+                <div className='pedidos-form'>
                     <h1 className='titulo'>Detalles</h1>
                 </div>
             </div>
