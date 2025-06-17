@@ -22,10 +22,10 @@ const SampleBox = ({ id, type, name, technician }) => {
         <p>{technician}</p>
       </div>
       <div className="sample-actions">  
-        <button className="action-btn"><Link to="/Detalles:{id}" ></Link><img src="./icons/edit.png" alt="Edit" /></button>
-        <button className="action-btn"><img src="./icons/refresh.png" alt="Refresh" /></button>
-        <button className="action-btn"><img src="./icons/view.png" alt="View" /></button>
-        <button className="action-btn"><img src="./icons/delete.png" alt="Delete" /></button>
+        <button className="action-btn"><Link to="/Detalles:{id}" ></Link><img src="./editar.png" alt="Edit" /></button>
+        <button className="action-btn"><img src="./refresh.png" alt="Refresh" /></button>
+        <button className="action-btn"><img src="./view.png" alt="View" /></button>
+        <button className="action-btn"><img src="./basura.png" alt="Delete" /></button>
       </div>
     </div>
   );
