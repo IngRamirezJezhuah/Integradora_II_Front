@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const SearchBar = ({ placeholder = 'Buscar muestra', value = '', onChange, onSearch, debounceTime = 300 }) => {
+const SearchBar = ({ placeholder = 'Buscar', value = '', onChange, onSearch, debounceTime = 300 }) => {
   const [inputValue, setInputValue] = useState(value);
 
   useEffect(() => {

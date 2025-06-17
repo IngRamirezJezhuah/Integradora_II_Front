@@ -5,6 +5,7 @@ import './App.css';
 import './styles.css';
 import './Dash.css'
 import './plantilla.css'
+import './elementos.css'
 
 import Component from './Screens/Component.jsx';
 //import Recuperacion from './Screens/Recuperacion.jsx';
@@ -14,7 +15,8 @@ import  Muestras  from './Screens/Muestras.jsx';
 //import Login from './Screens/Login.jsx';
 import Pedidos from './Screens/Pedidos.jsx';
 import Analisis from './Screens/Analisis.jsx';
-import { RegistrarPaceinte } from './Components/index.js';
+import { RegistrarPaceinte, SampleBox } from './Components/index.js';
+import AgregarMuestra from './Screens/AgregarMuestra.jsx';
 
 
 function App() {
@@ -36,6 +38,8 @@ function App() {
           <Route path="/Muestras" element={<Muestras />} />
           <Route path='/Analisis' element={<Analisis />} />
           <Route path='/Registrar-paciente' element={<RegistrarPaceinte />} />
+          <Route path='/Agregar-muestra' element={<AgregarMuestra />}/>
+          <Route path='/SampleBox' element={<SampleBox/>}/>
           </Route>
         {/*</Route>*/}
       </Routes>

@@ -64,11 +64,12 @@
     border-radius: 2rem;
 }
 .buscador{
-    position: relative;
+    position: absolute;
     width:50vw;
     padding: 1rem;
     border-radius: 3rem;
     border-color: #c1bfbf;
+    margin-bottom: 40vw;
 }
 
 .scroll{

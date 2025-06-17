@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 
 const RegistrarPaciente = () => {
     const [formData, setFormData] = useState({
@@ -61,6 +62,9 @@ const RegistrarPaciente = () => {
                     <label className='precios' htmlFor="correo">Correo:</label>
                     <input className='label-form' type="email" name="correo" value={formData.correo} onChange={handleChange} required   placeholder="Correo@gmail.com"/>
                     <input className='btn' type="submit" value="Registrar" />
+                    <Link to='/Pacientes'>  
+                    <button className='btn'>Regresar</button>
+                    </Link>
                 </form>
             </div>
         </div>

@@ -2,6 +2,7 @@
 import React from 'react'
 //import {useState,useEffect} from 'react'
 import { Link } from 'react-router-dom';
+import { SearchBar } from '../Components';
 
 const Pacientes =() => {
 
@@ -46,6 +47,7 @@ const Pacientes =() => {
     }, [])*/
     return (
             <div className='margen'>
+                {/*
                 <div className='buscador'>
                     <input type="text" placeholder='Buscar Paciente' className='buscador' />
                     <Link to="/Registrar-paciente">
@@ -53,7 +55,13 @@ const Pacientes =() => {
                     </Link>
                     <p className='prueba-name'>asa</p>
                 </div>
-                    
+                */}
+                <div className='buscador'>
+                    < SearchBar />
+                    <Link to="/Registrar-paciente">
+                    <button className='btn-agregar'>+Agregar</button>
+                    </Link>
+                </div>
                 <div className='scale-up-ver-center'>
                         <div className='caja_1'>
                             <div className='scroll'>

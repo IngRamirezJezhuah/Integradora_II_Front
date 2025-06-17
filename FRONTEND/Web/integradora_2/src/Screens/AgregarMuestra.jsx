@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import chemistryIcon from './icons/chemistry.png';
-import bloodTestIcon from './icons/blood-test.png';
+//import chemistryIcon from './icons/chemistry.png';
+//import bloodTestIcon from './icons/blood-test.png';
 
 const AgregarMuestra = () => {
   const [selectedTest, setSelectedTest] = useState('');
@@ -35,14 +35,14 @@ const AgregarMuestra = () => {
             className={`test-option ${selectedTest === 'Quimica Sanguinea' ? 'selected' : ''}`}
             onClick={() => handleTestChange('Quimica Sanguinea')}
           >
-            <img src={chemistryIcon} alt="Quimica Sanguinea" />
+            <img src="/chemistry.png" alt="Quimica Sanguinea" />
             <span>Quimica Sanguinea</span>
           </div>
           <div
             className={`test-option ${selectedTest === 'Biometria Hematica' ? 'selected' : ''}`}
             onClick={() => handleTestChange('Biometria Hematica')}
           >
-            <img src={bloodTestIcon} alt="Biometria Hematica" />
+            <img src='/blood-test.png' alt="Biometria Hematica" />
             <span>Biometria Hematica</span>
           </div>
         </div>
