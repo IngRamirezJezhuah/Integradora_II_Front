@@ -6,6 +6,7 @@ import './styles.css';
 import './Dash.css'
 import './plantilla.css'
 import './elementos.css'
+import './nav.css'
 
 import Component from './Screens/Component.jsx';
 //import Recuperacion from './Screens/Recuperacion.jsx';

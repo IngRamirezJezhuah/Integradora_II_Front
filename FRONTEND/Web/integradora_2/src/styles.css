@@ -5,16 +5,17 @@
 }
 .contenedor{
     background-color: #FEF7FF;
-    padding: 1vw;
-    margin: auto;
+
+    margin: 0;
 }
 
 .tabNavigator{
-    background-color: #FEF7FF;
-    margin-right: 90vw;
-    padding: 2rem;
+    margin: 0%;
+    background-color: #ff4242;
+    margin-right: 91vw;
+    margin-bottom: 1vw;
+    padding: 1rem;
     display: flex;
-    margin-bottom: auto;
 }
 
 .plantilla{

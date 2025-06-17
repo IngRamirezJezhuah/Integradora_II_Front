@@ -1,5 +1,7 @@
 .margen{
     margin: 0%;
+    padding: 1vw;
+    margin-left: 1vw;
     background: white;
     color: black;
     display: flex;
