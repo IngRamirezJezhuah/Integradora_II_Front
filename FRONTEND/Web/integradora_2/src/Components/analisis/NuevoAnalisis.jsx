@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import './FormLg.css';
+import { Link } from 'react-router-dom';
+
 
 const NuevoAnalisisForm = () => {
   const [formData, setFormData] = useState({
@@ -49,53 +50,59 @@ const NuevoAnalisisForm = () => {
 
   return (
     <div className="container">
-      <div className="header">
-        <h2 className="title">Nuevo Análisis</h2>
-        <button className="btn cancel" onClick={handleCancel}>Cancelar</button>
-      </div>
-      <form className="form" onSubmit={handleSubmit}>
-        {error && <p className="error-msg">{error}</p>}
+      <div className='scale-in-hor-center'>
 
-        <label>Nombre</label>
-        <input
-          className="input-field"
-          type="text"
-          name="nombre"
-          value={formData.nombre}
-          onChange={handleChange}
-        />
-
-        <label>Costo</label>
-        <input
-          className="input-field"
-          type="number"
-          name="costo"
-          value={formData.costo}
-          onChange={handleChange}
-          step="0.01"
-        />
-
-        <label>Días de espera</label>
-        <input
-          className="input-field"
-          type="number"
-          name="diasEspera"
-          value={formData.diasEspera}
-          onChange={handleChange}
-        />
-
-        <label>Descripción</label>
-        <textarea
-          className="input-field textarea"
-          name="descripcion"
-          value={formData.descripcion}
-          onChange={handleChange}
-        />
-
-        <div className="buttons">
-          <button type="submit" className="btn submit">Enviar</button>
+        <div className="header">
+          <h2 className="title">Nuevo Análisis</h2>
+          <button className="btn cancel" onClick={handleCancel}>Cancelar</button>
+          <Link to='/Analisis'>
+            <button className='btn'>Regresar</button>
+          </Link>
         </div>
-      </form>
+        <form className="form" onSubmit={handleSubmit}>
+          {error && <p className="error-msg">{error}</p>}
+
+          <label>Nombre</label>
+          <input
+            className="input-field"
+            type="text"
+            name="nombre"
+            value={formData.nombre}
+            onChange={handleChange}
+          />
+
+          <label>Costo</label>
+          <input
+            className="input-field"
+            type="number"
+            name="costo"
+            value={formData.costo}
+            onChange={handleChange}
+            step="0.01"
+          />
+
+          <label>Días de espera</label>
+          <input
+            className="input-field"
+            type="number"
+            name="diasEspera"
+            value={formData.diasEspera}
+            onChange={handleChange}
+          />
+
+          <label>Descripción</label>
+          <textarea
+            className="input-field textarea"
+            name="descripcion"
+            value={formData.descripcion}
+            onChange={handleChange}
+          />
+
+          <div className="buttons">
+            <button type="submit" className="btn submit">Enviar</button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };

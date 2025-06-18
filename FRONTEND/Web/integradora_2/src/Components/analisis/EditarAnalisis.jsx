@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-//import './NuevoAnalisisForm.css';
+import { Link } from 'react-router-dom';
+
 
 const EditarAnalisisForm = () => {
   const [formData, setFormData] = useState({
@@ -50,8 +51,11 @@ const EditarAnalisisForm = () => {
   return (
     <div className="container">
       <div className="header">
-        <h2 className="title">Nuevo Análisis</h2>
+        <h2 className="title">Editar Análisis</h2>
         <button className="btn cancel" onClick={handleCancel}>Cancelar</button>
+        <Link to='/Analisis'>
+          <button className='btn'>Regresar</button>
+        </Link>  
       </div>
       <form className="form" onSubmit={handleSubmit}>
         {error && <p className="error-msg">{error}</p>}
@@ -96,6 +100,8 @@ const EditarAnalisisForm = () => {
           <button type="submit" className="btn submit">Enviar</button>
         </div>
       </form>
+      
+
     </div>
   );
 };

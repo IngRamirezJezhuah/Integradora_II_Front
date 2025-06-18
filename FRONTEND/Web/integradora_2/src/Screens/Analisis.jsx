@@ -3,10 +3,14 @@ import { Link } from 'react-router-dom';
 import { SearchBar } from '../Components';
 
 const Analisis=()=> {
+    const Pruebas= [
+        "Quimica Sanguinea",
+        "BIometrica Hepatica"
+    ]
     return (
         <div className='margen'>
             <div className='buscador'>
-                <Link to='/Editar-Analisis'>
+                <Link to='/Nuevo-Analisis'>
                 <button className='btn-agregar'>+Agregar</button>
                 </Link>
                 <SearchBar/>
@@ -14,7 +18,9 @@ const Analisis=()=> {
             <div className='scale-in-hor-center'>
                 <div className='caja_1'>
                     <h1 className='titulo'>Pruebas</h1>
-                    <div className='prueba_tabla'>
+                    
+                        {/*
+                        
                         <img src="/prueba-de-sangre.png" alt="prueba imagen" className='imagen-prueba' />
                         <p className='prueba-name'>Quimica Sangiunea</p>
                         <div  className='acomodar-iconos'>
@@ -25,6 +31,24 @@ const Analisis=()=> {
                             <img src="/ajustes.png" alt="ajustes" className='iconos' />
                             </Link>
                         </div>
+                        */}
+                        {Pruebas.map((prueba,index) => (
+                            <div key={index} className='prueba_tabla'>
+                                <div className='icono'>
+                                    <img className='imagen-prueba' src="/prueba-de-sangre.png" alt="prueba imagen" />
+                                </div>
+                                <p className='prueba-name'>{prueba}</p>
+                                <div className='acomodar-iconos'>
+                                    <img src="/sobre-mas.png" alt="editar" className='iconos' />
+                                </div>
+                                <div className='acomodar-iconos-2'>
+                                <Link to='/Editar-Analisis'>
+                                <img src="/ajustes.png" alt="ajustes" className='iconos' />
+                                </Link>
+                            </div>
+                            </div>
+                        ))}
+                    <div className='prueba_tabla'>
                     </div>
                     <hr />
                 </div>

@@ -13,4 +13,5 @@ export {default as FilterBar } from './elementos/filterBar'
 export {default as SampleBox } from './elementos/sampleBox'
 export {default as SampleBoxes } from './elementos/sampleBox'
 //_____________Analisis_____________
+export {default as NuevoAnalisisForm } from './analisis/NuevoAnalisis'
 export {default as EditarAnalisisForm } from './analisis/EditarAnalisis'
