@@ -17,7 +17,7 @@ import  Muestras  from './Screens/Muestras.jsx';
 //import Login from './Screens/Login.jsx';
 import Pedidos from './Screens/Pedidos.jsx';
 import Analisis from './Screens/Analisis.jsx';
-import { RegistrarPaceinte, SampleBox } from './Components/index.js';
+import { EditarAnalisisForm, RegistrarPaceinte, SampleBox } from './Components/index.js';
 //import AgregarMuestra from './Components/muestras/AgregarMuestra.jsx';
 //import NuevoAnalisisForm from './Screens/NuevoAnalisis.jsx';
 
@@ -42,7 +42,7 @@ function App() {
           <Route path="/Muestras" element={<Muestras />} />
           <Route path='/Analisis' element={<Analisis />} />
           <Route path='/Registrar-paciente' element={<RegistrarPaceinte />} />
-          
+          <Route path='/Editar-Analisis' element={<EditarAnalisisForm/>} />
           <Route path='/SampleBox' element={<SampleBox/>}/>
           
           

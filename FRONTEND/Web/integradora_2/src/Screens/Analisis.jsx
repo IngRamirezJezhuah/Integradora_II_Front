@@ -1,11 +1,15 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
+import { SearchBar } from '../Components';
 
 const Analisis=()=> {
     return (
         <div className='margen'>
             <div className='buscador'>
-                <input type="text" placeholder='Buscar Analisis' className='buscador' />
+                <Link to='/Editar-Analisis'>
                 <button className='btn-agregar'>+Agregar</button>
+                </Link>
+                <SearchBar/>
             </div>
             <div className='scale-in-hor-center'>
                 <div className='caja_1'>
@@ -14,10 +18,12 @@ const Analisis=()=> {
                         <img src="/prueba-de-sangre.png" alt="prueba imagen" className='imagen-prueba' />
                         <p className='prueba-name'>Quimica Sangiunea</p>
                         <div  className='acomodar-iconos'>
-                            <img src="/basura.png" alt="editar" className='iconos' />
+                            <img src="/basura.png" alt="Borrar" className='iconos' />
                         </div>
                         <div className='acomodar-iconos-2'>
-                            <img src="/ajustes.png" alt="borrar" className='iconos' />
+                            <Link to='/Editar-Analisis'>
+                            <img src="/ajustes.png" alt="ajustes" className='iconos' />
+                            </Link>
                         </div>
                     </div>
                     <hr />

@@ -47,15 +47,6 @@ const Pacientes =() => {
     }, [])*/
     return (
             <div className='margen'>
-                {/*
-                <div className='buscador'>
-                    <input type="text" placeholder='Buscar Paciente' className='buscador' />
-                    <Link to="/Registrar-paciente">
-                    <button className='btn-agregar'>+Agregar</button>
-                    </Link>
-                    <p className='prueba-name'>asa</p>
-                </div>
-                */}
                 <div className='buscador'>
                     <Link to="/Registrar-paciente">
                     <button className='btn-agregar'>+Agregar</button>
