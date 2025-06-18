@@ -1,5 +1,7 @@
 //rafc para hacer una plantilla rapida
 import React from 'react'
+import { SearchBar } from '../Components';
+import { Link } from 'react-router-dom';
 //import Component from './Component'
 //import { Outlet } from 'react-router-dom'
 
@@ -8,8 +10,10 @@ const Pedidos =() => {
     return (
         <div className='margen'>
             <div className='buscador'>
-            <input type="text" placeholder='Buscar muestras' className='buscador' />
-                <button className='btn-agregar'> +agregar</button>
+                <Link to="/">
+                <button className='btn-agregar'>+Agregar</button>
+                </Link>
+            <SearchBar />
             </div>
             <div className='scale-up-ver-center'>
                 <div className='caja_1'>

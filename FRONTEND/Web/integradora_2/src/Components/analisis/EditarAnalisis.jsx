@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './NuevoAnalisisForm.css';
+//import './NuevoAnalisisForm.css';
 
 const EditarAnalisisForm = () => {
   const [formData, setFormData] = useState({

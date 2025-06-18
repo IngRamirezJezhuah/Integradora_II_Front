@@ -17,7 +17,8 @@ import  Muestras  from './Screens/Muestras.jsx';
 import Pedidos from './Screens/Pedidos.jsx';
 import Analisis from './Screens/Analisis.jsx';
 import { RegistrarPaceinte, SampleBox } from './Components/index.js';
-import AgregarMuestra from './Screens/AgregarMuestra.jsx';
+//import AgregarMuestra from './Components/muestras/AgregarMuestra.jsx';
+//import NuevoAnalisisForm from './Screens/NuevoAnalisis.jsx';
 
 
 function App() {
@@ -30,7 +31,8 @@ function App() {
           Páginas que usan ese layout
         <Route path="/Login" element={<Login />} />
         <Route path="/Recuperacion" element={<Recuperacion />} />
-        
+        <Route path='/Nuevo-Analisis' element={<NuevoAnalisisForm/>} />
+        <Route path='/Agregar-muestra' element={<AgregarMuestra />}/>
         */}
           <Route path="/" element={<Component />} >
           <Route path="/Dashboard" element={<Dashboard />} />
@@ -39,8 +41,10 @@ function App() {
           <Route path="/Muestras" element={<Muestras />} />
           <Route path='/Analisis' element={<Analisis />} />
           <Route path='/Registrar-paciente' element={<RegistrarPaceinte />} />
-          <Route path='/Agregar-muestra' element={<AgregarMuestra />}/>
+          
           <Route path='/SampleBox' element={<SampleBox/>}/>
+          
+          
           </Route>
         {/*</Route>*/}
       </Routes>

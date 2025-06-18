@@ -1,6 +1,7 @@
 import React from 'react'
 import { FilterBar, SearchBar } from '../Components';
 import { Link } from 'react-router-dom';
+
 //import {SearchBar, FilterBar, SampleBoxes} from "../Components";
 //import './elementos.css';
 
@@ -24,7 +25,7 @@ const Muestras =() =>{
             </div>
             <FilterBar/>
             <div className='Box-muestras'>
-                
+
             </div>
         </div>
     )

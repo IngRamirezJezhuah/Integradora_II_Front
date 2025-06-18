@@ -4,7 +4,7 @@ import SearchBar from '../Components/elementos/searchBar';
 
 const AnalysisScreen = () => {
   const [selectedOption, setSelectedOption] = useState('');
-  const [samples, setSamples] = useState([
+  const [samples, /*setSamples*/] = useState([
     { type: 'Análisis de sangre', createDate: '25/08/2025' },
     { type: 'Análisis de sangre', createDate: '25/05/2025' },
     { type: 'Análisis de sangre', createDate: '25/04/2024' },

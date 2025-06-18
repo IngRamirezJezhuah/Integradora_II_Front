@@ -57,10 +57,10 @@ const Pacientes =() => {
                 </div>
                 */}
                 <div className='buscador'>
-                    < SearchBar />
                     <Link to="/Registrar-paciente">
                     <button className='btn-agregar'>+Agregar</button>
                     </Link>
+                    < SearchBar />
                 </div>
                 <div className='scale-up-ver-center'>
                         <div className='caja_1'>
