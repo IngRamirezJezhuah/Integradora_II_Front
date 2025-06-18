@@ -51,7 +51,6 @@ const NuevoAnalisisForm = () => {
   return (
     <div className="container">
       <div className='scale-in-hor-center'>
-
         <div className="header">
           <h2 className="title">Nuevo Análisis</h2>
           <button className="btn cancel" onClick={handleCancel}>Cancelar</button>

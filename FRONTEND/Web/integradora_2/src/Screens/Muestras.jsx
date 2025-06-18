@@ -1,5 +1,5 @@
 import React from 'react'
-import { FilterBar, SearchBar } from '../Components';
+import { FilterBar, SampleBox, SampleModal, SearchBar } from '../Components';
 import { Link } from 'react-router-dom';
 
 //import {SearchBar, FilterBar, SampleBoxes} from "../Components";
@@ -16,6 +16,11 @@ const Muestras =() =>{
             <div className='Box-muestras'>
                 <SampleBoxes/>
             </div>
+
+            <div className='caja_1'>
+                <SampleModal/>
+                <SampleBox/>
+            </div>
             */}
             <div className='buscador'>
                 < SearchBar />
@@ -23,9 +28,12 @@ const Muestras =() =>{
                 <button className='btn-agregar'>+Agregar</button>
                 </Link>
             </div>
-            <FilterBar/>
             <div className='Box-muestras'>
-
+                <FilterBar/>
+                <div className='caja_1'>
+                <SampleModal/>
+                <SampleBox/>
+            </div>
             </div>
         </div>
     )

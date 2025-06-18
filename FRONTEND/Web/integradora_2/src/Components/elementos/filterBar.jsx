@@ -11,6 +11,7 @@ const FilterBar = ({ buttonLabels = ['En proceso', 'Completadas'] }) => {
     <div className="filter-bar">
       <div className="filter-buttons">
         {buttonLabels.map((label, index) => (
+          
           <button
             key={index}
             className={`filter-button ${activeButton === label ? 'active' : ''}`}
@@ -18,6 +19,7 @@ const FilterBar = ({ buttonLabels = ['En proceso', 'Completadas'] }) => {
           >
             {label}
           </button>
+          
         ))}
       </div>
     </div>

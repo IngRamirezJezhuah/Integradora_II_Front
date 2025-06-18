@@ -7,6 +7,14 @@ import { Link } from 'react-router-dom';
 
 
 const Pedidos =() => {
+    const Pruebas= [
+        "Quimica Sanguinea",
+        "BIometrica Hepatica",
+    ]
+    const precios=[
+        "500",
+        "300"
+    ]
     return (
         <div className='margen'>
             <div className='buscador'>
@@ -21,13 +29,19 @@ const Pedidos =() => {
                         <p className='precios'>pruebas</p>
                         <p className='precios'>precio</p>
                     </div>
-                    <div className='prueba_tabla'>
-                        <img src="/prueba-de-sangre.png" alt="prueba imagen" className='imagen-prueba' />
-                        <p className='prueba-name'>Quimica Sangiunea</p>
-                        <div  className='acomodar-iconos'>
-                            <p>100 $</p>
+                    {Pruebas.map((prueba,index) => (
+                        <div key={index} className='prueba_tabla'>
+                            <div className='icono'>
+                                <img className='imagen-prueba' src="/prueba-de-sangre.png" alt="prueba imagen" />
+                            </div>
+                            <p className='prueba-name'>{prueba}</p>
+                            
+                            <div className='acomodar-iconos-2'>
+                                
+                                <p>{precios[index]}</p>{/*se deja dentro el index para que muestre el valor 1 en 1 */}
+                            </div>
                         </div>
-                    </div>
+                        ))}
                     <hr />
                 </div>
             </div>

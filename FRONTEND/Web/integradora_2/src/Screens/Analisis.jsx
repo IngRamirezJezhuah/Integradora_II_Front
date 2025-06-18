@@ -15,7 +15,7 @@ const Analisis=()=> {
                 </Link>
                 <SearchBar/>
             </div>
-            <div className='scale-in-hor-center'>
+            <div className='scale-up-ver-center'>
                 <div className='caja_1'>
                     <h1 className='titulo'>Pruebas</h1>
                     
@@ -53,7 +53,7 @@ const Analisis=()=> {
                     <hr />
                 </div>
             </div>
-            <div className='scale-in-hor-center'>
+            <div className='scale-up-ver-center'>
             <div className='caja_2'>
                 <h1 className='titulo'>Detalles</h1>
                 <p className='detall-tex'>Quimica sanguinea</p>
