@@ -48,10 +48,10 @@ const Pacientes =() => {
     return (
             <div className='margen'>
                 <div className='buscador'>
-                    <Link to="/Registrar-paciente">
+                    < SearchBar />
+                    <Link to="/Nuevo-Paciente-Form">
                     <button className='btn-agregar'>+Agregar</button>
                     </Link>
-                    < SearchBar />
                 </div>
                 <div className='scale-up-ver-center'>
                         <div className='caja_1'>

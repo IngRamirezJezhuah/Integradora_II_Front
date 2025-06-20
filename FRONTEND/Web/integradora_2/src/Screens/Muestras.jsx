@@ -24,7 +24,7 @@ const Muestras =() =>{
             */}
             <div className='buscador'>
                 < SearchBar />
-                <Link to="/Agregar-muestra">
+                <Link to="/AgregarMuestras">
                 <button className='btn-agregar'>+Agregar</button>
                 </Link>
             </div>

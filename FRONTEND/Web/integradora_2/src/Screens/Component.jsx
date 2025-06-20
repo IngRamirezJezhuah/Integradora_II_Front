@@ -28,9 +28,11 @@ const Component=() => {
                         <li className="bordes"><img src="/analisis.png" alt="" /></li>
                         <li>analisis</li>
                     </Link>
+                    <Link to='/HeaderSlide'>
                         <div className='cerrar-sesion'>
                             <li className="bordes"><img src="/salida.png" alt="" /></li>
                         </div>
+                    </Link>
                 </div>
                 <div className='plantilla'>
                     <Outlet />

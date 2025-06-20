@@ -17,7 +17,8 @@ import  Muestras  from './Screens/Muestras.jsx';
 //import Login from './Screens/Login.jsx';
 import Pedidos from './Screens/Pedidos.jsx';
 import Analisis from './Screens/Analisis.jsx';
-import { AgregarMuestra, EditarAnalisisForm, NuevoAnalisisForm, RegistrarPaceinte, SampleBox, SampleModal } from './Components/index.js';
+//import { AgregarMuestra, EditarAnalisisForm, NuevoAnalisisForm, NuevoPaciente, RegistrarPaceinte, SampleBox, SampleModal } from './Components/index.js';
+import { AgregarMuestra, EditarAnalisisForm, NuevoAnalisisForm, NuevoPaciente, RegistrarPaceinte, SampleBox, SampleModal } from './Components/index.ts';
 //import AgregarMuestra from './Components/muestras/AgregarMuestra.jsx';
 //import NuevoAnalisisForm from './Screens/NuevoAnalisis.jsx';
 
@@ -35,6 +36,7 @@ function App() {
         <Route path='/Nuevo-Analisis' element={<NuevoAnalisisForm/>} />
         <Route path='/Agregar-muestra' element={<AgregarMuestra />}/>
         */}
+        
           <Route path="/" element={<Component />} >
           <Route path="/Dashboard" element={<Dashboard />} />
           <Route path="/Pacientes" element={<Pacientes />} />
@@ -43,7 +45,7 @@ function App() {
           <Route path="/Pedidos" element={<Pedidos />} />
           
           <Route path="/Muestras" element={<Muestras />} />
-          <Route path='/Agregar-Muestras' element={<AgregarMuestra/>} />
+          <Route path='/AgregarMuestras' element={<AgregarMuestra/>} />
           
           <Route path='/Analisis' element={<Analisis />} />
           <Route path='/Nuevo-Analisis' element={<NuevoAnalisisForm/>} />
@@ -51,9 +53,11 @@ function App() {
           
           <Route path='/SampleBox' element={<SampleBox/>}/>
           <Route path='/SampleModal' element={<SampleModal/>}/>
+          <Route path='/Nuevo-Paciente-Form' element={<NuevoPaciente/>}/>
           
+          {/**/}
           </Route>
-        {/*</Route>*/}
+        {/*</Route> */}
       </Routes>
     </Router>
   );

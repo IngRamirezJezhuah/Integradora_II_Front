@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import './FormLg.css';
 
 const NuevoPacienteForm = () => {
   const [formData, setFormData] = useState({
