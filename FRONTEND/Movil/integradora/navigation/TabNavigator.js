@@ -5,13 +5,21 @@ import Porfile from '../screens/porfile';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
+import dashboard from '../screens/dashboard';
 
 const Tab = createBottomTabNavigator();
 
 const TabNavigator = () => {
     return (
         <Tab.Navigator>
+
             <Tab.Screen name="Inicio" component={Home} 
+            options={{
+                tabBarIcon: () =>(
+                    <Ionicons name="home-outline" size={30} color={'#62bec0'}/>
+                )
+            }} />
+            <Tab.Screen name="Dashboard" component={dashboard} 
             options={{
                 tabBarIcon: () =>(
                     <Ionicons name="home-outline" size={30} color={'#62bec0'}/>

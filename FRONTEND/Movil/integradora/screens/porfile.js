@@ -5,7 +5,7 @@ import { View, Text, FlatList, Image, ScrollView, StyleSheet, TouchableOpacity, 
 const Porfile= () =>{
     return (
         <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
+        <Text>Perfil</Text>
         <StatusBar style="auto" />
         </View>
     );
