@@ -1,8 +1,10 @@
 import React from 'react'
-import { Outlet, Link } from 'react-router-dom'
+import { Outlet, Link, useLocation } from 'react-router-dom'
+import Dashboard from './Dashboard';
 //import styles from './Component.module.css';
 
 const Component=() => {
+    const location = useLocation();
     return (
         <div className='contenedor'>
             <div className='tabNavigator'>
@@ -34,9 +36,14 @@ const Component=() => {
                         </div>
                     </Link>
                 </div>
-                <div className='plantilla'>
-                    <Outlet />
-                    
+                {/* <div className='plantilla'>
+                    <Outlet /> */}
+                    <div className='plantilla'>
+                    {location.pathname === '/' ? (
+                        <Dashboard />
+                    ) : (
+                        <Outlet />
+                    )}
                 </div>  
             </div>
         </div>

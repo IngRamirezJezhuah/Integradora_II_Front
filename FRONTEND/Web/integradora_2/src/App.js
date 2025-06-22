@@ -37,7 +37,7 @@ function App() {
         <Route path='/Agregar-muestra' element={<AgregarMuestra />}/>
         */}
         
-          <Route path="/" element={<Component />} >
+          <Route path="/" element={<Component /> } >
           <Route path="/Dashboard" element={<Dashboard />} />
           <Route path="/Pacientes" element={<Pacientes />} />
           <Route path='/Registrar-paciente' element={<RegistrarPaceinte />} />
