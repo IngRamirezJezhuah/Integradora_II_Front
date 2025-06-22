@@ -6,8 +6,8 @@ export { default as LoginForm } from './login/loginform';
 export {default as  SampleChart } from './graficas/grafica-iot'
 export {default as  MuestrasHechas } from './graficas/muestras-dia'
 //_____________Paciente_____________
-export {default as  RegistrarPaceinte } from './paceintes/registrarPaciente'
-export {default as  NuevoPaciente } from './paceintes/NuevoPaciente'
+export {default as  RegistrarPaceinte } from './pacientes/registrarPaciente'
+export {default as  NuevoPaciente } from './pacientes/NuevoPaciente'
 
 //_____________Elementos_____________
 export {default as  SearchBar } from './elementos/searchBar'

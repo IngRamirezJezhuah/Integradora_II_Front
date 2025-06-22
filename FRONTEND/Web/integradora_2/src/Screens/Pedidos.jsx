@@ -18,10 +18,10 @@ const Pedidos =() => {
     return (
         <div className='margen'>
             <div className='buscador'>
-                <Link to="/">
+                <Link to="/AgregarMuestras">
                 <button className='btn-agregar'>+Agregar</button>
                 </Link>
-            <SearchBar />
+                <SearchBar />
             </div>
             <div className='scale-up-ver-center'>
                 <div className='caja_1'>

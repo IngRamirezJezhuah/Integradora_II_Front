@@ -62,15 +62,6 @@
   background-color: #d32f2f;
 }
 
-@media (max-width: 600px) {
-  .container {
-    padding: 1rem;
-  }
-
-  .buttons {
-    flex-direction: column;
-  }
-}
 
 
 .title {
@@ -118,7 +109,6 @@
 .btn.submit {
   background-color: #b71c1c;
 }
-
 @media (max-width: 600px) {
   .container {
     padding: 1rem;
