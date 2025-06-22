@@ -1,16 +1,21 @@
-.margen{
-    margin: 0%;
+.margen {
+    margin: 0;
     background: white;
     color: black;
     display: flex;
     align-items: flex-end;
+    min-height: 100vh;
+    padding: 1rem;
+    gap: 1rem;
 }
-.prueba{
+
+.prueba {
     font-size: medium;
     color: #ba3e11;
 }
 
-.div-graficas{
+.div-graficas {
+    color: white;
     padding: 2vw;
     margin: 1rem;
     width: 32vw;
@@ -18,44 +23,97 @@
     background-color: #FF4E4E;
     border-radius: 2rem;
 }
-.div-grafica{
+
+.div-grafica {
     padding: 1vw;
     margin: 1vw;
+    color: white;
 }
-.div-muestra{
+
+
+.div-muestra,
+.div-muestra-2,
+.div-muestra-3,
+.div-muestra-4 {
     padding: 2vw;
     margin: 1rem;
     width: 20vw;
     height: 6vw;
-    background-color: #FD908B;
-    border-radius: 2rem;
-}
-.div-muestra-2{
-    padding: 2vw;
-    margin: 1rem;
-    width: 20vw;
-    height: 6vw;
-    background-color: #FFC7BC;
-    border-radius: 2rem;
-}
-.div-muestra-3{
-    padding: 2vw;
-    margin: 1rem;
-    width: 20vw;
-    height: 6vw;
-    background-color: #f9dda3;
-    border-radius: 2rem;
-}
-.div-muestra-4{
-    padding: 2vw;
-    margin: 1rem;
-    width: 20vw;
-    height: 6vw;
-    background-color: #bef2af;
     border-radius: 2rem;
 }
 
-.centrar{
-    padding: .5vw;
+.div-muestra {
+    background-color: #FD908B;
+}
+
+.div-muestra-2 {
+    background-color: #FFC7BC;
+}
+
+.div-muestra-3 {
+    background-color: #f9dda3;
+}
+
+.div-muestra-4 {
+    background-color: #bef2af;
+}
+
+.centrar {
+    padding: 0.5vw;
     text-align: center;
+}
+
+/* Media Queries for Responsive Design */
+@media (max-width: 768px) {
+    .margen {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .margen > div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+
+    .div-graficas {
+        width: clamp(250px, 80vw, 350px);
+        height: clamp(180px, 40vw, 220px);
+        padding: 3vw;
+    }
+
+    .div-muestra,
+    .div-muestra-2,
+    .div-muestra-3,
+    .div-muestra-4 {
+        width: clamp(200px, 80vw, 300px);
+        height: clamp(80px, 20vw, 120px);
+        padding: 3vw;
+    }
+}
+
+@media (max-width: 480px) {
+    .div-graficas {
+        width: 90vw;
+        height: 35vw;
+        padding: 3vw;
+    }
+
+    .div-muestra,
+    .div-muestra-2,
+    .div-muestra-3,
+    .div-muestra-4 {
+        width: 90vw;
+        height: 18vw;
+        padding: 3vw;
+    }
+
+    .centrar h2 {
+        font-size: 1rem;
+    }
+
+    .centrar h1 {
+        font-size: 1.5rem;
+    }
 }

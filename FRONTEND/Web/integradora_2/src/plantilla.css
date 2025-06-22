@@ -150,7 +150,7 @@
 .btn-agregar{
     position: absolute;
     color: #ffffff;
-    background-color: #ff4242;
+    background-color: #DA0C15;
     border-style: none;
     border-radius: 15px;
     padding: .8rem;
@@ -158,13 +158,12 @@
     padding-right: 1rem;
     margin-left: 60vw;
 }
-.btn{
-    color: #ffffff;
-    background-color: #ff4242;
-    border-style: none;
-    border-radius: 2rem;
-    padding: .8rem;
-    margin: 1vw;
+.btn-agregar:hover{
+  background-color: #ffffff;
+  color: #DA0C15;
+  font-weight: bold;
+  border: #DA0C15 1px solid;
+  transition: background-color 0.3s, color 0.3s, border 0.3s;
 }
 
 /*________inputs________*/

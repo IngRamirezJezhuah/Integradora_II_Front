@@ -10,11 +10,11 @@ import './nav.css'
 import './FormLg.css';
 
 import Component from './Screens/Component.jsx';
-//import Recuperacion from './Screens/Recuperacion.jsx';
+import Login from './Screens/Login.jsx';
+import Recuperacion from './Screens/Recuperacion.jsx';
 import Dashboard from './Screens/Dashboard.jsx';
 import Pacientes from './Screens/Pacientes.jsx';
 import  Muestras  from './Screens/Muestras.jsx';
-//import Login from './Screens/Login.jsx';
 import Pedidos from './Screens/Pedidos.jsx';
 import Analisis from './Screens/Analisis.jsx';
 //import { AgregarMuestra, EditarAnalisisForm, NuevoAnalisisForm, NuevoPaciente, RegistrarPaceinte, SampleBox, SampleModal } from './Components/index.js';
@@ -29,14 +29,14 @@ function App() {
       <Routes>
         {/* Layout principal
         <Route path="/login" element={<Login />}>
-
-          Páginas que usan ese layout
-        <Route path="/Login" element={<Login />} />
-        <Route path="/Recuperacion" element={<Recuperacion />} />
+        
+        Páginas que usan ese layout
         <Route path='/Nuevo-Analisis' element={<NuevoAnalisisForm/>} />
         <Route path='/Agregar-muestra' element={<AgregarMuestra />}/>
         */}
         
+        <Route path="/Recuperacion" element={<Recuperacion />} />
+        <Route path="/Login" element={<Login />} />
           <Route path="/" element={<Component /> } >
           <Route path="/Dashboard" element={<Dashboard />} />
           <Route path="/Pacientes" element={<Pacientes />} />
