@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 const Muestras =() =>{
     return (
         <div>
+            <h1>Muestras</h1>
             <div className='buscador'>
                 <Link to="/AgregarMuestras">
                         <button className='btn-agregar'>+Agregar</button>
@@ -21,8 +22,11 @@ const Muestras =() =>{
                         <SampleModal/>
                         <SampleBox/>
                     </div>
-                    
                 </div>
+                <div className='scale-up-ver-center'>
+                <div className='pedidos-form'>
+                </div>
+            </div>
             </div>
         </div>
     )

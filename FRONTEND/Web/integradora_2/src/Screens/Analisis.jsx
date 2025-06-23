@@ -9,6 +9,7 @@ const Analisis=()=> {
     ]
     return (
         <div>
+            <h1>Analisis</h1>
                 <div className='buscador'>
                     <Link to='/Nuevo-Analisis'>
                     <button className='btn-agregar'>+Agregar</button>

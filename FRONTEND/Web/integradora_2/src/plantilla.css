@@ -197,9 +197,13 @@
 }
 /*________textos________*/
 .prueba-name{
-    padding: 7px;
+    padding: 1vw;
     margin-left: 2vw;
-    font-size:1vmax;
+    font-size:1vw;
+}
+.letra-circulo{
+    padding: 1vw;
+    font-size:2vh;
 }
 
 .detall-tex{
@@ -222,8 +226,10 @@
 }
 
 .inicial-circulo {
-    width: 2.5rem;
-    height: 2.5rem;
+    margin-bottom: 1vh;
+    padding: 1vw;
+    width: 1vh;
+    height: 1vh;
     background-color: #E7757A;
     color: white;
     border-radius: 50%;

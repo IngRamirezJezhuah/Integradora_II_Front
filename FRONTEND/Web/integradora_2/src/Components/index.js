@@ -20,3 +20,6 @@ export {default as NuevoAnalisisForm } from './analisis/NuevoAnalisis'
 export {default as EditarAnalisisForm } from './analisis/EditarAnalisis'
 //_____________Muestras_____________
 export {default as AgregarMuestra } from './muestras/AgregarMuestra'
+
+//_____________pedidos_____________
+export {default as DetallesPedidos } from './pedidos/DetallesPedidos'

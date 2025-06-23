@@ -4,6 +4,8 @@ import { MuestrasHechas, SampleChart } from '../Components';
 
 const Dashboard=()=> {
     return (
+    <div>
+        <h1>Dashboard </h1>
         <div className='margen'>
             <div>
                 <div className='div-graficas'>
@@ -21,7 +23,6 @@ const Dashboard=()=> {
                     </div>
                 </div>
             </div>
-            
             <div>
             <div className='div-muestra'>
                 <h2 className='centrar'>Pedidos Pendientes</h2>
@@ -41,6 +42,7 @@ const Dashboard=()=> {
                 </div>
             </div>
         </div>
+    </div>
     )
 }   
 

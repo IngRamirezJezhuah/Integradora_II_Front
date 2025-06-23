@@ -1,6 +1,6 @@
 //rafc para hacer una plantilla rapida
 import React from 'react'
-import { SearchBar } from '../Components';
+import { DetallesPedidos, SearchBar } from '../Components';
 import { Link } from 'react-router-dom';
 //import Component from './Component'
 //import { Outlet } from 'react-router-dom'
@@ -15,8 +15,11 @@ const Pedidos =() => {
         "500",
         "300"
     ]
+
+    
     return (
         <div>
+            <h1>Recibos Pacientes </h1>
             <div className='buscador'>
                 <Link to="/AgregarMuestras">
                 <button className='btn-agregar'>+Agregar</button>
@@ -24,6 +27,7 @@ const Pedidos =() => {
                 <SearchBar />
             </div>
         <div className='margen'>
+            
             <div className='scale-up-ver-center'>
                 <div className='caja_1'>
                     <div className='acomodar'>
@@ -46,9 +50,7 @@ const Pedidos =() => {
                 </div>
             </div>
             <div className='scale-up-ver-center'>
-                <div className='pedidos-form'>
-                    <h1 className='titulo'>Detalles</h1>
-                </div>
+                <DetallesPedidos/>
             </div>
         </div>
         </div>

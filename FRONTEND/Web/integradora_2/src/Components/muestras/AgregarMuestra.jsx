@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 //import chemistryIcon from './icons/chemistry.png';
 //import bloodTestIcon from './icons/blood-test.png';
 
@@ -35,14 +36,14 @@ const AgregarMuestra = () => {
             className={`test-option ${selectedTest === 'Quimica Sanguinea' ? 'selected' : ''}`}
             onClick={() => handleTestChange('Quimica Sanguinea')}
           >
-            <img src="/chemistry.png" alt="Quimica Sanguinea" />
+            <img src="/prueba-de-sangre.png" alt="Quimica Sanguinea" className='imagen-prueba' />
             <span>Quimica Sanguinea</span>
           </div>
           <div
             className={`test-option ${selectedTest === 'Biometria Hematica' ? 'selected' : ''}`}
             onClick={() => handleTestChange('Biometria Hematica')}
           >
-            <img src='/blood-test.png' alt="Biometria Hematica" />
+            <img src='/quimica.png' alt="Biometria Hematica" className='imagen-prueba'/>
             <span>Biometria Hematica</span>
           </div>
         </div>
@@ -87,8 +88,11 @@ const AgregarMuestra = () => {
             placeholder="Ej. archivo.pdf"
           />
         <div className="form-actions">
-          <button type="button" className="btn cancel">Cancelar</button>
-          <button type="submit" className="btn submit">Registrar</button>
+          <button type="submit" className="btn">Registrar</button>
+          <button type="button" className="btn">Cancelar</button>
+          <Link to="/Pacientes">
+            <button className='btn'>Regresar</button>
+          </Link>
         </div>
       </form>
     </div>
