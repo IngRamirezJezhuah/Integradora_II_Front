@@ -16,13 +16,14 @@ const Pedidos =() => {
         "300"
     ]
     return (
-        <div className='margen'>
+        <div>
             <div className='buscador'>
                 <Link to="/AgregarMuestras">
                 <button className='btn-agregar'>+Agregar</button>
                 </Link>
                 <SearchBar />
             </div>
+        <div className='margen'>
             <div className='scale-up-ver-center'>
                 <div className='caja_1'>
                     <div className='acomodar'>
@@ -37,8 +38,7 @@ const Pedidos =() => {
                             <p className='prueba-name'>{prueba}</p>
                             
                             <div className='acomodar-iconos-2'>
-                                
-                                <p>{precios[index]}</p>{/*se deja dentro el index para que muestre el valor 1 en 1 */}
+                                <p>{precios[index]}</p>
                             </div>
                         </div>
                         ))}
@@ -50,6 +50,7 @@ const Pedidos =() => {
                     <h1 className='titulo'>Detalles</h1>
                 </div>
             </div>
+        </div>
         </div>
     )
 }
