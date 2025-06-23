@@ -23,3 +23,4 @@ export {default as AgregarMuestra } from './muestras/AgregarMuestra'
 
 //_____________pedidos_____________
 export {default as DetallesPedidos } from './pedidos/DetallesPedidos'
+export {default as ReciboPedidos } from './pedidos/ReciboPedidos'

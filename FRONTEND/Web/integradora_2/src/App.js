@@ -18,6 +18,7 @@ import  Muestras  from './Screens/Muestras.jsx';
 import Pedidos from './Screens/Pedidos.jsx';
 import Analisis from './Screens/Analisis.jsx';
 import { AgregarMuestra, EditarAnalisisForm, NuevoAnalisisForm, NuevoPaciente, RegistrarPaceinte, SampleBox, SampleModal } from './Components/index.ts';
+import { ReciboPedidos } from './Components/index.js';
 
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
           <Route path='/Registrar-paciente' element={<RegistrarPaceinte />} />
           
           <Route path="/Pedidos" element={<Pedidos />} />
+          <Route path="/RecibosPedidos" element={<ReciboPedidos/>} />
           
           <Route path="/Muestras" element={<Muestras />} />
           <Route path='/AgregarMuestras' element={<AgregarMuestra/>} />
@@ -49,5 +51,5 @@ function App() {
     </Router>
   );
 }
-
+//
 export default App;

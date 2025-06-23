@@ -1,58 +1,31 @@
 //rafc para hacer una plantilla rapida
 import React from 'react'
-import { DetallesPedidos, SearchBar } from '../Components';
+import { FilterBar, SearchBar } from '../Components';
 import { Link } from 'react-router-dom';
 //import Component from './Component'
 //import { Outlet } from 'react-router-dom'
 
 
 const Pedidos =() => {
-    const Pruebas= [
-        "Quimica Sanguinea",
-        "BIometrica Hepatica",
-    ]
-    const precios=[
-        "500",
-        "300"
-    ]
-
+    
     
     return (
         <div>
-            <h1>Recibos Pacientes </h1>
+            <h1>Pedidos </h1>
             <div className='buscador'>
                 <Link to="/AgregarMuestras">
                 <button className='btn-agregar'>+Agregar</button>
                 </Link>
                 <SearchBar />
             </div>
-        <div className='margen'>
-            
-            <div className='scale-up-ver-center'>
-                <div className='caja_1'>
-                    <div className='acomodar'>
-                        <p className='precios'>pruebas</p>
-                        <p className='precios'>precio</p>
-                    </div>
-                    {Pruebas.map((prueba,index) => (
-                        <div key={index} className='prueba_tabla'>
-                            <div className='icono'>
-                                <img className='imagen-prueba' src="/prueba-de-sangre.png" alt="prueba imagen" />
-                            </div>
-                            <p className='prueba-name'>{prueba}</p>
-                            
-                            <div className='acomodar-iconos-2'>
-                                <p>{precios[index]}</p>
-                            </div>
-                        </div>
-                        ))}
-                    <hr />
+            <div className='margen'>
+                <div className='Box-muestras'>
+                    <FilterBar/>
+                </div>
+                <div >
+                    coso 1  
                 </div>
             </div>
-            <div className='scale-up-ver-center'>
-                <DetallesPedidos/>
-            </div>
-        </div>
         </div>
     )
 }

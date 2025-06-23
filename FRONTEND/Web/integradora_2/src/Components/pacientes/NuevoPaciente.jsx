@@ -114,6 +114,15 @@ const NuevoPacienteForm = () => {
           onChange={handleChange}
         />
 
+        
+        <label>Rol</label>
+          <select name="selectedFruit">
+            <option value="Admin">Admin</option>
+            <option value="Secretaria">Secretaria</option>
+            <option value="Cliente">Cliente</option>
+            <option value="Trabajador">Trabajador</option>
+          </select>
+
         <label>Apellido Materno</label>
         <input
           className="input-field"
