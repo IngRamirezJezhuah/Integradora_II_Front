@@ -1,4 +1,10 @@
-
+.margen {
+    margin-top: 6vh;
+    color: black;
+    display: flex;
+    /*align-items:flex-end;*/
+    padding: 1rem;
+}
 /*__________Animaciones__________*/
 /*__________de centro hcia afuera arriba abajo__________*/
 .scale-up-ver-center {
@@ -65,10 +71,10 @@
     margin-bottom: 40vw;
 }
 .search-bar {
-    height: 3rem;
+    height: 4vh;
+    width: 40vw;
     display: flex;
     align-items: center;
-    max-width: 50vw;
     border: 1px solid #ccc;
     border-radius: 20px;
     padding: 5px 10px;

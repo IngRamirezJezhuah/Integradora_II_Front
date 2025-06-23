@@ -1,11 +1,3 @@
-.margen {
-    margin-top: 6vh;
-    color: black;
-    display: flex;
-    /*align-items:flex-end;*/
-    padding: 1rem;
-}
-
 .prueba {
     font-size: medium;
     color: #ba3e11;
