@@ -1,12 +1,3 @@
-.margen{
-    margin: 0%;
-    padding: 1vw;
-    margin-left: 1vw;
-    background: white;
-    color: black;
-    display: flex;
-    align-items: flex-end;
-}
 
 /*__________Animaciones__________*/
 /*__________de centro hcia afuera arriba abajo__________*/
@@ -159,11 +150,11 @@
     margin-left: 60vw;
 }
 .btn-agregar:hover{
-  background-color: #ffffff;
-  color: #DA0C15;
-  font-weight: bold;
-  border: #DA0C15 1px solid;
-  transition: background-color 0.3s, color 0.3s, border 0.3s;
+    background-color: #ffffff;
+    color: #DA0C15;
+    font-weight: bold;
+    border: #DA0C15 1px solid;
+    transition: background-color 0.3s, color 0.3s, border 0.3s;
 }
 
 /*________inputs________*/

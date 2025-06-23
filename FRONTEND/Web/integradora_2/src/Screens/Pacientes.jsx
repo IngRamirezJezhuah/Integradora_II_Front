@@ -46,27 +46,45 @@ const Pacientes =() => {
         fetchPacientes()
     }, [])*/
     return (
-            <div className='margen'>
+            <div>
                 <div className='buscador'>
                     <Link to="/Nuevo-Paciente-Form">
                     <button className='btn-agregar'>+Agregar</button>
                     </Link>
                     < SearchBar />
                 </div>
-                <div className='scale-up-ver-center'>
-                        <div className='caja_1'>
-                            <div className='scroll'>
-                                {/* version con servidor, no funciona en local
-                                    {pacientes.map((paciente, index) => {
-                                        const nombreCompleto = `${paciente.nombre} ${paciente.apellidoPaterno} ${paciente.apellidoMaterno}`;
-                                        const inicial = paciente.nombre.charAt(0);
-                                        return (
-                                            <div key={index} className='prueba_tabla'>
+                <div className='margen'>
+                    <div className='scale-up-ver-center'>
+                            <div className='caja_1'>
+                                <div className='scroll'>
+                                    {/* version con servidor, no funciona en local
+                                        {pacientes.map((paciente, index) => {
+                                            const nombreCompleto = `${paciente.nombre} ${paciente.apellidoPaterno} ${paciente.apellidoMaterno}`;
+                                            const inicial = paciente.nombre.charAt(0);
+                                            return (
+                                                <div key={index} className='prueba_tabla'>
+                                                    <div className='inicial-circulo'>
+                                                        {inicial}
+                                                    </div>
+                                                    <div>
+                                                        <p className='prueba-name'>{nombreCompleto}</p>
+                                                    </div>
+                                                    <div className='acomodar-iconos'>
+                                                        <img src="/basura.png" alt="borrar" className='iconos' />
+                                                    </div>
+                                                </div>
+                                            );
+                                        })}
+                                    */}
+                                    {nombres.map((nombreCompleto,index) => {/*se usa map para iterar la lista y generar un bloque prueba_tabla por cada nombre tambien la usare en chechbox*/
+                                        const inicial = nombreCompleto.charAt(0);/*se obtiene la inicial con .charAt(0) para cada nombre dentro del map. recordar esta mamada*/
+                                        return(
+                                            <div key={index} className='prueba_tabla'>{/*cada hijo renderizado con map debe tener una key, por eso usé el índice index. */}
                                                 <div className='inicial-circulo'>
                                                     {inicial}
                                                 </div>
                                                 <div>
-                                                    <p className='prueba-name'>{nombreCompleto}</p>
+                                                    <p className='prueba-name'>{nombreCompleto}</p>                                
                                                 </div>
                                                 <div className='acomodar-iconos'>
                                                     <img src="/basura.png" alt="borrar" className='iconos' />
@@ -74,45 +92,29 @@ const Pacientes =() => {
                                             </div>
                                         );
                                     })}
-                                */}
-                                {nombres.map((nombreCompleto,index) => {/*se usa map para iterar la lista y generar un bloque prueba_tabla por cada nombre tambien la usare en chechbox*/
-                                    const inicial = nombreCompleto.charAt(0);/*se obtiene la inicial con .charAt(0) para cada nombre dentro del map. recordar esta mamada*/
-                                    return(
-                                        <div key={index} className='prueba_tabla'>{/*cada hijo renderizado con map debe tener una key, por eso usé el índice index. */}
-                                            <div className='inicial-circulo'>
-                                                {inicial}
-                                            </div>
-                                            <div>
-                                                <p className='prueba-name'>{nombreCompleto}</p>                                
-                                            </div>
-                                            <div className='acomodar-iconos'>
-                                                <img src="/basura.png" alt="borrar" className='iconos' />
-                                            </div>
-                                        </div>
-                                    );
-                                })}
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div className='scale-up-ver-center'>
-                        <div className='caja_2'>
-                            <h1 className='titulo'>Detalles</h1>
-                            
-                                {/**aqui empieza lo chido */}
-                                {pruebas.map((prueba, index) => (
-                                    <div key={index} className='tabla-detalles'>
-                                    <div className='icono'>
-                                        <img className='imagen-prueba' src="/prueba-de-sangre.png" alt="prueba imagen" />
-                                    </div>
-                                    <p className='prueba-name'>{prueba}</p>
-                                    <div className='acomodar-iconos'>
-                                        <img src="/sobre-mas.png" alt="editar" className='iconos' />
-                                    </div>
-                                    <div className='acomodar-iconos-2'>
-                                        <img src="/descargas.png" alt="borrar" className='iconos' />
-                                    </div>
-                                    </div>
-                                ))}
+                        <div className='scale-up-ver-center'>
+                            <div className='caja_2'>
+                                <h1 className='titulo'>Detalles</h1>
+                                
+                                    {/**aqui empieza lo chido */}
+                                    {pruebas.map((prueba, index) => (
+                                        <div key={index} className='tabla-detalles'>
+                                        <div className='icono'>
+                                            <img className='imagen-prueba' src="/prueba-de-sangre.png" alt="prueba imagen" />
+                                        </div>
+                                        <p className='prueba-name'>{prueba}</p>
+                                        <div className='acomodar-iconos'>
+                                            <img src="/sobre-mas.png" alt="editar" className='iconos' />
+                                        </div>
+                                        <div className='acomodar-iconos-2'>
+                                            <img src="/descargas.png" alt="borrar" className='iconos' />
+                                        </div>
+                                        </div>
+                                    ))}
+                        </div>
                     </div>
                 </div>
             </div>

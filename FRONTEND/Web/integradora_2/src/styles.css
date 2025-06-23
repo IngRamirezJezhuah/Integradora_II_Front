@@ -6,6 +6,8 @@
 .contenedor{
     background-color: #FEF7FF;
     margin: 0;
+    height:98vh;
+    width:100vw;
 }
 .tabNavigator{
     margin: 0%;
@@ -20,7 +22,7 @@
     flex-wrap: wrap;
     background-color: #FFFF;
     padding: 2vw;
-    margin-left: 4vw;
+    margin-left: 3vw;
     border-radius: 1rem;
 }
 

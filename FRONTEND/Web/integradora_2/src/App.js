@@ -17,24 +17,13 @@ import Pacientes from './Screens/Pacientes.jsx';
 import  Muestras  from './Screens/Muestras.jsx';
 import Pedidos from './Screens/Pedidos.jsx';
 import Analisis from './Screens/Analisis.jsx';
-//import { AgregarMuestra, EditarAnalisisForm, NuevoAnalisisForm, NuevoPaciente, RegistrarPaceinte, SampleBox, SampleModal } from './Components/index.js';
 import { AgregarMuestra, EditarAnalisisForm, NuevoAnalisisForm, NuevoPaciente, RegistrarPaceinte, SampleBox, SampleModal } from './Components/index.ts';
-//import AgregarMuestra from './Components/muestras/AgregarMuestra.jsx';
-//import NuevoAnalisisForm from './Screens/NuevoAnalisis.jsx';
 
 
 function App() {
   return (
     <Router>
       <Routes>
-        {/* Layout principal
-        <Route path="/login" element={<Login />}>
-        
-        Páginas que usan ese layout
-        <Route path='/Nuevo-Analisis' element={<NuevoAnalisisForm/>} />
-        <Route path='/Agregar-muestra' element={<AgregarMuestra />}/>
-        */}
-        
         <Route path="/Recuperacion" element={<Recuperacion />} />
         <Route path="/Login" element={<Login />} />
           <Route path="/" element={<Component /> } >
@@ -55,9 +44,7 @@ function App() {
           <Route path='/SampleModal' element={<SampleModal/>}/>
           <Route path='/Nuevo-Paciente-Form' element={<NuevoPaciente/>}/>
           
-          {/**/}
           </Route>
-        {/*</Route> */}
       </Routes>
     </Router>
   );

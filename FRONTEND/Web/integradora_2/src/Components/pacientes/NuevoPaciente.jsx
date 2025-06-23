@@ -109,7 +109,7 @@ const NuevoPacienteForm = () => {
         />
 
         <div className="buttons">
-          <button type="submit" className="btn submit">Actualizar</button>
+          <button type="submit" className="btn submit">Registrar</button>
         </div>
       </form>
     </div>

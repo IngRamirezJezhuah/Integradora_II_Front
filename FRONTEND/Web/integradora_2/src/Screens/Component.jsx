@@ -32,7 +32,7 @@ const Component=() => {
                         <li className={`bordes ${isActive('/Analisis') ? 'active' : ''}`}><img src="/analisis.png" alt="" /></li>
                         <li>analisis</li>
                     </Link>
-                    <Link to='/HeaderSlide'>
+                    <Link to='/login'>
                         <div className='cerrar-sesion'>
                             <li className="bordes"><img src="/salida.png" alt="" /></li>
                         </div>
@@ -40,7 +40,7 @@ const Component=() => {
                 </div>
                 {/* <div className='plantilla'>
                     <Outlet /> */}
-                    <div className='plantilla'>
+                <div className='plantilla'>
                     {location.pathname === '/' ? (
                         <Dashboard />
                     ) : (

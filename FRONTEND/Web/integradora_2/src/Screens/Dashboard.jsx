@@ -21,6 +21,7 @@ const Dashboard=()=> {
                     </div>
                 </div>
             </div>
+            
             <div>
             <div className='div-muestra'>
                 <h2 className='centrar'>Pedidos Pendientes</h2>
