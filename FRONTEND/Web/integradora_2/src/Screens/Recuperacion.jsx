@@ -2,7 +2,7 @@ import React from 'react';
 import Header from '../Components/login/headerHome';
 import Carousel from '../Components/login/carousel';
 import RecuperacionForm from '../Components/login/recuperacionForm';
-import './loginPage.css';
+import '../loginPage.css';
 
 const Recuperacion = () => {
   

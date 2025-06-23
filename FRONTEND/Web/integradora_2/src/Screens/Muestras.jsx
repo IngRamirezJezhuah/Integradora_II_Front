@@ -23,10 +23,10 @@ const Muestras =() =>{
             </div>
             */}
             <div className='buscador'>
-                < SearchBar />
                 <Link to="/AgregarMuestras">
-                <button className='btn-agregar'>+Agregar</button>
+                        <button className='btn-agregar'>+Agregar</button>
                 </Link>
+                <SearchBar />
             </div>
             <div className='Box-muestras'>
                 <FilterBar/>

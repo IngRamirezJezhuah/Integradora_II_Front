@@ -31,6 +31,7 @@ const RecuperacionForm = ({ onSubmit }) => {
 
   return (
   <div className="card">
+    
     <form onSubmit={handleSubmit}>
       <div>
         <label>Correo</label>
@@ -43,6 +44,7 @@ const RecuperacionForm = ({ onSubmit }) => {
       </div>
       {error && <p style={{ color: 'red' }}>{error}</p>}
       <button type="submit">Mandar Codigo</button>
+      <a href="/Login">Iniciar Sesión</a>
     </form>
   </div>
   );

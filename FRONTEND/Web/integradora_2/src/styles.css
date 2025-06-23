@@ -5,10 +5,8 @@
 }
 .contenedor{
     background-color: #FEF7FF;
-
     margin: 0;
 }
-
 .tabNavigator{
     margin: 0%;
     margin-right: 91vw;
@@ -50,9 +48,11 @@ a{
 
 /*_______Coso de las imagenes_______*/
 .bordes{
-    background-color: #bf1616;
     padding: 1vw;
     border-radius: 2vw;
+}
+.bordes.active {
+  background-color: #bf1616;
 }
 
 .cerrar-sesion{ 

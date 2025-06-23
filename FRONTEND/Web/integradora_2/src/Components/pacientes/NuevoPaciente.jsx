@@ -13,11 +13,11 @@ const NuevoPacienteForm = () => {
   useEffect(() => {
     // Simulate initial data fetch
     const initialData = {
-      nombre: 'Paciente',
-      apellidoPaterno: 'Apellido Paterno',
-      apellidoMaterno: 'Apellido Materno',
+      nombre: '',
+      apellidoPaterno: '',
+      apellidoMaterno: '',
       fechaNacimiento: 'dd/mm/yyyy',
-      correo: 'correo',
+      correo: '',
     };
     setFormData(initialData);
   }, []);
@@ -63,6 +63,7 @@ const NuevoPacienteForm = () => {
           className="input-field"
           type="text"
           name="nombre"
+          placeholder="Nombre del paciente"
           value={formData.nombre}
           onChange={handleChange}
         />
@@ -72,6 +73,7 @@ const NuevoPacienteForm = () => {
           className="input-field"
           type="text"
           name="apellidoPaterno"
+          placeholder="Apellido Paterno del paciente"
           value={formData.apellidoPaterno}
           onChange={handleChange}
         />
@@ -81,6 +83,7 @@ const NuevoPacienteForm = () => {
           className="input-field"
           type="text"
           name="apellidoMaterno"
+          placeholder="Apellido Materno del paciente"
           value={formData.apellidoMaterno}
           onChange={handleChange}
         />
@@ -88,7 +91,7 @@ const NuevoPacienteForm = () => {
         <label>Fecha de nacimiento</label>
         <input
           className="input-field"
-          type="text"
+          type="date"
           name="fechaNacimiento"
           value={formData.fechaNacimiento}
           onChange={handleChange}
@@ -100,6 +103,7 @@ const NuevoPacienteForm = () => {
           className="input-field"
           type="email"
           name="correo"
+          placeholder="Correo electrónico del paciente"
           value={formData.correo}
           onChange={handleChange}
         />

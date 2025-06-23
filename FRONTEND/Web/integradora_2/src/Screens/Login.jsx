@@ -2,7 +2,7 @@ import React from 'react';
 import Header from '../Components/login/headerHome';
 import Carousel from '../Components/login/carousel';
 import LoginForm from '../Components/login/loginform';
-import './loginPage.css';
+import '../loginPage.css';
 const Login = () => {
   const handleLogin = (result) => {
     if (result.success) {

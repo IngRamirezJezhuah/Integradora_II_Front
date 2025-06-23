@@ -27,7 +27,7 @@ const AgregarMuestra = () => {
   };
 
   return (
-    <div className="sample-form-container">
+    <div className="container">
       <div className="form-section">
         <h2>Pruebas</h2>
         <div className="test-options">
@@ -47,52 +47,51 @@ const AgregarMuestra = () => {
           </div>
         </div>
       </div>
-      <form className="form-section" onSubmit={handleSubmit}>
-        <div className="form-group">
+      <div className='Form-section-a'>
+        
+      <form className="form" onSubmit={handleSubmit}>
           <label>Pedido</label>
           <input
             type="text"
             name="pedido"
+            className="input-field"
             value={formData.pedido}
             onChange={handleInputChange}
             placeholder="P1285"
-          />
-        </div>
-        <div className="form-group">
+            />
           <label>Tipo de muestra</label>
           <input
             type="text"
             name="tipoMuestra"
+            className="input-field"
             value={formData.tipoMuestra}
             onChange={handleInputChange}
             placeholder="Sangre"
-          />
-        </div>
-        <div className="form-group">
+            />
           <label>Paciente (id)</label>
           <input
+            className="input-field"
             type="text"
             name="paciente"
             value={formData.paciente}
             onChange={handleInputChange}
             placeholder="Ej. P123"
           />
-        </div>
-        <div className="form-group">
           <label>Resultados</label>
           <input
-            type="text"
+            className="input-field"
+            type="file"
             name="resultados"
             value={formData.resultados}
             onChange={handleInputChange}
             placeholder="Ej. archivo.pdf"
           />
-        </div>
         <div className="form-actions">
-          <button type="button" className="cancel-btn">Cancelar</button>
-          <button type="submit" className="register-btn">Registrar</button>
+          <button type="button" className="btn cancel">Cancelar</button>
+          <button type="submit" className="btn submit">Registrar</button>
         </div>
       </form>
+    </div>
     </div>
   );
 };

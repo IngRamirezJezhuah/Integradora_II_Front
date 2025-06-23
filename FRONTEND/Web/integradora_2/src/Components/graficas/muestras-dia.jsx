@@ -21,7 +21,7 @@ const MuestrasHechas = () => {
                 label: "Análisis por día",
                 data: [20, 49, 38, 37, 22, 27, 30], // máximo 50
                 borderColor: "rgba(54, 162, 235, 1)",
-                backgroundColor: "rgba(54, 162, 235, 0.2)",
+                backgroundColor: "rgb(255, 255, 255)",
                 tension: 0.4, // curva suave
                 pointRadius: 5,
                 fill: true,
