@@ -68,9 +68,12 @@
 .centrar {
     padding: 0.5vw;
     text-align: center;
+    font-size: 2vmin;
+    font-size: 2vmax;
+    font-weight: bold;
 }
 
-/* Media Queries for Responsive Design */
+/* Media Queries for Responsive Design 
 @media (max-width: 768px) {
     .margen {
         flex-direction: column;
@@ -117,10 +120,10 @@
     }
 
     .centrar h2 {
-        font-size: 1rem;
+        font-size: .5vw;
     }
 
     .centrar h1 {
-        font-size: 1.5rem;
+        font-size: 1.5vw;
     }
-}
+}*/

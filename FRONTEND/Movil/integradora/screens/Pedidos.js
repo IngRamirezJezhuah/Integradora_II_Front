@@ -10,12 +10,12 @@ const OrdersScreen = () => {
   const [filter, setFilter] = useState('EnProceso');
 
   const orders = [
-    { id: 'P1285' },
-    { id: 'P1286' },
-    { id: 'P1287' },
-    { id: 'P1288' },
-    { id: 'P1289' },
-    { id: 'P1290' },
+    { name: 'P1285' },
+    { name: 'P1287' },
+    { name: 'P1286' },
+    { name: 'P1288' },
+    { name: 'P1289' },
+    { name: 'P1290' },
   ];
 
   const handleView = (item) => {

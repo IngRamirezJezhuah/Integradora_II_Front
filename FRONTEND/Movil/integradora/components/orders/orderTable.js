@@ -6,7 +6,7 @@ const OrdersTable = ({ orders, onView, onDelete }) => {
   return (
     <FlatList
       data={orders}
-      keyExtractor={(item) => item.id}
+      keyExtractor={(item) => item.name}
       renderItem={({ item }) => (
         <View style={styles.row}>
           <MaterialCommunityIcons name="test-tube" size={30} color="black" />

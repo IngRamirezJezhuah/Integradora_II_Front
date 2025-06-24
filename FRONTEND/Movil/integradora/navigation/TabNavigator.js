@@ -9,7 +9,7 @@ import { Colors } from 'react-native/Libraries/NewAppScreen';
 //import Porfile from '../screens/porfile';
 import dashboard from '../screens/dashboard';
 import Muestras from '../screens/Muestras';
-import { Pedidos } from '../screens';
+import {  Escaner, Pedidos } from '../screens';
 
 
 const Tab = createBottomTabNavigator();
@@ -17,7 +17,6 @@ const Tab = createBottomTabNavigator();
 const TabNavigator = () => {
     return (
         <Tab.Navigator>
-
             
             <Tab.Screen name="Monitoreo" component={dashboard} 
             options={{
@@ -37,12 +36,13 @@ const TabNavigator = () => {
                     <Fontisto name="test-tube" size={26} color={'#DA0C15'}/>
                 )
             }}/>
-            <Tab.Screen name="Escaner" component={Muestras} 
+            <Tab.Screen name="Escaner" component={Escaner} 
             options={{
                 tabBarIcon: () =>(
                     <MaterialIcons name="qr-code-scanner" size={30} color={'#DA0C15'} />
                 )
             }}/>
+            
         </Tab.Navigator>
     );
 };

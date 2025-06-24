@@ -3,4 +3,4 @@
 
 export { default as Pedidos } from './Pedidos'
 export { default as muestras } from './Muestras'
-
+export { default as Escaner } from './Escaner'

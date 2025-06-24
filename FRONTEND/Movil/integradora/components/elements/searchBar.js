@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, StyleSheet, Image, TouchableOpacity } from 'react-native';
-import { TextInput } from 'react-native-paper';
+import { TextInput } from 'react-native';
 
 const SearchBar = ({ searchText, onChangeSearch, onSearch }) => {
   return (
