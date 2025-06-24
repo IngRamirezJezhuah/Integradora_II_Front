@@ -1,6 +1,9 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+import Fontisto from '@expo/vector-icons/Fontisto';
+import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 //import Home from '../screens/home';
 //import Porfile from '../screens/porfile';
@@ -19,19 +22,25 @@ const TabNavigator = () => {
             <Tab.Screen name="Monitoreo" component={dashboard} 
             options={{
                 tabBarIcon: () =>(
-                    <Ionicons name="home-outline" size={30} color={'#62bec0'}/>
+                    <Ionicons name="home-outline" size={30} color={'#DA0C15'}/>
                 )
             }} />
             <Tab.Screen name="Pedidos" component={Pedidos} 
             options={{
                 tabBarIcon: () =>(
-                    <Ionicons name="heart-half-outline" size={30} color={'#62bec0'}/>
+                    <FontAwesome5 name="clipboard-list" size={25} color={'#DA0C15'}/>
                 )
             }}/>
             <Tab.Screen name="Muestras" component={Muestras} 
             options={{
                 tabBarIcon: () =>(
-                    <Ionicons name="heart-half-outline" size={30} color={'#62bec0'}/>
+                    <Fontisto name="test-tube" size={26} color={'#DA0C15'}/>
+                )
+            }}/>
+            <Tab.Screen name="Escaner" component={Muestras} 
+            options={{
+                tabBarIcon: () =>(
+                    <MaterialIcons name="qr-code-scanner" size={30} color={'#DA0C15'} />
                 )
             }}/>
         </Tab.Navigator>

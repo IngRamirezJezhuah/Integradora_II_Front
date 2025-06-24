@@ -16,34 +16,26 @@ export const Dashboard = StyleSheet.create({
         alignItems:'center',
         backgroundColor:'#fff',
     },
-    caja_1:{
-        //width:70,
-        //height:70,
+    caja:{
+        width:'70%',
         marginTop:20,
         paddingVertical:25,
         paddingHorizontal:30,
         justifyContent:'center',
         alignItems:'center',
-        backgroundColor:'rgb(181, 236, 229)',
         borderRadius:25,
     },
-    caja_2:{
-        marginTop:20,
-        paddingVertical:25,
-        paddingHorizontal:30,
-        justifyContent:'center',
-        alignItems:'center',
-        backgroundColor:'rgb(182, 232, 204)',
-        borderRadius:25,
+    ctemperatura:{
+        backgroundColor:'#FD908B',
     },
-    caja_3:{
-        marginTop:20,
-        paddingVertical:25,
-        paddingHorizontal:30,
-        justifyContent:'center',
-        alignItems:'center',
-        backgroundColor:'rgb(232, 227, 182)',
-        borderRadius:25,
+    chumedad:{
+        backgroundColor:'#FFC7BC',
+    },
+    cmuestra:{
+        backgroundColor:'#DA9409',
+    },
+    cprecaucion:{
+        backgroundColor:'#76F058',
     },
     TextoAlerta:{
         marginTop:20,
