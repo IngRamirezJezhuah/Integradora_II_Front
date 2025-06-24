@@ -62,6 +62,14 @@
     background-color: #f0f0f0;
     border-radius: 2rem;
 }
+.caja_pedidos{
+    padding: 1vw;
+    margin: 1vw;
+    width: 15vw;
+    height: 10vw;
+    background-color: #f0f0f0;
+    border-radius: 2rem;
+}
 .buscador{
     position: absolute;
     width:100%;
@@ -126,6 +134,14 @@
     width: 30vw;
     height: 33vw;
     overflow: auto;
+}
+
+.scroll_pruebas{
+    width: 70vw;
+    height: 36vw;
+    overflow: auto;
+    display: flex;
+    align-items:flex-start;
 }
 .prueba_tabla{
     padding: 10px;
