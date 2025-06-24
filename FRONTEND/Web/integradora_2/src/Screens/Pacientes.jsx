@@ -15,6 +15,13 @@ const Pacientes =() => {
         const getPacientes = async () => {
             try {
                 const res = await fetch("https://8d5e-189-197-191-34.ngrok-free.app/usuarios");
+                method: 'GET',
+                body: JSON.stringify({ 
+                nombre,apellidoPaterno,apellidoMaterno,
+                }),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
                 const data = await res.json();
                 console.log("Pacientes desde backend:", data);
                 setPacientes(data);
