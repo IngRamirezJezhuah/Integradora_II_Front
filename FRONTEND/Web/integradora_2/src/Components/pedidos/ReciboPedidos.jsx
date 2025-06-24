@@ -39,6 +39,8 @@ const ReciboPedidos = () => {
                                 <div className='acomodar-iconos-2'>
                                     <p>{precios[index]}</p>
                                 </div>
+                                
+                                <input type="checkbox" name="" id=""  className='acomodar-iconos'/>
                             </div>
                             ))}
                         <hr />

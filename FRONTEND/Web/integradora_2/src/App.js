@@ -1,13 +1,14 @@
 // App.js
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import './App.css';
+import './Themes/App.css';
 import './styles.css';
-import './Dash.css'
-import './plantilla.css'
-import './elementos.css'
+import './Themes/Dash.css'
+import './Themes/plantilla.css'
+import './Themes/elementos.css'
 import './nav.css'
-import './FormLg.css';
+import './Themes/FormLg.css';
+import './Themes/loginPage.css';
 
 import Component from './Screens/Component.jsx';
 import Login from './Screens/Login.jsx';

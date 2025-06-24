@@ -5,6 +5,50 @@
     /*align-items:flex-end;*/
     padding: 1rem;
 }
+
+
+/*______________modal_____________*/
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: white;
+    border-radius: 1rem;
+    padding: 2rem;
+    width: 400px;
+    position: relative;
+}
+
+.close-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: crimson;
+    color: white;
+    border: none;
+    padding: 0.3rem 0.6rem;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+input, select {
+    display: block;
+    width: 100%;
+    padding: 0.6rem;
+    margin-bottom: 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid #ccc;
+}
 /*__________Animaciones__________*/
 /*__________de centro hcia afuera arriba abajo__________*/
 .scale-up-ver-center {
@@ -66,9 +110,10 @@
     padding: 1vw;
     margin: 1vw;
     width: 15vw;
-    height: 10vw;
+    height: 11vw;
     background-color: #f0f0f0;
     border-radius: 2rem;
+
 }
 .buscador{
     position: absolute;
