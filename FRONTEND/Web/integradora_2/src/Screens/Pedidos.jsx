@@ -27,57 +27,34 @@ const Pedidos =() => {
                     <div className='scroll_pruebas'>
                         <div>
                             <div className='caja_pedidos'>
-                                <img src="/quimica.png" alt="ajustes" />
-                                <h1>P-123</h1>
-                                <p>analisis de sangre</p>
-                                <p>Mario Alberto Lira Zamora</p>
-                                    <Link to='/RecibosPedidos'>
-                                        <img src="/ajustes.png" alt="ajustes" className='iconos' />
-                                    </Link>
-                            </div>
-                            <div className='caja_pedidos'>
-                                <img src="/quimica.png" alt="ajustes" />
-                                <h1>P-123</h1>
-                                <p>Biometrica Hepatica</p>
-                                <p>David Jezhuah Ramirez Alvarado</p>
+                                <div className='titulo'>
+                                    <img src="/quimica.png" alt="ajustes" className='imgMuestra'/>
+                                </div>
+                                <h1 className='centrar'>P-123</h1>
+                                <p className='texto'>analisis de sangre</p>
+                                <p className='texto'>Mario Alberto Lira Zamora</p>
                                 <Link to='/RecibosPedidos'>
                                     <img src="/ajustes.png" alt="ajustes" className='iconos' />
                                 </Link>
                             </div>
                             <div className='caja_pedidos'>
-                                <img src="/quimica.png" alt="ajustes" />
-                                <h1>P-123</h1>
-                                <p>analisis de sangre</p>
-                                <p>Ricardo Luna Unzueta</p>
-                                <Link to='/RecibosPedidos'>
-                                    <img src="/ajustes.png" alt="ajustes" className='iconos' />
-                                </Link>
-                            </div>
-                        </div>
-                        <div>
-                            <div className='caja_pedidos'>
-                                <img src="/quimica.png" alt="ajustes" />
-                                <h1>P-123</h1>
-                                <p>analisis de sangre</p>
-                                <p>Mario Alberto Lira Zamora</p>
-                                    <Link to='/RecibosPedidos'>
-                                        <img src="/ajustes.png" alt="ajustes" className='iconos' />
-                                    </Link>
-                            </div>
-                            <div className='caja_pedidos'>
-                                <img src="/quimica.png" alt="ajustes" />
-                                <h1>P-123</h1>
-                                <p>Biometrica Hepatica</p>
-                                <p>David Jezhuah Ramirez Alvarado</p>
+                                <div className='titulo'>
+                                    <img src="/quimica.png" alt="ajustes" className='imgMuestra'/>
+                                </div>
+                                <h1 className='centrar'>P-123</h1>
+                                <p className='texto'>Biometrica Hepatica</p>
+                                <p className='texto'>David Jezhuah Ramirez Alvarado</p>
                                 <Link to='/RecibosPedidos'>
                                     <img src="/ajustes.png" alt="ajustes" className='iconos' />
                                 </Link>
                             </div>
                             <div className='caja_pedidos'>
-                                <img src="/quimica.png" alt="ajustes" />
-                                <h1>P-123</h1>
-                                <p>analisis de sangre</p>
-                                <p>Ricardo Luna Unzueta</p>
+                                <div className='titulo'>
+                                    <img src="/quimica.png" alt="ajustes" className='imgMuestra'/>
+                                </div>
+                                <h1 className='centrar'>P-123</h1>
+                                <p className='texto'>analisis de sangre</p>
+                                <p className='texto'>Ricardo Luna Unzueta</p>
                                 <Link to='/RecibosPedidos'>
                                     <img src="/ajustes.png" alt="ajustes" className='iconos' />
                                 </Link>
@@ -85,28 +62,69 @@ const Pedidos =() => {
                         </div>
                         <div>
                             <div className='caja_pedidos'>
-                                <img src="/quimica.png" alt="ajustes" />
-                                <h1>P-123</h1>
-                                <p>analisis de sangre</p>
-                                <p>Mario Alberto Lira Zamora</p>
-                                    <Link to='/RecibosPedidos'>
-                                        <img src="/ajustes.png" alt="ajustes" className='iconos' />
-                                    </Link>
-                            </div>
-                            <div className='caja_pedidos'>
-                                <img src="/quimica.png" alt="ajustes" />
-                                <h1>P-123</h1>
-                                <p>Biometrica Hepatica</p>
-                                <p>David Jezhuah Ramirez Alvarado</p>
+                                <div className='titulo'>
+                                    <img src="/quimica.png" alt="ajustes" className='imgMuestra'/>
+                                </div>
+                                <h1 className='centrar'>P-123</h1>
+                                <p className='texto'>analisis de sangre</p>
+                                <p className='texto'>Mario Alberto Lira Zamora</p>
                                 <Link to='/RecibosPedidos'>
                                     <img src="/ajustes.png" alt="ajustes" className='iconos' />
                                 </Link>
                             </div>
                             <div className='caja_pedidos'>
-                                <img src="/quimica.png" alt="ajustes" />
-                                <h1>P-123</h1>
-                                <p>analisis de sangre</p>
-                                <p>Ricardo Luna Unzueta</p>
+                                <div className='titulo'>
+                                    <img src="/quimica.png" alt="ajustes" className='imgMuestra'/>
+                                </div>
+                                <h1 className='centrar'>P-123</h1>
+                                <p className='texto'>Biometrica Hepatica</p>
+                                <p className='texto'>David Jezhuah Ramirez Alvarado</p>
+                                <Link to='/RecibosPedidos'>
+                                    <img src="/ajustes.png" alt="ajustes" className='iconos' />
+                                </Link>
+                            </div>
+                            <div className='caja_pedidos'>
+                                <div className='titulo'>
+                                    <img src="/quimica.png" alt="ajustes" className='imgMuestra'/>
+                                </div>
+                                <h1 className='centrar'>P-123</h1>
+                                <p className='texto'>analisis de sangre</p>
+                                <p className='texto'>Ricardo Luna Unzueta</p>
+                                <Link to='/RecibosPedidos'>
+                                    <img src="/ajustes.png" alt="ajustes" className='iconos' />
+                                </Link>
+                            </div>
+                        </div>
+                        <div>
+                            <div className='caja_pedidos'>
+                                <div className='titulo'>
+                                    <img src="/quimica.png" alt="ajustes" className='imgMuestra'/>
+                                </div>
+                                <h1 className='centrar'>P-123</h1>
+                                <p className='texto'>analisis de sangre</p>
+                                <p className='texto'>Mario Alberto Lira Zamora</p>
+                                <Link to='/RecibosPedidos'>
+                                    <img src="/ajustes.png" alt="ajustes" className='iconos' />
+                                </Link>
+                            </div>
+                            <div className='caja_pedidos'>
+                                <div className='titulo'>
+                                    <img src="/quimica.png" alt="ajustes" className='imgMuestra'/>
+                                </div>
+                                <h1 className='centrar'>P-123</h1>
+                                <p className='texto'>Biometrica Hepatica</p>
+                                <p className='texto'>David Jezhuah Ramirez Alvarado</p>
+                                <Link to='/RecibosPedidos'>
+                                    <img src="/ajustes.png" alt="ajustes" className='iconos' />
+                                </Link>
+                            </div>
+                            <div className='caja_pedidos'>
+                                <div className='titulo'>
+                                    <img src="/quimica.png" alt="ajustes" className='imgMuestra'/>
+                                </div>
+                                <h1 className='centrar'>P-123</h1>
+                                <p className='texto'>analisis de sangre</p>
+                                <p className='texto'>Ricardo Luna Unzueta</p>
                                 <Link to='/RecibosPedidos'>
                                     <img src="/ajustes.png" alt="ajustes" className='iconos' />
                                 </Link>

@@ -1,54 +1,46 @@
 //rfce para hacer una plantilla
 //import React, { useEffect, useState } from 'react'
-//import {useState,useEffect} from 'react'
 //import { Link } from 'react-router-dom';
 import { SearchBar } from '../Components';
 import { ModalPaciente } from '../Components';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const Pacientes =() => {
     const [modalAbierto, setModalAbierto] = useState(false);
-    
-    /*
     const [pacientes, setPacientes] = useState([]);
-    useEffect(() => {
-        const getPacientes = async () => {
-            try {
-                const res = await fetch("https://8d5e-189-197-191-34.ngrok-free.app/usuarios");
-                method: 'GET',
-                body: JSON.stringify({ 
-                nombre,apellidoPaterno,apellidoMaterno,
-                }),
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-                const data = await res.json();
-                console.log("Pacientes desde backend:", data);
-                setPacientes(data);
-                } catch (error){
-                    console.error("error al obtener pacientes",error);
-                    }
-                    };
-                    getPacientes();
-                    }, []); 
-                    ];
-                    <Link to="/Nuevo-Paciente-Form">
-                    <button className='btn-agregar'>+Agregar</button>
-                    </Link>
-                    */
-                    
-    const nombres = [//esta  es para usar una lista, alternatica sin peticion 
+    /*const nombres = [//esta  es para usar una lista, alternatica sin peticion 
     "Mario Lira Zamora",
     "David Jezhuah Ramirez Alvarado",
     "Racardo Luna Unzueta",
-    "Diego Daher Diaz Contreraz"]
+    "Diego Daher Diaz Contreraz"]*/
 
     const pruebas = [
         "Quimica sanguinea",
         "Biometrica Hepatica"
     ]
     
-
+    useEffect(() => {
+        const getPacientes = async () => {
+            try {
+                const res = await fetch("https://8d5e-189-197-191-34.ngrok-free.app/usuarios", {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+                if (!res.ok) {
+                    const errorText = await res.text();
+                    throw new Error(`Respuesta del servidor inválida: ${res.status} - ${errorText}`);
+                }
+                const data = await res.json();
+                console.log("Pacientes desde backend:", data);
+                setPacientes(data.usuarios);
+            } catch (error) {
+                console.error("Error al obtener pacientes:", error);
+            }
+        };
+        getPacientes();
+    }, []);
 
     return (
             <div>
@@ -63,24 +55,6 @@ const Pacientes =() => {
                             <div className='caja_1'>
                                 <div className='scroll'>
                                     {/*
-                                    
-                                    
-                                    {pacientes.map((paciente, index) => {
-                                        const nombreCompleto = `${paciente.nombre} ${paciente.apellidoPaterno} ${paciente.apellidoMaterno}`;
-                                        const inicial = paciente.nombre.charAt(0);
-                                        return (
-                                            <div key={index} className='prueba_tabla'>
-                                                <div className='inicial-circulo'>{inicial}</div>
-                                                <div>
-                                                    <p className='prueba-name'>{nombreCompleto}</p>
-                                                </div>
-                                                <div className='acomodar-iconos'>
-                                                    <img src="/basura.png" alt="borrar" className='iconos' />
-                                                </div>
-                                            </div>
-                                        );
-                                        })}
-                                    */}
                                     {nombres.map((nombreCompleto,index) => {
                                         const inicial = nombreCompleto.charAt(0);
                                         return(
@@ -90,6 +64,24 @@ const Pacientes =() => {
                                                 </div>
                                                 <div>
                                                     <p className='prueba-name'>{nombreCompleto}</p>                                
+                                                </div>
+                                                <div className='acomodar-iconos'>
+                                                    <img src="/basura.png" alt="borrar" className='iconos' />
+                                                </div>
+                                            </div>
+                                        );
+                                    })}
+                                    */}
+                                    {pacientes.map((paciente, index) => {
+                                        const nombreCompleto = `${paciente.nombre} ${paciente.apellidoPaterno} ${paciente.apellidoMaterno}`;
+                                        const inicial = paciente.nombre.charAt(0);
+                                        return (
+                                            <div key={index} className='prueba_tabla'>
+                                                <div className='inicial-circulo'>
+                                                    <p className='letra-circulo'>{inicial}</p>
+                                                </div>
+                                                <div>
+                                                    <p className='prueba-name'>{nombreCompleto}</p>
                                                 </div>
                                                 <div className='acomodar-iconos'>
                                                     <img src="/basura.png" alt="borrar" className='iconos' />

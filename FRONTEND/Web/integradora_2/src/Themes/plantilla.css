@@ -110,7 +110,7 @@ input, select {
     padding: 1vw;
     margin: 1vw;
     width: 15vw;
-    height: 11vw;
+    height: 15vw;
     background-color: #f0f0f0;
     border-radius: 2rem;
 
@@ -130,21 +130,18 @@ input, select {
     align-items: center;
     border: 1px solid #ccc;
     border-radius: 20px;
-    padding: 5px 10px;
 }
 
 .search-bar input {
-    flex: 1;
+    margin-top: 1rem;
+    margin-left: .3rem;
+    flex: 1.5;
     border: none;
     outline: none;
     font-size: 16px;
 }
 
-.search-icon {
-    width: 20px;
-    height: 20px;
-    margin-left: 10px;
-}
+
 
 .filter-bar {
     display: flex;
@@ -320,3 +317,9 @@ input, select {
 
 }
 
+.texto{
+    padding: 0.5vw;
+    text-align: center;
+    font-size: 2vmin;
+    font-size: 1vmax;
+}

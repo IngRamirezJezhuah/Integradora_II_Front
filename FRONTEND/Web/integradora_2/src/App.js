@@ -9,6 +9,7 @@ import './Themes/elementos.css'
 import './nav.css'
 import './Themes/FormLg.css';
 import './Themes/loginPage.css';
+import './Themes/imagenes-estilos.css'
 
 import Component from './Screens/Component.jsx';
 import Login from './Screens/Login.jsx';

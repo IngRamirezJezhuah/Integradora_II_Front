@@ -17,7 +17,7 @@ const SearchBar = ({ placeholder = 'Buscar', value = '', onChange, onSearch, deb
   };
 
   return (
-    <div className="search-bar">
+    <div className="search-bar" >
       <input
         type="text"
         placeholder={placeholder}
