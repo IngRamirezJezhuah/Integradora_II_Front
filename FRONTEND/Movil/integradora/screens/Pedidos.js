@@ -1,23 +1,38 @@
-import { StatusBar } from 'expo-status-bar';
-import React, {useState} from 'react';
-import { View, Text, FlatList, Image, ScrollView, StyleSheet, TouchableOpacity, TextInput } from "react-native";
+import React, { useState } from 'react';
+import { SafeAreaView } from 'react-native';
+import SearchBar from '../components/elements/searchBar';
+import FilterBar from '../components/elements/filterBar';
+import OrdersTable from '../components/orders/orderTable'; // Assuming you have an OrdersTable component
 
-const Pedidos= () =>{
-    return (
-        <View style={styles.container}>
-        <Text>Pedidos</Text>
-        <StatusBar style="auto" />
-        </View>
-    );
-}
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-});
+const OrdersScreen = () => {
+  const [searchText, setSearchText] = useState('');
+  const [filter, setFilter] = useState('EnProceso');
 
-export default Pedidos; 
+  const orders = [
+    { name: 'P1285' },
+    { name: 'P1287' },
+    { name: 'P1286' },
+    { name: 'P1288' },
+    { name: 'P1289' },
+    { name: 'P1290' },
+  ];
+
+  const handleView = (item) => {
+    console.log('View order', item);
+  };
+
+  const handleDelete = (item) => {
+    console.log('Delete order', item);
+  };
+
+  return (
+    <SafeAreaView>
+      <SearchBar searchText={searchText} onChangeSearch={setSearchText} />
+      <FilterBar activeFilter={filter} setFilter={setFilter} />
+      <OrdersTable orders={orders} onView={handleView} onDelete={handleDelete} />
+    </SafeAreaView>
+  );
+};
+
+export default OrdersScreen;
