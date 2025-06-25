@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 
+
 const ModalPaciente = ({ onClose }) => {
     const [formData, setFormData] = useState({
         nombre: '',
@@ -31,14 +32,14 @@ const ModalPaciente = ({ onClose }) => {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
             correo: formData.correo,
-            rol: "admin",
+            rol: '',//['admin','Cliente','Secretaria','Empleado']
             nombre: formData.nombre,
             apellidoPaterno: formData.apellidoPaterno,
             apellidoMaterno: formData.apellidoMaterno,
             fechaNacimiento: formData.fechaNacimiento
             })
         });
-
+        
         const result = await response.json();
 
         if (response.ok) {
@@ -62,11 +63,30 @@ const ModalPaciente = ({ onClose }) => {
 
             <form onSubmit={handleSubmit}>
             {error && <p className="error">{error}</p>}
-
+            
+            <label htmlFor="nombre">Nombre</label>
             <input type="text" name="nombre" placeholder="Nombre" value={formData.nombre} onChange={handleChange} />
+            
+            <label htmlFor="apellidoPaerno">ApellidoPaterno</label>
             <input type="text" name="apellidoPaterno" placeholder="Apellido Paterno" value={formData.apellidoPaterno} onChange={handleChange} />
+            
+            <label htmlFor="apellidoMaterno">Apellido Materno</label>
             <input type="text" name="apellidoMaterno" placeholder="Apellido Materno" value={formData.apellidoMaterno} onChange={handleChange} />
+
+            <label>
+                Rol:{''}
+                <select>
+                <option value="Admin">Admin</option>
+                <option value="Cliente">Cliente</option>
+                <option value="Secretaria">Secretaria</option>
+                <option value="Empleado">Empleado</option>
+                </select>
+            </label>
+            
+            <label htmlFor="fechaNacimiento">Fecha de Nacimiento</label>
             <input type="date" name="fechaNacimiento" value={formData.fechaNacimiento} onChange={handleChange} />
+            
+            <label htmlFor="Correo">Correo</label>
             <input type="email" name="correo" placeholder="Correo" value={formData.correo} onChange={handleChange} />
 
             <button type="submit" className="btn submit">Registrar</button>
