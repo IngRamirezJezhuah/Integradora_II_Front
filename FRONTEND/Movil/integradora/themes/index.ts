@@ -1,2 +1,2 @@
 
-export { Styles,Dashboard } from './GlobalStyles'
+export { Styles,DashboardStyles } from './GlobalStyles'

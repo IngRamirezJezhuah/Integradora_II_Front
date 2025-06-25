@@ -1,31 +1,24 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
-import { Button } from 'react-native-paper';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 
-const FilterBar = ({ activeFilter, setFilter }) => {
+const FilterBar = ({ activeFilter, setFilter, filters }) => {
+
   return (
     <View style={styles.container}>
-      <Button
-        mode={activeFilter === 'EnProceso' ? 'contained' : 'outlined'}
-        onPress={() => setFilter('EnProceso')}
-        style={styles.button}
-      >
-        En proceso
-      </Button>
-      <Button
-        mode={activeFilter === 'Completadas' ? 'contained' : 'outlined'}
-        onPress={() => setFilter('Completadas')}
-        style={styles.button}
-      >
-        Completadas
-      </Button>
-      <Button
-        mode={activeFilter === 'Canceladas' ? 'contained' : 'outlined'}
-        onPress={() => setFilter('Canceladas')}
-        style={styles.button}
-      >
-        Canceladas
-      </Button>
+      {filters.map((filter, index) => {
+        const isActive = filter === activeFilter;
+        return (
+          <TouchableOpacity
+            key={index}
+            onPress={() => setFilter(filter)}
+            style={[styles.button, isActive ? styles.active : styles.inactive]}
+          >
+            <Text style={isActive ? styles.textActive : styles.textInactive}>
+              {filter}
+            </Text>
+          </TouchableOpacity>
+        );
+      })}
     </View>
   );
 };
@@ -34,10 +27,26 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     justifyContent: 'space-around',
-    marginVertical: 10,
+    marginHorizontal: 10,
+    marginBottom: 12,
   },
   button: {
-    marginHorizontal: 5,
+    paddingHorizontal: 16,
+    paddingVertical: 8,
+    borderRadius: 14,
+  },
+  active: {
+    backgroundColor: '#D32F2F',
+  },
+  inactive: {
+    backgroundColor: '#F0F0F0',
+  },
+  textActive: {
+    color: '#fff',
+    fontWeight: 'bold',
+  },
+  textInactive: {
+    color: '#888',
   },
 });
 

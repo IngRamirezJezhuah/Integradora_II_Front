@@ -1,34 +1,46 @@
 import React from 'react';
-import { View, StyleSheet, Image, TouchableOpacity } from 'react-native';
-import { TextInput } from 'react-native';
+import { View, TextInput, StyleSheet } from 'react-native';
+import { Feather } from '@expo/vector-icons';
 
-const SearchBar = ({ searchText, onChangeSearch, onSearch }) => {
+const SearchBar = ({ searchText, onChangeSearch, placeholder }) => {
   return (
     <View style={styles.container}>
       <TextInput
-        color="#ff4d4d"
-        label="Buscar pedido"
+        style={styles.input}
+        placeholder={placeholder}
+        placeholderTextColor="#999"
         value={searchText}
         onChangeText={onChangeSearch}
-        mode="outlined"
-        right={<TextInput.Icon name="magnify" onPress={onSearch} />}
       />
-      <Image
-        source={require('../../assets/busqueda.png')}
-        style={{ width: 24, height: 24 }}
-      />
-      {/* If you want a custom image button, uncomment below and provide a valid image source */}
-      {/*
-      <TouchableOpacity onPress={onSearch}>
-      </TouchableOpacity>
-      */}
+      <Feather name="search" size={20} color="#D32F2F" style={styles.icon} />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    margin: 10,
+    margin: 12,
+    position: 'relative',
+  },
+  input: {
+    backgroundColor: '#fff',
+    borderRadius: 12,
+    borderColor: '#ccc',
+    borderWidth: 1,
+    paddingLeft: 15,
+    paddingRight: 40,
+    height: 45,
+    fontSize: 16,
+    shadowColor: '#000',
+    shadowOpacity: 0.05,
+    shadowRadius: 3,
+    shadowOffset: { width: 0, height: 2 },
+    elevation: 1,
+  },
+  icon: {
+    position: 'absolute',
+    right: 20,
+    top: 12,
   },
 });
 

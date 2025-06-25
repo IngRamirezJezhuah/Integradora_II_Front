@@ -7,9 +7,11 @@ import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 //import Home from '../screens/home';
 //import Porfile from '../screens/porfile';
-import dashboard from '../screens/dashboard';
+import Dashboard from '../screens/Dashboard';
 import Muestras from '../screens/Muestras';
-import {  Escaner, Pedidos } from '../screens';
+// import {  Escaner, Pedidos } from '../screens';
+import Pedidos from '../screens/Pedidos';
+import Escaner from '../screens/Escaner';
 
 
 const Tab = createBottomTabNavigator();
@@ -17,8 +19,7 @@ const Tab = createBottomTabNavigator();
 const TabNavigator = () => {
     return (
         <Tab.Navigator>
-            
-            <Tab.Screen name="Monitoreo" component={dashboard} 
+            <Tab.Screen name="Monitoreo" component={Dashboard} 
             options={{
                 tabBarIcon: () =>(
                     <Ionicons name="home-outline" size={30} color={'#DA0C15'}/>
@@ -36,7 +37,7 @@ const TabNavigator = () => {
                     <Fontisto name="test-tube" size={26} color={'#DA0C15'}/>
                 )
             }}/>
-            <Tab.Screen name="Escaner" component={Escaner} 
+            <Tab.Screen name="Escaner" component={Muestras} 
             options={{
                 tabBarIcon: () =>(
                     <MaterialIcons name="qr-code-scanner" size={30} color={'#DA0C15'} />

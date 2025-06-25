@@ -2,11 +2,11 @@ import React from 'react';
 import { FlatList, View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
-const OrdersTable = ({ orders, onView, onDelete }) => {
+const OrdersTable = ({ data, onView, onDelete }) => {
   return (
     <FlatList
-      data={orders}
-      keyExtractor={(item) => item.name}
+      data={data}
+      keyExtractor={(item) => item.id}
       renderItem={({ item }) => (
         <View style={styles.row}>
           <MaterialCommunityIcons name="test-tube" size={30} color="black" />

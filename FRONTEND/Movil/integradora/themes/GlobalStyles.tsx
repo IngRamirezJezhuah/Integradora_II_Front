@@ -9,7 +9,7 @@ export const Styles = StyleSheet.create({
     },
 })
 
-export const Dashboard = StyleSheet.create({
+export const DashboardStyles = StyleSheet.create({
     container:{
         flex: 1,
         justifyContent:'center',

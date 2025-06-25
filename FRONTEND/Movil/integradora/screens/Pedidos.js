@@ -2,35 +2,104 @@ import React, { useState } from 'react';
 import { SafeAreaView } from 'react-native';
 import SearchBar from '../components/elements/searchBar';
 import FilterBar from '../components/elements/filterBar';
-import OrdersTable from '../components/orders/orderTable'; // Assuming you have an OrdersTable component
+import OrdersTable from '../components/orders/ordersTable';
+import { filterData } from '../utils/filterUtils';
 
 
 const OrdersScreen = () => {
   const [searchText, setSearchText] = useState('');
   const [filter, setFilter] = useState('EnProceso');
-
+  const customFilters = ['En proceso', 'Completados', 'Cancelados'];
+  
   const orders = [
-    { name: 'P1285' },
-    { name: 'P1287' },
-    { name: 'P1286' },
-    { name: 'P1288' },
-    { name: 'P1289' },
-    { name: 'P1290' },
-  ];
+    {
+      "id": "P1285",
+    "nameUsuario": "Juan Perez",
+    "status": "pendiente",
+    "descripcion": "Análisis de rutina anual",
+    "procedimientos": [
+      {
+        "titulo": "quimica sanguinea",
+        "costo": 120,
+        "diasEspera": 1,
+        "estatus": 1
+      },
+      {
+        "titulo": "biometria hematica",
+        "costo": 150,
+        "diasEspera": 2,
+        "estatus": 1
+      }
+    ],
+    "createDate": "2025-06-20"
+  },
+  {
+    "id": "P1286",
+    "nameUsuario": "Maria Gomez",
+    "status": "completado",
+    "descripcion": "Chequeo postoperatorio",
+    "procedimientos": [
+      {
+        "titulo": "quimica sanguinea",
+        "costo": 120,
+        "diasEspera": 1,
+        "estatus": 1
+      }
+    ],
+    "createDate": "2025-06-18"
+  },
+  {
+    "id": "P1287",
+    "nameUsuario": "Carlos Lopez",
+    "status": "cancelado",
+    "descripcion": "Análisis de control diabetes",
+    "procedimientos": [
+      {
+        "titulo": "biometria hematica",
+        "costo": 150,
+        "diasEspera": 2,
+        "estatus": 1
+      }
+    ],
+    "createDate": "2025-06-15"
+  },
+  {
+    "id": "P1288",
+    "nameUsuario": "Ana Martinez",
+    "status": "pendiente",
+    "descripcion": "Examen general",
+    "procedimientos": [
+      {
+        "titulo": "quimica sanguinea",
+        "costo": 120,
+        "diasEspera": 1,
+        "estatus": 1
+      },
+      {
+        "titulo": "biometria hematica",
+        "costo": 150,
+        "diasEspera": 2,
+        "estatus": 1
+      }
+    ],
+    "createDate": "2025-06-22"
+  }
+];
 
-  const handleView = (item) => {
-    console.log('View order', item);
-  };
+const handleView = (item) => {
+  console.log('View order', item);
+};
 
-  const handleDelete = (item) => {
-    console.log('Delete order', item);
-  };
+const handleDelete = (item) => {
+  console.log('Delete order', item);
+};
+const filteredData = filterData(orders, searchText);
 
   return (
     <SafeAreaView>
-      <SearchBar searchText={searchText} onChangeSearch={setSearchText} />
-      <FilterBar activeFilter={filter} setFilter={setFilter} />
-      <OrdersTable orders={orders} onView={handleView} onDelete={handleDelete} />
+      <SearchBar placeholder={"Buscar Pedidos"} searchText={searchText} onChangeSearch={setSearchText} />
+      <FilterBar activeFilter={filter} setFilter={setFilter} filters={customFilters}/>
+      <OrdersTable data={orders} onView={handleView} onDelete={handleDelete} />
     </SafeAreaView>
   );
 };
