@@ -35,12 +35,9 @@ const ReciboPedidos = () => {
                                     <img className='imagen-prueba' src="/prueba-de-sangre.png" alt="prueba imagen" />
                                 </div>
                                 <p className='prueba-name'>{prueba}</p>
-                                
-                                <div className='acomodar-iconos-2'>
-                                    <p>{precios[index]}</p>
-                                </div>
-                                
+                                <p className='prueba-name'>{precios[index]}</p>
                                 <input type="checkbox" name="" id=""  className='acomodar-iconos'/>
+                                
                             </div>
                             ))}
                         <hr />

@@ -1,21 +1,26 @@
 //rafc para hacer una plantilla rapida
-import React from 'react'
+import { useState } from 'react'
 import { SearchBar } from '../Components';
 import { Link } from 'react-router-dom';
 import { OpcionesPedidos } from '../Components';
+import { ModalPedidos } from '../Components';
 //import Component from './Component'
 //import { Outlet } from 'react-router-dom'
 
 
 const Pedidos =() => {
-    
+    const [modalAbierto, setModalAbierto] = useState(false);
 
     return (
         <div>
             <h1>Pedidos </h1>
             <div className='buscador'>
-                <Link to="/AgregarMuestras">
+                
                 <button className='btn-agregar'>+Agregar</button>
+                
+                <button className='btn-agregar'  onClick={() => setModalAbierto(true)}>+Agregar</button>
+                {modalAbierto && <ModalPedidos onClose={() => setModalAbierto(false)} />}
+                <Link to="/AgregarMuestras">
                 </Link>
                 <SearchBar />
                 <div className='Box-muestras'>

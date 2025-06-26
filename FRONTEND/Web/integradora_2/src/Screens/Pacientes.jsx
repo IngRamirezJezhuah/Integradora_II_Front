@@ -3,22 +3,23 @@
 //import { Link } from 'react-router-dom';
 import { SearchBar } from '../Components';
 import { ModalPaciente } from '../Components';
-import { useEffect, useState } from 'react';
+import {  useState } from 'react';
 
 const Pacientes =() => {
-    const [modalAbierto, setModalAbierto] = useState(false);
-    const [pacientes, setPacientes] = useState([]);
-    /*const nombres = [//esta  es para usar una lista, alternatica sin peticion 
+
+    const nombres = [//esta  es para usar una lista, alternatica sin peticion 
     "Mario Lira Zamora",
     "David Jezhuah Ramirez Alvarado",
     "Racardo Luna Unzueta",
-    "Diego Daher Diaz Contreraz"]*/
+    "Diego Daher Diaz Contreraz",]
+    const [modalAbierto, setModalAbierto] = useState(false);
 
     const pruebas = [
         "Quimica sanguinea",
         "Biometrica Hepatica"
     ]
-    
+    /*Verison con servidor
+    const [pacientes, setPacientes] = useState([]);
     useEffect(() => {
         const getPacientes = async () => {
             try {
@@ -40,7 +41,7 @@ const Pacientes =() => {
             }
         };
         getPacientes();
-    }, []);
+    }, []);*/
 
     return (
             <div>
@@ -55,23 +56,6 @@ const Pacientes =() => {
                             <div className='caja_1'>
                                 <div className='scroll'>
                                     {/*
-                                    {nombres.map((nombreCompleto,index) => {
-                                        const inicial = nombreCompleto.charAt(0);
-                                        return(
-                                            <div key={index} className='prueba_tabla'>
-                                                <div className='inicial-circulo'>
-                                                    <p className='letra-circulo'>{inicial}</p>
-                                                </div>
-                                                <div>
-                                                    <p className='prueba-name'>{nombreCompleto}</p>                                
-                                                </div>
-                                                <div className='acomodar-iconos'>
-                                                    <img src="/basura.png" alt="borrar" className='iconos' />
-                                                </div>
-                                            </div>
-                                        );
-                                    })}
-                                    */}
                                     {pacientes.map((paciente, index) => {
                                         const nombreCompleto = `${paciente.nombre} ${paciente.apellidoPaterno} ${paciente.apellidoMaterno}`;
                                         const inicial = paciente.nombre.charAt(0);
@@ -89,6 +73,24 @@ const Pacientes =() => {
                                             </div>
                                         );
                                     })}
+                                    */}
+                                    {nombres.map((nombreCompleto,index) => {
+                                        const inicial = nombreCompleto.charAt(0);
+                                        return(
+                                            <div key={index} className='prueba_tabla'>
+                                                <div className='inicial-circulo'>
+                                                    <p className='letra-circulo'>{inicial}</p>
+                                                </div>
+                                                <div>
+                                                    <p className='prueba-name'>{nombreCompleto}</p>                                
+                                                </div>
+                                                <div className='acomodar-iconos'>
+                                                    <img src="/basura.png" alt="borrar" className='iconos' />
+                                                </div>
+                                            </div>
+                                        );
+                                    })}
+                                    
                                 </div>
                             </div>
                         </div>
