@@ -1,3 +1,43 @@
+
+/*________iconos e imagenes________*/
+.imagen-prueba{
+    width: 2vw;
+    height: 2vw;
+}
+.iconos{
+    width: 2vw;
+    height: 2vw;
+    padding: 5px;
+    display:flex;
+
+}
+
+.icono-borrar{
+    margin-left: 15vw;
+    margin-top: 1vw;
+}
+/*
+position: absolute;
+    margin-left: 17vw;
+    margin-bottom: 2vh;
+    height: 2vw;
+*/
+.icono-user{
+    width: 2vw;
+    height: 2vw;
+    padding: 5px;
+}
+
+.acomodar-iconos{
+
+    margin-left: 8vw;
+    height: .9vw;
+}
+.acomodar-iconos-2{
+    position: absolute;
+    margin-left: 22vw;
+}
+
 .search-icon {
     width: 20px;
     height: 20px;

@@ -43,6 +43,14 @@ const Pacientes =() => {
         getPacientes();
     }, []);*/
 
+    const [message] = useState('Usuario Borrado');
+
+    function handleSubmit(e) {
+        e.preventDefault();
+        setTimeout(() => {
+        alert(message);
+        }, 100);
+    }
     return (
             <div>
                 <h1>Pacientes </h1>
@@ -82,10 +90,10 @@ const Pacientes =() => {
                                                     <p className='letra-circulo'>{inicial}</p>
                                                 </div>
                                                 <div>
+                                                    <div className='acomodar-iconos'>
+                                                        <img src="/basura.png" alt="borrar" className='icono-borrar' onClick={handleSubmit}/>
+                                                    </div>
                                                     <p className='prueba-name'>{nombreCompleto}</p>                                
-                                                </div>
-                                                <div className='acomodar-iconos'>
-                                                    <img src="/basura.png" alt="borrar" className='iconos' />
                                                 </div>
                                             </div>
                                         );

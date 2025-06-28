@@ -11,6 +11,7 @@ import './Themes/FormLg.css';
 import './Themes/loginPage.css';
 import './Themes/imagenes-estilos.css'
 import './Themes/modal.css';
+import './Themes/textos.css';
 import Component from './Screens/Component.jsx';
 import Login from './Screens/Login.jsx';
 import Recuperacion from './Screens/Recuperacion.jsx';

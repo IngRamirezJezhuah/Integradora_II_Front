@@ -20,7 +20,7 @@ const SampleChart = () => {
         {
             label: "Ventas",
             data: [150, 200, 170, 220],
-            backgroundColor: "rgba(75,192,192,0.6)",
+            backgroundColor: "rgb(255, 193, 92)",
         },
         ],
     };
