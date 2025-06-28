@@ -2,6 +2,7 @@
 //import React, { useEffect, useState } from 'react'
 //import { Link } from 'react-router-dom';
 import { SearchBar } from '../Components';
+import { OpcionesPaciente } from '../Components';
 import { ModalPaciente } from '../Components';
 import {  useState } from 'react';
 
@@ -59,6 +60,9 @@ const Pacientes =() => {
                     {modalAbierto && <ModalPaciente onClose={() => setModalAbierto(false)} />}
                     < SearchBar />
                 </div>
+                    <div className='opciones'>
+                        <OpcionesPaciente/>
+                    </div>
                 <div className='margen'>
                     <div className='scale-up-ver-center'>
                             <div className='caja_1'>
@@ -113,12 +117,10 @@ const Pacientes =() => {
                                             <img className='imagen-prueba' src="/prueba-de-sangre.png" alt="prueba imagen" />
                                         </div>
                                         <p className='prueba-name'>{prueba}</p>
-                                        <div className='acomodar-iconos'>
-                                            <img src="/sobre-mas.png" alt="editar" className='iconos' />
-                                        </div>
-                                        <div className='acomodar-iconos-2'>
-                                            <img src="/descargas.png" alt="borrar" className='iconos' />
-                                        </div>
+                                            <div className='acomodar-iconos-2'>
+                                                <img src="/sobre-mas.png" alt="enviar" className='icono-correo' />
+                                                <img src="/descargas.png" alt="descargar" className='icono-correo' />
+                                            </div>
                                         </div>
                                     ))}
                         </div>

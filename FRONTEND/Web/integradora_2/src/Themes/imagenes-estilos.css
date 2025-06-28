@@ -9,19 +9,20 @@
     height: 2vw;
     padding: 5px;
     display:flex;
-
 }
 
 .icono-borrar{
+    height: 2vw;
+    width: 2vw;
     margin-left: 15vw;
     margin-top: 1vw;
 }
-/*
-position: absolute;
-    margin-left: 17vw;
-    margin-bottom: 2vh;
+.icono-correo{  
     height: 2vw;
-*/
+    width: 2vw;
+    margin-left:1.5vw ;
+    position: relative;
+}
 .icono-user{
     width: 2vw;
     height: 2vw;
@@ -29,13 +30,12 @@ position: absolute;
 }
 
 .acomodar-iconos{
-
     margin-left: 8vw;
     height: .9vw;
 }
 .acomodar-iconos-2{
     position: absolute;
-    margin-left: 22vw;
+    margin-left: 20vw;
 }
 
 .search-icon {

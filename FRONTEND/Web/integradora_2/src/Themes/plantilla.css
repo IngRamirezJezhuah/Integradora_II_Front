@@ -1,51 +1,10 @@
 .margen {
-    margin-top: 6vh;
+
     color: black;
     display: flex;
     /*align-items:flex-end;*/
     padding: 1rem;
 }
-
-
-/*__________Animaciones__________*/
-/*__________de centro hcia afuera arriba abajo__________*/
-.scale-up-ver-center {
-	animation: scale-up-ver-center 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
-} 
-@keyframes scale-up-ver-center {
-    0% {
-        transform: scaleY(0.4);
-    }
-    100% {
-        transform: scaleY(1);
-    }
-}
-/*__________del centro hacia afuera izq derecha__________*/
-.scale-in-hor-center {
-	animation: scale-in-hor-center 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-}
-@keyframes scale-in-hor-center {
-    0% {
-        transform: scaleX(0);
-        opacity: 1;
-    }
-    100% {
-        transform: scaleX(1);
-        opacity: 1;
-    }
-}
-/*__________del centro hacia afuera__________*/
-.scale-up-center {
-	animation: scale-up-center 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
-} 
-@keyframes scale-up-center {
-    0% {
-        transform: scale(0.5);
-    }
-    100% {
-        transform: scale(1);
-    }
-    }
 
 /*__________estilos de las cajas de contenido__________ */
 .caja_1{
@@ -80,6 +39,10 @@
     border-radius: 3rem;
     border-color: #c1bfbf;
     margin-bottom: 40vw;
+}
+.opciones{
+    margin:0%;
+    margin-top: 5vw;
 }
 .search-bar {
     height: 4vh;

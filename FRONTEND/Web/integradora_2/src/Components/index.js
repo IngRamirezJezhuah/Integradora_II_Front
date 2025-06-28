@@ -9,6 +9,7 @@ export {default as  MuestrasHechas } from './graficas/muestras-dia'
 export {default as  RegistrarPaceinte } from './pacientes/registrarPaciente'
 export {default as  NuevoPaciente } from './pacientes/NuevoPaciente'
 export {default as  ModalPaciente } from './pacientes/ModalPaciente'
+export {default as  OpcionesPaciente } from './pacientes/OpcionesPaciente'
 
 //_____________Elementos_____________
 export {default as  SearchBar } from './elementos/searchBar'
