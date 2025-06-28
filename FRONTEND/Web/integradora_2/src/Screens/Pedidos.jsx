@@ -23,12 +23,12 @@ const Pedidos =() => {
                 <Link to="/AgregarMuestras">
                 </Link>
                 <SearchBar />
-                <div className='Box-muestras'>
+            </div>
+                <div className='opciones'>
                     <OpcionesPedidos/>
                 </div>
-            </div>
-            <div className='margen'>
-                <div className='plantilla'>
+            <div className='plantilla'>
+                <div className='margen'>
                     <div className='scroll_pruebas'>
                         <div>
                             <div className='caja_pedidos'>

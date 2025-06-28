@@ -8,7 +8,7 @@ const Component=() => {
 
     const isActive = (path) => location.pathname === path;
     return (
-        <div className='contenedor'>
+        <section className='contenedor' >
             <div className='tabNavigator'>
                 <div>
                     <img className='menu' src="/menu.png" alt='icon-menu' />
@@ -39,16 +39,16 @@ const Component=() => {
                     </Link>
                 </div>
                 {/* <div className='plantilla'>
-                    <Outlet /> */}
-                <div className='plantilla'>
-                    {location.pathname === '/' ? (
-                        <Dashboard />
-                    ) : (
-                        <Outlet />
-                    )}
-                </div>  
+                    <Outlet /> 
+                    
+                    */}
+                    <section>
+                        {location.pathname === '/' ? (
+                            <Dashboard />
+                        ) : (<Outlet/>)}
+                    </section>  
             </div>
-        </div>
+        </section>
     )
 }
 

@@ -1,12 +1,14 @@
 // App.js
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 /*__________Estiloss__________*/
-import './Themes/App.css';import './styles.css';
+import './Themes/App.css';import './Themes/styles.css';
 import './Themes/Dash.css';import './Themes/plantilla.css';
-import './Themes/elementos.css';import './nav.css';
+import './Themes/elementos.css';import './Themes/nav.css';
 import './Themes/FormLg.css';import './Themes/loginPage.css';
 import './Themes/imagenes-estilos.css';import './Themes/modal.css';
 import './Themes/textos.css';import './Themes/Animaciones.css';
+
+
 /*__________Componentes__________*/
 import Component from './Screens/Component.jsx';
 import Login from './Screens/Login.jsx';

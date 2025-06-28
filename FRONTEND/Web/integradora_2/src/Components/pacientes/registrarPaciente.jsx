@@ -44,28 +44,30 @@ const RegistrarPaciente = () => {
     }
 
     return (
-        <div className='scale-up-center'>
-            <div className='registrar-user'>
-                <form onSubmit={handleSubmit}>
-                    <label className='precios' htmlFor="nombre">Nombre(s):</label>
-                    <input className='label-form' type="text" name="nombre" value={formData.nombre} onChange={handleChange} required  placeholder="David Jezhuah" />
+        <div className='plantilla'>
+            <div className='scale-up-center'>
+                <div className='margen'>
+                    <form onSubmit={handleSubmit}>
+                        <label className='precios' htmlFor="nombre">Nombre(s):</label>
+                        <input className='label-form' type="text" name="nombre" value={formData.nombre} onChange={handleChange} required  placeholder="David Jezhuah" />
 
-                    <label className='precios' htmlFor="apellidoPaterno">Apellido Paterno:</label>
-                    <input className='label-form' type="text" name="apellidoPaterno" value={formData.apellidoPaterno} onChange={handleChange} required  placeholder="Ramirez"/>
+                        <label className='precios' htmlFor="apellidoPaterno">Apellido Paterno:</label>
+                        <input className='label-form' type="text" name="apellidoPaterno" value={formData.apellidoPaterno} onChange={handleChange} required  placeholder="Ramirez"/>
 
-                    <label className='precios' htmlFor="apellidoMaterno">Apellido Materno:</label>
-                    <input className='label-form' type="text" name="apellidoMaterno" value={formData.apellidoMaterno} onChange={handleChange} required  placeholder="Alvarado"/>
+                        <label className='precios' htmlFor="apellidoMaterno">Apellido Materno:</label>
+                        <input className='label-form' type="text" name="apellidoMaterno" value={formData.apellidoMaterno} onChange={handleChange} required  placeholder="Alvarado"/>
 
-                    <label className='precios' htmlFor="fechaNacimiento">Fecha Nacimiento:</label>
-                    <input className='label-form' type="date" name="fechaNacimiento" value={formData.fechaNacimiento} onChange={handleChange} required />
+                        <label className='precios' htmlFor="fechaNacimiento">Fecha Nacimiento:</label>
+                        <input className='label-form' type="date" name="fechaNacimiento" value={formData.fechaNacimiento} onChange={handleChange} required />
 
-                    <label className='precios' htmlFor="correo">Correo:</label>
-                    <input className='label-form' type="email" name="correo" value={formData.correo} onChange={handleChange} required   placeholder="Correo@gmail.com"/>
-                    <input className='btn' type="submit" value="Registrar" />
-                    <Link to='/Pacientes'>  
-                    <button className='btn'>Regresar</button>
-                    </Link>
-                </form>
+                        <label className='precios' htmlFor="correo">Correo:</label>
+                        <input className='label-form' type="email" name="correo" value={formData.correo} onChange={handleChange} required   placeholder="Correo@gmail.com"/>
+                        <input className='btn' type="submit" value="Registrar" />
+                        <Link to='/Pacientes'>  
+                        <button className='btn'>Regresar</button>
+                        </Link>
+                    </form>
+                </div>
             </div>
         </div>
     )
