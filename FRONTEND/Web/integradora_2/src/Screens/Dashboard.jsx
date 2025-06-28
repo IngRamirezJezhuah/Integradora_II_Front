@@ -26,7 +26,48 @@ const Dashboard=()=> {
     }
 
     if (!ldrData) {
-        return <p>Cargando datos del sensor...</p>
+        return (
+        <div>
+            <p className='titulo'>Dashboard </p>
+        <div className='margen'>
+
+            <div>
+                <p>Cargando datos del sensor...</p>
+                <div className='div-graficas'>
+                    <p>Temperatura del Laboratorio</p>
+                    <p>25% c</p>
+                    <div className='div-grafica'>
+                        <p>Cargando datos del sensor...</p>
+                    </div>
+                </div>
+                <div className='div-graficas'>
+                    <p>Humedad del Laboratorio</p>
+                    <p>25% c</p>
+                    <div className='div-grafica'>
+                        <p>Cargando datos del sensor...</p>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div className='div-muestra'>
+                    <p className='centrar'>Pedidos Pendientes</p>
+                    <p className='texto-dash'><p>Cargando datos del sensor...</p></p>
+                </div>
+                <div className='div-muestra-2'>
+                    <p className='centrar'>muestras en preocesamiento</p>
+                    <p className='texto-dash'><p>Cargando datos del sensor...</p></p>
+                </div>
+                <div className='div-muestra-3'>
+                    <p className='centrar'>Contenedor esp32c3_001</p>
+                    <p className='centrar'>Cargando datos del sensor...</p>
+                    <p className='texto-dash'>LDR:Cargando datos del sensor...</p>
+                    <p className='texto-dash'>LDR:Cargando datos del sensor...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+        
+    )
     }
 
     const status = getLdrStatus(ldrData.ldr)
@@ -34,7 +75,7 @@ const Dashboard=()=> {
     */
     return (
     <div>
-        <h1>Dashboard </h1>
+        <p className='titulo'>Dashboard </p>
         <div className='margen'>
             <div>
                 <div className='div-graficas'>
@@ -53,19 +94,19 @@ const Dashboard=()=> {
                 </div>
             </div>
             <div>
-            <div className='div-muestra'>
-                <p className='centrar'>Pedidos Pendientes</p>
-                <p className='titulo'>12</p>
-            </div>
-            <div className='div-muestra-2'>
-                <p className='centrar'>muestras en preocesamiento</p>
-                <p className='titulo'>15</p>
-            </div>
+                <div className='div-muestra'>
+                    <p className='centrar'>Pedidos Pendientes</p>
+                    <p className='texto-dash'>12</p>
+                </div>
+                <div className='div-muestra-2'>
+                    <p className='centrar'>muestras en preocesamiento</p>
+                    <p className='texto-dash'>15</p>
+                </div>
                 <div className={status.clase}>
                     <p className='centrar'>Contenedor esp32c3_001{ldrData.id}</p>
                     <p className='centrar'>{status.estado}</p>
-                    <p className='titulo'>LDR:{ldrData.ldrMax}</p>
-                    <p className='titulo'>LDR:{ldrData.getLdrMin}</p>
+                    <p className='texto-dash'>LDR:{ldrData.ldrMax}</p>
+                    <p className='texto-dash'>LDR:{ldrData.getLdrMin}</p>
                 </div>
             </div>
         </div>

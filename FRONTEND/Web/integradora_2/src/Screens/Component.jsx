@@ -42,7 +42,7 @@ const Component=() => {
                     <Outlet /> 
                     
                     */}
-                    <section>
+                    <section className='plantilla'>
                         {location.pathname === '/' ? (
                             <Dashboard />
                         ) : (<Outlet/>)}

@@ -1,9 +1,6 @@
 .margen {
-
-    color: black;
     display: flex;
-    /*align-items:flex-end;*/
-    padding: 1rem;
+    align-items:flex-end;
 }
 
 /*__________estilos de las cajas de contenido__________ */

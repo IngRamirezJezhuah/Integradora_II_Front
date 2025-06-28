@@ -14,7 +14,7 @@ const ReciboPedidos = () => {
     ]
     return (
         <div>
-            <h1>Recibos Pacientes </h1>
+            <h1>Recibos Pedidos </h1>
             <div className='buscador'>
                 <Link to="/AgregarMuestras">
                 <button className='btn-agregar'>+Agregar</button>
@@ -22,7 +22,6 @@ const ReciboPedidos = () => {
                 <SearchBar />
             </div>
             <div className='margen'>
-                
                 <div className='scale-up-ver-center'>
                     <div className='caja_1'>
                         <div className='acomodar'>

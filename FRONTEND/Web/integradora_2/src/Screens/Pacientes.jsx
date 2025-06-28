@@ -54,7 +54,7 @@ const Pacientes =() => {
     }
     return (
             <div>
-                <h1>Pacientes </h1>
+                <p className='titulo'>Pacientes </p>
                 <div className='buscador'>
                     <button className='btn-agregar' onClick={() => setModalAbierto(true)}>+Agregar</button>
                     {modalAbierto && <ModalPaciente onClose={() => setModalAbierto(false)} />}

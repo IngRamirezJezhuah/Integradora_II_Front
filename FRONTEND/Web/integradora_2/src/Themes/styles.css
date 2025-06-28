@@ -4,10 +4,9 @@
     padding: 0px;
 }
 .contenedor{
-    background-color: #4b4b4b;
-    padding: auto;
-    min-height: fit-content;
-    max-width: fit-content;
+    background-color: #FEF7FF;
+    padding: 2vh;
+    margin: 0%;
 }
 .tabNavigator{
     margin: 0%;
@@ -22,7 +21,7 @@
     flex-wrap: wrap;
     background-color: #FFFF;
     padding: 2vw;
-    margin-left: 3vw;
+    margin-left: 5vw;
     border-radius: 2rem;
 }
 

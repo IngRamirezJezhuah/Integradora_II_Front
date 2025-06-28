@@ -9,7 +9,7 @@ const Analisis=()=> {
     ]
     return (
         <div>
-            <h1>Analisis</h1>
+            <p className='titulo'>Analisis</p>
                 <div className='buscador'>
                     <Link to='/Nuevo-Analisis'>
                     <button className='btn-agregar'>+Agregar</button>
@@ -51,9 +51,9 @@ const Analisis=()=> {
                     <p className='detall-tex'>5 dias</p>
                     <h2 className='prueba-name'>Dias de espera</h2>
                     <h2 className='prueba-name'>Descripcion</h2>
-                    <text>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Expedita facilis fugit inventore laborum suscipit architecto ullam ab vero et quisquam labore magni nobis aspernatur molestias ipsam, dignissimos perspiciatis temporibus soluta.
+                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Expedita facilis fugit inventore laborum suscipit architecto ullam ab vero et quisquam labore magni nobis aspernatur molestias ipsam, dignissimos perspiciatis temporibus soluta.
                     Suscipit quo corrupti illum a sed quas eius as nisi asperiores ratione quos ipsum repellendus ut pariatur. Adipisci delectus blanditiis error quibusdam voluptas, hic, tempore deleniti deserunt ullam esse sunt ipsam aliquid!
-                    </text>
+                    </p>
                 </div>
                 </div>
             </div>

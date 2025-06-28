@@ -65,13 +65,6 @@
   background-color: #f9dda3; /* amarillo claro para "Protegida" */
 }
 
-.centrar {
-    padding: 0.5vw;
-    text-align: center;
-    font-size: 2vmin;
-    font-size: 2vmax;
-    font-weight: bold;
-}
 
 /* Media Queries for Responsive Design 
 @media (max-width: 768px) {
