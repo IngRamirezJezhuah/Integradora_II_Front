@@ -1,6 +1,7 @@
 import React from 'react'
-import { FilterBar, SampleBox, SampleModal, SearchBar } from '../Components';
+import { FilterBar,/* SampleBox, SampleModal,*/ SearchBar } from '../Components';
 import { Link } from 'react-router-dom';
+import { ListaMuestras } from '../Components';
 
 //import {SearchBar, FilterBar, SampleBoxes} from "../Components";
 //import './elementos.css';
@@ -15,21 +16,20 @@ const Muestras =() =>{
                 </Link>
                 <SearchBar />
             </div>
-            <div className='margen'>
-                <div className='Box-muestras'>
-                    <FilterBar/>
-                    <div className='caja_1'>
-                        <SampleModal/>
-                        <SampleBox/>
+            <div>
+                <div className='margen'>
+                    <div className='Box-muestras'>
+                        <FilterBar/>
+                        <div className='scale-up-ver-center'>
+                        <ListaMuestras />
+                        </div>
                     </div>
                 </div>
-                <div className='scale-up-ver-center'>
-                <div className='pedidos-form'>
-                </div>
-            </div>
             </div>
         </div>
     )
 }
 
 export default Muestras;
+//    <SampleModal/>
+//    <SampleBox/>
