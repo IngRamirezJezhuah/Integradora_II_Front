@@ -1,7 +1,6 @@
 //rafc para hacer una plantilla rapida
 import { useState } from 'react'
 import { SearchBar } from '../Components';
-import { Link } from 'react-router-dom';
 import { OpcionesPedidos } from '../Components';
 import { ModalPedidos } from '../Components';
 import { ListaPedidos } from '../Components';
@@ -16,25 +15,18 @@ const Pedidos =() => {
         <div>
             <p className='titulo'>Pedidos </p>
             <div className='buscador'>
-                
-                <button className='btn-agregar'>+Agregar</button>
-                
                 <button className='btn-agregar'  onClick={() => setModalAbierto(true)}>+Agregar</button>
                 {modalAbierto && <ModalPedidos onClose={() => setModalAbierto(false)} />}
-                <Link to="/AgregarMuestras">
-                </Link>
                 <SearchBar />
             </div>
-                <div className='opciones'>
+            <div className='opciones'>
                     <OpcionesPedidos/>
-                </div>
-            <div className='plantilla'>
+            </div>
                 <div className='margen'>
                     <div className='scale-up-ver-center'>
                         <ListaPedidos/>
                     </div>
                 </div>
-            </div>
         </div>
     )
 }

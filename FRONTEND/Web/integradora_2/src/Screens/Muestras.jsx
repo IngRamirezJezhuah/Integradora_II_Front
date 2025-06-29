@@ -1,6 +1,5 @@
 import React from 'react'
 import { FilterBar,/* SampleBox, SampleModal,*/ SearchBar } from '../Components';
-import { Link } from 'react-router-dom';
 import { ListaMuestras } from '../Components';
 
 //import {SearchBar, FilterBar, SampleBoxes} from "../Components";
@@ -11,15 +10,15 @@ const Muestras =() =>{
         <div>
             <p className='titulo'>Muestras</p>
             <div className='buscador'>
-                <Link to="/AgregarMuestras">
-                        <button className='btn-agregar'>+Agregar</button>
-                </Link>
+                <button className='btn-agregar'>+Agregar</button>
                 <SearchBar />
             </div>
+                <div className='opciones'>
+                    <FilterBar />
+                </div>
             <div>
                 <div className='margen'>
                     <div className='Box-muestras'>
-                        <FilterBar/>
                         <div className='scale-up-ver-center'>
                         <ListaMuestras />
                         </div>
