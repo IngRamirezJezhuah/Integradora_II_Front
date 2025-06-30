@@ -1,8 +1,7 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 
-const FilterBar = ({ activeFilter, setFilter, filters }) => {
-
+const FilterBar = ({ activeFilter, setFilter, filters, filterKey }) => {
   return (
     <View style={styles.container}>
       {filters.map((filter, index) => {
@@ -26,9 +25,11 @@ const FilterBar = ({ activeFilter, setFilter, filters }) => {
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    justifyContent: 'space-around',
+    flexWrap: 'wrap',
+    justifyContent: 'flex-start',
     marginHorizontal: 10,
     marginBottom: 12,
+    gap: 8,
   },
   button: {
     paddingHorizontal: 16,

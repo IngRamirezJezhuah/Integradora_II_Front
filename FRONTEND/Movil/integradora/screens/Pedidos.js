@@ -9,13 +9,14 @@ import { filterData } from '../utils/filterUtils';
 const OrdersScreen = () => {
   const [searchText, setSearchText] = useState('');
   const [filter, setFilter] = useState('EnProceso');
-  const customFilters = ['En proceso', 'Completados', 'Cancelados'];
+  const customFilters = ['En proceso', 'Completado', 'Cancelado'];
+  const filterKey = 'status';
   
   const orders = [
     {
       "id": "P1285",
     "nameUsuario": "Juan Perez",
-    "status": "pendiente",
+    "status": "En proceso",
     "descripcion": "Análisis de rutina anual",
     "procedimientos": [
       {
@@ -36,7 +37,7 @@ const OrdersScreen = () => {
   {
     "id": "P1286",
     "nameUsuario": "Maria Gomez",
-    "status": "completado",
+    "status": "Completado",
     "descripcion": "Chequeo postoperatorio",
     "procedimientos": [
       {
@@ -51,7 +52,7 @@ const OrdersScreen = () => {
   {
     "id": "P1287",
     "nameUsuario": "Carlos Lopez",
-    "status": "cancelado",
+    "status": "Cancelado",
     "descripcion": "Análisis de control diabetes",
     "procedimientos": [
       {
@@ -66,7 +67,7 @@ const OrdersScreen = () => {
   {
     "id": "P1288",
     "nameUsuario": "Ana Martinez",
-    "status": "pendiente",
+    "status": "En proceso",
     "descripcion": "Examen general",
     "procedimientos": [
       {
@@ -98,7 +99,8 @@ const filteredData = filterData(orders, searchText);
   return (
     <SafeAreaView>
       <SearchBar placeholder={"Buscar Pedidos"} searchText={searchText} onChangeSearch={setSearchText} />
-      <FilterBar activeFilter={filter} setFilter={setFilter} filters={customFilters}/>
+      <FilterBar activeFilter={filter} setFilter={setFilter} filters={customFilters} 
+        filterKey={filterKey}/>
       <OrdersTable data={orders} onView={handleView} onDelete={handleDelete} />
     </SafeAreaView>
   );

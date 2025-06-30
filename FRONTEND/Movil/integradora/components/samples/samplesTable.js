@@ -1,19 +1,19 @@
 import React from 'react';
-import { FlatList, View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { FlatList, View, Text, StyleSheet, TouchableOpacity , Image} from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 const SamplesTable = ({ data, onView, onDelete }) => {
-const getIconSource = (tipo) => {
-    // Normaliza el nombre del tipo para que coincida con el nombre del archivo
-    // Ejemplo: "biometria hematica" -> "biometriahematica.png"
-    if (!tipo) return require('../../../assets/default.png');
-    const iconName = tipo.replace(/\s+/g, '').toLowerCase() + '.png';
-    try {
-        return require(`../../../assets/${iconName}`);
-    } catch (e) {
-        return require('../../../assets/default.png');
-    }
-};
+// const getIconSource = (tipo) => {
+//     // Normaliza el nombre del tipo para que coincida con el nombre del archivo
+//     // Ejemplo: "biometria hematica" -> "biometriahematica.png"
+//     if (!tipo) return require('../../../assets/icon.png');
+//     const iconName = tipo.replace(/\s+/g, '').toLowerCase() + '.png';
+//     try {
+//         return require(`../../../assets/${iconName}`);
+//     } catch (e) {
+//         return require('../../../assets/icon.png');
+//     }
+// };
 
 return (
     <FlatList
@@ -22,7 +22,7 @@ return (
         renderItem={({ item }) => (
             <View style={styles.row}>
                 <Image
-                    source={getIconSource(item.tipo)}
+                    source={("/assets/biometriahematica.png")} // Use a default icon or modify to use getIconSource(item.tipoMuestra)
                     style={{ width: 30, height: 30 }}
                     resizeMode="contain"
                 />
