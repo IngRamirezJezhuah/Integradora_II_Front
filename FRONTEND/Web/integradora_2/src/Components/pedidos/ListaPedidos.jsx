@@ -1,6 +1,5 @@
-import React from 'react'
-import { useState } from 'react';
 import { Link } from 'react-router-dom'
+import Swal from 'sweetalert2'
 
 const ListaPedidos = () => {
     const pedidos = [
@@ -13,23 +12,52 @@ const ListaPedidos = () => {
         // puedes agregar más...
         ];
 
-        function dividirEnFilas(data, tam) {
-            const filas = [];
-            for (let i = 0; i < data.length; i += tam) {
-                filas.push(data.slice(i, i + tam));
-            } return filas;
-        }
+    function dividirEnFilas(data, tam) {
+        const filas = [];
+        for (let i = 0; i < data.length; i += tam) {
+            filas.push(data.slice(i, i + tam));
+        } return filas;
+    }
+    const filas = dividirEnFilas(pedidos, 3);
 
-        const filas = dividirEnFilas(pedidos, 3);
-        //aqui llamo el dato que tomara y la cantidad de filas a hacer para que dividir en filas hacga su logica
-        const [message] = useState('Usuario Borrado');
-                    
-                        function handleSubmit(e) {
-                            e.preventDefault();
-                            setTimeout(() => {
-                            alert(message);
-                            }, 100);
-                        }
+    //sweet alert
+    function handleAlert(e) {
+        const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+            confirmButton: "btn btn-success",
+            cancelButton: "btn btn-danger"
+        },
+        buttonsStyling: false
+        });
+            swalWithBootstrapButtons.fire({
+            title: "Estas Seguro de borrarlo?",
+            text: "No podras Revertirlo una vez lo borres!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Si, borralo!",
+            cancelButtonText: "No, cancelar!",
+            reverseButtons: true
+            }).then((result) => {
+        if (result.isConfirmed) {
+            swalWithBootstrapButtons.fire({
+            title: "Borrado Exitosamente!",
+            text: "Tu pedido ha sido borrado correctamente",
+            icon: "success"
+            });
+        } else if (
+            /* Read more about handling dismissals below */
+            result.dismiss === Swal.DismissReason.cancel
+        ) {
+            swalWithBootstrapButtons.fire({
+            title: "Cancelado",
+            text: "Tu Pedido se ah mantenido ( >v°)",
+            icon: "error"
+            });
+        }
+        });
+
+    }
+    
     return (
         <div className='scroll_pruebas'>
             {filas.map((fila, i) => ( 
@@ -49,9 +77,7 @@ const ListaPedidos = () => {
                             <Link to='/RecibosPedidos'>
                                 <img src="/detalles.png" alt="detalles" className='iconos' />
                             </Link>
-                            <Link to='/RecibosPedidos'>
-                                <img src="/basura.png" alt="detalles" className='iconos' onClick={handleSubmit} />
-                            </Link>
+                                <img src="/basura.png" alt="detalles" className='iconos' onClick={handleAlert} />
                         </div>
                     </div>
                 ))}
