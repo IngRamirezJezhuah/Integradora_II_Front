@@ -1,10 +1,8 @@
-//rfce para hacer una plantilla
-//import React, { useEffect, useState } from 'react'
-//import { Link } from 'react-router-dom';
 import { SearchBar } from '../Components';
 import { OpcionesPaciente } from '../Components';
 import { ModalPaciente } from '../Components';
 import {  useState } from 'react';
+import Swal from 'sweetalert2';
 
 const Pacientes =() => {
 
@@ -44,14 +42,42 @@ const Pacientes =() => {
         getPacientes();
     }, []);*/
 
-    const [message] = useState('Usuario Borrado');
-
-    function handleSubmit(e) {
-        e.preventDefault();
-        setTimeout(() => {
-        alert(message);
-        }, 100);
+    function handleAlert(e) {
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+                confirmButton: "btn btn-success",
+                cancelButton: "btn btn-danger"
+            },
+            buttonsStyling: false
+        });
+        swalWithBootstrapButtons.fire({
+            title: "Estas Seguro de borrarlo?",
+            text: "No podras Revertirlo una vez lo borres!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Si, borralo!",
+            cancelButtonText: "No, cancelar!",
+            reverseButtons: true
+        }).then((result) => {
+            if (result.isConfirmed) {
+                swalWithBootstrapButtons.fire({
+                    title: "Borrado Exitosamente!",
+                    text: "Tu paciente ha sido borrado correctamente",
+                    icon: "success"
+                });
+            } else if (
+                result.dismiss === Swal.DismissReason.cancel
+            ) {
+                swalWithBootstrapButtons.fire({
+                    title: "Cancelado",
+                    text: "Tu Paciente se ah mantenido ( >v°)",
+                    icon: "error"
+                });
+            }
+        })
+            
     }
+
     return (
             <div>
                 <p className='titulo'>Pacientes </p>
@@ -95,7 +121,7 @@ const Pacientes =() => {
                                                 </div>
                                                 <div>
                                                     <div className='acomodar-iconos'>
-                                                        <img src="/basura.png" alt="borrar" className='icono-borrar' onClick={handleSubmit}/>
+                                                        <img src="/basura.png" alt="borrar" className='icono-borrar' onClick={handleAlert}/>
                                                     </div>
                                                     <p className='prueba-name'>{nombreCompleto}</p>                                
                                                 </div>

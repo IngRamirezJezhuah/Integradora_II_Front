@@ -9,6 +9,10 @@ const ListaPedidos = () => {
         { id: 'P-123', descripcion: 'Análisis de sangre', paciente: 'Mario Alberto Lira Zamora' },
         { id: 'P-123', descripcion: 'Biometría Hepática', paciente: 'David Jezhuah Ramirez Alvarado' },
         { id: 'P-123', descripcion: 'Análisis de sangre', paciente: 'Ricardo Luna Unzueta' },
+        { id: 'P-123', descripcion: 'Análisis de sangre', paciente: 'Mario Alberto Lira Zamora' },
+        { id: 'P-123', descripcion: 'Biometría Hepática', paciente: 'David Jezhuah Ramirez Alvarado' },
+        { id: 'P-123', descripcion: 'Análisis de sangre', paciente: 'Ricardo Luna Unzueta' },
+        // puedes agregar más...
         // puedes agregar más...
         ];
 
