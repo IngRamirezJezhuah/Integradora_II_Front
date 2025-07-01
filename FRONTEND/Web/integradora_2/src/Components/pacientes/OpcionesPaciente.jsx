@@ -6,6 +6,7 @@ const OpcionesPaciente = ({buttonLabels =["Paciente Alta", "Paciente Baja"]}) =>
     const handleBUttonClick = (label) => {
         setActiveButton(label);
     };
+
     return (
         <div className='filter-bar'>
             <div className='filter-buttons'>
@@ -18,6 +19,14 @@ const OpcionesPaciente = ({buttonLabels =["Paciente Alta", "Paciente Baja"]}) =>
                         {label}
                     </button>
                 ))}
+            </div>
+            <div>
+                {activeButton === buttonLabels[0] ? (
+                    <p className='texto'>Dar de alta a un paciente</p>
+                    
+                ) : (
+                    <p className='texto'>Dar de baja a un paciente</p>
+                )}
             </div>
         </div>
     )

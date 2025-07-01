@@ -20,6 +20,7 @@ import Pedidos from './Screens/Pedidos.jsx';
 import Analisis from './Screens/Analisis.jsx';
 import { AgregarMuestra, EditarAnalisisForm, NuevoAnalisisForm, NuevoPaciente, RegistrarPaceinte, SampleBox, SampleModal } from './Components/index.ts';
 import { ReciboPedidos } from './Components/index.js';
+import PerfilPaciente from './Screens/PerfilPaciente.jsx';
 
 
 function App() {
@@ -29,24 +30,24 @@ function App() {
         <Route path="/Recuperacion" element={<Recuperacion />} />
         <Route path="/Login" element={<Login />} />
           <Route path="/" element={<Component /> } >
-          <Route path="/Dashboard" element={<Dashboard />} />
-          <Route path="/Pacientes" element={<Pacientes />} />
-          <Route path='/Registrar-paciente' element={<RegistrarPaceinte />} />
-          
-          <Route path="/Pedidos" element={<Pedidos />} />
-          <Route path="/RecibosPedidos" element={<ReciboPedidos/>} />
-          
-          <Route path="/Muestras" element={<Muestras />} />
-          <Route path='/AgregarMuestras' element={<AgregarMuestra/>} />
-          
-          <Route path='/Analisis' element={<Analisis />} />
-          <Route path='/Nuevo-Analisis' element={<NuevoAnalisisForm/>} />
-          <Route path='/Editar-Analisis' element={<EditarAnalisisForm/>} />
-          
-          <Route path='/SampleBox' element={<SampleBox/>}/>
-          <Route path='/SampleModal' element={<SampleModal/>}/>
-          <Route path='/Nuevo-Paciente-Form' element={<NuevoPaciente/>}/>
-          
+            <Route path="/Dashboard" element={<Dashboard />} />
+            <Route path="/Pacientes" element={<Pacientes />} />
+            <Route path='/EditarInfoPaciente' element={<RegistrarPaceinte />} />
+            
+            <Route path="/Pedidos" element={<Pedidos />} />
+            <Route path="/RecibosPedidos" element={<ReciboPedidos/>} />
+            
+            <Route path="/Muestras" element={<Muestras />} />
+            <Route path='/AgregarMuestras' element={<AgregarMuestra/>} />
+            
+            <Route path='/Analisis' element={<Analisis />} />
+            <Route path='/Nuevo-Analisis' element={<NuevoAnalisisForm/>} />
+            <Route path='/Editar-Analisis' element={<EditarAnalisisForm/>} />
+            
+            <Route path='/SampleBox' element={<SampleBox/>}/>
+            <Route path='/SampleModal' element={<SampleModal/>}/>
+            <Route path='/Nuevo-Paciente-Form' element={<NuevoPaciente/>}/>
+            <Route path='/Perfil' element={<PerfilPaciente/>}/>
           </Route>
       </Routes>
     </Router>

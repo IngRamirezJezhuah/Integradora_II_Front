@@ -4,6 +4,10 @@
 }
 
 /*__________estilos de las cajas de contenido__________ */
+.analisis{
+    padding-top: 4vw;
+}
+
 .caja_1{
     padding: 2vw;
     margin: 1rem;
@@ -99,7 +103,7 @@
     padding:0%;
     margin:0%;
     width: 30vw;
-    height: 33vw;
+    height: 30vw;
     overflow: auto;
 }
 

@@ -9,8 +9,13 @@ const Pacientes =() => {
     const nombres = [//esta  es para usar una lista, alternatica sin peticion 
     "Mario Lira Zamora",
     "David Jezhuah Ramirez Alvarado",
-    "Racardo Luna Unzueta",
-    "Diego Daher Diaz Contreraz",]
+    "Ricardo Luna Unzueta",
+    "Diego Daher Diaz Contreraz",
+    "Edson Burceaga Govea",
+    "Alejandro Puentes de Busk",
+    "Angel Hernandez",
+    "Oscar Perez Romer",
+]
     const [modalAbierto, setModalAbierto] = useState(false);
 
     const pruebas = [

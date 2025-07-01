@@ -10,7 +10,7 @@ const Dashboard=()=> {
     const [ldrData, setLdrData] = useState(null)
     useEffect(() => {
         axios
-        .get('https://8d5e-189-197-191-34.ngrok-free.app/ldr/esp32c3_001')
+        .get('https://bb1f-189-197-191-34.ngrok-free.app/ldr/esp32c3_001')
         .then((res) => {
             setLdrData(res.data)
         })
