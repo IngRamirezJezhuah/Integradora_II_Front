@@ -1,19 +1,19 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { /* useEffect, useRef, */ useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { Camera, CameraType } from 'expo-camera';
-import ModalCodigo from '../components/ModalCodigo';
+// import { Camera, CameraType } from 'expo-camera';
+import ModalCodigo from '../components/samples/modalCodigo';
 
 const Escaner = () => {
-  const [hasPermission, setHasPermission] = useState(null);
+//   const [hasPermission, setHasPermission] = useState(null);
   const [modalVisible, setModalVisible] = useState(false);
-  const cameraRef = useRef(null);
+//   const cameraRef = useRef(null);
 
-  useEffect(() => {
-    (async () => {
-      const { status } = await Camera.requestCameraPermissionsAsync();
-      setHasPermission(status === 'granted');
-    })();
-  }, []);
+//   useEffect(() => {
+//     (async () => {
+//       const { status } = await Camera.requestCameraPermissionsAsync();
+//       setHasPermission(status === 'granted');
+//     })();
+//   }, []);
 
   const handleManualSubmit = (codigo) => {
     console.log('Código ingresado manualmente:', codigo);
@@ -21,38 +21,38 @@ const Escaner = () => {
     // Aquí podrías buscar en tu backend, validar, etc.
   };
 
-  if (hasPermission === null) {
-    return <Text>Solicitando permisos de cámara...</Text>;
-  }
+//   if (hasPermission === null) {
+//     return <Text>Solicitando permisos de cámara...</Text>;
+//   }
 
-  if (hasPermission === false) {
-    return <Text>Permiso de cámara denegado</Text>;
-  }
+//   if (hasPermission === false) {
+//     return <Text>Permiso de cámara denegado</Text>;
+//   }
 
-  return (
+return (
     <View style={styles.container}>
-      <Text style={styles.header}>Escanea el código</Text>
+        <Text style={styles.header}>Escanea el código</Text>
+        {/* <Camera
+            ref={cameraRef}
+            style={styles.camera}
+            
+            type={CameraType.back} // Usa la cámara trasera
+            ratio="16:9"
+        /> */}
 
-      <Camera
-        ref={cameraRef}
-        style={styles.camera}
-        type={CameraType.back}
-        ratio="16:9"
-      />
+        <Text style={styles.subtext}>Escaneando...</Text>
 
-      <Text style={styles.subtext}>Escaneando...</Text>
+        <TouchableOpacity style={styles.button} onPress={() => setModalVisible(true)}>
+            <Text style={styles.buttonText}>Ingresar código</Text>
+        </TouchableOpacity>
 
-      <TouchableOpacity style={styles.button} onPress={() => setModalVisible(true)}>
-        <Text style={styles.buttonText}>Ingresar código</Text>
-      </TouchableOpacity>
-
-      <ModalCodigo
-        isVisible={modalVisible}
-        onClose={() => setModalVisible(false)}
-        onSubmit={handleManualSubmit}
-      />
+        <ModalCodigo
+            isVisible={modalVisible}
+            onClose={() => setModalVisible(false)}
+            onSubmit={handleManualSubmit}
+        />
     </View>
-  );
+);
 };
 
 const styles = StyleSheet.create({
