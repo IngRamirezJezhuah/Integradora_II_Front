@@ -1,11 +1,15 @@
 // SampleModal.js
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
 import Modal from 'react-native-modal';
 import { Ionicons } from '@expo/vector-icons';
 import PropTypes from 'prop-types';
+import QuimSangResultados from './QuimSangResultados';
+import BiomHemResultados from './bioHemResultados';
 
 const SampleModal = ({ visible, sample, onClose }) => {
+  const [showQuimModal, setShowQuimModal] = useState(false);
+  const [showBiomModal, setShowBiomModal] = useState(false);
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     return date.toLocaleDateString('es-ES', {
@@ -23,6 +27,33 @@ const SampleModal = ({ visible, sample, onClose }) => {
 
   const getStatusText = (status) => {
     return status ? 'Completado' : 'En Proceso';
+  };
+
+  const handleRegistrarResultado = () => {
+    if (!sample || !sample.tipoMuestra) {
+      console.warn('No se puede determinar el tipo de muestra');
+      return;
+    }
+
+    const tipo = sample.tipoMuestra.toLowerCase().replace(/\s+/g, '');
+    
+    if (tipo.includes('quimicasanguinea') || tipo.includes('quimica')) {
+      setShowQuimModal(true);
+      console.log('Abriendo modal de Química Sanguínea para:', sample._id);
+    } else if (tipo.includes('biometriahematica') || tipo.includes('biometria')) {
+      setShowBiomModal(true);
+      console.log('Abriendo modal de Biometría Hemática para:', sample._id);
+    } else {
+      console.warn('Tipo de muestra no reconocido:', sample.tipoMuestra);
+    }
+  };
+
+  const handleCloseQuimModal = () => {
+    setShowQuimModal(false);
+  };
+
+  const handleCloseBiomModal = () => {
+    setShowBiomModal(false);
   };
 
   if (!sample) return null;
@@ -68,12 +99,27 @@ const SampleModal = ({ visible, sample, onClose }) => {
             </>
           )}
         </ScrollView>
+
         <TouchableOpacity style={styles.button} onPress={onClose}>
           <Text style={styles.buttonText}>Cerrar</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.button} onPress={onClose}>
+        
+        <TouchableOpacity style={styles.button} onPress={handleRegistrarResultado}>
           <Text style={styles.buttonText}>Registrar Resultado</Text>
         </TouchableOpacity>
+
+        {/* Modales de resultados */}
+        <QuimSangResultados
+          visible={showQuimModal}
+          sample={sample}
+          onClose={handleCloseQuimModal}
+        />
+        
+        <BiomHemResultados
+          visible={showBiomModal}
+          sample={sample}
+          onClose={handleCloseBiomModal}
+        />
       </View>
     </Modal>
   );

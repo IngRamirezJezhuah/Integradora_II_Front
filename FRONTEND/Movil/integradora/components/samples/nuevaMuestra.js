@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 import Modal from 'react-native-modal';
+import { Ionicons } from '@expo/vector-icons';
 import ComboBoxSample from './comboBoxSample';
 
 const nuevaMuestra = ({ isVisible, onClose, onSubmit }) => {
@@ -29,6 +30,9 @@ const nuevaMuestra = ({ isVisible, onClose, onSubmit }) => {
       style={styles.modal}
     >
       <View style={styles.container}>
+      <TouchableOpacity onPress={onClose} style={styles.backArrow}>
+          <Ionicons name="arrow-back" size={24} color="black" />
+        </TouchableOpacity>
         <Text style={styles.title}>Registrar Muestra</Text>
 
         <ComboBoxSample onSelect={setSelectedTipo} />
@@ -87,6 +91,10 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 20,
     borderTopLeftRadius: 20
   },
+  
+  backArrow: {
+    marginBottom: 10,
+  },
   title: {
     fontSize: 20,
     fontWeight: 'bold',
@@ -102,7 +110,8 @@ const styles = StyleSheet.create({
     height: 40
   },
   inputFocus: {
-    borderColor: '#BF1E2D'
+    borderColor: '#BF1E2D',
+    borderWidth: 2
   },
   textArea: {
     height: 100,

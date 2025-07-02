@@ -33,6 +33,26 @@ const SamplesTable = ({ data, onView, onDelete }) => {
 //     }
 // };
 
+    const getImageSource = (tipoMuestra) => {
+        if (!tipoMuestra) {
+            // eslint-disable-next-line
+            return require('../../assets/biometriahematica.png'); // imagen por defecto
+        }
+        
+        const tipo = tipoMuestra.toLowerCase().replace(/\s+/g, '');
+        
+        if (tipo.includes('quimicasanguinea') || tipo.includes('quimica')) {
+            // eslint-disable-next-line
+            return require('../../assets/quimicasanguinea.png');
+        } else if (tipo.includes('biometriahematica') || tipo.includes('biometria')) {
+            // eslint-disable-next-line
+            return require('../../assets/biometriahematica.png');
+        } else {
+            // eslint-disable-next-line
+            return require('../../assets/biometriahematica.png'); // imagen por defecto
+        }
+    };
+
 const getStatusColor = (status) => {
     return status ? '#28A745' : '#FFC107'; // Verde para completado, amarillo para en proceso
 };
@@ -41,14 +61,6 @@ const getStatusText = (status) => {
     return status ? 'Completado' : 'En Proceso';
 };
 
-const formatDate = (dateString) => {
-    const date = new Date(dateString);
-    return date.toLocaleDateString('es-ES', {
-        day: '2-digit',
-        month: '2-digit',
-        year: 'numeric'
-    });
-};
 
 return (
     <>
@@ -59,7 +71,7 @@ return (
                 <View style={styles.row}>
                     <View style={styles.iconContainer}>
                         <Image
-                            source={require('../../assets/biometriahematica.png')}
+                            source={getImageSource(item.tipoMuestra)}
                             style={styles.typeIcon}
                             resizeMode="contain"
                         />
@@ -67,21 +79,11 @@ return (
                     
                     <View style={styles.dataContainer}>
                         <View style={styles.headerRow}>
-                            <Text style={styles.idText}>ID: {item._id ? item._id.slice(-8) : 'N/A'}</Text>
+                            <Text style={styles.patientText}>{item.nombrePaciente || 'N/A'}</Text>
+                        </View>
                             <View style={[styles.statusBadge, { backgroundColor: getStatusColor(item.status) }]}>
                                 <Text style={styles.statusText}>{getStatusText(item.status)}</Text>
                             </View>
-                        </View>
-                        
-                        <Text style={styles.patientText}>Paciente: {item.nombrePaciente || 'N/A'}</Text>
-                        <Text style={styles.typeText}>Tipo: {item.tipoMuestra || 'N/A'}</Text>
-                        <Text style={styles.dateText}>Fecha: {formatDate(item.createDate)}</Text>
-                        
-                        {item.observaciones && (
-                            <Text style={styles.observationsText} numberOfLines={2}>
-                                Obs: {item.observaciones}
-                            </Text>
-                        )}
                     </View>
                     
                     <View style={styles.actionsContainer}>
@@ -142,15 +144,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 5,
   },
-  idText: {
-    fontSize: 14,
-    fontWeight: 'bold',
-    color: '#333',
-  },
   statusBadge: {
     paddingHorizontal: 8,
     paddingVertical: 3,
     borderRadius: 12,
+    width: 90,
   },
   statusText: {
     fontSize: 12,
@@ -163,25 +161,10 @@ const styles = StyleSheet.create({
     color: '#2C3E50',
     marginBottom: 3,
   },
-  typeText: {
-    fontSize: 14,
-    color: '#7F8C8D',
-    marginBottom: 3,
-  },
-  dateText: {
-    fontSize: 14,
-    color: '#7F8C8D',
-    marginBottom: 3,
-  },
-  observationsText: {
-    fontSize: 13,
-    color: '#95A5A6',
-    fontStyle: 'italic',
-    marginTop: 3,
-  },
   actionsContainer: {
     alignItems: 'center',
     justifyContent: 'center',
+    flexDirection: 'row',
   },
   actionButton: {
     padding: 8,

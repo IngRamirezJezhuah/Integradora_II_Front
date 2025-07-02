@@ -58,7 +58,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 10,
     borderRadius: 8,
-    paddingHorizontal: 14
+    paddingHorizontal: 10,
+    marginHorizontal: 2,
   },
   selected: {
     backgroundColor: '#BF1E2D'
@@ -67,8 +68,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#E0E0E0'
   },
   textSelected: {
-    color: 'white',
-    fontWeight: 'bold'
+    color: 'white'
   },
   textUnselected: {
     color: '#333'
