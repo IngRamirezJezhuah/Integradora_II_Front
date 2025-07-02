@@ -1,3 +1,35 @@
+/*___________tab navigator___________*/
+.menu{
+    width: 3vw;
+    height: 3vw;
+    margin: 1vw;
+    margin-top: 0vw;
+    cursor: pointer;
+}
+
+.tabNavigator{
+    margin: 0%;
+    margin-right: 91vw;
+    margin-bottom: 1vw;
+    padding: 1rem;
+    display: flex;
+}
+
+li{
+    list-style-type: none;
+}
+.textbarra{
+    margin-top: 1.5vw;
+    margin-left: 10vw;
+}
+
+a{
+    outline: none;
+    text-decoration: none;
+    color: #000000;
+    text-align: center; 
+}
+
 .container {
             display: flex;
             height: 100vh;
@@ -12,7 +44,6 @@
             padding-top: 1.25rem;
             padding-bottom: 1.25rem;
             justify-content: space-between;
-            position: fixed;
             top: 0;
             bottom: 0;
             left: 0;

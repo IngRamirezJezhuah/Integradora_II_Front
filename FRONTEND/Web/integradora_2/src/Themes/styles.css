@@ -8,13 +8,7 @@
     padding: 2vh;
     margin: 0%;
 }
-.tabNavigator{
-    margin: 0%;
-    margin-right: 91vw;
-    margin-bottom: 1vw;
-    padding: 1rem;
-    display: flex;
-}
+
 
 .plantilla{
     display: flex;
@@ -23,27 +17,6 @@
     padding: 2vw;
     margin-left: 5vw;
     border-radius: 2rem;
-}
-
-/*___________tab navigator___________*/
-.menu{
-    width: 3vw;
-    height: 3vw;
-    margin: 1vw;
-    margin-top: 0vw;
-
-}
-
-li{
-    list-style-type: none;
-    text-align: center;
-}
-
-a{
-    outline: none;
-    text-decoration: none;
-    color: #000000;
-    text-align: center; 
 }
 
 
