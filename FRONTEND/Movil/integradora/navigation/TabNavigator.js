@@ -4,14 +4,14 @@ import { Ionicons } from '@expo/vector-icons';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import Fontisto from '@expo/vector-icons/Fontisto';
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
-import { Colors } from 'react-native/Libraries/NewAppScreen';
+// import { Colors } from 'react-native/Libraries/NewAppScreen';
 //import Home from '../screens/home';
 //import Porfile from '../screens/porfile';
+// import {  Escaner, Pedidos } from '../screens';
 import Dashboard from '../screens/Dashboard';
 import Muestras from '../screens/Muestras';
-// import {  Escaner, Pedidos } from '../screens';
 import Pedidos from '../screens/Pedidos';
-import Escaner from '../screens/Escaner';
+import  Escaner  from '../screens/Escaner';
 
 
 const Tab = createBottomTabNavigator();
@@ -37,7 +37,7 @@ const TabNavigator = () => {
                     <Fontisto name="test-tube" size={26} color={'#DA0C15'}/>
                 )
             }}/>
-            <Tab.Screen name="Escaner" component={Muestras} 
+            <Tab.Screen name="Escaner" component={Escaner} 
             options={{
                 tabBarIcon: () =>(
                     <MaterialIcons name="qr-code-scanner" size={30} color={'#DA0C15'} />

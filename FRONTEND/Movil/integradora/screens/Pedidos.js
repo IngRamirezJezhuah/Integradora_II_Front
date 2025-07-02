@@ -3,7 +3,7 @@ import { SafeAreaView } from 'react-native';
 import SearchBar from '../components/elements/searchBar';
 import FilterBar from '../components/elements/filterBar';
 import OrdersTable from '../components/orders/ordersTable';
-import { filterData } from '../utils/filterUtils';
+// import { filterData } from '../utils/filterUtils';
 
 
 const OrdersScreen = () => {
@@ -94,7 +94,7 @@ const handleView = (item) => {
 const handleDelete = (item) => {
   console.log('Delete order', item);
 };
-const filteredData = filterData(orders, searchText);
+/* const filteredData = filterData(orders, searchText); */
 
   return (
     <SafeAreaView>

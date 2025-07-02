@@ -24,7 +24,7 @@ const OrdersTable = ({ data, onView, onDelete }) => {
           <View style={styles.row}>
             <MaterialCommunityIcons name="test-tube" size={30} color="black" />
             <Text style={styles.orderText}>{item.nameUsuario}</Text>
-            <TouchableOpacity onPress={(orderModal) => handleView(item)}>
+            <TouchableOpacity onPress={(OrderModal) => handleView(item)}>
               <MaterialCommunityIcons name="file-search-outline" size={30} color="black" />
             </TouchableOpacity>
             <TouchableOpacity onPress={() => onDelete(item)}>

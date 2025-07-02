@@ -13,6 +13,7 @@ const MuestrasScreen = () => {
   const [filter, setFilter] = useState('EnProceso');
   const customFilters = ['En proceso', 'Completado', 'Cancelado'];
   const filterKey = 'status';
+  const [/* muestras */, setMuestras] = useState([]);
   
 // const [muestras, setMuestras] = useState([]);
 

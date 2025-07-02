@@ -8,7 +8,7 @@ const Recovery = () => {
   const [email, setEmail] = useState('');
 
   const handleLogin = async () => {
-    if (!email || !password) {
+    if (!email ) {
       Alert.alert('Campos vacíos', 'Por favor, llena todos los campos');
       return;
     }
@@ -19,7 +19,7 @@ const Recovery = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ email}),
       });
 
       const data = await response.json();
