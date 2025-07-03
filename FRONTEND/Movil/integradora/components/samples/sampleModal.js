@@ -1,10 +1,63 @@
-// OrderModal.tsx
-import React from 'react';
+// SampleModal.js
+import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
 import Modal from 'react-native-modal';
 import { Ionicons } from '@expo/vector-icons';
+import PropTypes from 'prop-types';
+import QuimSangResultados from './QuimSangResultados';
+import BiomHemResultados from './bioHemResultados';
 
-const OrderModal = ({ visible, order, onClose }) => {
+const SampleModal = ({ visible, sample, onClose }) => {
+  const [showQuimModal, setShowQuimModal] = useState(false);
+  const [showBiomModal, setShowBiomModal] = useState(false);
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString('es-ES', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit'
+    });
+  };
+
+  const getStatusColor = (status) => {
+    return status ? '#28A745' : '#FFC107';
+  };
+
+  const getStatusText = (status) => {
+    return status ? 'Completado' : 'En Proceso';
+  };
+
+  const handleRegistrarResultado = () => {
+    if (!sample || !sample.tipoMuestra) {
+      console.warn('No se puede determinar el tipo de muestra');
+      return;
+    }
+
+    const tipo = sample.tipoMuestra.toLowerCase().replace(/\s+/g, '');
+    
+    if (tipo.includes('quimicasanguinea') || tipo.includes('quimica')) {
+      setShowQuimModal(true);
+      console.log('Abriendo modal de Química Sanguínea para:', sample._id);
+    } else if (tipo.includes('biometriahematica') || tipo.includes('biometria')) {
+      setShowBiomModal(true);
+      console.log('Abriendo modal de Biometría Hemática para:', sample._id);
+    } else {
+      console.warn('Tipo de muestra no reconocido:', sample.tipoMuestra);
+    }
+  };
+
+  const handleCloseQuimModal = () => {
+    setShowQuimModal(false);
+  };
+
+  const handleCloseBiomModal = () => {
+    setShowBiomModal(false);
+  };
+
+  if (!sample) return null;
+
   return (
     <Modal isVisible={visible} onBackdropPress={onClose} swipeDirection="down" style={styles.modal}>
       <View style={styles.container}>
@@ -14,28 +67,59 @@ const OrderModal = ({ visible, order, onClose }) => {
 
         <ScrollView>
           <View style={styles.iconContainer}>
-            <Ionicons name="flask" size={48} color="black" />
-            <Text style={styles.idText}>{order.id}</Text>
+            <Ionicons name="flask" size={48} color="#DA0C15" />
+            <Text style={styles.idText}>ID: {sample._id ? sample._id.slice(-8) : 'N/A'}</Text>
           </View>
 
-          <Text style={styles.label}>Cliente</Text>
-          <Text style={styles.value}>{order.nameUsuario}</Text>
+          <Text style={styles.label}>Paciente</Text>
+          <Text style={styles.value}>{sample.nombrePaciente || 'N/A'}</Text>
 
-          <Text style={styles.label}>Procedimiento</Text>
-          {order.procedimientos?.map((proc, index) => (
-            <Text key={index} style={styles.value}>• {proc.titulo}</Text>
-          ))}
+          <Text style={styles.label}>Tipo de Muestra</Text>
+          <Text style={styles.value}>{sample.tipoMuestra || 'N/A'}</Text>
 
-          <Text style={styles.label}>Información extra</Text>
-          <Text style={styles.value}>Comió hace 5 horas</Text>
+          <Text style={styles.label}>Estado</Text>
+          <View style={[styles.statusBadge, { backgroundColor: getStatusColor(sample.status) }]}>
+            <Text style={styles.statusText}>{getStatusText(sample.status)}</Text>
+          </View>
 
-          <Text style={styles.label}>Fecha de pedido</Text>
-          <Text style={styles.value}>{order.createDate}</Text>
+          <Text style={styles.label}>Fecha de Creación</Text>
+          <Text style={styles.value}>{formatDate(sample.createDate)}</Text>
+
+          {sample.observaciones && (
+            <>
+              <Text style={styles.label}>Observaciones</Text>
+              <Text style={styles.value}>{sample.observaciones}</Text>
+            </>
+          )}
+
+          {sample.pedidoId && (
+            <>
+              <Text style={styles.label}>ID del Pedido</Text>
+              <Text style={styles.value}>{sample.pedidoId}</Text>
+            </>
+          )}
         </ScrollView>
 
-        <TouchableOpacity style={styles.button} onPress={() => console.log("Ir a otro modal")}>
-          <Text style={styles.buttonText}>Registrar muestra</Text>
+        <TouchableOpacity style={styles.button} onPress={onClose}>
+          <Text style={styles.buttonText}>Cerrar</Text>
         </TouchableOpacity>
+        
+        <TouchableOpacity style={styles.button} onPress={handleRegistrarResultado}>
+          <Text style={styles.buttonText}>Registrar Resultado</Text>
+        </TouchableOpacity>
+
+        {/* Modales de resultados */}
+        <QuimSangResultados
+          visible={showQuimModal}
+          sample={sample}
+          onClose={handleCloseQuimModal}
+        />
+        
+        <BiomHemResultados
+          visible={showBiomModal}
+          sample={sample}
+          onClose={handleCloseBiomModal}
+        />
       </View>
     </Modal>
   );
@@ -77,7 +161,7 @@ const styles = StyleSheet.create({
     color: '#555',
   },
   button: {
-    backgroundColor: '#B91C1C',
+    backgroundColor: '#DA0C15',
     padding: 15,
     borderRadius: 10,
     alignItems: 'center',
@@ -88,6 +172,33 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     fontSize: 16,
   },
+  statusBadge: {
+    paddingHorizontal: 8,
+    paddingVertical: 3,
+    borderRadius: 12,
+    alignSelf: 'flex-start',
+    marginBottom: 10,
+  },
+  statusText: {
+    fontSize: 12,
+    fontWeight: 'bold',
+    color: '#FFFFFF',
+  },
 });
 
-export default OrderModal;
+// PropTypes para validación de props
+SampleModal.propTypes = {
+  visible: PropTypes.bool.isRequired,
+  sample: PropTypes.shape({
+    _id: PropTypes.string,
+    nombrePaciente: PropTypes.string,
+    tipoMuestra: PropTypes.string,
+    status: PropTypes.bool,
+    createDate: PropTypes.string,
+    observaciones: PropTypes.string,
+    pedidoId: PropTypes.string
+  }),
+  onClose: PropTypes.func.isRequired
+};
+
+export default SampleModal;

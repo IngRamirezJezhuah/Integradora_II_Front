@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 
-const AgregarMuestra = ({ onClose }) => {
+const ModalMuestras = ({ onClose }) => {
   const [selectedTest, setSelectedTest] = useState('');
   const [formData, setFormData] = useState({
     pedido: '',
-    tipoMuestra: '',
+    tipoMuestra: 'Sangre',
     paciente: '',
     resultados: ''
   });
@@ -100,4 +100,4 @@ const AgregarMuestra = ({ onClose }) => {
   );
 };
 
-export default AgregarMuestra;
+export default ModalMuestras;

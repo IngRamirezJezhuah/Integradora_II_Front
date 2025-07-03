@@ -11,7 +11,7 @@ import { useEffect } from 'react';
 const MuestrasScreen = () => {
   const [searchText, setSearchText] = useState('');
   const [filter, setFilter] = useState('EnProceso');
-  const customFilters = ['En proceso', 'Completado', 'Cancelado'];
+  const customFilters = ['En proceso', 'Completado'];
   const filterKey = 'status';
   const [/* muestras */, setMuestras] = useState([]);
   
