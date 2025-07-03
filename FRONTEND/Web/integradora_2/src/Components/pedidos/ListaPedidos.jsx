@@ -15,7 +15,7 @@ const ListaPedidos = () => {
         // puedes agregar más...
         // puedes agregar más...
         ];
-
+        
     function dividirEnFilas(data, tam) {
         const filas = [];
         for (let i = 0; i < data.length; i += tam) {

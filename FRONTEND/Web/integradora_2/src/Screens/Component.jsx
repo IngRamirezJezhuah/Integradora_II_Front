@@ -56,37 +56,37 @@ const Component=() => {
                         <Link to="/Dashboard" className="nav-link">
                             <li className={`bordes ${isActive('/Dashboard') ? 'active' : ''}`}>
                                 <img className='iconos' src="/dash.png" alt="" />
-                                {showMenu && <span className='bordes'>Dashboard</span>}
+                                {showMenu && <span className='bordestxt'>Dashboard</span>}
                             </li>
                         </Link>
                         <Link to="/Pacientes" className="nav-link">
                             <li className={`bordes ${isActive('/Pacientes') ? 'active' : ''}`}>
                                 <img className='iconos' src="/usuario.png" alt="" />
-                                {showMenu && <span className='bordes'>Pacientes</span>}
+                                {showMenu && <span className='bordestxt'>Pacientes</span>}
                             </li>
                         </Link>
                         <Link to="/Pedidos" className="nav-link">
                             <li className={`bordes ${isActive('/Pedidos') ? 'active' : ''}`}>
                                 <img className='iconos' src="/pedido.png" alt="" />
-                                {showMenu && <span className='bordes'>Pedido</span>}
+                                {showMenu && <span className='bordestxt'>Pedido</span>}
                             </li>
                         </Link>
                         <Link to="/Muestras" className="nav-link">
                             <li className={`bordes ${isActive('/Muestras') ? 'active' : ''}`}>
                                 <img className='iconos' src="/muestras.png" alt="" />
-                                {showMenu && <span className={`bordes ${isActive('/Muestras') ? 'active' : ''}`}>Muestras</span>}
+                                {showMenu && <span className='bordestxt'>Muestras</span>}
                             </li>
                         </Link>
                         <Link to="/Analisis" className="nav-link">
                             <li className={`bordes ${isActive('/Analisis') ? 'active' : ''}`}>
                                 <img className='iconos' src="/analisis.png" alt="" />
-                                {showMenu && <span className='bordes'>Análisis</span>}
+                                {showMenu && <span className='bordestxt'>Análisis</span>}
                             </li>
                         </Link>
                         <Link className="nav-link logout-btn" onClick={handleAlert}>
                             <li className={`bordes ${isActive('/login') ? 'active' : ''}`}>
                                 <img className='iconos' src="/salida.png" alt="Salir" />
-                                {showMenu && <span className='bordes'>Salir</span>}
+                                {showMenu && <span className='bordestxt'>Salir</span>}
                             </li>
                         </Link>
                     </nav>

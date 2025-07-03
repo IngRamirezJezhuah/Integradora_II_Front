@@ -47,6 +47,16 @@
     font-weight: bold;
 }
 
+.bordestxt{
+    padding: 1vh;
+    margin-left: 2vh;
+    border-radius: 5vh;
+}
+
+.bordestxt.active {
+    background-color: rgb(231, 65, 65);
+}
+
 .texto-dash{
     padding: 0;
     font-size: 1vmin;
