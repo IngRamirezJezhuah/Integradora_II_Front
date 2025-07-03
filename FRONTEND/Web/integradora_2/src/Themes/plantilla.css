@@ -15,6 +15,9 @@
     height: 30vw;
     background-color: #f0f0f0;
     border-radius: 2rem;
+    box-shadow: -10px 11px 30px -7px rgba(39,39,39,0.51);
+    -webkit-box-shadow: -10px 11px 30px -7px rgba(39,39,39,0.51);
+    -moz-box-shadow: -10px 11px 30px -7px rgba(39,39,39,0.51);
 }
 .caja_2{
     padding: 2vw;
@@ -23,6 +26,9 @@
     height: 30vw;
     background-color: #f0f0f0;
     border-radius: 2rem;
+    box-shadow: -10px 11px 30px -7px rgba(39,39,39,0.51);
+-webkit-box-shadow: -10px 11px 30px -7px rgba(39,39,39,0.51);
+-moz-box-shadow: -10px 11px 30px -7px rgba(39,39,39,0.51);
 }
 .caja_pedidos{
     padding: 1vw;
