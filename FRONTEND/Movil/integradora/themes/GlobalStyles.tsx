@@ -17,13 +17,20 @@ export const DashboardStyles = StyleSheet.create({
         backgroundColor:'#fff',
     },
     caja:{
-        width:'70%',
+        width:270,
         marginTop:20,
         paddingVertical:25,
         paddingHorizontal:30,
         justifyContent:'center',
         alignItems:'center',
         borderRadius:25,
+        // Shadow for iOS
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 3 },
+        shadowOpacity: 0.3,
+        shadowRadius: 4,
+        // Elevation for Android
+        elevation: 6,
     },
     ctemperatura:{
         backgroundColor:'#FD908B',
