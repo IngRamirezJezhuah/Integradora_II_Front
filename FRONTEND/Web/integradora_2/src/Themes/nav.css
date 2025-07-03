@@ -1,17 +1,18 @@
 /*___________tab navigator___________*/
 .menu{
-    width: 3vw;
-    height: 3vw;
+    width: 8vh;
+    height: 8vh;
     margin: 1vw;
     margin-top: 0vw;
-    cursor: pointer;
+    cursor: 'pointer'; 
+    margin-bottom: '2vw';
 }
 
 .tabNavigator{
     margin: 0%;
     margin-right: 91vw;
     margin-bottom: 1vw;
-    padding: 1rem;
+    padding: 0;
     display: flex;
 }
 
@@ -21,7 +22,7 @@ li{
 .textbarra{
     position: absolute;
     margin-left: 4vw;
-    margin-top: 1.5vw;
+    margin-top: 1vw;
 }
 
 a{
@@ -36,51 +37,54 @@ a{
     height: 100vh;
     width: 100vw;
 }
-.sidebar {
-    width: 220px;
-    transition: transform 0.3s cubic-bezier(.4,2,.6,1), opacity 0.3s;
-    background: #fff;
-    box-shadow: 2px 0 8px rgba(0,0,0,0.07);
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    z-index: 10;
-    opacity: 1;
-    transform: translateX(0);
-}
 
-.sidebar-closed {
-    opacity: 0;
-    pointer-events: none;
-    transform: translateX(-100%);
+.sidebar {
+    width: 4vw;
+    transition: width 0.5s cubic-bezier(.4,2,.6,1), box-shadow 0.5s, background 0.3s;
+    background: #fff;
+    box-shadow: 0px 4px 8px 0px rgba(0,0,0,0.07);
+    position: relative;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
 }
 
 .sidebar-open {
-    opacity: 1;
-    pointer-events: auto;
-    transform: translateX(0);
+    width: 16vw;
 }
 
+.sidebar-closed {
+    width: 4vw;
+}
 
 .nav {
-            display: flex;
-            flex-direction: column;
-            gap: 1.25rem;
-            align-items: center;
-            width: 100%;
-}
-.nav-link {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            color: #333;
-            text-decoration: none;
-            font-size: 0.75rem;
-            position: relative;
-            width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-top: 2vw;
 }
 
+.nav-link {
+    display: flex;
+    align-items: center;
+    gap: 1vw;
+    width: 100%;
+    padding: 0.5vw 1vw;
+    transition: background 0.2s;
+    border-radius: 1vw;
+}
+
+
+
+.sidebar-closed .textbarra {
+    opacity: 0;
+    width: 0;
+    margin-left: 0;
+    pointer-events: none;
+}
 
 .logout-btn {
             margin-bottom: 1.25rem;
@@ -89,21 +93,4 @@ a{
 .logout-btn img {
             width: 2.5rem;
             height: 2.5rem;
-}
-.content {
-            flex: 1;
-            margin-left: 5rem;
-            padding: 1.25rem;
-            width: calc(100% - 5rem);
-            transition: margin-left 0.3s ease-in-out;
-}
-@media (max-width: 48rem) { /* ~768px */
-            .sidebar {
-            width: 4rem;
-            transform: translateX(-100%);
-}
-.sidebar.collapsed {transform: translateX(0);}
-.content {margin-left: 0;}
-
-.content.shifted {margin-left: 4rem;}
 }

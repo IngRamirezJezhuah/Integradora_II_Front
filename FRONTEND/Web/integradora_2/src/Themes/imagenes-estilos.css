@@ -7,7 +7,7 @@
 .iconos{
     width: 2vw;
     height: 2vw;
-    padding: 5px;
+    padding: 1px;
     display:flex;
 }
 
@@ -48,4 +48,18 @@
     width: 4vw;
     height: 4vw;
     margin-left: 5vw;
+}
+
+.bordes{
+    padding: 1vh;
+    margin-left: 1vh;
+    margin-bottom: 0%;
+    border-radius: 5vh;
+}
+.bordes.active {
+    background-color: rgb(231, 65, 65);
+}
+
+.cerrar-sesion{ 
+    margin-top: 16vw;
 }

@@ -15,20 +15,34 @@
     flex-wrap: wrap;
     background-color: #FFFF;
     padding: 2vw;
-    margin-left: 8vw;
     border-radius: 2rem;
+    transition: margin-left 0.3s cubic-bezier(.4,2,.6,1), width 0.3s cubic-bezier(.4,2,.6,1);
+    margin-left: 4vw;
 }
 
-
-/*_______Coso de las imagenes_______*/
-.bordes{
-    padding: 1vw;
-    border-radius: 2vw;
-}
-.bordes.active {
-    background-color: #bf1616;
+.content-expanded {
+    margin-left: 8vw;
 }
 
-.cerrar-sesion{ 
-    margin-top: 16vw;
+.content-collapsed {
+    margin-left: 4vw;
 }
+
+@media (max-width: 768px) {
+    .sidebar,
+    .sidebar-open,
+    .sidebar-closed {
+        width: 12vw;
+        min-width: 12vw;
+    }
+    .sidebar-open {
+        width: 40vw;
+    }
+    .plantilla {
+        margin-left: 12vw;
+    }
+    .content-expanded {
+        margin-left: 40vw;
+    }
+}
+

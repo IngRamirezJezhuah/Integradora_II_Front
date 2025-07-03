@@ -46,7 +46,6 @@ const Pacientes =() => {
         };
         getPacientes();
     }, []);*/
-
     function handleAlert(e) {
         const swalWithBootstrapButtons = Swal.mixin({
             customClass: {
