@@ -19,8 +19,9 @@ li{
     list-style-type: none;
 }
 .textbarra{
+    position: absolute;
+    margin-left: 4vw;
     margin-top: 1.5vw;
-    margin-left: 10vw;
 }
 
 a{
@@ -31,27 +32,36 @@ a{
 }
 
 .container {
-            display: flex;
-            height: 100vh;
-            width: 100vw;
+    display: flex;
+    height: 100vh;
+    width: 100vw;
 }
 .sidebar {
-            width: 6rem;
-            background-color: #ff4242;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding-top: 1.25rem;
-            padding-bottom: 1.25rem;
-            justify-content: space-between;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            transition: transform 0.3s ease-in-out;
+    width: 220px;
+    transition: transform 0.3s cubic-bezier(.4,2,.6,1), opacity 0.3s;
+    background: #fff;
+    box-shadow: 2px 0 8px rgba(0,0,0,0.07);
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 10;
+    opacity: 1;
+    transform: translateX(0);
 }
-.sidebar.collapsed {
-            transform: translateX(-100%);
+
+.sidebar-closed {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(-100%);
 }
+
+.sidebar-open {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateX(0);
+}
+
 
 .nav {
             display: flex;
@@ -70,30 +80,8 @@ a{
             position: relative;
             width: 100%;
 }
-.nav-link img {
-            width: 2rem;
-            height: 2rem;
-            z-index: 2;
-}
-.nav-link span {
-            margin-top: 0.25rem;
-            z-index: 2;
-}
-.nav-link .active-bg {
-            position: absolute;
-            top: -1rem;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 5rem;
-            height: 4rem;
-            background-color: #ff837e;
-            border-radius: 15px;
-            z-index: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color : white;
-}
+
+
 .logout-btn {
             margin-bottom: 1.25rem;
             cursor: pointer;

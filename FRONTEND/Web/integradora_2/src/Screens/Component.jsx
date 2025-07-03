@@ -12,43 +12,39 @@ const Component=() => {
     return (
         <section className='contenedor' >
             <div className='tabNavigator'>
-                <div>
+                <div> 
+                    
                     <img className='menu' src="/menu.png" alt='icon-menu' onClick={HandleMenuDinamico}/>
-                    {showMenu && (
-                    <div className='sidebar'>
+                    
+                    <div className={`sidebar ${showMenu ? 'sidebar-open' : 'sidebar-closed'}`}>
+                        <img className='menu' src="/menu.png" alt='icon-menu' onClick={HandleMenuDinamico}/>
                         <Link to="/Dashboard">
-                            <li className={`bordes ${isActive('/Dashboard') ? 'active' : ''}`}><img src="/dash.png" alt="" /></li>
                             <li className='textbarra'>Dashboard</li>
+                            <li className={`bordes ${isActive('/Dashboard') ? 'active' : ''}`}><img src="/dash.png" alt="" /></li>
                         </Link>
                         <Link to="/Pacientes">
+                            <li className='textbarra'>Pacientes</li>
                             <li className={`bordes ${isActive('/Pacientes') ? 'active' : ''}`}><img src="/usuario.png" alt="" /></li>
                         </Link>
-                            <li>Pacientes</li>
                         <Link to="/Pedidos">
+                            <li className='textbarra'>Pedido</li>
                             <li className={`bordes ${isActive('/Pedidos') ? 'active' : ''}`}><img src="/pedido.png" alt="" /></li>
                         </Link>
-                            <li>Pedido</li>
                         <Link to="/Muestras">
+                            <li className='textbarra'>Muestras</li>
                             <li className={`bordes ${isActive('/Muestras') ? 'active' : ''}`}><img src="/muestras.png" alt="" /></li>
                         </Link>
-                            <li>Muestras</li>
                         <Link to="/Analisis">
+                            <li className='textbarra'>analisis</li>
                             <li className={`bordes ${isActive('/Analisis') ? 'active' : ''}`}><img src="/analisis.png" alt="" /></li>
                         </Link>
-                            <li>analisis</li>
                         <Link to='/login'>
                             <div className='cerrar-sesion'>
                                 <li className="bordes"><img src="/salida.png" alt="" /></li>
                             </div>
                         </Link>
                     </div>
-                    )}
-                    
                 </div>
-                {/* <div className='plantilla'>
-                    <Outlet /> 
-                    
-                    */}
                     <section className='plantilla'>
                         {location.pathname === '/' ? (
                             <Dashboard />
