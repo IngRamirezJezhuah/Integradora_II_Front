@@ -51,10 +51,14 @@
     padding: 1vh;
     margin-left: 2vh;
     border-radius: 5vh;
+    font-size: .5vmin;
+    font-size: 1vmax;
+    
 }
 
-.bordestxt.active {
+.bordestxt :active {
     background-color: rgb(231, 65, 65);
+    color: rgb(255, 255, 255);
 }
 
 .texto-dash{

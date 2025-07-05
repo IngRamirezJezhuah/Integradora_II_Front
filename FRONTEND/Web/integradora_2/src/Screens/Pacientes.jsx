@@ -40,9 +40,11 @@ const Pacientes =() => {
                     {modalAbierto && <ModalPaciente onClose={() => setModalAbierto(false)} />}
                     < SearchBar />
                 </div>
+                <div className='contenedor_pedidos'>
                     <div className='opciones'>
-                    <OpcionesPaciente/>
+                        <OpcionesPaciente/>
                     </div>
+                </div>
             </div>
     )
 }

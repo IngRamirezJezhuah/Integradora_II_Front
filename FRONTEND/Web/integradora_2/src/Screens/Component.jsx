@@ -39,6 +39,13 @@ const Component=() => {
                 
         }
     const HandleMenuDinamico = () => setShowMenu(!showMenu) ;
+    
+    const [img] = useState({
+        name: 'Niki de Saint Phalle',
+        image: '/dash.png',
+    });
+    
+    
     return (
         <section className='contenedor'>
             <div className='tabNavigator'>
@@ -88,6 +95,15 @@ const Component=() => {
                         <Dashboard />
                     ) : (<Outlet />)}
                 </section>
+                    <div className='perfil'>
+                        <p>perfil</p>
+                        <div className='inicial-circulo'>
+                            <img
+                            src={img.image}
+                            alt={img.name}
+                            />
+                        </div>
+                    </div>
             </div>
         </section>
     )

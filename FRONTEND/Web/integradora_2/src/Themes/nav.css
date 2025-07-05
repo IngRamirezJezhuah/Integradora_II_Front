@@ -3,7 +3,7 @@
     width: 8vh;
     height: 8vh;
     margin: 1vw;
-    margin-top: 0vw;
+    margin-top: 1vw;
     cursor: 'pointer'; 
     margin-bottom: '2vw';
 }
@@ -59,7 +59,7 @@ a{
 }
 
 .sidebar-closed {
-    width: 7vw;
+    width: 6.5vw;
 }
 
 .nav {

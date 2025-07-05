@@ -29,50 +29,55 @@ const Dashboard=()=> {
         return (
         <div>
             <p className='titulo'>Dashboard </p>
-        <div className='margen'>
-            <div>
-                <p>Cargando datos del sensor...</p>
-                <div className='div-graficas'>
-                    <p>Temperatura del Laboratorio</p>
-                    <p>25% c</p>
-                    <div className='div-grafica'>
+            <div className='contenedor_pedidos'>
+                <div>
+                    <div className='div-graficas'>
+                        <p>Temperatura del Laboratorio</p>
+                        <p>25% c</p>
+                        <div className='div-grafica'>
+                            
+                            <div class="cargando">
+                                <div class="pelotas"></div>
+                                <div class="pelotas"></div>
+                                <div class="pelotas"></div>
+                                <span class="texto-cargando">Cargando...</span>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <div className='div-graficas'>
+                        <p>Humedad del Laboratorio</p>
+                        <p>25% c</p>
+                        <div className='div-grafica'>
+                            <div class="cargando">
+                                <div class="pelotas"></div>
+                                <div class="pelotas"></div>
+                                <div class="pelotas"></div>
+                                <span class="texto-cargando">Cargando...</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div className='div-muestra'>
+                        <p className='centrar'>Pedidos Pendientes</p>
                         
+                    </div>
+                    <div className='div-muestra-2'>
+                        <p className='centrar'>muestras en preocesamiento</p>
+                    </div>
+                    <div className='div-muestra-3'>
+                        <p className='centrar'>Contenedor esp32c3_001</p>
+                        <br /><br />
                         <div class="cargando">
                             <div class="pelotas"></div>
                             <div class="pelotas"></div>
                             <div class="pelotas"></div>
                             <span class="texto-cargando">Cargando...</span>
                         </div>
-                        
-                    </div>
-                </div>
-                <div className='div-graficas'>
-                    <p>Humedad del Laboratorio</p>
-                    <p>25% c</p>
-                    <div className='div-grafica'>
-                        <p>Cargando datos del sensor...</p>
-                        <div class="loader"></div>
                     </div>
                 </div>
             </div>
-            <div>
-                <div className='div-muestra'>
-                    <p className='centrar'>Pedidos Pendientes</p>
-                    <p className='texto-dash'><p>Cargando datos del sensor...</p></p>
-                </div>
-                <div className='div-muestra-2'>
-                    <p className='centrar'>muestras en preocesamiento</p>
-                    <p className='texto-dash'><p>Cargando datos del sensor...</p></p>
-                </div>
-                <div className='div-muestra-3'>
-                    <p className='centrar'>Contenedor esp32c3_001</p>
-                    <p className='centrar'>Cargando datos del sensor...</p>
-                    <p className='texto-dash'>LDR:Cargando datos del sensor...</p>
-                    <p className='texto-dash'>LDR:Cargando datos del sensor...</p>
-                </div>
-            </div>
-            <div className='margen'></div>
-        </div>
     </div>
         
     )

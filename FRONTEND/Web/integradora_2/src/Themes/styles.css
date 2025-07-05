@@ -3,12 +3,22 @@
     margin: 0px;
     padding: 0px;
 }
+
+.perfil{
+    margin-top: 1vw;
+    margin-left: 2vw;
+    background-color: #e9e6e9;
+    min-height: 4vw;
+    max-height: 4vw;
+    min-width: 4vw;
+    max-width: 4vw;
+}
+
 .contenedor{
     background-color: #FEF7FF;
     padding: 2vh;
     margin: 0%;
 }
-
 
 .plantilla{
     background-color: #FFFF;
@@ -19,11 +29,11 @@
 }
 
 .content-expanded {
-    margin-left: 3vw;
+    margin-left: 2vw;
 }
 
 .content-collapsed {
-    margin-left: 3vw;
+    margin-left: 2vw;
 }
 
 @media (max-width: 768px) {

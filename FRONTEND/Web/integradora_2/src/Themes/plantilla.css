@@ -41,6 +41,14 @@
     border-radius: 2rem;
 }
 
+.contenedor_pedidos{
+    margin: 0vw 3vw 0vw 0vw;
+    width: 70vw;
+    height: 40vw;
+    display: flex;
+    border-radius: 2rem;
+}
+
 .buscador{
     position: absolute;
     padding: 1rem;

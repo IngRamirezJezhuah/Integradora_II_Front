@@ -18,8 +18,10 @@ const Pedidos =() => {
                 {modalAbierto && <ModalPedidos onClose={() => setModalAbierto(false)} />}
                 <SearchBar />
             </div>
-            <div className='opciones'>
-                    <OpcionesPedidos/>
+            <div className='contenedor_pedidos'>
+                <div className='opciones'>
+                        <OpcionesPedidos/>
+                </div>
             </div>
         </div>
     )

@@ -79,6 +79,7 @@ const ListaPedidos = () => {
                 </div>
             ))}
         </div>
+
     );
 };
 
