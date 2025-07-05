@@ -8,6 +8,8 @@ export {default as  MuestrasHechas } from './graficas/muestras-dia'
 //_____________Paciente_____________
 export {default as  RegistrarPaceinte } from './pacientes/registrarPaciente'
 export {default as  NuevoPaciente } from './pacientes/NuevoPaciente'
+export {default as  PacientesAlta } from './pacientes/PacientesAlta'
+export {default as  DetallesPacienteAlta } from './pacientes/DetallesPacienteAlta'
 
 //_____________Elementos_____________
 export {default as  SearchBar } from './elementos/searchBar'

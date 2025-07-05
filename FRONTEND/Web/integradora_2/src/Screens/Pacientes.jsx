@@ -2,26 +2,11 @@ import { SearchBar } from '../Components';
 import { OpcionesPaciente } from '../Components';
 import { ModalPaciente } from '../Components';
 import {  useState } from 'react';
-import Swal from 'sweetalert2';
 
 const Pacientes =() => {
-
-    const nombres = [//esta  es para usar una lista, alternatica sin peticion 
-    "Mario Lira Zamora",
-    "David Jezhuah Ramirez Alvarado",
-    "Ricardo Luna Unzueta",
-    "Diego Daher Diaz Contreraz",
-    "Edson Burceaga Govea",
-    "Alejandro Puentes de Busk",
-    "Angel Hernandez",
-    "Oscar Perez Romer",
-]
     const [modalAbierto, setModalAbierto] = useState(false);
 
-    const pruebas = [
-        "Quimica sanguinea",
-        "Biometrica Hepatica"
-    ]
+    
     /*Verison con servidor
     const [pacientes, setPacientes] = useState([]);
     useEffect(() => {
@@ -46,41 +31,6 @@ const Pacientes =() => {
         };
         getPacientes();
     }, []);*/
-    function handleAlert(e) {
-        const swalWithBootstrapButtons = Swal.mixin({
-            customClass: {
-                confirmButton: "btn btn-success",
-                cancelButton: "btn btn-danger"
-            },
-            buttonsStyling: false
-        });
-        swalWithBootstrapButtons.fire({
-            title: "Estas Seguro de borrarlo?",
-            text: "No podras Revertirlo una vez lo borres!",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonText: "Si, borralo!",
-            cancelButtonText: "No, cancelar!",
-            reverseButtons: true
-        }).then((result) => {
-            if (result.isConfirmed) {
-                swalWithBootstrapButtons.fire({
-                    title: "Borrado Exitosamente!",
-                    text: "Tu paciente ha sido borrado correctamente",
-                    icon: "success"
-                });
-            } else if (
-                result.dismiss === Swal.DismissReason.cancel
-            ) {
-                swalWithBootstrapButtons.fire({
-                    title: "Cancelado",
-                    text: "Tu Paciente se ah mantenido ( >v°)",
-                    icon: "error"
-                });
-            }
-        })
-            
-    }
 
     return (
             <div>
@@ -91,71 +41,8 @@ const Pacientes =() => {
                     < SearchBar />
                 </div>
                     <div className='opciones'>
-                        <OpcionesPaciente/>
+                    <OpcionesPaciente/>
                     </div>
-                <div className='margen'>
-                    <div className='scale-up-ver-center'>
-                            <div className='caja_1'>
-                                <div className='scroll'>
-                                    {/*
-                                    {pacientes.map((paciente, index) => {
-                                        const nombreCompleto = `${paciente.nombre} ${paciente.apellidoPaterno} ${paciente.apellidoMaterno}`;
-                                        const inicial = paciente.nombre.charAt(0);
-                                        return (
-                                            <div key={index} className='prueba_tabla'>
-                                                <div className='inicial-circulo'>
-                                                    <p className='letra-circulo'>{inicial}</p>
-                                                </div>
-                                                <div>
-                                                    <p className='prueba-name'>{nombreCompleto}</p>
-                                                </div>
-                                                <div className='acomodar-iconos'>
-                                                    <img src="/basura.png" alt="borrar" className='iconos' />
-                                                </div>
-                                            </div>
-                                        );
-                                    })}
-                                    */}
-                                    {nombres.map((nombreCompleto,index) => {
-                                        const inicial = nombreCompleto.charAt(0);
-                                        return(
-                                            <div key={index} className='prueba_tabla'>
-                                                <div className='inicial-circulo'>
-                                                    <p className='letra-circulo'>{inicial}</p>
-                                                </div>
-                                                <div>
-                                                    <div className='acomodar-iconos'>
-                                                        <img src="/basura.png" alt="borrar" className='icono-borrar' onClick={handleAlert}/>
-                                                    </div>
-                                                    <p className='prueba-name'>{nombreCompleto}</p>                                
-                                                </div>
-                                            </div>
-                                        );
-                                    })}
-                                    
-                                </div>
-                            </div>
-                        </div>
-                        <div className='scale-up-ver-center'>
-                            <div className='caja_2'>
-                                <h1 className='titulo'>Detalles</h1>
-                                
-                                    {/**aqui empieza lo chido */}
-                                    {pruebas.map((prueba, index) => (
-                                        <div key={index} className='tabla-detalles'>
-                                        <div className='icono'>
-                                            <img className='imagen-prueba' src="/prueba-de-sangre.png" alt="prueba imagen" />
-                                        </div>
-                                        <p className='prueba-name'>{prueba}</p>
-                                            <div className='acomodar-iconos-2'>
-                                                <img src="/sobre-mas.png" alt="enviar" className='icono-correo' />
-                                                <img src="/descargas.png" alt="descargar" className='icono-correo' />
-                                            </div>
-                                        </div>
-                                    ))}
-                        </div>
-                    </div>
-                </div>
             </div>
     )
 }

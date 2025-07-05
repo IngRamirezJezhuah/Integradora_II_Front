@@ -11,7 +11,8 @@ import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 import Dashboard from '../screens/Dashboard';
 import Muestras from '../screens/Muestras';
 import Pedidos from '../screens/Pedidos';
-import  Escaner  from '../screens/Escaner';
+// import  Escaner  from '../screens/Escaner';
+import PatientsHome from '../screens/PatientsHome';
 
 
 const Tab = createBottomTabNavigator();
@@ -37,7 +38,7 @@ const TabNavigator = () => {
                     <Fontisto name="test-tube" size={26} color={'#DA0C15'}/>
                 )
             }}/>
-            <Tab.Screen name="Escaner" component={Escaner} 
+            <Tab.Screen name="Escaner" component={PatientsHome} 
             options={{
                 tabBarIcon: () =>(
                     <MaterialIcons name="qr-code-scanner" size={30} color={'#DA0C15'} />

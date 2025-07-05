@@ -1,6 +1,7 @@
 import React from 'react';
 import { FlatList, View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import PropTypes from 'prop-types';
 import OrderModal from './orderModal';
 
 const OrdersTable = ({ data, onView, onDelete }) => {
@@ -24,7 +25,7 @@ const OrdersTable = ({ data, onView, onDelete }) => {
           <View style={styles.row}>
             <MaterialCommunityIcons name="test-tube" size={30} color="#DA0C15" />
             <Text style={styles.orderText}>{item.nameUsuario}</Text>
-            <TouchableOpacity onPress={(OrderModal) => handleView(item)}>
+            <TouchableOpacity onPress={() => handleView(item)}>
               <MaterialCommunityIcons name="file-search-outline" size={30} color="#DA0C15" />
             </TouchableOpacity>
             <TouchableOpacity onPress={() => onDelete(item)}>
@@ -67,5 +68,15 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
 });
+
+// PropTypes para validación de props
+OrdersTable.propTypes = {
+  data: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    nameUsuario: PropTypes.string.isRequired,
+  })).isRequired,
+  onView: PropTypes.func,
+  onDelete: PropTypes.func.isRequired,
+};
 
 export default OrdersTable;
