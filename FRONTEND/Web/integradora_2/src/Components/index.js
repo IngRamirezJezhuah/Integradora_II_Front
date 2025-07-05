@@ -7,7 +7,7 @@ export {default as  SampleChart } from './graficas/grafica-iot'
 export {default as  MuestrasHechas } from './graficas/muestras-dia'
 //_____________Paciente_____________
 export {default as  RegistrarPaceinte } from './pacientes/registrarPaciente'
-export {default as  NuevoPaciente } from './pacientes/NuevoPaciente'
+
 export {default as  ModalPaciente } from './pacientes/ModalPaciente'
 export {default as  OpcionesPaciente } from './pacientes/OpcionesPaciente'
 

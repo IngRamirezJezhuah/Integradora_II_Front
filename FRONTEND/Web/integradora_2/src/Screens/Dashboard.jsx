@@ -3,6 +3,7 @@ import React from 'react'
 import { MuestrasHechas, SampleChart } from '../Components';
 import { useEffect, useState } from 'react'
 import axios from 'axios'
+import Swal from 'sweetalert2';
 
 const Dashboard=()=> {
     
@@ -25,6 +26,21 @@ const Dashboard=()=> {
         return { estado: 'Echada a perder', clase: 'div-muestra-dañada' }
     }
 
+    const handleEasterEgg = () => {
+        Swal.fire({
+            title: "Easter egg",
+            width: 600,
+            padding: "3em",
+            color: "#716add",
+            background: "#fff url(/images/trees.png)",
+            backdrop: `
+                rgba(0,0,123,0.4)
+                url("https://sweetalert2.github.io/images/nyan-cat.gif")
+                left top
+                no-repeat
+            `
+    });
+    }
     if (!ldrData) {
         return (
         <div>
@@ -59,9 +75,12 @@ const Dashboard=()=> {
                     </div>
                 </div>
                 <div className='scale-up-center'>
-                    <div className='div-muestra'>
-                        <p className='centrar'>Pedidos Pendientes</p>
-                        
+                    <div onClick={handleEasterEgg}>
+
+                        <div className='div-muestra'>
+                            <p className='centrar'>Pedidos Pendientes</p>
+                            
+                        </div>
                     </div>
                     <div className='div-muestra-2'>
                         <p className='centrar'>muestras en preocesamiento</p>

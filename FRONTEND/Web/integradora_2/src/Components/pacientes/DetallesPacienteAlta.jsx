@@ -1,4 +1,3 @@
-import React from 'react'
 
 const DetallesPacienteAlta = () => {
     const pruebas = [
@@ -17,7 +16,6 @@ const DetallesPacienteAlta = () => {
                 </div>
                 <p className='prueba-name'>{prueba}</p>
                     <div className='acomodar-iconos-2'>
-                        <img src="/sobre-mas.png" alt="enviar" className='icono-correo' />
                         <img src="/descargas.png" alt="descargar" className='icono-correo' />
                     </div>
                 </div>

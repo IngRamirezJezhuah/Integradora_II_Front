@@ -15,11 +15,11 @@ const ReciboPedidos = () => {
     return (
         <div>
             <h1>Recibos Pedidos </h1>
+                <Link to={"/Pedidos"}>
+                    <button className='btn'>regresar</button>
+                </Link>
             <div className='buscador'>
                 <SearchBar />
-                <Link to={"/Pedidos"}>
-                    <button className='btn-agregar'>regresar</button>
-                </Link>
             </div>
             <div className='analisis'>
                 <div className='margen'>
