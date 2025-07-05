@@ -1,18 +1,20 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
 import { SearchBar } from '../Components';
+import { ModalAnalisis } from '../Components';
 
 const Analisis=()=> {
     const Pruebas= [
         "Quimica Sanguinea",
         "BIometrica Hepatica"
     ]
+    const [modalAbierto,setModalAbierto] = useState(false)
     return (
         <div>
             <p className='titulo'>Analisis</p>
                 <div className='buscador'>
-                    <button className='btn-agregar'>+Agregar</button>
-                    
+                    <button className='btn-agregar' onClick={() => setModalAbierto(true)}>+Agregar</button>
+                    {modalAbierto && <ModalAnalisis onClose={()=> setModalAbierto(false)} />}
                     <SearchBar/>
                 </div>
             <div className='analisis'>
@@ -25,15 +27,13 @@ const Analisis=()=> {
                                             <div className='icono'>
                                                 <img className='imagen-prueba' src="/prueba-de-sangre.png" alt="prueba imagen" />
                                             </div>
-                                            <p className='prueba-name'>{prueba}</p>
-                                            <div className='acomodar-iconos'>
-                                                <img src="/sobre-mas.png" alt="editar" className='iconos' />
+                                            <p className='prueba-name'>{prueba}</p> 
+                                            <div className='margen'>
+                                                <Link to='/Editar-Analisis'>
+                                                    <img src="/ajustes.png" alt="ajustes" className='iconos' />
+                                                </Link>
+                                                <img src="/basura.png" alt="editar" className='iconos' />
                                             </div>
-                                            <div className='acomodar-iconos-2'>
-                                            <Link to='/Editar-Analisis'>
-                                            <img src="/ajustes.png" alt="ajustes" className='iconos' />
-                                            </Link>
-                                        </div>
                                         </div>
                                     ))}
                                 <div className='prueba_tabla'>

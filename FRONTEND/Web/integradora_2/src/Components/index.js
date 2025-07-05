@@ -20,6 +20,7 @@ export {default as SampleModal} from './elementos/sampleModal'
 //_____________Analisis_____________
 export {default as NuevoAnalisisForm } from './analisis/NuevoAnalisis'
 export {default as EditarAnalisisForm } from './analisis/EditarAnalisis'
+export {default as ModalAnalisis } from './analisis/ModalAnalisis'
 //_____________Muestras_____________
 export {default as AgregarMuestra } from './muestras/AgregarMuestra'
 export {default as ListaMuestras } from './muestras/ListaMuestras'
