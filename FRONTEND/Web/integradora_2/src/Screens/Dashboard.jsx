@@ -30,19 +30,19 @@ const Dashboard=()=> {
         <div>
             <p className='titulo'>Dashboard </p>
             <div className='contenedor_pedidos'>
-                <div>
+                <div className='scale-in-hor-center'>
+                    
                     <div className='div-graficas'>
                         <p>Temperatura del Laboratorio</p>
                         <p>25% c</p>
                         <div className='div-grafica'>
                             
-                            <div class="cargando">
-                                <div class="pelotas"></div>
-                                <div class="pelotas"></div>
-                                <div class="pelotas"></div>
-                                <span class="texto-cargando">Cargando...</span>
-                            </div>
-                            
+                                <div class="cargando">
+                                    <div class="pelotas"></div>
+                                    <div class="pelotas"></div>
+                                    <div class="pelotas"></div>
+                                    <span class="texto-cargando">Cargando...</span>
+                                </div>
                         </div>
                     </div>
                     <div className='div-graficas'>
@@ -58,7 +58,7 @@ const Dashboard=()=> {
                         </div>
                     </div>
                 </div>
-                <div>
+                <div className='scale-up-center'>
                     <div className='div-muestra'>
                         <p className='centrar'>Pedidos Pendientes</p>
                         
