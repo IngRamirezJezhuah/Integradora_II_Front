@@ -44,15 +44,7 @@ const ListaMuestras = () => {
                     text: "Tu muestra ha sido borrada correctamente",
                     icon: "success"
                 });
-            } else if (
-                result.dismiss === Swal.DismissReason.cancel
-            ) {
-                swalWithBootstrapButtons.fire({
-                    title: "Cancelado",
-                    text: "Tu Pedido se ah mantenido ( >v°)",
-                    icon: "error"
-                });
-            }
+            } else if (result.dismiss === Swal.DismissReason.close) {}
         })
     }
     return (

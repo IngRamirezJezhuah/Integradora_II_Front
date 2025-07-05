@@ -34,15 +34,7 @@ const Component=() => {
                     }).then(() => {
                         navigate('/login'); 
                     });
-                } else if (
-                    result.dismiss === Swal.DismissReason.cancel
-                ) {
-                    swalWithBootstrapButtons.fire({
-                        title: "Ok",
-                        text: "( >v°)",
-                        icon: "success"
-                    });
-                }
+                } else if (result.dismiss === Swal.DismissReason.cancel) {}
             })
                 
         }

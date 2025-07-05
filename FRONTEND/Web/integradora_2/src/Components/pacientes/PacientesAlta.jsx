@@ -35,15 +35,7 @@ const PacientesAlta = () => {
                     text: "Tu paciente ha sido borrado correctamente",
                     icon: "success"
                 });
-            } else if (
-                result.dismiss === Swal.DismissReason.cancel
-            ) {
-                swalWithBootstrapButtons.fire({
-                    title: "Cancelado",
-                    text: "Tu Paciente se ah mantenido ( >v°)",
-                    icon: "error"
-                });
-            }
+            } else if(result.dismiss === Swal.DismissReason.close) {}
         })
             
     }

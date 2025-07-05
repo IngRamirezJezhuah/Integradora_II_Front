@@ -48,16 +48,7 @@ const ListaPedidos = () => {
             text: "Tu pedido ha sido borrado correctamente",
             icon: "success"
             });
-        } else if (
-            /* Read more about handling dismissals below */
-            result.dismiss === Swal.DismissReason.cancel
-        ) {
-            swalWithBootstrapButtons.fire({
-            title: "Cancelado",
-            text: "Tu Pedido se ah mantenido ( >v°)",
-            icon: "error"
-            });
-        }
+        } else if (result.dismiss === Swal.DismissReason.close) {}
         });
 
     }
