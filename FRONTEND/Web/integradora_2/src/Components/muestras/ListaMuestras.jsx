@@ -1,5 +1,7 @@
-import { Link } from 'react-router-dom'
+
 import Swal from 'sweetalert2'
+import {useState}from 'react'
+import EditarMuestras from './EditarMuestras';
 
 const ListaMuestras = () => {
     const muestras = [
@@ -57,6 +59,9 @@ const ListaMuestras = () => {
             }
         })
     }
+
+    const [modalAbierto, setModalAbierto] = useState(false);
+
     return (
         <div className='scroll_pruebas'>
             {filas.map((fila, i) => ( 
@@ -66,16 +71,14 @@ const ListaMuestras = () => {
                         <div className='titulo'>
                             <img src="/bioHem.png" alt="ajustes" className='imgMuestra'/>
                         </div>
-                        <h1 className='centrar'>{muestras.id}</h1>
-                        <p className='texto'>{muestras.descripcion}</p>
-                        <p className='texto'>{muestras.paciente}</p>
+                            <h1 className='centrar'>{muestras.id}</h1>
+                            <p className='texto'>{muestras.descripcion}</p>
+                            <p className='texto'>{muestras.paciente}</p>
                         <div className='margen'>
-                            <Link to='/RecibosPedidos'>
-                                <img src="/editar.png" alt="editar" className='iconos' />
-                            </Link>
-                            <Link to='/RecibosPedidos'>
-                                <img src="/detalles.png" alt="detalles" className='iconos' />
-                            </Link>
+                            
+                            <img src="/editar.png" alt="editar" className='iconos' onClick={() => setModalAbierto(true)} />
+                            
+                            <img src="/detalles.png" alt="detalles" className='iconos'/>
                             
                             <img src="/basura.png" alt="detalles" className='iconos' onClick={hanldeAlert} />
                             
@@ -84,6 +87,7 @@ const ListaMuestras = () => {
                 ))}
                 </div>
             ))}
+            {modalAbierto && <EditarMuestras onClose={() => setModalAbierto(false)} />}
         </div>
         );
     };

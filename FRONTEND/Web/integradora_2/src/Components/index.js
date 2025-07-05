@@ -24,6 +24,7 @@ export {default as ModalAnalisis } from './analisis/ModalAnalisis'
 //_____________Muestras_____________
 export {default as AgregarMuestra } from './muestras/AgregarMuestra'
 export {default as ListaMuestras } from './muestras/ListaMuestras'
+export {default as EditarMuestras } from './muestras/EditarMuestras'
 
 //_____________pedidos_____________
 export {default as DetallesPedidos } from './pedidos/DetallesPedidos'

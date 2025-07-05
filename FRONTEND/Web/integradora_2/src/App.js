@@ -21,6 +21,7 @@ import Analisis from './Screens/Analisis.jsx';
 import { AgregarMuestra, EditarAnalisisForm, NuevoAnalisisForm,  RegistrarPaceinte, SampleBox, SampleModal } from './Components/index.ts';
 import { ReciboPedidos } from './Components/index.js';
 import PerfilPaciente from './Screens/PerfilPaciente.jsx';
+import { EditarMuestras } from './Components/index.js';
 
 
 function App() {
@@ -39,6 +40,7 @@ function App() {
             
             <Route path="/Muestras" element={<Muestras />} />
             <Route path='/AgregarMuestras' element={<AgregarMuestra/>} />
+            <Route path='/EditarMuestras' element={<EditarMuestras />} />
             
             <Route path='/Analisis' element={<Analisis />} />
             <Route path='/Nuevo-Analisis' element={<NuevoAnalisisForm/>} />

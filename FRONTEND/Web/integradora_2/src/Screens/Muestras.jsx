@@ -3,6 +3,7 @@ import { FilterBar,/* SampleBox, SampleModal,*/ SearchBar } from '../Components'
 import { ListaMuestras } from '../Components';
 import ModalMuestras from '../Components/muestras/ModalMuestras';
 
+
 //import {SearchBar, FilterBar, SampleBoxes} from "../Components";
 //import './elementos.css';
 
@@ -26,6 +27,7 @@ const Muestras =() =>{
                         <div className='Box-muestras'>
                             <div className='scale-up-ver-center'>
                             <ListaMuestras />
+                            
                             </div>
                         </div>
                     </div>

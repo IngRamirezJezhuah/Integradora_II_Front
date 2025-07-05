@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { SearchBar } from '../Components';
 import { ModalAnalisis } from '../Components';
 
+
 const Analisis=()=> {
     const Pruebas= [
         "Quimica Sanguinea",
