@@ -11,21 +11,19 @@
 
 
 .plantilla{
-    display: flex;
-    flex-wrap: wrap;
     background-color: #FFFF;
     padding: 2vw;
     border-radius: 2rem;
-    transition: margin-left 0.3s cubic-bezier(.4,2,.6,1), width 0.3s cubic-bezier(.4,2,.6,1);
-    margin-left: 4vw;
+    min-height: auto;
+    max-height: auto;
 }
 
 .content-expanded {
-    margin-left: 8vw;
+    margin-left: 3vw;
 }
 
 .content-collapsed {
-    margin-left: 4vw;
+    margin-left: 3vw;
 }
 
 @media (max-width: 768px) {

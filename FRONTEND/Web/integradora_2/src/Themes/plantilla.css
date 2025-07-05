@@ -117,13 +117,16 @@
 
 .scroll_pruebas{
     width: 70vw;
-    height: 36vw;
+    height: 38vw;
     overflow: auto;
     display: flex;
     flex-direction: column;
     align-items:flex-start;
 }
-
+.scroll_pruebas ::after{
+    content: "";
+    height: auto;
+}
 .prueba_tabla{
     padding: 10px;
     display: flex;

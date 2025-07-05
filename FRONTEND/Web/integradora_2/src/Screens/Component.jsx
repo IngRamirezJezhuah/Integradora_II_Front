@@ -75,7 +75,7 @@ const Component=() => {
                                 {showMenu && <span className='bordestxt'>Análisis</span>}
                             </li>
                         </Link>
-                        <Link className="nav-link logout-btn" onClick={handleAlert}>
+                        <Link className="nav-link" onClick={handleAlert}>
                             <li className={`bordes ${isActive('/login') ? 'active' : ''}`}>
                                 <img className='iconos' src="/salida.png" alt="Salir" />
                                 {showMenu && <span className='bordestxt'>Salir</span>}
