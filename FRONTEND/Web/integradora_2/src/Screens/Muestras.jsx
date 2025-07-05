@@ -21,10 +21,12 @@ const Muestras =() =>{
                     <FilterBar />
                 </div>
             <div>
-                <div className='margen'>
-                    <div className='Box-muestras'>
-                        <div className='scale-up-ver-center'>
-                        <ListaMuestras />
+                <div className='contenedor_pedidos'>
+                    <div className='margen'>
+                        <div className='Box-muestras'>
+                            <div className='scale-up-ver-center'>
+                            <ListaMuestras />
+                            </div>
                         </div>
                     </div>
                 </div>
