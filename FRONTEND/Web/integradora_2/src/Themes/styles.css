@@ -3,29 +3,37 @@
     margin: 0px;
     padding: 0px;
 }
+
+.perfil{
+    margin-top: 1vw;
+    margin-left: 2vw;
+    background-color: #e9e6e9;
+    min-height: 4vw;
+    max-height: 4vw;
+    min-width: 4vw;
+    max-width: 4vw;
+}
+
 .contenedor{
     background-color: #FEF7FF;
     padding: 2vh;
     margin: 0%;
 }
 
-
 .plantilla{
-    display: flex;
-    flex-wrap: wrap;
     background-color: #FFFF;
     padding: 2vw;
     border-radius: 2rem;
-    transition: margin-left 0.3s cubic-bezier(.4,2,.6,1), width 0.3s cubic-bezier(.4,2,.6,1);
-    margin-left: 4vw;
+    min-height: auto;
+    max-height: auto;
 }
 
 .content-expanded {
-    margin-left: 8vw;
+    margin-left: 2vw;
 }
 
 .content-collapsed {
-    margin-left: 4vw;
+    margin-left: 2vw;
 }
 
 @media (max-width: 768px) {

@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 /*__________Estiloss__________*/
 import './Themes/App.css';import './Themes/styles.css';
 import './Themes/Dash.css';import './Themes/plantilla.css';
-import './Themes/elementos.css';import './Themes/nav.css';
+import './Themes/nav.css';
 import './Themes/FormLg.css';import './Themes/loginPage.css';
 import './Themes/imagenes-estilos.css';import './Themes/modal.css';
 import './Themes/textos.css';import './Themes/Animaciones.css';
@@ -18,7 +18,7 @@ import Pacientes from './Screens/Pacientes.jsx';
 import  Muestras  from './Screens/Muestras.jsx';
 import Pedidos from './Screens/Pedidos.jsx';
 import Analisis from './Screens/Analisis.jsx';
-import { AgregarMuestra, EditarAnalisisForm, NuevoAnalisisForm, NuevoPaciente, RegistrarPaceinte, SampleBox, SampleModal } from './Components/index.ts';
+import { AgregarMuestra, EditarAnalisisForm, NuevoAnalisisForm,  RegistrarPaceinte, SampleBox, SampleModal } from './Components/index.ts';
 import { ReciboPedidos } from './Components/index.js';
 import PerfilPaciente from './Screens/PerfilPaciente.jsx';
 
@@ -46,7 +46,7 @@ function App() {
             
             <Route path='/SampleBox' element={<SampleBox/>}/>
             <Route path='/SampleModal' element={<SampleModal/>}/>
-            <Route path='/Nuevo-Paciente-Form' element={<NuevoPaciente/>}/>
+            
             <Route path='/Perfil' element={<PerfilPaciente/>}/>
           </Route>
       </Routes>

@@ -15,9 +15,6 @@
     height: 30vw;
     background-color: #f0f0f0;
     border-radius: 2rem;
-    box-shadow: -10px 11px 30px -7px rgba(39,39,39,0.51);
-    -webkit-box-shadow: -10px 11px 30px -7px rgba(39,39,39,0.51);
-    -moz-box-shadow: -10px 11px 30px -7px rgba(39,39,39,0.51);
 }
 .caja_2{
     padding: 2vw;
@@ -26,16 +23,29 @@
     height: 30vw;
     background-color: #f0f0f0;
     border-radius: 2rem;
-    box-shadow: -10px 11px 30px -7px rgba(39,39,39,0.51);
--webkit-box-shadow: -10px 11px 30px -7px rgba(39,39,39,0.51);
--moz-box-shadow: -10px 11px 30px -7px rgba(39,39,39,0.51);
+    
 }
+
+.caja_1,.caja_2,.caja_pedidos{
+    box-shadow: -10px 11px 30px -7px rgba(39,39,39,0.51);
+    -webkit-box-shadow: -10px 11px 30px -7px rgba(39, 39, 39, 0.381);
+    -moz-box-shadow: -10px 11px 30px -7px rgba(39,39,39,0.51);
+}
+
 .caja_pedidos{
     padding: 1vw;
     margin: 1vw;
     width: 17vw;
     height: 17vw;
     background-color: #f0f0f0;
+    border-radius: 2rem;
+}
+
+.contenedor_pedidos{
+    margin: 0vw 3vw 0vw 0vw;
+    width: 70vw;
+    height: 40vw;
+    display: flex;
     border-radius: 2rem;
 }
 
@@ -115,13 +125,16 @@
 
 .scroll_pruebas{
     width: 70vw;
-    height: 36vw;
+    height: 38vw;
     overflow: auto;
     display: flex;
     flex-direction: column;
     align-items:flex-start;
 }
-
+.scroll_pruebas ::after{
+    content: "";
+    height: auto;
+}
 .prueba_tabla{
     padding: 10px;
     display: flex;

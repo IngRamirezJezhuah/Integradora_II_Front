@@ -34,19 +34,18 @@ const Component=() => {
                     }).then(() => {
                         navigate('/login'); 
                     });
-                } else if (
-                    result.dismiss === Swal.DismissReason.cancel
-                ) {
-                    swalWithBootstrapButtons.fire({
-                        title: "Ok",
-                        text: "( >v°)",
-                        icon: "success"
-                    });
-                }
+                } else if (result.dismiss === Swal.DismissReason.cancel) {}
             })
                 
         }
     const HandleMenuDinamico = () => setShowMenu(!showMenu) ;
+    
+    const [img] = useState({
+        name: 'Niki de Saint Phalle',
+        image: '/dash.png',
+    });
+    
+    
     return (
         <section className='contenedor'>
             <div className='tabNavigator'>
@@ -56,13 +55,13 @@ const Component=() => {
                         <Link to="/Dashboard" className="nav-link">
                             <li className={`bordes ${isActive('/Dashboard') ? 'active' : ''}`}>
                                 <img className='iconos' src="/dash.png" alt="" />
-                                {showMenu && <span className='bordes'>Dashboard</span>}
+                                {showMenu && <span className='bordes'> Dashboard</span>}
                             </li>
                         </Link>
                         <Link to="/Pacientes" className="nav-link">
                             <li className={`bordes ${isActive('/Pacientes') ? 'active' : ''}`}>
                                 <img className='iconos' src="/usuario.png" alt="" />
-                                {showMenu && <span className='bordes'>Pacientes</span>}
+                                {showMenu &&<span className='bordes'>Pacientes</span>}
                             </li>
                         </Link>
                         <Link to="/Pedidos" className="nav-link">
@@ -74,7 +73,7 @@ const Component=() => {
                         <Link to="/Muestras" className="nav-link">
                             <li className={`bordes ${isActive('/Muestras') ? 'active' : ''}`}>
                                 <img className='iconos' src="/muestras.png" alt="" />
-                                {showMenu && <span className={`bordes ${isActive('/Muestras') ? 'active' : ''}`}>Muestras</span>}
+                                {showMenu && <span className='bordes'>Muestras</span>}
                             </li>
                         </Link>
                         <Link to="/Analisis" className="nav-link">
@@ -83,7 +82,7 @@ const Component=() => {
                                 {showMenu && <span className='bordes'>Análisis</span>}
                             </li>
                         </Link>
-                        <Link className="nav-link logout-btn" onClick={handleAlert}>
+                        <Link className="nav-link" onClick={handleAlert}>
                             <li className={`bordes ${isActive('/login') ? 'active' : ''}`}>
                                 <img className='iconos' src="/salida.png" alt="Salir" />
                                 {showMenu && <span className='bordes'>Salir</span>}
@@ -96,6 +95,15 @@ const Component=() => {
                         <Dashboard />
                     ) : (<Outlet />)}
                 </section>
+                    <div className='perfil'>
+                        <p>perfil</p>
+                        <div className='inicial-circulo'>
+                            <img
+                            src={img.image}
+                            alt={img.name}
+                            />
+                        </div>
+                    </div>
             </div>
         </section>
     )

@@ -15,7 +15,7 @@ const ListaPedidos = () => {
         // puedes agregar más...
         // puedes agregar más...
         ];
-
+        
     function dividirEnFilas(data, tam) {
         const filas = [];
         for (let i = 0; i < data.length; i += tam) {
@@ -34,8 +34,8 @@ const ListaPedidos = () => {
         buttonsStyling: false
         });
             swalWithBootstrapButtons.fire({
-            title: "Estas Seguro de borrarlo?",
-            text: "No podras Revertirlo una vez lo borres!",
+            title: "¿Estas deguro de borrarlo?",
+            text: "!No podras Revertirlo una vez lo borres¡",
             icon: "warning",
             showCancelButton: true,
             confirmButtonText: "Si, borralo!",
@@ -44,19 +44,20 @@ const ListaPedidos = () => {
             }).then((result) => {
         if (result.isConfirmed) {
             swalWithBootstrapButtons.fire({
-            title: "Borrado Exitosamente!",
+            title: "!Borrado Exitosamente¡",
             text: "Tu pedido ha sido borrado correctamente",
-            icon: "success"
+            icon: "success",
+            timer : 1300,
+            showConfirmButton: false
             });
-        } else if (
-            /* Read more about handling dismissals below */
-            result.dismiss === Swal.DismissReason.cancel
-        ) {
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
             swalWithBootstrapButtons.fire({
-            title: "Cancelado",
-            text: "Tu Pedido se ah mantenido ( >v°)",
-            icon: "error"
-            });
+                    title: "!Cancelado!",
+                    text: "Regresando a la pagina",
+                    icon: "success",
+                    timer : 1000,
+                    showConfirmButton: false
+                });
         }
         });
 
@@ -88,6 +89,7 @@ const ListaPedidos = () => {
                 </div>
             ))}
         </div>
+
     );
 };
 

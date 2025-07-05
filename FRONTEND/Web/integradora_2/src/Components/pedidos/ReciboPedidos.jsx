@@ -15,13 +15,14 @@ const ReciboPedidos = () => {
     return (
         <div>
             <h1>Recibos Pedidos </h1>
-            <div className='buscador'>
-                <Link to="/AgregarMuestras">
-                <button className='btn-agregar'>+Agregar</button>
+                <Link to={"/Pedidos"}>
+                    <button className='btn'>regresar</button>
                 </Link>
+            <div className='buscador'>
                 <SearchBar />
             </div>
-            <div className='margen'>
+            <div className='analisis'>
+                <div className='margen'>
                 <div className='scale-up-ver-center'>
                     <div className='caja_1'>
                         <div className='acomodar'>
@@ -41,9 +42,11 @@ const ReciboPedidos = () => {
                             ))}
                         <hr />
                     </div>
+                    
                 </div>
                 <div className='scale-up-ver-center'>
                     <DetallesPedidos/>
+                </div>
                 </div>
             </div>
         </div>

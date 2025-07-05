@@ -3,6 +3,7 @@ import React from 'react'
 import { MuestrasHechas, SampleChart } from '../Components';
 import { useEffect, useState } from 'react'
 import axios from 'axios'
+import Swal from 'sweetalert2';
 
 const Dashboard=()=> {
     
@@ -25,46 +26,77 @@ const Dashboard=()=> {
         return { estado: 'Echada a perder', clase: 'div-muestra-dañada' }
     }
 
+    const handleEasterEgg = () => {
+        Swal.fire({
+            title: "Easter egg",
+            width: 600,
+            padding: "3em",
+            color: "#716add",
+            background: "#fff url(/images/trees.png)",
+            backdrop: `
+                rgba(0,0,123,0.4)
+                url("https://sweetalert2.github.io/images/nyan-cat.gif")
+                left top
+                no-repeat
+            `
+    });
+    }
     if (!ldrData) {
         return (
         <div>
             <p className='titulo'>Dashboard </p>
-        <div className='margen'>
+            <div className='contenedor_pedidos'>
+                <div className='scale-in-hor-center'>
+                    
+                    <div className='div-graficas'>
+                        <p>Temperatura del Laboratorio</p>
+                        <p>25% c</p>
+                        <div className='div-grafica'>
+                            
+                                <div class="cargando">
+                                    <div class="pelotas"></div>
+                                    <div class="pelotas"></div>
+                                    <div class="pelotas"></div>
+                                    <span class="texto-cargando">Cargando...</span>
+                                </div>
+                        </div>
+                    </div>
+                    <div className='div-graficas'>
+                        <p>Humedad del Laboratorio</p>
+                        <p>25% c</p>
+                        <div className='div-grafica'>
+                            <div class="cargando">
+                                <div class="pelotas"></div>
+                                <div class="pelotas"></div>
+                                <div class="pelotas"></div>
+                                <span class="texto-cargando">Cargando...</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div className='scale-up-center'>
+                    <div onClick={handleEasterEgg}>
 
-            <div>
-                <p>Cargando datos del sensor...</p>
-                <div className='div-graficas'>
-                    <p>Temperatura del Laboratorio</p>
-                    <p>25% c</p>
-                    <div className='div-grafica'>
-                        <p>Cargando datos del sensor...</p>
+                        <div className='div-muestra'>
+                            <p className='centrar'>Pedidos Pendientes</p>
+                            
+                        </div>
                     </div>
-                </div>
-                <div className='div-graficas'>
-                    <p>Humedad del Laboratorio</p>
-                    <p>25% c</p>
-                    <div className='div-grafica'>
-                        <p>Cargando datos del sensor...</p>
+                    <div className='div-muestra-2'>
+                        <p className='centrar'>muestras en preocesamiento</p>
+                    </div>
+                    <div className='div-muestra-3'>
+                        <p className='centrar'>Contenedor esp32c3_001</p>
+                        <br /><br />
+                        <div class="cargando">
+                            <div class="pelotas"></div>
+                            <div class="pelotas"></div>
+                            <div class="pelotas"></div>
+                            <span class="texto-cargando">Cargando...</span>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div>
-                <div className='div-muestra'>
-                    <p className='centrar'>Pedidos Pendientes</p>
-                    <p className='texto-dash'><p>Cargando datos del sensor...</p></p>
-                </div>
-                <div className='div-muestra-2'>
-                    <p className='centrar'>muestras en preocesamiento</p>
-                    <p className='texto-dash'><p>Cargando datos del sensor...</p></p>
-                </div>
-                <div className='div-muestra-3'>
-                    <p className='centrar'>Contenedor esp32c3_001</p>
-                    <p className='centrar'>Cargando datos del sensor...</p>
-                    <p className='texto-dash'>LDR:Cargando datos del sensor...</p>
-                    <p className='texto-dash'>LDR:Cargando datos del sensor...</p>
-                </div>
-            </div>
-        </div>
     </div>
         
     )

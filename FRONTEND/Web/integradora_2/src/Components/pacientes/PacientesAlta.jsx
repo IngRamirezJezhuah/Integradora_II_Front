@@ -33,15 +33,17 @@ const PacientesAlta = () => {
                 swalWithBootstrapButtons.fire({
                     title: "Borrado Exitosamente!",
                     text: "Tu paciente ha sido borrado correctamente",
-                    icon: "success"
+                    icon: "success",
+                    timer : 1300,
+                    showConfirmButton: false
                 });
-            } else if (
-                result.dismiss === Swal.DismissReason.cancel
-            ) {
+            } else if(result.dismiss === Swal.DismissReason.cancel) {
                 swalWithBootstrapButtons.fire({
-                    title: "Cancelado",
-                    text: "Tu Paciente se ah mantenido ( >v°)",
-                    icon: "error"
+                    title: "!Cancelado!",
+                    text: "Regresando a la pagina",
+                    icon: "success",
+                    timer : 1000,
+                    showConfirmButton: false
                 });
             }
         })

@@ -3,7 +3,6 @@ import { useState } from 'react'
 import { SearchBar } from '../Components';
 import { OpcionesPedidos } from '../Components';
 import { ModalPedidos } from '../Components';
-import { ListaPedidos } from '../Components';
 //import Component from './Component'
 //import { Outlet } from 'react-router-dom'
 
@@ -19,14 +18,11 @@ const Pedidos =() => {
                 {modalAbierto && <ModalPedidos onClose={() => setModalAbierto(false)} />}
                 <SearchBar />
             </div>
-            <div className='opciones'>
-                    <OpcionesPedidos/>
-            </div>
-                <div className='margen'>
-                    <div className='scale-up-ver-center'>
-                        <ListaPedidos/>
-                    </div>
+            <div className='contenedor_pedidos'>
+                <div className='opciones'>
+                        <OpcionesPedidos/>
                 </div>
+            </div>
         </div>
     )
 }

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import Swal from 'sweetalert2';
 
 const ModalPaciente = ({ onClose }) => {
     const [formData, setFormData] = useState({
@@ -8,6 +8,7 @@ const ModalPaciente = ({ onClose }) => {
         apellidoMaterno: '',
         fechaNacimiento: '',
         correo: '',
+        rol:''
     });
 
     const [error, setError] = useState('');
@@ -19,7 +20,7 @@ const ModalPaciente = ({ onClose }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (!formData.nombre || !formData.apellidoPaterno || !formData.apellidoMaterno || !formData.fechaNacimiento || !formData.correo) {
+        if (!formData.nombre || !formData.apellidoPaterno || !formData.apellidoMaterno || !formData.fechaNacimiento || !formData.correo || !formData.rol) {
         setError('Por favor, completa todos los campos requeridos');
         return;
         }
@@ -32,11 +33,7 @@ const ModalPaciente = ({ onClose }) => {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
             correo: formData.correo,
-            rol: {
-                Admin:'',
-                Cliente:'',
-                Secretaria:''
-            },//['admin','Cliente','Secretaria','Empleado']
+            rol: formData.rol,
             nombre: formData.nombre,
             apellidoPaterno: formData.apellidoPaterno,
             apellidoMaterno: formData.apellidoMaterno,
@@ -49,6 +46,13 @@ const ModalPaciente = ({ onClose }) => {
         if (response.ok) {
             alert("Paciente registrado exitosamente.");
             onClose(); // Cierra el modal
+            await Swal.fire({
+                    title: "¡ Envidao Correctamente !",
+                    icon: "success",
+                    timer : 1500,
+                    showConfirmButton: false
+                    });
+                    onClose();
         } else {
             setError(result.message || "Hubo un error al registrar al paciente.");
         }
@@ -61,41 +65,43 @@ const ModalPaciente = ({ onClose }) => {
 
     return (
         <div className="modal-overlay">
-        <div className="modal-content">
-            <h2>Registrar nuevo paciente</h2>
-            <button className="close-btn" onClick={onClose}>X</button>
+            <div className='scale-in-hor-center'>
+                <div className="modal-content">
+                    <h2>Registrar nuevo paciente</h2>
+                    <button className="close-btn" onClick={onClose}>X</button>
+                    <form onSubmit={handleSubmit}>
+                    {error && <p className='error-msg'>{error}</p>}
+                    
+                    <label htmlFor="nombre">Nombre</label>
+                    <input type="text" name="nombre" placeholder="Nombre" value={formData.nombre} onChange={handleChange} />
+                    
+                    <label htmlFor="apellidoPaerno">ApellidoPaterno</label>
+                    <input type="text" name="apellidoPaterno" placeholder="Apellido Paterno" value={formData.apellidoPaterno} onChange={handleChange} />
+                    
+                    <label htmlFor="apellidoMaterno">Apellido Materno</label>
+                    <input type="text" name="apellidoMaterno" placeholder="Apellido Materno" value={formData.apellidoMaterno} onChange={handleChange} />
 
-            <form onSubmit={handleSubmit}>
-            {error && <p className="error">{error}</p>}
-            
-            <label htmlFor="nombre">Nombre</label>
-            <input type="text" name="nombre" placeholder="Nombre" value={formData.nombre} onChange={handleChange} />
-            
-            <label htmlFor="apellidoPaerno">ApellidoPaterno</label>
-            <input type="text" name="apellidoPaterno" placeholder="Apellido Paterno" value={formData.apellidoPaterno} onChange={handleChange} />
-            
-            <label htmlFor="apellidoMaterno">Apellido Materno</label>
-            <input type="text" name="apellidoMaterno" placeholder="Apellido Materno" value={formData.apellidoMaterno} onChange={handleChange} />
+                    <label>
+                        Rol:{''}
+                        <select name="rol" value={formData.rol} onChange={handleChange}>
+                            <option value="">Selecciona un rol</option>
+                            <option value="Admin">Admin</option>
+                            <option value="Cliente">Cliente</option>
+                            <option value="Secretaria">Secretaria</option>
+                            <option value="Empleado">Empleado</option>
+                        </select>
+                    </label>
+                    
+                    <label htmlFor="fechaNacimiento">Fecha de Nacimiento</label>
+                    <input type="date" name="fechaNacimiento" value={formData.fechaNacimiento} onChange={handleChange} />
+                    
+                    <label htmlFor="Correo">Correo</label>
+                    <input type="email" name="correo" placeholder="Correo" value={formData.correo} onChange={handleChange} />
 
-            <label>
-                Rol:{''}
-                <select>
-                <option id='Admin' value="Admin">Admin</option>
-                <option id='Cliente' value="Cliente">Cliente</option>
-                <option id='Secretaria' value="Secretaria">Secretaria</option>
-                <option id='Empleado' value="Empleado">Empleado</option>
-                </select>
-            </label>
-            
-            <label htmlFor="fechaNacimiento">Fecha de Nacimiento</label>
-            <input type="date" name="fechaNacimiento" value={formData.fechaNacimiento} onChange={handleChange} />
-            
-            <label htmlFor="Correo">Correo</label>
-            <input type="email" name="correo" placeholder="Correo" value={formData.correo} onChange={handleChange} />
-
-            <button type="submit" className="btn submit">Registrar</button>
-            </form>
-        </div>
+                    <button type="submit" className="btn">Registrar</button>
+                    </form>
+                </div>
+            </div>
         </div>
     );
 };

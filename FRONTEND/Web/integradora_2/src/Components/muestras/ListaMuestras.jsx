@@ -30,8 +30,8 @@ const ListaMuestras = () => {
             buttonStyling:false
         });
         swalWithBootstrapButtons.fire({
-            title: "Estas Seguro de borrarlo?",
-            text: "No podras Revertirlo una vez lo borres!",
+            title: "¿Estas seguro de borrarlo?",
+            text: "!!No podras revertirlo una vez lo borres!!",
             icon: "warning",
             showCancelButton: true,
             confirmButtonText: "Si, borralo!",
@@ -40,17 +40,19 @@ const ListaMuestras = () => {
         }).then((result) => {
             if (result.isConfirmed) {
                 swalWithBootstrapButtons.fire({
-                    title: "Borrado Exitosamente!",
+                    title: "!Borrado Exitosamente¡",
                     text: "Tu muestra ha sido borrada correctamente",
-                    icon: "success"
+                    icon: "success",
+                    timer : 1300,
+                    showConfirmButton: false
                 });
-            } else if (
-                result.dismiss === Swal.DismissReason.cancel
-            ) {
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
                 swalWithBootstrapButtons.fire({
-                    title: "Cancelado",
-                    text: "Tu Pedido se ah mantenido ( >v°)",
-                    icon: "error"
+                    title: "!Cancelado¡",
+                    text: "Regresando...",
+                    icon: "success",
+                    timer : 1000,
+                    showConfirmButton: false
                 });
             }
         })

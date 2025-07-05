@@ -7,7 +7,7 @@ export {default as  SampleChart } from './graficas/grafica-iot'
 export {default as  MuestrasHechas } from './graficas/muestras-dia'
 //_____________Paciente_____________
 export {default as  RegistrarPaceinte } from './pacientes/registrarPaciente'
-export {default as  NuevoPaciente } from './pacientes/NuevoPaciente'
+
 export {default as  ModalPaciente } from './pacientes/ModalPaciente'
 export {default as  OpcionesPaciente } from './pacientes/OpcionesPaciente'
 
@@ -20,6 +20,7 @@ export {default as SampleModal} from './elementos/sampleModal'
 //_____________Analisis_____________
 export {default as NuevoAnalisisForm } from './analisis/NuevoAnalisis'
 export {default as EditarAnalisisForm } from './analisis/EditarAnalisis'
+export {default as ModalAnalisis } from './analisis/ModalAnalisis'
 //_____________Muestras_____________
 export {default as AgregarMuestra } from './muestras/AgregarMuestra'
 export {default as ListaMuestras } from './muestras/ListaMuestras'
@@ -30,3 +31,4 @@ export {default as ReciboPedidos } from './pedidos/ReciboPedidos'
 export {default as OpcionesPedidos } from './pedidos/OpcionesPedidos'
 export {default as ModalPedidos } from './pedidos/ModalPedidos'
 export {default as ListaPedidos } from './pedidos/ListaPedidos'
+export {default as EnProcesoPedidos } from './pedidos/EnProcesoPedidos'
