@@ -21,7 +21,7 @@ const MenuPerfil = ({ token }) => {
   const handleEditProfile = () => {
     // Para navegación futura
     console.log('Navegar a Editar Perfil');
-    // navigation.navigate('EditProfile', { token });
+    navigation.navigate('EditProfile', { token });
     setIsOpen(false);
   };
 

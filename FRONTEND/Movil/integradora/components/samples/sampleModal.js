@@ -5,7 +5,7 @@ import Modal from 'react-native-modal';
 import { Ionicons } from '@expo/vector-icons';
 import PropTypes from 'prop-types';
 import QuimSangResultados from './QuimSangResultados';
-import BiomHemResultados from './bioHemResultados';
+import BiomHemResultados from './BiomHemResultados';
 
 const SampleModal = ({ visible, sample, onClose }) => {
   const [showQuimModal, setShowQuimModal] = useState(false);
@@ -39,14 +39,15 @@ const SampleModal = ({ visible, sample, onClose }) => {
     
     if (tipo.includes('quimicasanguinea') || tipo.includes('quimica')) {
       setShowQuimModal(true);
-      console.log('Abriendo modal de Química Sanguínea para:', sample._id);
+      // console.log('Abriendo modal de Química Sanguínea para:', sample._id);
     } else if (tipo.includes('biometriahematica') || tipo.includes('biometria')) {
       setShowBiomModal(true);
-      console.log('Abriendo modal de Biometría Hemática para:', sample._id);
+      // console.log('Abriendo modal de Biometría Hemática para:', sample._id);
     } else {
       console.warn('Tipo de muestra no reconocido:', sample.tipoMuestra);
     }
   };
+  //acomodar imagen biometiahematica y quimicasanguinea
 
   const handleCloseQuimModal = () => {
     setShowQuimModal(false);

@@ -4,3 +4,8 @@
 export { default as Pedidos } from './Pedidos'
 export { default as muestras } from './Muestras'
 export { default as Escaner } from './Escaner'
+export { default as Dashboard } from './Dashboard'
+export { default as PatientsHome } from './PatientsHome'
+export { default as EditProfile } from './EditProfile'
+export { default as Recovery } from './Recovery'
+export { default as Login } from './Login'

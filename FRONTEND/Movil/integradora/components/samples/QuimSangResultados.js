@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, ScrollView, TextInput } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, ScrollView, TextInput,Image } from 'react-native';
 import Modal from 'react-native-modal';
 import { Ionicons } from '@expo/vector-icons';
 import PropTypes from 'prop-types';
@@ -42,7 +42,12 @@ const QuimSangResultados = ({ visible, sample, onClose }) => {
 
         <ScrollView>
           <View style={styles.iconContainer}>
-            <Ionicons name="flask" size={48} color="#DA0C15" />
+            <Image
+              // eslint-disable-next-line
+              source={require('../../assets/quimicasanguinea.png')}
+              style={styles.image}
+              resizeMode="cover"
+            />
             <Text style={styles.title}>Química Sanguínea</Text>
             <Text style={styles.subtitle}>ID: {sample._id ? sample._id.slice(-8) : 'N/A'}</Text>
             <Text style={styles.subtitle}>Paciente: {sample.nombrePaciente}</Text>
@@ -137,6 +142,12 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
     maxHeight: '90%',
+  },
+  image: {
+    alignSelf: 'center',
+    width: 80,
+    height: 80,
+    marginVertical: 10,
   },
   backArrow: {
     marginBottom: 10,

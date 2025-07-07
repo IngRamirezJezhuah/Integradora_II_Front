@@ -236,6 +236,12 @@ const styles = StyleSheet.create({
     color: '#666',
     marginTop: 5,
   },
+  image: {
+    alignSelf: 'center',
+    width: 50,
+    height: 50,
+    marginVertical: 10,
+  },
   formContainer: {
     paddingHorizontal: 10,
   },

@@ -9,7 +9,8 @@ const InputGroup = ({
   placeholder, 
   multiline = false, 
   numberOfLines = 1,
-  keyboardType = "numeric" 
+  keyboardType = "numeric",
+  secureTextEntry = false
 }) => {
   return (
     <View style={styles.inputGroup}>
@@ -23,6 +24,7 @@ const InputGroup = ({
         multiline={multiline}
         numberOfLines={numberOfLines}
         textAlignVertical={multiline ? 'top' : 'center'}
+        secureTextEntry={secureTextEntry}
       />
     </View>
   );
@@ -61,6 +63,7 @@ InputGroup.propTypes = {
   multiline: PropTypes.bool,
   numberOfLines: PropTypes.number,
   keyboardType: PropTypes.string,
+  secureTextEntry: PropTypes.bool,
 };
 
 export default InputGroup;

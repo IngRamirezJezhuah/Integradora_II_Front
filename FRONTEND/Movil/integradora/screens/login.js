@@ -40,6 +40,7 @@ const Login = () => {
   return (
     <View style={styles.container}>
         <Image
+            // eslint-disable-next-line
             source={require('../assets/logo-iic.png')}
             style={{ width: 120, height: 120, marginBottom: 30 }}
             resizeMode="contain"
@@ -70,6 +71,8 @@ const Login = () => {
             
         </TouchableOpacity>
         <Image
+
+            // eslint-disable-next-line
             source={require('../assets/logo-ujed.png')}
             style={{ width: 120, height: 120, marginTop: 30}}
             resizeMode="contain"
