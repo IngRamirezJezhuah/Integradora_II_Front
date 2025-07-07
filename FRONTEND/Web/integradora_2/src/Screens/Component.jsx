@@ -105,6 +105,7 @@ const Component=() => {
                 <section className={`plantilla ${showMenu ? 'content-expanded' : 'content-collapsed'}`}>
                     <Outlet />
                 </section>
+                <Link to={'/Perfil'}>
                     <div className='perfil'>
                         <p>perfil</p>
                         <div className='inicial-circulo'>
@@ -114,6 +115,7 @@ const Component=() => {
                             />
                         </div>
                     </div>
+                </Link>
             </div>
         </section>
     )
