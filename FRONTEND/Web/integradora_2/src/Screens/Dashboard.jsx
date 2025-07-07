@@ -9,7 +9,46 @@ const Dashboard=()=> {
     
 
     const [ldrData, setLdrData] = useState(null)
+    /*const apiUrl = ProcessingInstruction.env.REACT_APP_API_URL;
+    const handleEnviar = async (e) => {
+        e.preventDefault();
+        try{
+            console.log('API URL', apiUrl);
+            const response = await fetch(`${apiUrl}/ldr/esp32c3_001`,{
+                method: 'POST',
+                headers:{
+                    'Content-type': 'application/json',
+                },
+                body: JSON.stringify({ldrData}),
+            });
+            const text = await response.text();
+            console.log('Raw response:', text);
+
+            let data:
+            try{
+                data = JSON.parse(text);
+            } catch {
+                setError('respuesta inesperada del servidor:\n' + text);
+                return;
+            }
+
+            if (!response.ok){
+                throw new Error(data.message || 'Error en dash')
+            }
+
+            localStorage.setItem('token', data.token);
+
+            if (onSubmit){
+                onSubmit
+            }
+        }
+    };*/
+
     useEffect(() => {
+        /*console.log('API URL', apiUrl);
+        const response = await fetch(`${apiUrl}/`) {
+            
+        }*/
         axios
         .get('https://bb1f-189-197-191-34.ngrok-free.app/ldr/esp32c3_001')
         .then((res) => {

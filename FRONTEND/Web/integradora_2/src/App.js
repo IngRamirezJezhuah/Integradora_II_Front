@@ -49,8 +49,8 @@ function App() {
             <Route path='/SampleBox' element={<SampleBox/>}/>
             <Route path='/SampleModal' element={<SampleModal/>}/>
             
-            <Route path='/Perfil' element={<PerfilPaciente/>}/>
           </Route>
+            <Route path='/Perfil' element={<PerfilPaciente/>}/>
       </Routes>
     </Router>
   );

@@ -12,7 +12,8 @@ const LoginForm = ({ onSubmit }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      console.log('API URL:', `${apiUrl}/usuarios/login`);
+      //console.log('API URL:', `${apiUrl}/usuarios/login`);
+      console.log('API URL', apiUrl);
       const response = await fetch(`${apiUrl}/usuarios/login`, {
         method: 'POST',
         headers: {
@@ -20,29 +21,39 @@ const LoginForm = ({ onSubmit }) => {
         },
         body: JSON.stringify({ correo: username, contraseña: password }),
       });
-      const data = await response.json();
+      const text = await response.text();
+      console.log('Raw response:', text);
 
-      if (!response.ok) {
-        throw new Error(data.message || 'Error en el login');
-      }
-
-      localStorage.setItem('token', data.token);
-
-      if (onSubmit) {
-        onSubmit({ success: true, token: data.token });
-      }
-
-      await Swal.fire({
-        title: 'Login exitoso',
-        icon: 'success',
-        timer: 1200,
-        showConfirmButton: false,
-      });
-
-      navigate('/Dashboard');
-    } catch (err) {
-      setError(err.message);
+    let data;
+    try {
+      data = JSON.parse(text);
+    } catch {
+      setError('respuesta inesperada del servidor:\n' + text);
+      return;
     }
+
+    if (!response.ok) {
+      throw new Error(data.message || 'Error en el login');
+    }
+
+    localStorage.setItem('token', data.token);
+
+    if (onSubmit) {
+      onSubmit({ success: true, token: data.token });
+    }
+
+    await Swal.fire({
+      title: 'Login exitoso',
+      icon: 'success',
+      timer: 1200,
+      showConfirmButton: false,
+    });
+
+    navigate('/Dashboard');
+  } catch (err) {
+    setError(err.message);
+  }
+      
   };
 
   return (
