@@ -13,7 +13,7 @@ import Dashboard from '../screens/Dashboard';
 import Muestras from '../screens/Muestras';
 import Pedidos from '../screens/Pedidos';
 // import  Escaner  from '../screens/Escaner';
-import PatientsHome from '../screens/PatientsHome';
+import PatientStack from './PatientStack';
 import AuthStack from './AuthStack';
 
 
@@ -83,7 +83,7 @@ const TabNavigator = () => {
                     <Fontisto name="test-tube" size={26} color={'#DA0C15'}/>
                 )
             }}/>
-            <Tab.Screen name="Escaner" component={PatientsHome} 
+            <Tab.Screen name="Escaner" component={PatientStack} 
             options={{
                 tabBarIcon: () =>(
                     <MaterialIcons name="qr-code-scanner" size={30} color={'#DA0C15'} />

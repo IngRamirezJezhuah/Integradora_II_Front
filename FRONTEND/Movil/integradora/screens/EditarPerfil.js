@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, ScrollView, Alert } from 'react-native';
 import PropTypes from 'prop-types';
-import InputGroup from '../components/';
+import { InputGroup } from '../components/';
 
 const EditarPerfil = ({ onSave, onClose }) => {
   const [formData, setFormData] = useState({

@@ -1,7 +1,6 @@
 import { View, StyleSheet} from "react-native";
 import React, { useState, useEffect } from 'react';
-import SamplesTable from "../components/samples/pacienteMuestra";
-import InfoPatient from "../components/elements/infoPaciente";
+import {TablaMuestrasPaciente, InfoPaciente} from "../components";
 // import axios from 'axios';
 
 const muestrasEjemplo = [
@@ -27,8 +26,12 @@ const PacienteInicio = () => {
   };
     return (
         <View style={styles.container}>
-            <InfoPatient/>
-            <SamplesTable data={muestras} onView={handleView} onDelete={handleDelete} />
+            <View style={styles.header}>
+                <View style={styles.headerContent}>
+                     <InfoPaciente/>
+                </View>
+            </View>
+            <TablaMuestrasPaciente data={muestras} onView={handleView} onDelete={handleDelete} />
         </View>
     );
     }
@@ -37,6 +40,16 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#f5f5f5',
         paddingTop: 50,
+    },
+    header: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'flex-start',
+        paddingHorizontal: 20,
+        paddingBottom: 10,
+    },
+    headerContent: {
+        flex: 1,
     },
 });
 export default PacienteInicio;

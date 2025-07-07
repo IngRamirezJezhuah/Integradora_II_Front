@@ -1,15 +1,15 @@
-// src/navigation/AuthStack.js
+// src/navigation/PatientStack.js
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import {EditProfile, PatientsHome} from '../screens';
+import { EditarPerfil, PacienteInicio } from '../screens';
 
 const Stack = createNativeStackNavigator();
 
-const AuthStack = () => (
-    <Stack.Navigator >
-        <Stack.Screen name="Login" component={EditProfile} />
-        <Stack.Screen name="Estudios" component={PatientsHome} />
+const PatientStack = () => (
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="Paciente" component={PacienteInicio} />
+        <Stack.Screen name="EditarPerfil" component={EditarPerfil} />
     </Stack.Navigator>
 );
 
-export default AuthStack;
+export default PatientStack;
