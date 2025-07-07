@@ -1,21 +1,22 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const LoginForm = ({ onSubmit }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    onSubmit({ username, password });
-    
-  try {
-      const response = await fetch('http://localhost:5000/api/login', { // Ajusta la URL según tu backend
+    try {
+      const response = await fetch('http://vps-5127231-x.dattaweb.com:3500/usuarios/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ correo: username, contraseña: password }), // Ajusta a los nombres esperados por el backend
+        body: JSON.stringify({ correo: username, contraseña: password }),
       });
 
       const data = await response.json();
@@ -24,44 +25,51 @@ const LoginForm = ({ onSubmit }) => {
         throw new Error(data.message || 'Error en el login');
       }
 
-      // Almacenar el token (ejemplo con localStorage)
       localStorage.setItem('token', data.token);
 
-      // Llamar a onSubmit si está definido (para notificar al padre)
       if (onSubmit) {
         onSubmit({ success: true, token: data.token });
       }
+
+      await Swal.fire({
+        title: 'Login exitoso',
+        icon: 'success',
+        timer: 1200,
+        showConfirmButton: false,
+      });
+
+      navigate('/Dashboard');
     } catch (err) {
       setError(err.message);
     }
   };
 
   return (
-  <div className="card">
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label>Usuario</label>
-        <input
-          type="text"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          placeholder="Ingrese su correo"
+    <div className="card">
+      <form onSubmit={handleSubmit}>
+        <div>
+          <label>Usuario</label>
+          <input
+            type="text"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            placeholder="Ingrese su correo"
           />
-      </div>
-      <div>
-        <label>Contraseña</label>
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder="Ingrese su contraseña"
+        </div>
+        <div>
+          <label>Contraseña</label>
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Ingrese su contraseña"
           />
-      </div>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-      <button type="submit">Iniciar sesión</button>
-      <a href="/Recuperacion">Olvide la contraseña</a>
-    </form>
-  </div>
+        </div>
+        {error && <p style={{ color: 'red' }}>{error}</p>}
+        <button type="submit">Iniciar sesión</button>
+        <a href="/Recuperacion">Olvide la contraseña</a>
+      </form>
+    </div>
   );
 };
 

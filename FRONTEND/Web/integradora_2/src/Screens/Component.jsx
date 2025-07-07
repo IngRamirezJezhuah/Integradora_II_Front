@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { Outlet, Link, useLocation, useNavigate } from 'react-router-dom'
-import Dashboard from './Dashboard';
 import Swal from 'sweetalert2';
 
 const Component=() => {
@@ -48,6 +47,7 @@ const Component=() => {
     
     return (
         <section className='contenedor'>
+            {location.pathname === '/'}
             <div className='tabNavigator'>
                 <div className={`sidebar ${showMenu ? 'sidebar-open' : 'sidebar-closed'}`}>
                     <img className='menu' src="/logo-iic.png" alt='icon-menu' onClick={HandleMenuDinamico}/>
@@ -90,10 +90,9 @@ const Component=() => {
                         </Link>
                     </nav>
                 </div>
+                    
                 <section className={`plantilla ${showMenu ? 'content-expanded' : 'content-collapsed'}`}>
-                    {location.pathname === '/' ? (
-                        <Dashboard />
-                    ) : (<Outlet />)}
+                    <Outlet />
                 </section>
                     <div className='perfil'>
                         <p>perfil</p>
