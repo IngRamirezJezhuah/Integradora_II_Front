@@ -7,6 +7,7 @@ const Component=() => {
     const navigate = useNavigate(); 
     const [showMenu,setShowMenu] = useState(true);
     const isActive = (path) => location.pathname === path;
+    const apiUrl = process.env.REACT_APP_API_URL;
 
     function handleAlert(e) {
             const swalWithBootstrapButtons = Swal.mixin({
@@ -31,7 +32,7 @@ const Component=() => {
                         text: "Redirigiendo a la pagina de inicio de sesion...",
                         icon: "success"
                     }).then(() => {
-                        navigate('/login'); 
+                        navigate('/'); 
                     });
                 } else if (result.dismiss === Swal.DismissReason.cancel) {}
             })
@@ -44,6 +45,16 @@ const Component=() => {
         image: '/dash.png',
     });
     
+    const handleLogout = async () => {
+        const token = localStorage.getItem('token');
+        await fetch(`${apiUrl}/usuarios/logout`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`,
+                },
+            });
+    };
     
     return (
         <section className='contenedor'>
@@ -83,7 +94,7 @@ const Component=() => {
                             </li>
                         </Link>
                         <Link className="nav-link" onClick={handleAlert}>
-                            <li className={`bordes ${isActive('/login') ? 'active' : ''}`}>
+                            <li className='bordes' onClick={handleLogout}>
                                 <img className='iconos' src="/salida.png" alt="Salir" />
                                 {showMenu && <span className='bordes'>Salir</span>}
                             </li>
@@ -109,46 +120,3 @@ const Component=() => {
 }
 
 export default Component;
-/*
-<section className='contenedor' >
-            <div className='tabNavigator'>
-                    <img className='menu' src="/logo-iic.png" alt='icon-menu' onClick={HandleMenuDinamico}/>
-                    <nav className='nav'>
-                        
-                        <Link to="/Dashboard">
-                            <li className='textbarra'>Dashboard</li>
-                            <li className={`bordes ${isActive('/Dashboard') ? 'active' : ''}`}><img src="/dash.png" alt="" /></li>
-                        </Link>
-                        <Link to="/Pacientes">
-                            <li className='textbarra'>Pacientes</li>
-                            <li className={`bordes ${isActive('/Pacientes') ? 'active' : ''}`}><img src="/usuario.png" alt="" /></li>
-                        </Link>
-                        <Link to="/Pedidos">
-                            <li className='textbarra'>Pedido</li>
-                            <li className={`bordes ${isActive('/Pedidos') ? 'active' : ''}`}><img src="/pedido.png" alt="" /></li>
-                        </Link>
-                        <Link to="/Muestras">
-                            <li className='textbarra'>Muestras</li>
-                            <li className={`bordes ${isActive('/Muestras') ? 'active' : ''}`}><img src="/muestras.png" alt="" /></li>
-                        </Link>
-                        <Link to="/Analisis">
-                            <li className='textbarra'>analisis</li>
-                            <li className={`bordes ${isActive('/Analisis') ? 'active' : ''}`}><img src="/analisis.png" alt="" /></li>
-                        </Link>
-                        <Link to='/login'>
-                            <div className='cerrar-sesion'>
-                                <li className="bordes"><img src="/salida.png" alt="" /></li>
-                            </div>
-                        </Link>
-                    </nav>
-                    <div className={`sidebar ${showMenu ? 'sidebar-open' : 'sidebar-closed'}`}>
-                        
-                </div>
-                    <section className='plantilla'>
-                        {location.pathname === '/' ? (
-                            <Dashboard />
-                        ) : (<Outlet/>)}
-                    </section>  
-            </div>
-        </section>                  
-*/

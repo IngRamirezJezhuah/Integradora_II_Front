@@ -7,18 +7,19 @@ const LoginForm = ({ onSubmit }) => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
   const navigate = useNavigate();
-
+  const apiUrl = process.env.REACT_APP_API_URL;
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://vps-5127231-x.dattaweb.com:3500/usuarios/login', {
+      console.log('API URL:', `${apiUrl}/usuarios/login`);
+      const response = await fetch(`${apiUrl}/usuarios/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ correo: username, contraseña: password }),
       });
-
       const data = await response.json();
 
       if (!response.ok) {
