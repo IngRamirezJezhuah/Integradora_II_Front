@@ -3,12 +3,12 @@ import Swal from 'sweetalert2';
 
 const ModalPaciente = ({ onClose }) => {
     const [formData, setFormData] = useState({
-        nombre: '',
-        apellidoPaterno: '',
-        apellidoMaterno: '',
-        fechaNacimiento: '',
         correo: '',
-        rol:''
+        rol: '',
+        nombre:'',
+        apellidoPaterno:'',
+        apellidoMaterno:'',
+        fechaNacimiento:'',
     });
 
     const [error, setError] = useState('');
@@ -20,7 +20,14 @@ const ModalPaciente = ({ onClose }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (!formData.nombre || !formData.apellidoPaterno || !formData.apellidoMaterno || !formData.fechaNacimiento || !formData.correo || !formData.rol) {
+        if (
+            !formData.correo 
+            || !formData.rol
+            ||!formData.nombre 
+            || !formData.apellidoPaterno 
+            || !formData.apellidoMaterno 
+            || !formData.fechaNacimiento 
+        ) {
         setError('Por favor, completa todos los campos requeridos');
         return;
         }
@@ -28,7 +35,7 @@ const ModalPaciente = ({ onClose }) => {
         setError('');
 
         try {
-        const response = await fetch("https://8d5e-189-197-191-34.ngrok-free.app/usuarios", {
+        const response = await fetch("http://vps-5127231-x.dattaweb.com:3500/usuarios", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({

@@ -38,6 +38,7 @@ const OpcionesPaciente = ({buttonLabels =["Paciente Alta", "Paciente Baja"]}) =>
                     
                     ) : (
                         <p className='texto'>Dar de baja a un paciente</p>
+                        
                     )}
                 </div>
         </div>
