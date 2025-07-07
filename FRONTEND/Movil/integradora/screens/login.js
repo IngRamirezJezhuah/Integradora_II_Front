@@ -15,7 +15,7 @@ const Login = ({ onLoginSuccess }) => {
     }
 
     try {
-      const response = await fetch('http://vps-5127231-x.dattaweb.com:3500/usuarios/login', {
+      const response = await fetch('.../usuarios/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -22,7 +22,7 @@ const muestras = [
 ]
 
 useEffect(() => {
-  axios.get('http://vps-5127231-x.dattaweb.com:3500 /muestras')
+  axios.get('.../muestras')
       .then(response => {
           setMuestras(response.data);
           console.log('Respuesta de la API:', response.data);
