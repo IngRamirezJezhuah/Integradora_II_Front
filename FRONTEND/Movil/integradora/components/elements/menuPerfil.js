@@ -1,12 +1,39 @@
 import React, { useState } from 'react';
-import { View, TouchableOpacity, Text, StyleSheet, Animated } from 'react-native';
+import { View, TouchableOpacity, Text, StyleSheet, Animated, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import PropTypes from 'prop-types';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 const MenuPerfil = ({ token }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [animation] = useState(new Animated.Value(0));
   const navigation = useNavigation();
+  const handleLogout = async () => {
+          Alert.alert(
+              'Cerrar Sesión',
+              '¿Estás seguro de que quieres cerrar sesión?',
+              [
+                  {
+                      text: 'Cancelar',
+                      style: 'cancel',
+                  },
+                  {
+                      text: 'Cerrar Sesión',
+                      onPress: async () => {
+                          try {
+                              await AsyncStorage.removeItem('userToken');
+                              await AsyncStorage.removeItem('userData');
+                              // La app se recargará automáticamente debido al estado de autenticación
+                          } catch (error) {
+                              console.error('Error during logout:', error);
+                              Alert.alert('Error', 'Hubo un problema al cerrar sesión');
+                          }
+                      },
+                  },
+              ]
+          );
+      };
 
   const toggleMenu = () => {
     const toValue = isOpen ? 0 : 1;
@@ -25,13 +52,6 @@ const MenuPerfil = ({ token }) => {
     setIsOpen(false);
   };
 
-  const handleLogout = () => {
-    // Logic to kill token
-    console.log('Cerrar sesión');
-    setIsOpen(false);
-    // Para navegación futura cuando tengas AuthStack configurado
-    // navigation.reset({ index: 0, routes: [{ name: 'Login' }] });
-  };
 
   const height = animation.interpolate({
     inputRange: [0, 1],

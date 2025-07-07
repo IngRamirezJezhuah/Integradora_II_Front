@@ -1,13 +1,18 @@
 import React from 'react'
-import { Text, View } from 'react-native';
+import { Text, View, } from 'react-native';
 import { DashboardStyles } from '../themes';
 import AnimatedContent from '../utils/AnimatedContent';
+import { MenuPerfil } from '../components';
 
 
 const Dashboard = () => {
-    return (
-        
+    return (        
         <View style={DashboardStyles.container}>
+            <View style={DashboardStyles.header}>
+                <Text style={DashboardStyles.headerTitle}>Dashboard</Text>
+                <MenuPerfil />
+            </View>
+        <View style={DashboardStyles.content}>
         <AnimatedContent>
             <View style={[DashboardStyles.ctemperatura, DashboardStyles.caja]}>
                 <Text>Temperatura del Laboratorio </Text>
@@ -34,6 +39,7 @@ const Dashboard = () => {
                 <Text style={DashboardStyles.TextoAlerta}>Precaucion</Text>
             </View>
         </AnimatedContent>
+        </View>
 
     </View>
     );

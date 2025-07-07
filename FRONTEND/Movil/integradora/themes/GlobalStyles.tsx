@@ -12,9 +12,33 @@ export const Styles = StyleSheet.create({
 export const DashboardStyles = StyleSheet.create({
     container:{
         flex: 1,
-        justifyContent:'center',
-        alignItems:'center',
         backgroundColor:'#fff',
+    },
+    header: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        paddingHorizontal: 20,
+        paddingTop: 40,
+        paddingBottom: 20,
+        backgroundColor: '#fff',
+        borderBottomWidth: 1,
+        borderBottomColor: '#E0E0E0',
+    },
+    headerTitle: {
+        fontSize: 24,
+        fontWeight: 'bold',
+        color: '#2C3E50',
+    },
+    logoutButton: {
+        padding: 8,
+        borderRadius: 8,
+        backgroundColor: '#F8F9FA',
+    },
+    content: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     caja:{
         width:270,

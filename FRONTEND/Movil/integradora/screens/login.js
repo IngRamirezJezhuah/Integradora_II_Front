@@ -1,10 +1,10 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { View, Text, TextInput, Alert, StyleSheet, TouchableOpacity } from 'react-native';
-import { AuthContext } from '../App';
 import { Image } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import PropTypes from 'prop-types';
 
-const Login = () => {
-  const { setIsAuthenticated } = useContext(AuthContext);
+const Login = ({ onLoginSuccess }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -15,7 +15,7 @@ const Login = () => {
     }
 
     try {
-      const response = await fetch('https://ecommerceproyectserviceebs-se-production.up.railway.app/api/v1/esb/user/login', {
+      const response = await fetch('http://vps-5127231-x.dattaweb.com:3500/usuarios/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -26,8 +26,16 @@ const Login = () => {
       const data = await response.json();
 
       if (response.ok && data.data) {
+        // Guardar el token en AsyncStorage
+        await AsyncStorage.setItem('userToken', data.token || 'authenticated');
+        await AsyncStorage.setItem('userData', JSON.stringify(data.data));
+        
         Alert.alert('Éxito', 'Inicio de sesión exitoso');
-        setIsAuthenticated(true);
+        
+        // Llamar a la función onLoginSuccess si está disponible
+        if (onLoginSuccess) {
+          onLoginSuccess();
+        }
       } else {
         Alert.alert('Error', data.message || 'Credenciales incorrectas');
       }
@@ -79,6 +87,10 @@ const Login = () => {
         />
     </View>
   );
+};
+
+Login.propTypes = {
+  onLoginSuccess: PropTypes.func,
 };
 
 export default Login;

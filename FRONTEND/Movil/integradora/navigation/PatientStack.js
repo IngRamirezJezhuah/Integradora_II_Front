@@ -7,7 +7,7 @@ const Stack = createNativeStackNavigator();
 
 const AuthStack = () => (
     <Stack.Navigator >
-        <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="Login" component={EditProfile} />
         <Stack.Screen name="Estudios" component={PatientsHome} />
     </Stack.Navigator>
 );

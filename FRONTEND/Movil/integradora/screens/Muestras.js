@@ -22,12 +22,12 @@ const muestras = [
 ]
 
 useEffect(() => {
-    axios.get('https://bb1f-189-197-191-34.ngrok-free.app/muestras')
-        .then(response => {
-            setMuestras(response.data);
-            console.log('Respuesta de la API:', response.data);
-        })
-        .catch(error => console.error('Error fetching muestras:', error));
+  axios.get('http://vps-5127231-x.dattaweb.com:3500 /muestras')
+      .then(response => {
+          setMuestras(response.data);
+          console.log('Respuesta de la API:', response.data);
+      })
+      .catch(error => console.error('Error fetching muestras:', error));
 }, []);
 
 const handleView = (item) => {
