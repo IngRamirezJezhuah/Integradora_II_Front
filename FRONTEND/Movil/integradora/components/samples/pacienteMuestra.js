@@ -3,7 +3,7 @@ import { FlatList, View, Text, StyleSheet, TouchableOpacity, Image } from 'react
 import { Ionicons } from '@expo/vector-icons';
 import PropTypes from 'prop-types';
 
-const SamplesTable = ({ data, onView, onDelete }) => {
+const TablaMuestrasPaciente = ({ data, onView, onDelete }) => {
   const handleViewSample = (sample) => {
     if (onView) {
       onView(sample);
@@ -150,7 +150,7 @@ const styles = StyleSheet.create({
   },
 });
 
-SamplesTable.propTypes = {
+TablaMuestrasPaciente.propTypes = {
   data: PropTypes.arrayOf(PropTypes.shape({
     _id: PropTypes.string,
     id: PropTypes.string,
@@ -161,4 +161,4 @@ SamplesTable.propTypes = {
   onDelete: PropTypes.func.isRequired,
 };
 
-export default SamplesTable;
+export default TablaMuestrasPaciente;

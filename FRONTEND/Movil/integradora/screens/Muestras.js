@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { SafeAreaView } from 'react-native';
 import SearchBar from '../components/elements/searchBar';
 import FilterBar from '../components/elements/filterBar';
-import SamplesTable from '../components/samples/samplesTable';
+import SamplesTable from '../components/samples/tablaMuestras';
 import { filterData } from '../utils/filterUtils';
 import axios from 'axios';
 import { useEffect } from 'react';

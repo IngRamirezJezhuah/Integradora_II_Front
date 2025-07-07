@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, ScrollView, Alert } from 'react-native';
 import PropTypes from 'prop-types';
-import InputGroup from '../components/elements/InputGroup';
+import InputGroup from '../components/';
 
-const EditProfile = ({ onSave, onClose }) => {
+const EditarPerfil = ({ onSave, onClose }) => {
   const [formData, setFormData] = useState({
     email: '',
     oldPassword: '',
@@ -165,9 +165,9 @@ const styles = StyleSheet.create({
 });
 
 // PropTypes para validación de props
-EditProfile.propTypes = {
+EditarPerfil.propTypes = {
   onSave: PropTypes.func,
   onClose: PropTypes.func,
 };
 
-export default EditProfile;
+export default EditarPerfil;

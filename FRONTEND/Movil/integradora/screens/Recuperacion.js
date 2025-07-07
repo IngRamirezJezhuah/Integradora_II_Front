@@ -3,7 +3,7 @@ import { View, Text, TextInput, Alert, StyleSheet, TouchableOpacity } from 'reac
 import { AuthContext } from '../App';
 import { Image } from 'react-native';
 
-const Recovery = () => {
+const Recuperacion = () => {
   const { setIsAuthenticated } = useContext(AuthContext);
   const [email, setEmail] = useState('');
 
@@ -39,6 +39,7 @@ const Recovery = () => {
   return (
     <View style={styles.container}>
         <Image
+            // eslint-disable-next-line
             source={require('../assets/logo-iic.png')}
             style={{ width: 120, height: 120, marginBottom: 30 }}
             resizeMode="contain"
@@ -61,6 +62,7 @@ const Recovery = () => {
             
         </TouchableOpacity>
         <Image
+            // eslint-disable-next-line
             source={require('../assets/logo-ujed.png')}
             style={{ width: 120, height: 120, marginTop: 30}}
             resizeMode="contain"
@@ -69,7 +71,7 @@ const Recovery = () => {
   );
 };
 
-export default Recovery;
+export default Recuperacion;
 
 const styles = StyleSheet.create({
   container: {

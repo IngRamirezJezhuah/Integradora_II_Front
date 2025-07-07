@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { SafeAreaView } from 'react-native';
-import SearchBar from '../components/elements/searchBar';
-import FilterBar from '../components/elements/filterBar';
-import OrdersTable from '../components/orders/ordersTable';
+import { SearchBar, FilterBar, TablaPedidos } from '../components';
 // import { filterData } from '../utils/filterUtils';
 
 
@@ -101,7 +99,7 @@ const handleDelete = (item) => {
       <SearchBar placeholder={"Buscar Pedidos"} searchText={searchText} onChangeSearch={setSearchText} />
       <FilterBar activeFilter={filter} setFilter={setFilter} filters={customFilters} 
         filterKey={filterKey}/>
-      <OrdersTable data={orders} onView={handleView} onDelete={handleDelete} />
+      <TablaPedidos data={orders} onView={handleView} onDelete={handleDelete} />
     </SafeAreaView>
   );
 };

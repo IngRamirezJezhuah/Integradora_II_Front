@@ -2,9 +2,9 @@ import React from 'react';
 import { FlatList, View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import PropTypes from 'prop-types';
-import OrderModal from './orderModal';
+import ModalPedido from './modalPedido';
 
-const OrdersTable = ({ data, onView, onDelete }) => {
+const TablaPedidos = ({ data, onView, onDelete }) => {
   const [selectedOrder, setSelectedOrder] = React.useState(null);
 
   const handleView = (item) => {
@@ -35,7 +35,7 @@ const OrdersTable = ({ data, onView, onDelete }) => {
         )}
       />
       {selectedOrder && (
-        <OrderModal
+        <ModalPedido
           visible={!!selectedOrder}
           order={selectedOrder}
           onClose={handleCloseModal}
@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
 });
 
 // PropTypes para validación de props
-OrdersTable.propTypes = {
+TablaPedidos.propTypes = {
   data: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string.isRequired,
     nameUsuario: PropTypes.string.isRequired,
@@ -79,4 +79,4 @@ OrdersTable.propTypes = {
   onDelete: PropTypes.func.isRequired,
 };
 
-export default OrdersTable;
+export default TablaPedidos;

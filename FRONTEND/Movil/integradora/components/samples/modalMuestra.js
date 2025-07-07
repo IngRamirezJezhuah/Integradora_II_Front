@@ -1,13 +1,11 @@
-// SampleModal.js
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
 import Modal from 'react-native-modal';
 import { Ionicons } from '@expo/vector-icons';
 import PropTypes from 'prop-types';
-import QuimSangResultados from './QuimSangResultados';
-import BiomHemResultados from './BiomHemResultados';
+import {QuimSangResultados,BiomHemResultados } from '../../components';
 
-const SampleModal = ({ visible, sample, onClose }) => {
+const ModalMuestra = ({ visible, sample, onClose }) => {
   const [showQuimModal, setShowQuimModal] = useState(false);
   const [showBiomModal, setShowBiomModal] = useState(false);
   const formatDate = (dateString) => {
@@ -188,7 +186,7 @@ const styles = StyleSheet.create({
 });
 
 // PropTypes para validación de props
-SampleModal.propTypes = {
+ModalMuestra.propTypes = {
   visible: PropTypes.bool.isRequired,
   sample: PropTypes.shape({
     _id: PropTypes.string,
@@ -202,4 +200,4 @@ SampleModal.propTypes = {
   onClose: PropTypes.func.isRequired
 };
 
-export default SampleModal;
+export default ModalMuestra;

@@ -1,4 +1,3 @@
-// OrderModal.tsx
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
 import Modal from 'react-native-modal';
@@ -6,7 +5,7 @@ import { Ionicons } from '@expo/vector-icons';
 import PropTypes from 'prop-types';
 import NuevaMuestra from '../samples/nuevaMuestra';
 
-const OrderModal = ({ visible, order, onClose, onNuevaMuestra }) => {
+const ModalPedido = ({ visible, order, onClose, onNuevaMuestra }) => {
   const [showNuevaMuestraModal, setShowNuevaMuestraModal] = useState(false);
 
   // Función para manejar la apertura del modal de nueva muestra
@@ -64,8 +63,6 @@ const OrderModal = ({ visible, order, onClose, onNuevaMuestra }) => {
           <Text style={styles.buttonText}>Registrar muestra</Text>
         </TouchableOpacity>
       </View>
-      
-      {/* Modal de Nueva Muestra */}
       <NuevaMuestra
         isVisible={showNuevaMuestraModal}
         onClose={handleCloseNuevaMuestra}
@@ -125,7 +122,7 @@ const styles = StyleSheet.create({
 });
 
 // PropTypes para validación de props
-OrderModal.propTypes = {
+ModalPedido.propTypes = {
   visible: PropTypes.bool.isRequired,
   order: PropTypes.shape({
     id: PropTypes.string.isRequired,
@@ -139,4 +136,4 @@ OrderModal.propTypes = {
   onNuevaMuestra: PropTypes.func
 };
 
-export default OrderModal;
+export default ModalPedido;

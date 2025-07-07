@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity,Image, StyleSheet, ScrollView } from 'reac
 import Modal from 'react-native-modal';
 import { Ionicons } from '@expo/vector-icons';
 import PropTypes from 'prop-types';
-import InputGroup from '../elements/InputGroup';
+import InputGroup from '../../components';
 
 const BiomHemResultados = ({ visible, sample, onClose }) => {
   const [resultados, setResultados] = useState({

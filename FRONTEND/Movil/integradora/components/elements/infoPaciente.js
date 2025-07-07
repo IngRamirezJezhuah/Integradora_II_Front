@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import MenuPerfil from './menuPerfil';
 
-const InfoPatient = () => {
+const infoPaciente = () => {
   return (
     <View style={styles.card}>
       <View style={styles.header}>
@@ -51,4 +51,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default InfoPatient;
+export default infoPaciente;

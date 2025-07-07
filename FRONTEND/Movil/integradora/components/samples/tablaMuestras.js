@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { FlatList, View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import PropTypes from 'prop-types';
-import SampleModal from './sampleModal';
+import SampleModal from './modalMuestra';
 
-const SamplesTable = ({ data, onView, onDelete }) => {
+const TablaMuestras = ({ data, onView, onDelete }) => {
     const [selectedSample, setSelectedSample] = useState(null);
     const [modalVisible, setModalVisible] = useState(false);
 
@@ -173,7 +173,7 @@ const styles = StyleSheet.create({
 });
 
 // PropTypes para validación de props
-SamplesTable.propTypes = {
+TablaMuestras.propTypes = {
   data: PropTypes.arrayOf(PropTypes.shape({
     _id: PropTypes.string,
     id: PropTypes.string,
@@ -187,4 +187,4 @@ SamplesTable.propTypes = {
   onDelete: PropTypes.func.isRequired
 };
 
-export default SamplesTable;
+export default TablaMuestras;

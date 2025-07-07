@@ -1,7 +1,7 @@
 import { View, StyleSheet} from "react-native";
 import React, { useState, useEffect } from 'react';
-import SamplesTable from "../components/samples/samplesPatient";
-import InfoPatient from "../components/elements/infoPatient";
+import SamplesTable from "../components/samples/pacienteMuestra";
+import InfoPatient from "../components/elements/infoPaciente";
 // import axios from 'axios';
 
 const muestrasEjemplo = [
@@ -10,7 +10,7 @@ const muestrasEjemplo = [
   {"__v": 0, "_id": "6861579c8930eb0dc235f2f2", "createDate": "2025-06-29T15:11:24.097Z", "fechaTomaMuestra": "2025-06-29T15:11:24.097Z", "idusuario": "685c3712978fa098a3769589", "nombrePaciente": "Diego Pérez", "observaciones": "Muestra tomada correctamente", "pedidoId": "6650e5cd1234567890abcdef", "status": true, "statusShowClient": true, "tipoMuestra": "biometriaHematica"}
 ];
 
-const PatientsHome = () => {
+const PacienteInicio = () => {
   const [muestras, setMuestras] = useState([]);
 
   useEffect(() => {
@@ -39,4 +39,4 @@ const styles = StyleSheet.create({
         paddingTop: 50,
     },
 });
-export default PatientsHome;
+export default PacienteInicio;
