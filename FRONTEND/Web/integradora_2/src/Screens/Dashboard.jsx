@@ -1,63 +1,30 @@
-//rafc para hacer una plantilla rapida
-import React from 'react'
 import { MuestrasHechas, SampleChart } from '../Components';
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import Swal from 'sweetalert2';
 
 const Dashboard=()=> {
-    
-
-    const [ldrData, setLdrData] = useState(null)
-    /*const apiUrl = ProcessingInstruction.env.REACT_APP_API_URL;
-    const handleEnviar = async (e) => {
-        e.preventDefault();
-        try{
-            console.log('API URL', apiUrl);
-            const response = await fetch(`${apiUrl}/ldr/esp32c3_001`,{
-                method: 'POST',
-                headers:{
-                    'Content-type': 'application/json',
-                },
-                body: JSON.stringify({ldrData}),
-            });
-            const text = await response.text();
-            console.log('Raw response:', text);
-
-            let data:
-            try{
-                data = JSON.parse(text);
-            } catch {
-                setError('respuesta inesperada del servidor:\n' + text);
-                return;
-            }
-
-            if (!response.ok){
-                throw new Error(data.message || 'Error en dash')
-            }
-
-            localStorage.setItem('token', data.token);
-
-            if (onSubmit){
-                onSubmit
-            }
-        }
-    };*/
+    const [ldrData, setLdrData] = useState(null);
+    const [tempData, setTempData] = useState(null);
+    const apiUrl = process.env.REACT_APP_API_URL;
 
     useEffect(() => {
-        /*console.log('API URL', apiUrl);
-        const response = await fetch(`${apiUrl}/`) {
-            
-        }*/
+        const token = localStorage.getItem('token');
+        const headers = token
+            ? { Authorization: `Bearer ${token}` }
+            : {};
+        //este es para le lDR
         axios
-        .get('https://bb1f-189-197-191-34.ngrok-free.app/ldr/esp32c3_001')
-        .then((res) => {
-            setLdrData(res.data)
-        })
-        .catch((err) => {
-            console.error('Error al obtener datos:', err)
-        }) 
-    }, [])
+        .get(`${apiUrl}/ldr/esp32c3_001`, {headers})
+        .then((res) => setLdrData(res.data))
+        .catch((err) => {console.error('Error al obtener LDR:', err)}) 
+        //Esta es para la de Temperatuea y Humedad
+        axios
+        .get(`${apiUrl}/tempwet/esp32c3_001`, {headers})
+        .then((res) => setTempData(res.data))
+        .catch((err) => {console.error('Error al obtener LDR:', err)})
+        
+    }, [apiUrl]);
 
     const getLdrStatus = (ldr) => {
         if (ldr <= 600) return { estado: 'En peligro', clase: 'div-muestra-3' }
@@ -137,13 +104,9 @@ const Dashboard=()=> {
                 </div>
             </div>
     </div>
-        
     )
     }
-
     const status = getLdrStatus(ldrData.ldr)
-    /*
-    */
     return (
     <div>
         <p className='titulo'>Dashboard </p>
@@ -151,33 +114,34 @@ const Dashboard=()=> {
             <div>
                 <div className='div-graficas'>
                     <p>Temperatura del Laboratorio</p>
-                    <p>25% c</p>
+                    <p>{tempData.dht11_temp}°C</p>
                     <div className='div-grafica'>
-                        < MuestrasHechas/>
+                        < MuestrasHechas tempData={tempData}/>
                     </div>
                 </div>
                 <div className='div-graficas'>
                     <p>Humedad del Laboratorio</p>
-                    <p>25% c</p>
+                    <p>{tempData.dht11_hum}%</p>
                     <div className='div-grafica'>
-                        <SampleChart/>
+                        <SampleChart tempData={tempData}/>
                     </div>
                 </div>
             </div>
             <div>
-                <div className='div-muestra'>
-                    <p className='centrar'>Pedidos Pendientes</p>
-                    <p className='texto-dash'>12</p>
+                <div onClick={handleEasterEgg}>
+                    <div className='div-muestra'>
+                        <p className='centrar'>Pedidos Pendientes</p>
+                        <p className='texto-dash'>12</p>
+                    </div>
                 </div>
                 <div className='div-muestra-2'>
                     <p className='centrar'>muestras en preocesamiento</p>
                     <p className='texto-dash'>15</p>
                 </div>
                 <div className={status.clase}>
-                    <p className='centrar'>Contenedor esp32c3_001{ldrData.id}</p>
+                    <p className='centrar'>Contenedor {ldrData.id}</p>
                     <p className='centrar'>{status.estado}</p>
-                    <p className='texto-dash'>LDR:{ldrData.ldrMax}</p>
-                    <p className='texto-dash'>LDR:{ldrData.getLdrMin}</p>
+                    <p className='texto-dash'>LDR:{ldrData.ldr}</p>
                 </div>
             </div>
         </div>

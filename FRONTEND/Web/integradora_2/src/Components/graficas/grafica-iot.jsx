@@ -13,13 +13,14 @@ import { Bar } from "react-chartjs-2";
 // Registrar los módulos
 ChartJS.register(CategoryScale, LinearScale, BarElement, Tooltip, Legend);
 
-const SampleChart = () => {
+const SampleChart = ({tempData}) => {
     const data = {
-        labels: ["Enero", "Febrero", "Marzo", "Abril"],
+        //labels: ["Enero", "Febrero", "Marzo", "Abril"],
+        labels: ["Temperatura", "Humedad"],
         datasets: [
         {
-            label: "Ventas",
-            data: [150, 200, 170, 220],
+            label: "Valores",
+            data: [tempData.dht11_temp, tempData.dht11_hum],
             backgroundColor: "rgb(255, 193, 92)",
         },
         ],
@@ -28,9 +29,9 @@ const SampleChart = () => {
     const options = {
         responsive: true,
         plugins: {
-        legend: {
-            position: "top",
-        },
+            legend: {
+                position: "top",
+            },
         },
     };
 
