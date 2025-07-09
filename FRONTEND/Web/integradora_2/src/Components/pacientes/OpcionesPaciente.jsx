@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import PacientesAlta from './PacientesAlta';
 import DetallesPacienteAlta from './DetallesPacienteAlta';
+import PacientesBaja from './PacientesBaja';
 
 const OpcionesPaciente = ({buttonLabels =["Paciente Alta", "Paciente Baja"]}) => {
     const [activeButton,setActiveButton]= useState(buttonLabels[0]);
@@ -28,7 +29,7 @@ const OpcionesPaciente = ({buttonLabels =["Paciente Alta", "Paciente Baja"]}) =>
                     {activeButton === buttonLabels[0] ? (
                         <div className='margen'>
                             <div className='scale-up-ver-center'>
-                                <PacientesAlta />
+                                <PacientesAlta/>
                                     
                             </div>
                             <div className='scale-up-ver-center'>    
@@ -37,8 +38,13 @@ const OpcionesPaciente = ({buttonLabels =["Paciente Alta", "Paciente Baja"]}) =>
                         </div>
                     
                     ) : (
-                        <p className='texto'>Dar de baja a un paciente</p>
-                        
+                        <div className='margen'>
+                            <div className='scale-up-ver-center'>
+                                <PacientesBaja />
+                                    
+                            </div>
+                        </div>
+
                     )}
                 </div>
         </div>

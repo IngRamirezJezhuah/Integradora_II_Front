@@ -47,7 +47,7 @@ const Dashboard=()=> {
             `
     });
     }
-    if (!ldrData) {
+    if (!ldrData || !tempData) {
         return (
         <div>
             <p className='titulo'>Dashboard </p>
