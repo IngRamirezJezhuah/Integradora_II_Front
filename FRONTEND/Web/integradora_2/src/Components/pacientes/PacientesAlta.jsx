@@ -56,7 +56,7 @@ const PacientesAlta = () => {
         fetchPacientes();
     }, [apiUrl, token]);
 
-    function handleAlert(e) {
+    function handleAlert(pacienteId) {
         const swalWithBootstrapButtons = Swal.mixin({
             customClass: {
                 confirmButton: "btn btn-success",
@@ -65,22 +65,51 @@ const PacientesAlta = () => {
             buttonsStyling: false
         });
         swalWithBootstrapButtons.fire({
-            title: "Estas Seguro de borrarlo?",
-            text: "No podras Revertirlo una vez lo borres!",
+            title: "Estas Seguro de darlo de baja?",
+            text: "No podras Revertirlo una vez lo des de baja!",
             icon: "warning",
             showCancelButton: true,
-            confirmButtonText: "Si, borralo!",
+            confirmButtonText: "Si, dar de baja!",
             cancelButtonText: "No, cancelar!",
             reverseButtons: true
-        }).then((result) => {
+        }).then(async (result) => {
+            if (!token) return;
             if (result.isConfirmed) {
-                swalWithBootstrapButtons.fire({
-                    title: "Borrado Exitosamente!",
-                    text: "Tu paciente ha sido borrado correctamente",
-                    icon: "success",
-                    timer : 1300,
-                    showConfirmButton: false
-                });
+                setLoading(true);
+                setError(null);
+                try {
+                    console.log("API URL:", apiUrl);
+                    console.log("TOKEN:", token);
+                    const headers = {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    };
+                    const response = await fetch(`http://vps-5127231-x.dattaweb.com:3500/usuarios/${pacienteId}`, {
+                        method: 'DELETE',
+                        headers,
+                        body: JSON.stringify({ status: false }),
+                    });
+                    if (!response.ok) {
+                        throw new Error('Error al dar de baja al paciente');
+                    }
+                    // Actualiza la lista localmente quitando el paciente dado de baja
+                    setPacientes(prev => prev.filter(p => p._id !== pacienteId));
+                    swalWithBootstrapButtons.fire({
+                        title: "Baja exitosa!",
+                        text: "El paciente ha sido dado de baja correctamente",
+                        icon: "success",
+                        timer : 1300,
+                        showConfirmButton: false
+                    });
+                } catch (error) {
+                    swalWithBootstrapButtons.fire({
+                        title: "Error!",
+                        text: "No se pudo dar de baja al paciente",
+                        icon: "error",
+                        timer : 1300,
+                        showConfirmButton: false
+                    });
+                }
             } else if(result.dismiss === Swal.DismissReason.cancel) {
                 swalWithBootstrapButtons.fire({
                     title: "!Cancelado!",
@@ -129,7 +158,7 @@ const PacientesAlta = () => {
                             </div>
                             <div>
                                 <div className='acomodar-iconos'>
-                                    <img src="/basura.png" alt="borrar" className='icono-borrar' onClick={handleAlert}/>
+                                    <img src="/basura.png" alt="borrar" className='icono-borrar' onClick={() => handleAlert(paciente._id)}/>
                                 </div>
                                 <p className='prueba-name'>{nombreCompleto}</p>
                             </div>
