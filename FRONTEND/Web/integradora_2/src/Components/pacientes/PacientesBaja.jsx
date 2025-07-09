@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Swal from 'sweetalert2';
 import { requireTokenOrRedirect } from "../../utils/auth";
-import CargaBolitas from '../elementos/CargaBolitas';
+import CargaBarras from '../elementos/CargaBarras';
 
 
 const PacientesBaja = () => {   
@@ -123,7 +123,7 @@ const PacientesBaja = () => {
             <div className='margen'>
                 <br />
                 <br />
-                <CargaBolitas />
+                <CargaBarras />
             </div>
         </div>
         );

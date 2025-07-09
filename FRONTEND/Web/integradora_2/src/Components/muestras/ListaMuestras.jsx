@@ -2,6 +2,7 @@
 import Swal from 'sweetalert2'
 import {useState}from 'react'
 import EditarMuestras from './EditarMuestras';
+import { Link } from 'react-router-dom';
 
 const ListaMuestras = () => {
     const muestras = [
@@ -77,8 +78,10 @@ const ListaMuestras = () => {
                         <div className='margen'>
                             
                             <img src="/editar.png" alt="editar" className='iconos' onClick={() => setModalAbierto(true)} />
+                            <Link to={'/Analisis'}>
+                                <img src="/detalles.png" alt="detalles" className='iconos'/>
+                            </Link>
                             
-                            <img src="/detalles.png" alt="detalles" className='iconos'/>
                             
                             <img src="/basura.png" alt="detalles" className='iconos' onClick={hanldeAlert} />
                             

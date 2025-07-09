@@ -19,6 +19,7 @@ export {default as SampleBox } from './elementos/sampleBox'
 export {default as SampleBoxes } from './elementos/sampleBox'
 export {default as SampleModal} from './elementos/sampleModal'
 export {default as CargaBolita } from './elementos/CargaBolitas'
+export {default as CargaBarras } from './elementos/CargaBarras'
 //_____________Analisis_____________
 export {default as NuevoAnalisisForm } from './analisis/NuevoAnalisis'
 export {default as EditarAnalisisForm } from './analisis/EditarAnalisis'

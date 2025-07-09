@@ -2,13 +2,70 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
 import { SearchBar } from '../Components';
 import { ModalAnalisis } from '../Components';
-
+import Swal from 'sweetalert2';
 
 const Analisis=()=> {
     const Pruebas= [
         "Quimica Sanguinea",
         "BIometrica Hepatica"
     ]
+
+    function handleAlert(AnalisisId) {
+            const swalWithBootstrapButtons = Swal.mixin({
+                customClass: {
+                    confirmButton: "btn btn-success",
+                    cancelButton: "btn btn-danger"
+                },
+                buttonsStyling: false
+            });
+            swalWithBootstrapButtons.fire({
+                title: "Estas Seguro de borrarlo?",
+                text: "No podras Revertirlo una vez lo borres!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonText: "Si, borralo!",
+                cancelButtonText: "No, cancelar!",
+                reverseButtons: true
+            }).then(async (result) => {
+                if (result.isConfirmed) {
+                    try {
+                        const headers = {
+                            'Content-Type': 'application/json',
+                        };
+                        const response = await fetch(`http://vps-5127231-x.dattaweb.com:3500/analisis/${AnalisisId}`, {
+                            method: 'DELETE',
+                            headers
+                        });
+                        if (!response.ok) {
+                            throw new Error('Error al borrar paciente');
+                        }
+                        swalWithBootstrapButtons.fire({
+                            title: "Borrado Exitosamente!",
+                            text: "Tu paciente ha sido borrado correctamente",
+                            icon: "success",
+                            timer : 1300,
+                            showConfirmButton: false
+                        });
+                    } catch (error) {
+                        swalWithBootstrapButtons.fire({
+                            title: "Error!",
+                            text: "No se pudo borrar el Analisis",
+                            icon: "error",
+                            timer : 1300,
+                            showConfirmButton: false
+                        });
+                    }
+                } else if(result.dismiss === Swal.DismissReason.cancel) {
+                    swalWithBootstrapButtons.fire({
+                        title: "!Cancelado!",
+                        text: "Regresando a la pagina",
+                        icon: "success",
+                        timer : 1000,
+                        showConfirmButton: false
+                    });
+                }
+            })
+        }
     const [modalAbierto,setModalAbierto] = useState(false)
     return (
         <div>
@@ -33,7 +90,7 @@ const Analisis=()=> {
                                                 <Link to='/Editar-Analisis'>
                                                     <img src="/ajustes.png" alt="ajustes" className='iconos' />
                                                 </Link>
-                                                <img src="/basura.png" alt="editar" className='iconos' />
+                                                <img src="/basura.png" alt="editar" className='iconos' onClick={handleAlert}/>
                                             </div>
                                         </div>
                                     ))}

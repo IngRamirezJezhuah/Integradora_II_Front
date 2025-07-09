@@ -82,15 +82,6 @@ const EditarMuestras = ({ muestra, onClose }) => {
                 value={formData.paciente}
                 onChange={handleChange}
                 />
-
-                <label>Resultados</label>
-                <input
-                className="input-field"
-                type="file"
-                name="resultados"
-                onChange={handleChange}
-                />
-
                 <div className="form-actions">
                 <button type="submit" className="btn">Guardar Cambios</button>
                 </div>

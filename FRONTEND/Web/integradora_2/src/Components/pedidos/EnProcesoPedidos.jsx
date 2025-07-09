@@ -80,7 +80,7 @@ const EnProcesoPedidos = () => {
                             <Link to='/RecibosPedidos'>
                                 <img src="/editar.png" alt="editar" className='iconos' />
                             </Link>
-                            <Link to='/'>
+                            <Link to='/Analisis'>
                                 <img src="/detalles.png" alt="detalles" className='iconos' />
                             </Link>
                                 <img src="/basura.png" alt="detalles" className='iconos' onClick={handleAlert} />
