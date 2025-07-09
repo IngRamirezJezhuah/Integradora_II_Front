@@ -1,72 +1,51 @@
-import React, { useContext, useState } from 'react';
-import { View, Text, TextInput, Alert, StyleSheet, TouchableOpacity } from 'react-native';
-import { AuthContext } from '../App';
-import { Image } from 'react-native';
+import React from 'react';
+import { View, Text, TextInput, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { useFocusField, usePasswordRecovery } from '../hooks';
 
 const Recuperacion = () => {
-  const { setIsAuthenticated } = useContext(AuthContext);
-  const [email, setEmail] = useState('');
-
-  const handleLogin = async () => {
-    if (!email ) {
-      Alert.alert('Campos vacíos', 'Por favor, llena todos los campos');
-      return;
-    }
-
-    try {
-      const response = await fetch('https://ecommerceproyectserviceebs-se-production.up.railway.app/api/v1/esb/user/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email}),
-      });
-
-      const data = await response.json();
-
-      if (response.ok && data.data) {
-        Alert.alert('Éxito', 'Inicio de sesión exitoso');
-        setIsAuthenticated(true);
-      } else {
-        Alert.alert('Error', data.message || 'Credenciales incorrectas');
-      }
-    } catch (error) {
-      Alert.alert('Error', 'Algo salió mal');
-      console.error(error);
-    }
-  };
+  const navigation = useNavigation();
+  
+  // Hooks para funcionalidad específica
+  const { setFocus, clearFocus, getFieldStyle } = useFocusField();
+  const { email, setEmail, sendRecoveryRequest } = usePasswordRecovery();
 
   return (
     <View style={styles.container}>
-        <Image
-            // eslint-disable-next-line
-            source={require('../assets/logo-iic.png')}
-            style={{ width: 120, height: 120, marginBottom: 30 }}
-            resizeMode="contain"
-        />
-      <Text style={styles.title}>Recuperacion</Text>
+      <Image
+        // eslint-disable-next-line
+        source={require('../assets/logo-iic.png')}
+        style={styles.logo}
+        resizeMode="contain"
+      />
+      
+      <Text style={styles.title}>Recuperar Contraseña</Text>
 
       <TextInput
-        style={styles.input}
+        style={getFieldStyle('email', styles.input, styles.inputFocus)}
         placeholder="Correo electrónico"
         value={email}
         onChangeText={setEmail}
         autoCapitalize="none"
+        keyboardType="email-address"
+        onFocus={() => setFocus('email')}
+        onBlur={clearFocus}
       />
 
-      <TouchableOpacity style={styles.button} onPress={handleLogin}>
-        <Text style={styles.buttonText}>Entrar</Text>
+      <TouchableOpacity style={styles.button} onPress={sendRecoveryRequest}>
+        <Text style={styles.buttonText}>Recuperar Contraseña</Text>
       </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate('login')}>
-            <Text style={{ color: '#3b82f6', marginTop: 20 }}>Iniciar Sesion</Text>
-            
-        </TouchableOpacity>
-        <Image
-            // eslint-disable-next-line
-            source={require('../assets/logo-ujed.png')}
-            style={{ width: 120, height: 120, marginTop: 30}}
-            resizeMode="contain"
-        />
+      
+      <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+        <Text style={styles.linkText}>Volver al Inicio de Sesión</Text>
+      </TouchableOpacity>
+      
+      <Image
+        // eslint-disable-next-line
+        source={require('../assets/logo-ujed.png')}
+        style={styles.logoBottom}
+        resizeMode="contain"
+      />
     </View>
   );
 };
@@ -82,9 +61,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 30,
   },
+  logo: {
+    width: 120,
+    height: 120,
+    marginBottom: 30,
+  },
   title: {
     fontSize: 28,
-    faontWeight: 'bold',
+    fontWeight: 'bold',
     marginBottom: 40,
     color: '#000',
   },
@@ -99,6 +83,11 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#DDD',
   },
+  inputFocus: {
+    borderColor: '#BF1E2D',
+    borderWidth: 2,
+    backgroundColor: '#fff',
+  },
   button: {
     backgroundColor: '#DA0C15',
     paddingVertical: 15,
@@ -111,5 +100,14 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     fontSize: 16,
     fontWeight: 'bold',
+  },
+  linkText: {
+    color: '#3b82f6',
+    marginTop: 20,
+  },
+  logoBottom: {
+    width: 120,
+    height: 120,
+    marginTop: 30,
   },
 });

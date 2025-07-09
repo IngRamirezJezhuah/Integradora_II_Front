@@ -1,12 +1,44 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
+import PropTypes from 'prop-types';
 
-const ComboBoxSample = ({ onSelect }) => {
+const ComboBoxSample = ({ onSelect, selectedValue }) => {
   const [selected, setSelected] = useState('quimica');
+
+  // Función para convertir el nombre del análisis al valor interno
+  const convertirNombreAValor = (nombreAnalisis) => {
+    if (!nombreAnalisis) return 'quimica';
+    
+    if (nombreAnalisis === 'Biometria Hematica' || nombreAnalisis === 'Biometría Hemática') {
+      return 'biometria';
+    }
+    if (nombreAnalisis === 'Quimica Sanguinea' || nombreAnalisis === 'Química Sanguínea') {
+      return 'quimica';
+    }
+    return 'quimica'; // Por defecto
+  };
+
+  // Efecto para actualizar el valor seleccionado cuando cambia selectedValue
+  useEffect(() => {
+    if (selectedValue) {
+      const valorConvertido = convertirNombreAValor(selectedValue);
+      setSelected(valorConvertido);
+      console.log('ComboBox valor convertido:', selectedValue, '->', valorConvertido);
+    }
+  }, [selectedValue]);
 
   const handleSelect = (option) => {
     setSelected(option);
-    onSelect(option);
+    
+    // Convertir el valor interno al nombre del análisis
+    let nombreAnalisis = '';
+    if (option === 'biometria') {
+      nombreAnalisis = 'Biometria Hematica';
+    } else if (option === 'quimica') {
+      nombreAnalisis = 'Quimica Sanguinea';
+    }
+    
+    onSelect(nombreAnalisis);
   };
 
   return (
@@ -20,6 +52,7 @@ const ComboBoxSample = ({ onSelect }) => {
           ]}
           onPress={() => handleSelect('biometria')}
         >
+          {/* eslint-disable-next-line */}
           <Image source={require('../../assets/biometriahematica.png')} style={styles.icon} />
           <Text style={[
             styles.optionText,
@@ -36,6 +69,7 @@ const ComboBoxSample = ({ onSelect }) => {
           ]}
           onPress={() => handleSelect('quimica')}
         >
+          {/* eslint-disable-next-line */}
           <Image source={require('../../assets/quimicasanguinea.png')} style={styles.icon} />
           <Text style={[
             styles.optionText,
@@ -81,5 +115,10 @@ const styles = StyleSheet.create({
     height: 20
   }
 });
+
+ComboBoxSample.propTypes = {
+  onSelect: PropTypes.func.isRequired,
+  selectedValue: PropTypes.string,
+};
 
 export default ComboBoxSample;

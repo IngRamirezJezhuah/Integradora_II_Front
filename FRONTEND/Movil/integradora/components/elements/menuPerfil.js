@@ -1,39 +1,52 @@
 import React, { useState } from 'react';
 import { View, TouchableOpacity, Text, StyleSheet, Animated, Alert } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import PropTypes from 'prop-types';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Modal from 'react-native-modal';
+import EditarPerfil from '../../screens/EditarPerfil';
 
 
-const MenuPerfil = ({ token }) => {
+const MenuPerfil = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [showEditProfile, setShowEditProfile] = useState(false);
   const [animation] = useState(new Animated.Value(0));
-  const navigation = useNavigation();
+  
   const handleLogout = async () => {
-          Alert.alert(
-              'Cerrar Sesión',
-              '¿Estás seguro de que quieres cerrar sesión?',
-              [
-                  {
-                      text: 'Cancelar',
-                      style: 'cancel',
-                  },
-                  {
-                      text: 'Cerrar Sesión',
-                      onPress: async () => {
-                          try {
-                              await AsyncStorage.removeItem('userToken');
-                              await AsyncStorage.removeItem('userData');
-                              // La app se recargará automáticamente debido al estado de autenticación
-                          } catch (error) {
-                              console.error('Error during logout:', error);
-                              Alert.alert('Error', 'Hubo un problema al cerrar sesión');
-                          }
-                      },
-                  },
-              ]
-          );
-      };
+    Alert.alert(
+      'Cerrar Sesión',
+      '¿Estás seguro de que quieres cerrar sesión?',
+      [
+        {
+          text: 'Cancelar',
+          style: 'cancel',
+        },
+        {
+          text: 'Cerrar Sesión',
+          onPress: async () => {
+            try {
+              // Cerrar el menú inmediatamente
+              setIsOpen(false);
+              
+              // Remover tokens y datos del usuario
+              await AsyncStorage.removeItem('userToken');
+              await AsyncStorage.removeItem('userData');
+              
+              console.log('Logout exitoso - tokens removidos');
+              
+              // Mostrar mensaje de éxito
+              Alert.alert('Éxito', 'Sesión cerrada correctamente');
+              
+              // El TabNavigator detectará automáticamente que no hay token
+              // y redirigirá al AuthStack en el próximo render (máximo 10 segundos)
+              
+            } catch (error) {
+              console.error('Error durante logout:', error);
+              Alert.alert('Error', 'Hubo un problema al cerrar sesión. Intenta de nuevo.');
+            }
+          },
+        },
+      ]
+    );
+  };
 
   const toggleMenu = () => {
     const toValue = isOpen ? 0 : 1;
@@ -46,10 +59,20 @@ const MenuPerfil = ({ token }) => {
   };
 
   const handleEditProfile = () => {
-    // Para navegación futura
-    console.log('Navegar a Editar Perfil');
-    navigation.navigate('EditProfile', { token });
+    console.log('Abrir Modal de Editar Perfil');
+    setShowEditProfile(true);
     setIsOpen(false);
+  };
+
+  const handleCloseEditProfile = () => {
+    setShowEditProfile(false);
+  };
+
+  const handleSaveProfile = (profileData) => {
+    console.log('Guardar perfil:', profileData);
+    // Aquí puedes agregar la lógica para guardar el perfil
+    Alert.alert('Éxito', 'Perfil actualizado correctamente');
+    setShowEditProfile(false);
   };
 
 
@@ -73,6 +96,20 @@ const MenuPerfil = ({ token }) => {
           </TouchableOpacity>
         </Animated.View>
       )}
+      
+      {/* Modal para Editar Perfil */}
+      <Modal
+        isVisible={showEditProfile}
+        onBackdropPress={handleCloseEditProfile}
+        onSwipeComplete={handleCloseEditProfile}
+        swipeDirection="down"
+        style={styles.modal}
+      >
+        <EditarPerfil 
+          onSave={handleSaveProfile} 
+          onClose={handleCloseEditProfile} 
+        />
+      </Modal>
     </View>
   );
 };
@@ -125,11 +162,10 @@ const styles = StyleSheet.create({
     color: '#333',
     textAlign: 'left',
   },
+  modal: {
+    justifyContent: 'flex-end',
+    margin: 0,
+  },
 });
-
-// PropTypes para validación de props
-MenuPerfil.propTypes = {
-  token: PropTypes.string,
-};
 
 export default MenuPerfil;

@@ -2,7 +2,7 @@
 //export { default as Recuperacion } from './Recuperacion'
 
 export { default as Pedidos } from './Pedidos'
-export { default as muestras } from './Muestras'
+export { default as Muestras } from './Muestras'
 export { default as Escaner } from './Escaner'
 export { default as Dashboard } from './Dashboard'
 export { default as PacienteInicio } from './PacienteInicio'

@@ -3,6 +3,7 @@ import { View, Text, TouchableOpacity, StyleSheet, ScrollView, TextInput,Image }
 import Modal from 'react-native-modal';
 import { Ionicons } from '@expo/vector-icons';
 import PropTypes from 'prop-types';
+import useFocusField from '../../hooks';
 
 const QuimSangResultados = ({ visible, sample, onClose }) => {
   const [resultados, setResultados] = useState({
@@ -14,6 +15,9 @@ const QuimSangResultados = ({ visible, sample, onClose }) => {
     acidoUrico: '',
     observaciones: ''
   });
+
+  // Usar el hook personalizado para manejar el focus
+  const { setFocus, clearFocus, getFieldStyle } = useFocusField();
 
   const handleInputChange = (field, value) => {
     setResultados(prev => ({
@@ -55,63 +59,77 @@ const QuimSangResultados = ({ visible, sample, onClose }) => {
 
           <Text style={styles.label}>Glucosa (mg/dL)</Text>
           <TextInput
-            style={styles.input}
+            style={getFieldStyle('glucosa', styles.input, styles.inputFocus)}
             value={resultados.glucosa}
             onChangeText={(value) => handleInputChange('glucosa', value)}
+            onFocus={() => setFocus('glucosa')}
+            onBlur={clearFocus}
             placeholder="70-100"
             keyboardType="numeric"
           />
 
           <Text style={styles.label}>Colesterol Total (mg/dL)</Text>
           <TextInput
-            style={styles.input}
+            style={getFieldStyle('colesterol', styles.input, styles.inputFocus)}
             value={resultados.colesterol}
             onChangeText={(value) => handleInputChange('colesterol', value)}
+            onFocus={() => setFocus('colesterol')}
+            onBlur={clearFocus}
             placeholder="< 200"
             keyboardType="numeric"
           />
 
           <Text style={styles.label}>Triglicéridos (mg/dL)</Text>
           <TextInput
-            style={styles.input}
+            style={getFieldStyle('trigliceridos', styles.input, styles.inputFocus)}
             value={resultados.trigliceridos}
             onChangeText={(value) => handleInputChange('trigliceridos', value)}
+            onFocus={() => setFocus('trigliceridos')}
+            onBlur={clearFocus}
             placeholder="< 150"
             keyboardType="numeric"
           />
 
           <Text style={styles.label}>Urea (mg/dL)</Text>
           <TextInput
-            style={styles.input}
+            style={getFieldStyle('urea', styles.input, styles.inputFocus)}
             value={resultados.urea}
             onChangeText={(value) => handleInputChange('urea', value)}
+            onFocus={() => setFocus('urea')}
+            onBlur={clearFocus}
             placeholder="15-40"
             keyboardType="numeric"
           />
 
           <Text style={styles.label}>Creatinina (mg/dL)</Text>
           <TextInput
-            style={styles.input}
+            style={getFieldStyle('creatinina', styles.input, styles.inputFocus)}
             value={resultados.creatinina}
             onChangeText={(value) => handleInputChange('creatinina', value)}
+            onFocus={() => setFocus('creatinina')}
+            onBlur={clearFocus}
             placeholder="0.6-1.2"
             keyboardType="numeric"
           />
 
           <Text style={styles.label}>Ácido Úrico (mg/dL)</Text>
           <TextInput
-            style={styles.input}
+            style={getFieldStyle('acidoUrico', styles.input, styles.inputFocus)}
             value={resultados.acidoUrico}
             onChangeText={(value) => handleInputChange('acidoUrico', value)}
+            onFocus={() => setFocus('acidoUrico')}
+            onBlur={clearFocus}
             placeholder="3.5-7.2"
             keyboardType="numeric"
           />
 
           <Text style={styles.label}>Observaciones</Text>
           <TextInput
-            style={[styles.input, styles.textArea]}
+            style={getFieldStyle('observaciones', [styles.input, styles.textArea], styles.inputFocus)}
             value={resultados.observaciones}
             onChangeText={(value) => handleInputChange('observaciones', value)}
+            onFocus={() => setFocus('observaciones')}
+            onBlur={clearFocus}
             placeholder="Observaciones adicionales..."
             multiline
             numberOfLines={4}
@@ -181,6 +199,11 @@ const styles = StyleSheet.create({
     padding: 12,
     fontSize: 16,
     backgroundColor: '#f9f9f9',
+  },
+  inputFocus: {
+    borderColor: '#DA0C15',
+    borderWidth: 2,
+    backgroundColor: '#fff',
   },
   textArea: {
     height: 80,

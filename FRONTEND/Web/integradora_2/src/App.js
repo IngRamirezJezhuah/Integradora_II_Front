@@ -28,8 +28,8 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/Recuperacion" element={<Recuperacion />} />
-        <Route path="/" element={<Login />} />
+        {/* <Route path="/Recuperacion" element={<Recuperacion />} />
+        <Route path="/" element={<Login />} /> */}
           <Route path="/" element={<Component /> } >
             <Route path="/Dashboard" element={<Dashboard />} />
             <Route path="/Pacientes" element={<Pacientes />} />

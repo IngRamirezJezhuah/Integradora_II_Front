@@ -1,7 +1,7 @@
 import React, { /* useEffect, useRef, */ useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 // import { Camera, CameraType } from 'expo-camera';
-import ModalCodigo from '../components/samples/modalCodigo';
+import {ModalCodigo, Header} from '../components';
 
 const Escaner = () => {
 //   const [hasPermission, setHasPermission] = useState(null);
@@ -31,6 +31,7 @@ const Escaner = () => {
 
 return (
     <View style={styles.container}>
+        <Header title="Dashboard" />
         <Text style={styles.header}>Escanea el código</Text>
         {/* <Camera
             ref={cameraRef}

@@ -4,6 +4,7 @@ import Modal from 'react-native-modal';
 import { Ionicons } from '@expo/vector-icons';
 import PropTypes from 'prop-types';
 import InputGroup from '../../components';
+import useFocusField from '../../hooks/useFocusField';
 
 const BiomHemResultados = ({ visible, sample, onClose }) => {
   const [resultados, setResultados] = useState({
@@ -25,6 +26,9 @@ const BiomHemResultados = ({ visible, sample, onClose }) => {
     basofilos: '',
     observaciones: ''
   });
+
+  // Usar el hook personalizado para manejar el focus
+  const { setFocus, clearFocus, getFieldStyle } = useFocusField();
 
   const handleInputChange = (field, value) => {
     setResultados(prev => ({
@@ -73,6 +77,9 @@ const BiomHemResultados = ({ visible, sample, onClose }) => {
               value={resultados.hemoglobina}
               onChangeText={(value) => handleInputChange('hemoglobina', value)}
               placeholder="12.0 - 15.5"
+              onFocus={() => setFocus('hemoglobina')}
+              onBlur={clearFocus}
+              style={getFieldStyle('hemoglobina', {}, styles.inputFocus)}
             />
 
             <InputGroup
@@ -80,6 +87,9 @@ const BiomHemResultados = ({ visible, sample, onClose }) => {
               value={resultados.hematocrito}
               onChangeText={(value) => handleInputChange('hematocrito', value)}
               placeholder="36 - 46"
+              onFocus={() => setFocus('hematocrito')}
+              onBlur={clearFocus}
+              style={getFieldStyle('hematocrito', {}, styles.inputFocus)}
             />
 
             <InputGroup
@@ -87,6 +97,9 @@ const BiomHemResultados = ({ visible, sample, onClose }) => {
               value={resultados.eritrocito}
               onChangeText={(value) => handleInputChange('eritrocito', value)}
               placeholder="4.2 - 5.4"
+              onFocus={() => setFocus('eritrocito')}
+              onBlur={clearFocus}
+              style={getFieldStyle('eritrocito', {}, styles.inputFocus)}
             />
 
             <InputGroup
@@ -94,6 +107,9 @@ const BiomHemResultados = ({ visible, sample, onClose }) => {
               value={resultados.globulosRojos}
               onChangeText={(value) => handleInputChange('globulosRojos', value)}
               placeholder="4.2 - 5.4"
+              onFocus={() => setFocus('globulosRojos')}
+              onBlur={clearFocus}
+              style={getFieldStyle('globulosRojos', {}, styles.inputFocus)}
             />
 
             <InputGroup
@@ -101,6 +117,9 @@ const BiomHemResultados = ({ visible, sample, onClose }) => {
               value={resultados.ConMediaHb}
               onChangeText={(value) => handleInputChange('ConMediaHb', value)}
               placeholder="32 - 36"
+              onFocus={() => setFocus('ConMediaHb')}
+              onBlur={clearFocus}
+              style={getFieldStyle('ConMediaHb', {}, styles.inputFocus)}
             />
 
             <InputGroup
@@ -108,6 +127,9 @@ const BiomHemResultados = ({ visible, sample, onClose }) => {
               value={resultados.globulosBlancos}
               onChangeText={(value) => handleInputChange('globulosBlancos', value)}
               placeholder="4.5 - 11.0"
+              onFocus={() => setFocus('globulosBlancos')}
+              onBlur={clearFocus}
+              style={getFieldStyle('globulosBlancos', {}, styles.inputFocus)}
             />
 
             <InputGroup
@@ -115,6 +137,9 @@ const BiomHemResultados = ({ visible, sample, onClose }) => {
               value={resultados.volumenGlobularMedio}
               onChangeText={(value) => handleInputChange('volumenGlobularMedio', value)}
               placeholder="80 - 100"
+              onFocus={() => setFocus('volumenGlobularMedio')}
+              onBlur={clearFocus}
+              style={getFieldStyle('volumenGlobularMedio', {}, styles.inputFocus)}
             />
 
             <InputGroup
@@ -122,6 +147,9 @@ const BiomHemResultados = ({ visible, sample, onClose }) => {
               value={resultados.HbGCospucularMedio}
               onChangeText={(value) => handleInputChange('HbGCospucularMedio', value)}
               placeholder="27 - 32"
+              onFocus={() => setFocus('HbGCospucularMedio')}
+              onBlur={clearFocus}
+              style={getFieldStyle('HbGCospucularMedio', {}, styles.inputFocus)}
             />
 
             <InputGroup
@@ -129,6 +157,9 @@ const BiomHemResultados = ({ visible, sample, onClose }) => {
               value={resultados.cuentaLeucitoria}
               onChangeText={(value) => handleInputChange('cuentaLeucitoria', value)}
               placeholder="4.5 - 11.0"
+              onFocus={() => setFocus('cuentaLeucitoria')}
+              onBlur={clearFocus}
+              style={getFieldStyle('cuentaLeucitoria', {}, styles.inputFocus)}
             />
 
             <InputGroup
@@ -136,6 +167,9 @@ const BiomHemResultados = ({ visible, sample, onClose }) => {
               value={resultados.plaquetas}
               onChangeText={(value) => handleInputChange('plaquetas', value)}
               placeholder="150 - 450"
+              onFocus={() => setFocus('plaquetas')}
+              onBlur={clearFocus}
+              style={getFieldStyle('plaquetas', {}, styles.inputFocus)}
             />
 
             <Text style={styles.sectionTitle}>Diferencial Leucocitario (%)</Text>
@@ -145,6 +179,9 @@ const BiomHemResultados = ({ visible, sample, onClose }) => {
               value={resultados.neutrofilos}
               onChangeText={(value) => handleInputChange('neutrofilos', value)}
               placeholder="50 - 70"
+              onFocus={() => setFocus('neutrofilos')}
+              onBlur={clearFocus}
+              style={getFieldStyle('neutrofilos', {}, styles.inputFocus)}
             />
 
             <InputGroup
@@ -152,6 +189,9 @@ const BiomHemResultados = ({ visible, sample, onClose }) => {
               value={resultados.segmentados}
               onChangeText={(value) => handleInputChange('segmentados', value)}
               placeholder="50 - 70"
+              onFocus={() => setFocus('segmentados')}
+              onBlur={clearFocus}
+              style={getFieldStyle('segmentados', {}, styles.inputFocus)}
             />
 
             <InputGroup
@@ -159,6 +199,9 @@ const BiomHemResultados = ({ visible, sample, onClose }) => {
               value={resultados.linfocitos}
               onChangeText={(value) => handleInputChange('linfocitos', value)}
               placeholder="20 - 40"
+              onFocus={() => setFocus('linfocitos')}
+              onBlur={clearFocus}
+              style={getFieldStyle('linfocitos', {}, styles.inputFocus)}
             />
 
             <InputGroup
@@ -166,6 +209,9 @@ const BiomHemResultados = ({ visible, sample, onClose }) => {
               value={resultados.monocitos}
               onChangeText={(value) => handleInputChange('monocitos', value)}
               placeholder="2 - 8"
+              onFocus={() => setFocus('monocitos')}
+              onBlur={clearFocus}
+              style={getFieldStyle('monocitos', {}, styles.inputFocus)}
             />
 
             <InputGroup
@@ -173,6 +219,9 @@ const BiomHemResultados = ({ visible, sample, onClose }) => {
               value={resultados.eosinofilos}
               onChangeText={(value) => handleInputChange('eosinofilos', value)}
               placeholder="1 - 4"
+              onFocus={() => setFocus('eosinofilos')}
+              onBlur={clearFocus}
+              style={getFieldStyle('eosinofilos', {}, styles.inputFocus)}
             />
 
             <InputGroup
@@ -180,6 +229,9 @@ const BiomHemResultados = ({ visible, sample, onClose }) => {
               value={resultados.basofilos}
               onChangeText={(value) => handleInputChange('basofilos', value)}
               placeholder="0 - 1"
+              onFocus={() => setFocus('basofilos')}
+              onBlur={clearFocus}
+              style={getFieldStyle('basofilos', {}, styles.inputFocus)}
             />
 
             <InputGroup
@@ -189,6 +241,9 @@ const BiomHemResultados = ({ visible, sample, onClose }) => {
               placeholder="Observaciones adicionales..."
               multiline={true}
               numberOfLines={4}
+              onFocus={() => setFocus('observaciones')}
+              onBlur={clearFocus}
+              style={getFieldStyle('observaciones', {}, styles.inputFocus)}
             />
           </View>
         </ScrollView>
@@ -244,6 +299,11 @@ const styles = StyleSheet.create({
   },
   formContainer: {
     paddingHorizontal: 10,
+  },
+  inputFocus: {
+    borderColor: '#DA0C15',
+    borderWidth: 2,
+    backgroundColor: '#fff',
   },
   sectionTitle: {
     fontSize: 18,

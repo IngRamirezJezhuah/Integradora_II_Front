@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 import Modal from 'react-native-modal';
+import PropTypes from 'prop-types';
+import useFocusField from '../../hooks/useFocusField';
 
 const ModalCodigo = ({ isVisible, onClose, onSubmit }) => {
   const [codigo, setCodigo] = useState('');
+  const { setFocus, clearFocus, getFieldStyle } = useFocusField();
 
 return (
     <Modal isVisible={isVisible} onBackdropPress={onClose}>
@@ -13,7 +16,9 @@ return (
                 placeholder="Ej: ABC123"
                 value={codigo}
                 onChangeText={setCodigo}
-                style={styles.input}
+                style={getFieldStyle('codigo', styles.input, styles.inputFocus)}
+                onFocus={() => setFocus('codigo')}
+                onBlur={clearFocus}
             />
             <TouchableOpacity
                 style={styles.button}
@@ -48,6 +53,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     height: 40,
   },
+  inputFocus: {
+    borderColor: '#BF1E2D',
+    borderWidth: 2,
+  },
   button: {
     backgroundColor: '#DA0C15',
     padding: 15,
@@ -56,5 +65,12 @@ const styles = StyleSheet.create({
     marginTop: 15,
   },
 });
+
+// PropTypes para validación de props
+ModalCodigo.propTypes = {
+  isVisible: PropTypes.bool.isRequired,
+  onClose: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
+};
 
 export default ModalCodigo;

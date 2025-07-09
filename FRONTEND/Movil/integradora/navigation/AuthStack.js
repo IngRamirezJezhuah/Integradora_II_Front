@@ -2,7 +2,7 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import PropTypes from 'prop-types';
-import {Login, Recovery} from '../screens';
+import {Login, Recuperacion} from '../screens';
 
 const Stack = createNativeStackNavigator();
 
@@ -11,7 +11,7 @@ const AuthStack = ({ onLoginSuccess }) => (
         <Stack.Screen name="Login">
             {(props) => <Login {...props} onLoginSuccess={onLoginSuccess} />}
         </Stack.Screen>
-        <Stack.Screen name="Recovery" component={Recovery} />
+        <Stack.Screen name="Recovery" component={Recuperacion} />
     </Stack.Navigator>
 );
 

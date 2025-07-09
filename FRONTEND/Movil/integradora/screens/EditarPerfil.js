@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, ScrollView, Alert } from 'react-native';
 import PropTypes from 'prop-types';
 import { InputGroup } from '../components/';
+import useFocusField from '../hooks/useFocusField';
 
 const EditarPerfil = ({ onSave, onClose }) => {
   const [formData, setFormData] = useState({
@@ -10,6 +11,9 @@ const EditarPerfil = ({ onSave, onClose }) => {
     newPassword: '',
     confirmPassword: '',
   });
+
+  // Usar el hook personalizado para manejar el focus
+  const { setFocus, clearFocus, getFieldStyle } = useFocusField();
 
   const handleInputChange = (field, value) => {
     setFormData(prev => ({
@@ -73,6 +77,9 @@ const EditarPerfil = ({ onSave, onClose }) => {
           onChangeText={(value) => handleInputChange('email', value)}
           placeholder="Ingresa tu email"
           keyboardType="email-address"
+          onFocus={() => setFocus('email')}
+          onBlur={clearFocus}
+          style={getFieldStyle('email', {}, styles.inputFocus)}
         />
         <InputGroup
           labelTitle="Contraseña Anterior"
@@ -81,6 +88,9 @@ const EditarPerfil = ({ onSave, onClose }) => {
           placeholder="Ingresa tu antigua contraseña"
           keyboardType="default"
           secureTextEntry
+          onFocus={() => setFocus('oldPassword')}
+          onBlur={clearFocus}
+          style={getFieldStyle('oldPassword', {}, styles.inputFocus)}
         />
         <InputGroup
           labelTitle="Nueva Contraseña"
@@ -89,6 +99,9 @@ const EditarPerfil = ({ onSave, onClose }) => {
           placeholder="Ingresa tu nueva contraseña"
           keyboardType="default"
           secureTextEntry
+          onFocus={() => setFocus('newPassword')}
+          onBlur={clearFocus}
+          style={getFieldStyle('newPassword', {}, styles.inputFocus)}
         />
         <InputGroup
           labelTitle="Confirmar Contraseña"
@@ -97,6 +110,9 @@ const EditarPerfil = ({ onSave, onClose }) => {
           placeholder="Confirma tu nueva contraseña"
           keyboardType="default"
           secureTextEntry
+          onFocus={() => setFocus('confirmPassword')}
+          onBlur={clearFocus}
+          style={getFieldStyle('confirmPassword', {}, styles.inputFocus)}
         />
 
         <View style={styles.buttonContainer}>
@@ -130,6 +146,11 @@ const styles = StyleSheet.create({
     marginTop: 10,
     color: '#333',
     marginBottom: 20,
+  },
+  inputFocus: {
+    borderColor: '#BF1E2D',
+    borderWidth: 2,
+    backgroundColor: '#fff',
   },
   buttonContainer: {
     flexDirection: 'row',

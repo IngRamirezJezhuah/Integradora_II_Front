@@ -1,90 +1,72 @@
-import React, { useState } from 'react';
-import { View, Text, TextInput, Alert, StyleSheet, TouchableOpacity } from 'react-native';
-import { Image } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import React from 'react';
+import { View, Text, TextInput, Alert, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import PropTypes from 'prop-types';
+import { useFocusField, useLoginForm, useAuth } from '../hooks';
 
 const Login = ({ onLoginSuccess }) => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const navigation = useNavigation();
+  
+  // Hooks para funcionalidad específica
+  const { setFocus, clearFocus, getFieldStyle } = useFocusField();
+  const { correo, contraseña, setCorreo, setContraseña, isFormValid } = useLoginForm();
+  const { login } = useAuth();
 
   const handleLogin = async () => {
-    if (!username || !password) {
+    if (!isFormValid()) {
       Alert.alert('Campos vacíos', 'Por favor, llena todos los campos');
       return;
     }
 
-    try {
-      const response = await fetch('.../usuarios/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ username, password }),
-      });
-
-      const data = await response.json();
-
-      if (response.ok && data.data) {
-        // Guardar el token en AsyncStorage
-        await AsyncStorage.setItem('userToken', data.token || 'authenticated');
-        await AsyncStorage.setItem('userData', JSON.stringify(data.data));
-        
-        Alert.alert('Éxito', 'Inicio de sesión exitoso');
-        
-        // Llamar a la función onLoginSuccess si está disponible
-        if (onLoginSuccess) {
-          onLoginSuccess();
-        }
-      } else {
-        Alert.alert('Error', data.message || 'Credenciales incorrectas');
-      }
-    } catch (error) {
-      Alert.alert('Error', 'Algo salió mal');
-      console.error(error);
-    }
+    await login(correo, contraseña, onLoginSuccess);
   };
 
   return (
     <View style={styles.container}>
-        <Image
-            // eslint-disable-next-line
-            source={require('../assets/logo-iic.png')}
-            style={{ width: 120, height: 120, marginBottom: 30 }}
-            resizeMode="contain"
-        />
+      <Image
+        // eslint-disable-next-line
+        source={require('../assets/logo-iic.png')}
+        style={styles.logo}
+        resizeMode="contain"
+      />
+      
       <Text style={styles.title}>Bienvenido</Text>
-
+      
       <TextInput
-        style={styles.input}
-        placeholder="Usuario"
-        value={username}
-        onChangeText={setUsername}
+        style={getFieldStyle('correo', styles.input, styles.inputFocus)}
+        placeholder="Correo electrónico"
+        value={correo}
+        onChangeText={setCorreo}
         autoCapitalize="none"
+        keyboardType="email-address"
+        onFocus={() => setFocus('correo')}
+        onBlur={clearFocus}
       />
-
+      
       <TextInput
-        style={styles.input}
+        style={getFieldStyle('contraseña', styles.input, styles.inputFocus)}
         placeholder="Contraseña"
-        value={password}
-        onChangeText={setPassword}
+        value={contraseña}
+        onChangeText={setContraseña}
         secureTextEntry
+        onFocus={() => setFocus('contraseña')}
+        onBlur={clearFocus}
       />
-
+      
       <TouchableOpacity style={styles.button} onPress={handleLogin}>
         <Text style={styles.buttonText}>Entrar</Text>
       </TouchableOpacity>
-        <TouchableOpacity onPress={() => Alert.alert('Recuperar contraseña', 'Funcionalidad no implementada')}>
-            <Text style={{ color: '#3b82f6', marginTop: 20 }}>¿Olvidaste tu contraseña?</Text>
-            
-        </TouchableOpacity>
-        <Image
-
-            // eslint-disable-next-line
-            source={require('../assets/logo-ujed.png')}
-            style={{ width: 120, height: 120, marginTop: 30}}
-            resizeMode="contain"
-        />
+      
+      <TouchableOpacity onPress={() => navigation.navigate('Recovery')}>
+        <Text style={styles.linkText}>¿Olvidaste tu contraseña?</Text>
+      </TouchableOpacity>
+      
+      <Image
+        // eslint-disable-next-line
+        source={require('../assets/logo-ujed.png')}
+        style={styles.logoBottom}
+        resizeMode="contain"
+      />
     </View>
   );
 };
@@ -104,9 +86,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 30,
   },
+  logo: {
+    width: 120,
+    height: 120,
+    marginBottom: 30,
+  },
   title: {
     fontSize: 28,
-    faontWeight: 'bold',
+    fontWeight: 'bold',
     marginBottom: 40,
     color: '#000',
   },
@@ -121,6 +108,11 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#DDD',
   },
+  inputFocus: {
+    borderColor: '#BF1E2D',
+    borderWidth: 2,
+    backgroundColor: '#fff',
+  },
   button: {
     backgroundColor: '#DA0C15',
     paddingVertical: 15,
@@ -133,5 +125,14 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     fontSize: 16,
     fontWeight: 'bold',
+  },
+  linkText: {
+    color: '#3b82f6',
+    marginTop: 20,
+  },
+  logoBottom: {
+    width: 120,
+    height: 120,
+    marginTop: 30,
   },
 });

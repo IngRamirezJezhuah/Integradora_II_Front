@@ -1,7 +1,18 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import PropTypes from 'prop-types';
 
-const FilterBar = ({ activeFilter, setFilter, filters, filterKey }) => {
+const FilterBar = ({ activeFilter, setFilter, filters }) => {
+  const handleFilterPress = (filter) => {
+    // Si el filtro ya está activo, lo desactivamos (setFilter a null)
+    // Si no está activo, lo activamos
+    if (activeFilter === filter) {
+      setFilter(null); // Desactivar filtro
+    } else {
+      setFilter(filter); // Activar filtro
+    }
+  };
+
   return (
     <View style={styles.container}>
       {filters.map((filter, index) => {
@@ -9,7 +20,7 @@ const FilterBar = ({ activeFilter, setFilter, filters, filterKey }) => {
         return (
           <TouchableOpacity
             key={index}
-            onPress={() => setFilter(filter)}
+            onPress={() => handleFilterPress(filter)}
             style={[styles.button, isActive ? styles.active : styles.inactive]}
           >
             <Text style={isActive ? styles.textActive : styles.textInactive}>
@@ -50,5 +61,11 @@ const styles = StyleSheet.create({
     color: '#888',
   },
 });
+
+FilterBar.propTypes = {
+  activeFilter: PropTypes.string,
+  setFilter: PropTypes.func.isRequired,
+  filters: PropTypes.arrayOf(PropTypes.string).isRequired,
+};
 
 export default FilterBar;

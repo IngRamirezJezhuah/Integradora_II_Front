@@ -7,13 +7,6 @@ export const Styles = StyleSheet.create({
         alignItems:'center',
         backgroundColor:'#c3e1f7',
     },
-})
-
-export const DashboardStyles = StyleSheet.create({
-    container:{
-        flex: 1,
-        backgroundColor:'#fff',
-    },
     header: {
         flexDirection: 'row',
         justifyContent: 'space-between',
@@ -30,10 +23,12 @@ export const DashboardStyles = StyleSheet.create({
         fontWeight: 'bold',
         color: '#2C3E50',
     },
-    logoutButton: {
-        padding: 8,
-        borderRadius: 8,
-        backgroundColor: '#F8F9FA',
+})
+
+export const DashboardStyles = StyleSheet.create({
+    container:{
+        flex: 1,
+        backgroundColor:'#fff',
     },
     content: {
         flex: 1,

@@ -8,7 +8,7 @@ const Stack = createNativeStackNavigator();
 const PatientStack = () => (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen name="Paciente" component={PacienteInicio} />
-        <Stack.Screen name="EditarPerfil" component={EditarPerfil} />
+        <Stack.Screen name="EditProfile" component={EditarPerfil} />
     </Stack.Navigator>
 );
 
