@@ -63,6 +63,20 @@ const Component=() => {
                 <div className={`sidebar ${showMenu ? 'sidebar-open' : 'sidebar-closed'}`}>
                     <img className='menu' src="/logo-iic.png" alt='icon-menu' onClick={HandleMenuDinamico}/>
                     <nav className="nav">
+                        <Link to={'/Perfil'} className="nav-link">
+                            <div>
+                                <li className={`bordes ${isActive('/') ? 'active' : ''}`}>
+                                    <div className='inicial-circulo'>
+                                        <img
+                                        src={img.image}
+                                        alt={img.name}
+                                        className='iconos'
+                                        />
+                                    </div>
+                                    {showMenu && <span className='bordes'> Perfil</span>}
+                                </li>
+                            </div>
+                        </Link>
                         <Link to="/Dashboard" className="nav-link">
                             <li className={`bordes ${isActive('/Dashboard') ? 'active' : ''}`}>
                                 <img className='iconos' src="/dash.png" alt="" />
@@ -105,17 +119,7 @@ const Component=() => {
                 <section className={`plantilla ${showMenu ? 'content-expanded' : 'content-collapsed'}`}>
                     <Outlet />
                 </section>
-                <Link to={'/Perfil'}>
-                    <div className='perfil'>
-                        <p>perfil</p>
-                        <div className='inicial-circulo'>
-                            <img
-                            src={img.image}
-                            alt={img.name}
-                            />
-                        </div>
-                    </div>
-                </Link>
+                
             </div>
         </section>
     )
