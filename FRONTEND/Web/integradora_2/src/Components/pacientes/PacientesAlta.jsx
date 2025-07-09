@@ -47,7 +47,6 @@ const PacientesAlta = () => {
                 }
                 const datat = JSON.parse(text);
                 setPacientes(Array.isArray(datat) ?datat : (datat.usuarios || []));
-                //setPacientes(datat.usuarios || []);
             } catch (error) {
                 setError('Error al obtener pacientes');
             } finally {

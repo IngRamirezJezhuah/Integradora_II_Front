@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import Swal from 'sweetalert2';
 import { requireTokenOrRedirect } from "../../utils/auth";
+import CargaBolitas from '../elementos/CargaBolitas';
 
-const PacientesBaja = () => {
-    const [pacientes, setPacientes] = useState([]);
+
+const PacientesBaja = () => {   
+    const [pacientes,setPacientes] = useState([]);
     const [error, setError] = useState(null);
-    const [loading, setLoading] = useState(false);
-    const apiUrl = process.env.REACT_APP_API_URL;
-    const [token, setToken] = useState(null);
+    const [loading,setLoading] = useState(null);
+    const [token, setToken ] = useState(null);
+    // const [setRawResponse] = useState(null);
+    const apiUrl = process.env.REACT_APP_API_URL
 
-    useEffect(() => {
+    useEffect( () => {
         const tk = requireTokenOrRedirect();
         setToken(tk);
     }, []);
@@ -19,17 +22,20 @@ const PacientesBaja = () => {
         const fetchPacientes = async () => {
             setLoading(true);
             setError(null);
-            try {
-                const headers = {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
+            try{
+                console.log("API URL", apiUrl);
+                console.log("TOKEN", token);
+                const headers ={
+                    'Content-Type':'application/json',
+                    'Authorization':`Bearer ${token}`,
                 };
-                const response = await fetch(`${apiUrl}/usuarios`, {
-                    method: 'GET',
+                const response = await fetch(`${apiUrl}/usuarios`,{
+                    method:'GET',
                     headers
                 });
+                const text = await response.text();
                 if (response.status === 401) {
-                    setError('Sesión expirada, redirigiendo...');
+                    setError('Sesion expirada, redirigiendo...');
                     setTimeout(() => {
                         window.location.href = '/';
                     }, 1500);
@@ -38,17 +44,17 @@ const PacientesBaja = () => {
                 if (!response.ok) {
                     throw new Error('Error al obtener pacientes');
                 }
-                const data = await response.json();
-                setPacientes(data.usuarios || []);
-            } catch (error) {
+                const dataUsr = JSON.parse(text);
+                setPacientes(Array.isArray(dataUsr) ? dataUsr : (dataUsr.usuarios|| []));
+            } catch (error){
                 setError('Error al obtener pacientes');
-            } finally {
-                setLoading(false);
+            } finally{
+                setLoading(false)
             }
         };
         fetchPacientes();
     }, [apiUrl, token]);
-
+    
     function handleAlert(e) {
         const swalWithBootstrapButtons = Swal.mixin({
             customClass: {
@@ -86,12 +92,32 @@ const PacientesBaja = () => {
         })
     }
 
-    const pacientesFiltrados = pacientes.filter(p => p.status === false);
-    if (loading) return <div>Cargando pacientes...</div>;
+    const pacientesFiltrados = pacientes.filter(
+        p => p.status === false || p.status === 'false'
+    );
+    if (loading) return (
+        <div className='caja_1'>
+            <div className='margen'>
+                <br />
+                <br />
+                <CargaBolitas />
+            </div>
+        </div>
+        );
+
     if (error) return <div>{error}</div>;
-    return (
+    return(
         <div className='caja_1'>
             <div className='scroll'>
+                {/*
+                esto es para ver si funciona correctamente
+                <div>
+                    <h3>Respuesta cruda del backend:</h3>
+                    <pre>{rawResponse}</pre>
+                    <h3>Pacientes parseados:</h3>
+                    <pre>{JSON.stringify(pacientes, null, 2)}</pre>
+                </div>
+                */}
                 {pacientesFiltrados.map((paciente, index) => {
                     const nombreCompleto = `${paciente.nombre} ${paciente.apellidoPaterno} ${paciente.apellidoMaterno}`;
                     const inicial = paciente.nombre.charAt(0);
