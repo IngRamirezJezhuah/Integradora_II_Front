@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import Swal from 'sweetalert2';
 import { requireTokenOrRedirect } from "../../utils/auth";
+import CargaBolitas from '../elementos/CargaBolitas';
 
 const PacientesAlta = () => {
     const [pacientes, setPacientes] = useState([]);
-    const [rawResponse, setRawResponse] = useState(null);
+    const [, setRawResponse] = useState(null);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
     const apiUrl = process.env.REACT_APP_API_URL;
@@ -45,7 +46,8 @@ const PacientesAlta = () => {
                     throw new Error('Error al obtener pacientes');
                 }
                 const datat = JSON.parse(text);
-                setPacientes(datat.usuarios || []);
+                setPacientes(Array.isArray(datat) ?datat : (datat.usuarios || []));
+                //setPacientes(datat.usuarios || []);
             } catch (error) {
                 setError('Error al obtener pacientes');
             } finally {
@@ -92,74 +94,33 @@ const PacientesAlta = () => {
         })
     }
 
-    if (loading) return <div>Cargando pacientes...</div>;
-    if (error) return <div>{error}</div>;
-
-    /*
-    useEffect(() => {
-        if (!token) return;
-        const fetchPacientes = async () => {
-            setLoading(true);
-            setError(null);
-            try {
-                console.log("API URL:", apiUrl);
-                console.log("TOKEN:", token);
-                const headers = {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
-                };
-                const response = await fetch(`${apiUrl}/usuarios`,{
-                    method: 'GET',
-                    headers
-                });
-                const text = await response.text();
-                setRawResponse(text);
-                console.log("Raw response:", text);
-                if (response.status === 401) {
-                    setError('Sesion expirada, redirigiendo...');
-                    setTimeout(() => {
-                        window.location.href = '/';
-                    }, 1500);
-                    return;
-                } 
-                if (!response.ok) {
-                    throw new Error('Error al obtener pacientes');
-                }
-                //const datat = await response.json();
-                
-                setPacientes(datat.usuarios || []);
-                
-            } catch (error){
-                setError('Error al obtener pacientes');
-            } finally{
-                setLoading(false);
-            }
-        };
-        fetchPacientes();
-        
-    }, [apiUrl, token]);
-
-    
-    console.log('Pacientes del backend', pacientes);
-    /*const pacientesFiltrados = pacientes.filter(
-        p => p.status === true || p.status === "true"
+    const pacientesFiltrados = pacientes.filter(
+        p => p.status === true || p.status === 'true'
     );
-    //const pacientesFiltrados = pacientes.filter(p => p.status === true);
-    const pacientesFiltrados = pacientes;
-    pacientes.forEach(p => console.log(p.nombre, p.status, typeof p.status));
-    if (loading) return <div>Cargando pacientes...</div>;
+    if (loading) return (
+        <div className='caja_1'>
+            <div className='margen'>
+                <br />
+                <br />
+                <CargaBolitas />
+            </div>
+        </div>
+        );
     if (error) return <div>{error}</div>;
-    console.log(pacientesFiltrados);*/
+
     return (
         <div className='caja_1'>
             <div className='scroll'>
+                {/*
+                esto es para ver si funciona correctamente
                 <div>
                     <h3>Respuesta cruda del backend:</h3>
                     <pre>{rawResponse}</pre>
                     <h3>Pacientes parseados:</h3>
                     <pre>{JSON.stringify(pacientes, null, 2)}</pre>
                 </div>
-                {/*pacientesFiltrados.map((paciente, index) => {
+                */}
+                {pacientesFiltrados.map((paciente, index) => {
                     const nombreCompleto = `${paciente.nombre} ${paciente.apellidoPaterno} ${paciente.apellidoMaterno}`;
                     const inicial = paciente.nombre.charAt(0);
                     return(
@@ -175,7 +136,7 @@ const PacientesAlta = () => {
                             </div>
                         </div>
                     )
-                })*/}
+                })}
             </div>
         </div>
     )

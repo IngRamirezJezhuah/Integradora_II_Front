@@ -2,6 +2,7 @@ import { MuestrasHechas, SampleChart } from '../Components';
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import Swal from 'sweetalert2';
+import { CargaBolita } from '../Components';
 
 const Dashboard=()=> {
     const [ldrData, setLdrData] = useState(null);
@@ -59,24 +60,14 @@ const Dashboard=()=> {
                         <p>25% c</p>
                         <div className='div-grafica'>
                             
-                                <div class="cargando">
-                                    <div class="pelotas"></div>
-                                    <div class="pelotas"></div>
-                                    <div class="pelotas"></div>
-                                    <span class="texto-cargando">Cargando...</span>
-                                </div>
+                                <CargaBolita/>  
                         </div>
                     </div>
                     <div className='div-graficas'>
                         <p>Humedad del Laboratorio</p>
                         <p>25% c</p>
                         <div className='div-grafica'>
-                            <div class="cargando">
-                                <div class="pelotas"></div>
-                                <div class="pelotas"></div>
-                                <div class="pelotas"></div>
-                                <span class="texto-cargando">Cargando...</span>
-                            </div>
+                            <CargaBolita/>  
                         </div>
                     </div>
                 </div>
@@ -85,21 +76,19 @@ const Dashboard=()=> {
 
                         <div className='div-muestra'>
                             <p className='centrar'>Pedidos Pendientes</p>
-                            
+                            <br /><br />
+                        <CargaBolita/> 
                         </div>
                     </div>
                     <div className='div-muestra-2'>
                         <p className='centrar'>muestras en preocesamiento</p>
+                        <br /><br />
+                        <CargaBolita/> 
                     </div>
                     <div className='div-muestra-3'>
                         <p className='centrar'>Contenedor esp32c3_001</p>
                         <br /><br />
-                        <div class="cargando">
-                            <div class="pelotas"></div>
-                            <div class="pelotas"></div>
-                            <div class="pelotas"></div>
-                            <span class="texto-cargando">Cargando...</span>
-                        </div>
+                        <CargaBolita/>  
                     </div>
                 </div>
             </div>
