@@ -132,7 +132,7 @@ const PacientesAlta = () => {
         p => p.status === true || p.status === 'true'
     );
     if (loading) return (
-        <div className=''>    
+        <div className='scale-up-ver-center'>    
             <div className='caja_1'>
                 <div className='margen'>
                     <br />

@@ -10,6 +10,7 @@ const OpcionesPaciente = ({buttonLabels =["Paciente Alta", "Paciente Baja"]}) =>
         setActiveButton(label);
     };
 
+
     return (
         <div>
             <div className='filter-bar'>

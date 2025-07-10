@@ -119,11 +119,13 @@ const PacientesBaja = () => {
         p => p.status === false || p.status === 'false'
     );
     if (loading) return (
-        <div className='caja_1'>
-            <div className='margen'>
-                <br />
-                <br />
-                <CargaBarras />
+        <div className='scale-up-ver-center'>
+            <div className='caja_1'>
+                <div className='margen'>
+                    <br />
+                    <br />
+                    <CargaBarras />
+                </div>
             </div>
         </div>
         );
