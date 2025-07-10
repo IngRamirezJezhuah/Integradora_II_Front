@@ -34,7 +34,7 @@ const PacientesAlta = () => {
                 });
                 const text = await response.text();
                 setRawResponse(text);
-                console.log("Raw response:", text);
+                //console.log("Raw response:", text); //esto muestra el arreglo de pacientes
                 if (response.status === 401) {
                     setError('Sesion expirada, redirigiendo...');
                     setTimeout(() => {

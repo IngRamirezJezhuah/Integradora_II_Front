@@ -1,7 +1,12 @@
 import React, { useState } from 'react';
 import Swal from 'sweetalert2';
+import { requireTokenOrRedirect } from "../../utils/auth";
 
 const ModalPaciente = ({ onClose }) => {
+    const apiUrl = process.env.REACT_APP_API_URL;
+    const [error, setError] = useState('');
+    const [, setLoading] = useState(false);
+
     const [formData, setFormData] = useState({
         correo: '',
         rol: '',
@@ -11,12 +16,20 @@ const ModalPaciente = ({ onClose }) => {
         fechaNacimiento:'',
     });
 
-    const [error, setError] = useState('');
+    const roles = [
+    { label: "Administrador", value: "admin" },
+    { label: "Secretaria", value: "accounting" },
+    { label: "Laboratorio", value: "laboratory" },
+    { label: "Paciente", value: "patient" },
+    ];
+
+
 
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData(prev => ({ ...prev, [name]: value }));
     };
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -28,45 +41,50 @@ const ModalPaciente = ({ onClose }) => {
             || !formData.apellidoMaterno 
             || !formData.fechaNacimiento 
         ) {
-        setError('Por favor, completa todos los campos requeridos');
-        return;
+            setError('Por favor, completa todos los campos requeridos');
+            return;
         }
-
         setError('');
-
+        setLoading(true);
         try {
-        const response = await fetch("http://vps-5127231-x.dattaweb.com:3500/usuarios", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-            correo: formData.correo,
-            rol: formData.rol,
-            nombre: formData.nombre,
-            apellidoPaterno: formData.apellidoPaterno,
-            apellidoMaterno: formData.apellidoMaterno,
-            fechaNacimiento: formData.fechaNacimiento
-            })
-        });
-        
-        const result = await response.json();
+            const token = requireTokenOrRedirect();
+            if (!token) return;
+            const headers = {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            };
+                // Antes del fetch
+            console.log("Enviando datos:", formData);
 
-        if (response.ok) {
-            alert("Paciente registrado exitosamente.");
-            onClose(); // Cierra el modal
-            await Swal.fire({
-                    title: "¡ Envidao Correctamente !",
+            const response = await fetch(`${apiUrl}/usuarios`, {
+                method: 'POST',
+                headers,
+                body: JSON.stringify({
+                    correo: formData.correo,
+                    rol: formData.rol,
+                    nombre: formData.nombre,
+                    apellidoPaterno: formData.apellidoPaterno,
+                    apellidoMaterno: formData.apellidoMaterno,
+                    fechaNacimiento: formData.fechaNacimiento
+                })
+            });
+            const result = await response.json();
+            if (response.ok) {
+                await Swal.fire({
+                    title: "¡ Enviado Correctamente !",
                     icon: "success",
                     timer : 1500,
                     showConfirmButton: false
-                    });
-                    onClose();
-        } else {
-            setError(result.message || "Hubo un error al registrar al paciente.");
-        }
-
+                });
+                onClose();
+            } else {
+                setError(result.message || "Hubo un error al registrar al paciente.");
+            }
         } catch (error) {
-        console.error("Error de red:", error);
-        setError("No se pudo conectar al servidor.");
+            console.error("Error de red:", error);
+            setError("No se pudo conectar al servidor.");
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -87,17 +105,32 @@ const ModalPaciente = ({ onClose }) => {
                     
                     <label htmlFor="apellidoMaterno">Apellido Materno</label>
                     <input type="text" name="apellidoMaterno" placeholder="Apellido Materno" value={formData.apellidoMaterno} onChange={handleChange} />
-
-                    <label>
-                        Rol:{''}
+                    
+                    <label htmlFor="">
                         <select name="rol" value={formData.rol} onChange={handleChange}>
-                            <option value="">Selecciona un rol</option>
-                            <option value="Admin">Admin</option>
-                            <option value="Cliente">Cliente</option>
-                            <option value="Secretaria">Secretaria</option>
-                            <option value="Empleado">Empleado</option>
+                        <option value="">Selecciona un rol</option>
+                        {roles.map((rol) => (
+                            <option key={rol.value} value={rol.value}>
+                            {rol.label}
+                            </option>
+                        ))}
                         </select>
                     </label>
+
+                    {/*
+                    
+                    <label>
+                        Rol:{' '}
+                        <select name="rol" value={formData.rol} onChange={handleChange}>
+                            <option value="">Selecciona un rol</option>
+                            <option value="admin">Administrador</option>
+                            <option value="accounting">Secretaria</option>
+                            <option value="laboratory">Laboratorio</option>
+                            <option value="patient">Paciente</option>
+                        </select>
+                    </label>
+                    */}
+
                     
                     <label htmlFor="fechaNacimiento">Fecha de Nacimiento</label>
                     <input type="date" name="fechaNacimiento" value={formData.fechaNacimiento} onChange={handleChange} />
