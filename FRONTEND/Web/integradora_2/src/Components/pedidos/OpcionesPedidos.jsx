@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import EnProcesoPedidos from './EnProcesoPedidos';
+import ListaPedidos from './ListaPedidos';
 
 
 const OpcionesPedidos = ({ buttonLabels = ['En proceso', 'Completadas', 'Canceladas'] }) => {
@@ -36,7 +37,7 @@ const OpcionesPedidos = ({ buttonLabels = ['En proceso', 'Completadas', 'Cancela
                             <p className='texto'>Pedidos completados</p>
                             <div className='margen'>
                                 <div className='scale-up-ver-center'>
-                                    <EnProcesoPedidos/>
+                                    <ListaPedidos/>
                                 </div>
                             </div>
                         </div>

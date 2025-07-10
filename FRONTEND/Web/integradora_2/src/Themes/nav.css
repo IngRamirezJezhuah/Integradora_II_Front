@@ -80,6 +80,29 @@ a{
     border-radius: 1vw;
 }
 
+.nav-link:hover {
+    background-color: #e9727293;
+    padding: 0.5vw 1vw;
+    transition: background 0.2s;
+
+}
+
+.paciente-link {
+    display: flex;
+    align-items: center;
+    gap: 1vw;
+    width: 13vh;
+    padding: 0.5vw 1vw;
+    transition: background 0.2s;
+    border-radius: 1vw;
+}
+.paciente-link:hover {
+    background-color: #e9727293;
+    /*padding: 0.5vw 1vw;*/
+    transition: background 0.2s;
+    width: 13vh;
+}
+
 
 
 .sidebar-closed .textbarra {
