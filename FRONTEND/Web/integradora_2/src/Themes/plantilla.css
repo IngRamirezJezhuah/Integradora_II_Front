@@ -140,6 +140,13 @@
     display: flex;
     align-items: flex-end;
 }
+
+.prueba_tabla.seleccionado {
+    background-color: #ffabab7a;
+    transform: scale(1.03);
+    border: 2px solid #e37878af;
+}
+
 .pedidos-form{
     padding: 2vw;
     margin: 1rem;

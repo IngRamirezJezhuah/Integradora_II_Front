@@ -30,11 +30,21 @@ const Component=() => {
                     swalWithBootstrapButtons.fire({
                         title: "Bye bye ( >v°)!",
                         text: "Redirigiendo a la pagina de inicio de sesion...",
-                        icon: "success"
+                        icon: "success",
+                        timer : 1000,
+                        showConfirmButton: false
                     }).then(() => {
                         navigate('/'); 
                     });
-                } else if (result.dismiss === Swal.DismissReason.cancel) {}
+                } else if (result.dismiss === Swal.DismissReason.cancel) {
+                    swalWithBootstrapButtons.fire({
+                    title: "!Cancelado!",
+                    text: "Regresando a la pagina",
+                    icon: "success",
+                    timer : 1000,
+                    showConfirmButton: false
+                });
+                }
             })
                 
         }

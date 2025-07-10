@@ -10,6 +10,9 @@ const PacientesAlta = () => {
     const [loading, setLoading] = useState(false);
     const apiUrl = process.env.REACT_APP_API_URL;
     const [token, setToken] = useState(null);
+    const [pacienteSeleccionado, setPacienteSeleccionado] = useState(null);
+
+    
 
     useEffect(() => {
         const tk = requireTokenOrRedirect();
@@ -36,7 +39,10 @@ const PacientesAlta = () => {
                 setRawResponse(text);
                 //console.log("Raw response:", text); //esto muestra el arreglo de pacientes
                 if (response.status === 401) {
-                    setError('Sesion expirada, redirigiendo...');
+                    <div>
+
+                    </div>
+                        setError('Sesion expirada, redirigiendo...');
                     setTimeout(() => {
                         window.location.href = '/';
                     }, 1500);
@@ -126,15 +132,23 @@ const PacientesAlta = () => {
         p => p.status === true || p.status === 'true'
     );
     if (loading) return (
-        <div className='caja_1'>
-            <div className='margen'>
-                <br />
-                <br />
-                <CargaBarras />
+        <div className=''>    
+            <div className='caja_1'>
+                <div className='margen'>
+                    <br />
+                    <br />
+                    <CargaBarras />
+                </div>
             </div>
         </div>
         );
     if (error) return <div>{error}</div>;
+    
+    const handleSeleccionarPaciente = (paciente) => {
+    setPacienteSeleccionado(paciente);
+    };
+    //onClick={() => handleSeleccionarPaciente(paciente)} para reutilizarlo en pasitos
+
 
     return (
         <div className='caja_1'>
@@ -151,14 +165,15 @@ const PacientesAlta = () => {
                 {pacientesFiltrados.map((paciente, index) => {
                     const nombreCompleto = `${paciente.nombre} ${paciente.apellidoPaterno} ${paciente.apellidoMaterno}`;
                     const inicial = paciente.nombre.charAt(0);
+                    const isSelected = pacienteSeleccionado === paciente._id;
                     return(
-                        <div key={paciente._id || index} className='prueba_tabla'>
+                        <div key={paciente._id || index} className={`prueba_tabla ${isSelected ? 'seleccionado' : ''}`} onClick={() => handleSeleccionarPaciente(paciente._id)} >
                             <div className='inicial-circulo'>
                                 <p className='letra-circulo'>{inicial}</p>
                             </div>
                             <div>
                                 <div className='acomodar-iconos'>
-                                    <img src="/basura.png" alt="borrar" className='icono-borrar' onClick={() => handleAlert(paciente._id)}/>
+                                    <img src="/basura.png" alt="borrar" className='icono-borrar' onClick={(e) =>{e.stopPropagation(); handleAlert(paciente._id)} }/>
                                 </div>
                                 <p className='prueba-name'>{nombreCompleto}</p>
                             </div>
