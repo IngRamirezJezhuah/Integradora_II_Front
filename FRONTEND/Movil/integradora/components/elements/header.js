@@ -3,17 +3,18 @@ import { View, Text, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 import MenuPerfil from './menuPerfil';
 
-const Header = ({ title }) => {
+const Header = ({ title, showMenu = true }) => {
     return(
         <View style={styles.header}>
             <Text style={styles.headerTitle}>{title}</Text>
-            <MenuPerfil />
+            {showMenu && <MenuPerfil />}
         </View>
     );
 };
 
 Header.propTypes = {
     title: PropTypes.string.isRequired,
+    showMenu: PropTypes.bool,
 };
 
 const styles = StyleSheet.create({

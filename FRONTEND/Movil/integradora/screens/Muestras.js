@@ -14,15 +14,9 @@ const MuestrasScreen = () => {
   // Estados para el modal
   const [selectedSample, setSelectedSample] = useState(null);
   const [showSampleModal, setShowSampleModal] = useState(false);
+
   
-  // Datos de ejemplo iniciales
-  const muestrasEjemplo = [
-    {"__v": 0, "_id": "6860648b90d32bcde0828eb3", "createDate": "2025-06-28T21:54:19.417Z", "deleteDate": "2025-06-28T21:55:08.074Z", "fechaTomaMuestra": "2025-06-28T21:54:19.417Z", "idusuario": "6650e3ab1234567890abcdef", "nombrePaciente": "Juan Pablo Pérez", "observaciones": "Actualizado por el Dr. González", "pedidoId": "6650e5cd1234567890abcdef", "quimicaSanguinea": {}, "status": false, "statusShowClient": false, "tipoMuestra": "quimicaSanguinea"}, 
-    {"__v": 0, "_id": "6860cd358930eb0dc235f2ee", "createDate": "2025-06-29T05:20:53.410Z", "fechaTomaMuestra": "2025-06-29T05:20:53.410Z", "idusuario": "6650e3ab1234567890abcdef", "nombrePaciente": "Juan Pérez", "observaciones": "Muestra tomada correctamente", "pedidoId": "6650e5cd1234567890abcdef", "status": true, "statusShowClient": false, "tipoMuestra": "quimicaSanguinea"}, 
-    {"__v": 0, "_id": "6861579c8930eb0dc235f2f2", "createDate": "2025-06-29T15:11:24.097Z", "fechaTomaMuestra": "2025-06-29T15:11:24.097Z", "idusuario": "685c3712978fa098a3769589", "nombrePaciente": "Diego Pérez", "observaciones": "Muestra tomada correctamente", "pedidoId": "6650e5cd1234567890abcdef", "status": true, "statusShowClient": false, "tipoMuestra": "quimicaSanguinea"}
-  ];
-  
-  const [muestras, setMuestras] = useState(muestrasEjemplo);
+  const [muestras, setMuestras] = useState();
 
 useEffect(() => {
   const fetchMuestras = async () => {
