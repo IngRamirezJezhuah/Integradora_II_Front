@@ -1,8 +1,8 @@
 import React from 'react';
 import { View, TextInput, StyleSheet } from 'react-native';
-import { Feather } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
 import PropTypes from 'prop-types';
-import useFocusField from '../../hooks/useFocusField';
+import { useFocusField } from '../../hooks';
 
 const SearchBar = ({ searchText, onChangeSearch, placeholder }) => {
   const { setFocus, clearFocus, getFieldStyle } = useFocusField();
@@ -18,7 +18,7 @@ const SearchBar = ({ searchText, onChangeSearch, placeholder }) => {
         onFocus={() => setFocus('search')}
         onBlur={clearFocus}
       />
-      <Feather name="search" size={20} color="#D32F2F" style={styles.icon} />
+      <Ionicons name="search" size={20} color="#D32F2F" style={styles.icon} />
     </View>
   );
 };

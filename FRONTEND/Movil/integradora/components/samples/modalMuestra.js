@@ -98,10 +98,6 @@ const ModalMuestra = ({ visible, sample, onClose }) => {
             </>
           )}
         </ScrollView>
-
-        <TouchableOpacity style={styles.button} onPress={onClose}>
-          <Text style={styles.buttonText}>Cerrar</Text>
-        </TouchableOpacity>
         
         <TouchableOpacity style={styles.button} onPress={handleRegistrarResultado}>
           <Text style={styles.buttonText}>Registrar Resultado</Text>

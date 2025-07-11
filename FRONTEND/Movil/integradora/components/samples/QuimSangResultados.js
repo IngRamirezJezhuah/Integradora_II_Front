@@ -1,23 +1,49 @@
-import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, ScrollView, TextInput,Image } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, TouchableOpacity, StyleSheet, ScrollView, TextInput,Image, Alert } from 'react-native';
 import Modal from 'react-native-modal';
 import { Ionicons } from '@expo/vector-icons';
 import PropTypes from 'prop-types';
-import useFocusField from '../../hooks';
+import { useFocusField } from '../../hooks';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { API_URL } from '@env';
 
 const QuimSangResultados = ({ visible, sample, onClose }) => {
   const [resultados, setResultados] = useState({
     glucosa: '',
-    colesterol: '',
-    trigliceridos: '',
+    glucosaPost: '',
+    acidoUrico: '',
     urea: '',
     creatinina: '',
-    acidoUrico: '',
+    colesterol: '',
+    LDR: '',
+    gGT: '',
+    trigliceridos: '',
     observaciones: ''
   });
 
+  const [loading, setLoading] = useState(false);
+
   // Usar el hook personalizado para manejar el focus
   const { setFocus, clearFocus, getFieldStyle } = useFocusField();
+
+  // Cargar datos existentes cuando se abre el modal
+  useEffect(() => {
+    if (visible && sample?.quimicaSanguinea) {
+      const quimicaData = sample.quimicaSanguinea;
+      setResultados({
+        glucosa: quimicaData.glucosa?.toString() || '',
+        glucosaPost: quimicaData.glucosaPost?.toString() || '',
+        acidoUrico: quimicaData.acidoUrico?.toString() || '',
+        urea: quimicaData.urea?.toString() || '',
+        creatinina: quimicaData.creatinina?.toString() || '',
+        colesterol: quimicaData.colesterol?.toString() || '',
+        LDR: quimicaData.LDR?.toString() || '',
+        gGT: quimicaData.gGT?.toString() || '',
+        trigliceridos: quimicaData.trigliceridos?.toString() || '',
+        observaciones: quimicaData.observaciones || ''
+      });
+    }
+  }, [visible, sample]);
 
   const handleInputChange = (field, value) => {
     setResultados(prev => ({
@@ -26,13 +52,64 @@ const QuimSangResultados = ({ visible, sample, onClose }) => {
     }));
   };
 
-  const handleSubmit = () => {
-    console.log('Resultados de Química Sanguínea:', {
-      sampleId: sample?._id,
-      resultados
-    });
-    // Aquí puedes agregar la lógica para enviar los resultados al backend
-    onClose();
+  const handleSubmit = async () => {
+    if (!sample?._id) {
+      Alert.alert('Error', 'No se encontró el ID de la muestra');
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const token = await AsyncStorage.getItem('userToken');
+      
+      if (!token) {
+        Alert.alert('Error', 'No se encontró el token de autenticación');
+        setLoading(false);
+        return;
+      }
+
+      // Convertir strings a números donde sea necesario
+      const formattedResults = {
+        quimicaSanguinea: {
+          glucosa: resultados.glucosa ? parseFloat(resultados.glucosa) : null,
+          glucosaPost: resultados.glucosaPost ? parseFloat(resultados.glucosaPost) : null,
+          acidoUrico: resultados.acidoUrico ? parseFloat(resultados.acidoUrico) : null,
+          urea: resultados.urea ? parseFloat(resultados.urea) : null,
+          creatinina: resultados.creatinina ? parseFloat(resultados.creatinina) : null,
+          colesterol: resultados.colesterol ? parseFloat(resultados.colesterol) : null,
+          LDR: resultados.LDR ? parseFloat(resultados.LDR) : null,
+          gGT: resultados.gGT ? parseFloat(resultados.gGT) : null,
+          trigliceridos: resultados.trigliceridos ? parseFloat(resultados.trigliceridos) : null,
+          observaciones: resultados.observaciones || ''
+        }
+      };
+
+      const response = await fetch(`${API_URL}/muestras/resultados/${sample._id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        },
+        body: JSON.stringify(formattedResults),
+      });
+
+      if (response.ok) {
+        const responseData = await response.json();
+        console.log('Resultados guardados exitosamente:', responseData);
+        Alert.alert('Éxito', 'Los resultados se han guardado correctamente');
+        onClose();
+      } else {
+        const errorData = await response.json();
+        console.error('Error al guardar resultados:', errorData);
+        Alert.alert('Error', 'No se pudieron guardar los resultados');
+      }
+    } catch (error) {
+      console.error('Error al guardar resultados:', error);
+      Alert.alert('Error', 'Error de conexión al guardar los resultados');
+    } finally {
+      setLoading(false);
+    }
   };
 
   if (!sample) return null;
@@ -68,25 +145,25 @@ const QuimSangResultados = ({ visible, sample, onClose }) => {
             keyboardType="numeric"
           />
 
-          <Text style={styles.label}>Colesterol Total (mg/dL)</Text>
+          <Text style={styles.label}>Glucosa Post (mg/dL)</Text>
           <TextInput
-            style={getFieldStyle('colesterol', styles.input, styles.inputFocus)}
-            value={resultados.colesterol}
-            onChangeText={(value) => handleInputChange('colesterol', value)}
-            onFocus={() => setFocus('colesterol')}
+            style={getFieldStyle('glucosaPost', styles.input, styles.inputFocus)}
+            value={resultados.glucosaPost}
+            onChangeText={(value) => handleInputChange('glucosaPost', value)}
+            onFocus={() => setFocus('glucosaPost')}
             onBlur={clearFocus}
-            placeholder="< 200"
+            placeholder="< 140"
             keyboardType="numeric"
           />
 
-          <Text style={styles.label}>Triglicéridos (mg/dL)</Text>
+          <Text style={styles.label}>Ácido Úrico (mg/dL)</Text>
           <TextInput
-            style={getFieldStyle('trigliceridos', styles.input, styles.inputFocus)}
-            value={resultados.trigliceridos}
-            onChangeText={(value) => handleInputChange('trigliceridos', value)}
-            onFocus={() => setFocus('trigliceridos')}
+            style={getFieldStyle('acidoUrico', styles.input, styles.inputFocus)}
+            value={resultados.acidoUrico}
+            onChangeText={(value) => handleInputChange('acidoUrico', value)}
+            onFocus={() => setFocus('acidoUrico')}
             onBlur={clearFocus}
-            placeholder="< 150"
+            placeholder="3.5-7.2"
             keyboardType="numeric"
           />
 
@@ -112,14 +189,47 @@ const QuimSangResultados = ({ visible, sample, onClose }) => {
             keyboardType="numeric"
           />
 
-          <Text style={styles.label}>Ácido Úrico (mg/dL)</Text>
+          <Text style={styles.label}>Colesterol Total (mg/dL)</Text>
           <TextInput
-            style={getFieldStyle('acidoUrico', styles.input, styles.inputFocus)}
-            value={resultados.acidoUrico}
-            onChangeText={(value) => handleInputChange('acidoUrico', value)}
-            onFocus={() => setFocus('acidoUrico')}
+            style={getFieldStyle('colesterol', styles.input, styles.inputFocus)}
+            value={resultados.colesterol}
+            onChangeText={(value) => handleInputChange('colesterol', value)}
+            onFocus={() => setFocus('colesterol')}
             onBlur={clearFocus}
-            placeholder="3.5-7.2"
+            placeholder="< 200"
+            keyboardType="numeric"
+          />
+
+          <Text style={styles.label}>LDR (mg/dL)</Text>
+          <TextInput
+            style={getFieldStyle('LDR', styles.input, styles.inputFocus)}
+            value={resultados.LDR}
+            onChangeText={(value) => handleInputChange('LDR', value)}
+            onFocus={() => setFocus('LDR')}
+            onBlur={clearFocus}
+            placeholder="< 100"
+            keyboardType="numeric"
+          />
+
+          <Text style={styles.label}>GGT (U/L)</Text>
+          <TextInput
+            style={getFieldStyle('gGT', styles.input, styles.inputFocus)}
+            value={resultados.gGT}
+            onChangeText={(value) => handleInputChange('gGT', value)}
+            onFocus={() => setFocus('gGT')}
+            onBlur={clearFocus}
+            placeholder="9-48"
+            keyboardType="numeric"
+          />
+
+          <Text style={styles.label}>Triglicéridos (mg/dL)</Text>
+          <TextInput
+            style={getFieldStyle('trigliceridos', styles.input, styles.inputFocus)}
+            value={resultados.trigliceridos}
+            onChangeText={(value) => handleInputChange('trigliceridos', value)}
+            onFocus={() => setFocus('trigliceridos')}
+            onBlur={clearFocus}
+            placeholder="< 150"
             keyboardType="numeric"
           />
 
@@ -140,8 +250,14 @@ const QuimSangResultados = ({ visible, sample, onClose }) => {
           <TouchableOpacity style={[styles.button, styles.cancelButton]} onPress={onClose}>
             <Text style={styles.cancelButtonText}>Cancelar</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={handleSubmit}>
-            <Text style={styles.buttonText}>Guardar</Text>
+          <TouchableOpacity 
+            style={[styles.button, loading && styles.buttonDisabled]} 
+            onPress={handleSubmit}
+            disabled={loading}
+          >
+            <Text style={styles.buttonText}>
+              {loading ? 'Guardando...' : 'Guardar'}
+            </Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -222,6 +338,9 @@ const styles = StyleSheet.create({
     flex: 1,
     marginHorizontal: 5,
   },
+  buttonDisabled: {
+    backgroundColor: '#ccc',
+  },
   cancelButton: {
     backgroundColor: '#666',
   },
@@ -242,6 +361,18 @@ QuimSangResultados.propTypes = {
   sample: PropTypes.shape({
     _id: PropTypes.string,
     nombrePaciente: PropTypes.string,
+    quimicaSanguinea: PropTypes.shape({
+      glucosa: PropTypes.number,
+      glucosaPost: PropTypes.number,
+      acidoUrico: PropTypes.number,
+      urea: PropTypes.number,
+      creatinina: PropTypes.number,
+      colesterol: PropTypes.number,
+      LDR: PropTypes.number,
+      gGT: PropTypes.number,
+      trigliceridos: PropTypes.number,
+      observaciones: PropTypes.string,
+    }),
   }),
   onClose: PropTypes.func.isRequired
 };

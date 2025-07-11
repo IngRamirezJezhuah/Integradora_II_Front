@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, ScrollView, Alert } from 'react-native';
 import PropTypes from 'prop-types';
 import { InputGroup } from '../components/';
-import useFocusField from '../hooks/useFocusField';
+import { useFocusField } from '../hooks';
 
 const EditarPerfil = ({ onSave, onClose }) => {
   const [formData, setFormData] = useState({

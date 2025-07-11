@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 import Modal from 'react-native-modal';
 import PropTypes from 'prop-types';
-import useFocusField from '../../hooks/useFocusField';
+import { useFocusField } from '../../hooks';
 
 const ModalCodigo = ({ isVisible, onClose, onSubmit }) => {
   const [codigo, setCodigo] = useState('');
