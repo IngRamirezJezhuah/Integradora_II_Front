@@ -21,7 +21,7 @@ const Dashboard=()=> {
         .catch((err) => {console.error('Error al obtener LDR:', err)}) 
         //Esta es para la de Temperatuea y Humedad
         axios
-        .get(`${apiUrl}/tempwet/esp32c3_001`, {headers})
+        .get(`${apiUrl}/tempwet/tempWetController_001`, {headers})
         .then((res) => setTempData(res.data))
         .catch((err) => {console.error('Error al obtener LDR:', err)})
         

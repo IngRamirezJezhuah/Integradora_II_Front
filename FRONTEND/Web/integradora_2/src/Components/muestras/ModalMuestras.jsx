@@ -2,19 +2,15 @@ import React, { useState } from 'react';
 import Swal from 'sweetalert2';
 
 const ModalMuestras = ({ onClose }) => {
-  //const [selectedTest, setSelectedTest] = useState('');
-  const [formData, setFormData] = useState({
+
+  /*const [formData, setFormData] = useState({
     pedido: '',
     tipoMuestra: 'Sangre',
     paciente: '',
     resultados: ''
   });
   const [error, setError] = useState('');
-  /*
-  const handleTestChange = (test) => {
-    setSelectedTest(test);
-  };
-  */
+
   
     const handleChange = (e) => {
         const {name,value} = e.target;
@@ -35,18 +31,42 @@ const ModalMuestras = ({ onClose }) => {
         });
         onClose();
         }
-    };
+    };*/
+
+    const [pasoActual, setPasoActual] = useState(1);
+    const [, setmuestrasSeleccionado] = useState(null);
+
+    const avanzarPaso = () => setPasoActual(prev => prev +1);
+    const retrocederPaso = () => setPasoActual(prev => prev -1);
+
 
   return (
     <div className='modal-overlay'>
       <div className='scale-in-hor-center'>
         <div className='modal-content'>
-          <h2>Registrar Nueva Muestra</h2>
+          <h2>Registrar nueva muestra </h2>
+          <button className='close-btn' onClick={onClose}>X</button>
+          {pasoActual ===1 &&(
+            <div>
+              <p className='titulo'></p>
+
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default ModalMuestras;
+
+
+/*
+<h2>Registrar Nueva Muestra</h2>
           <button className="close-btn" onClick={onClose}>X</button>
           
           <div className="form-section">
             <h3>Tipo de Prueba</h3>
-            {/*
             <div className="test-options">
               <div
                 className={`test-option ${selectedTest === 'Quimica Sanguinea' ? 'selected' : ''}`}
@@ -63,7 +83,7 @@ const ModalMuestras = ({ onClose }) => {
                 <span>Biometria Hematica</span>
               </div>
             </div>
-            */}
+            
           </div>
             <form onSubmit={handleSubmit}>
               {error && <p className='error-msg'>{error}</p>}
@@ -108,10 +128,4 @@ const ModalMuestras = ({ onClose }) => {
                 <button type="submit" className="btn">Registrar</button>
               </div>
             </form>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-export default ModalMuestras;
+*/
