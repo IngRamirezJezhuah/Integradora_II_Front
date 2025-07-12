@@ -26,11 +26,9 @@ const AgregarMuestra = ({ onClose }) => {
   };
 
   return (
-    <div className='modal-overlay'>
-      <div className='modal-content'>
+    <div>
+      <div>
         <h2>Registrar Nueva Muestra</h2>
-        <button className="close-btn" onClick={onClose}>X</button>
-        
         <div className="form-section">
           <h3>Tipo de Prueba</h3>
           <div className="test-options">

@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import Swal from 'sweetalert2';
+import PacientesAlta from '../pacientes/PacientesAlta';
+import DetallesPacienteAlta from '../pacientes/DetallesPacienteAlta';
+import AgregarMuestra from './AgregarMuestra';
 
 const ModalMuestras = ({ onClose }) => {
 
@@ -34,7 +36,8 @@ const ModalMuestras = ({ onClose }) => {
     };*/
 
     const [pasoActual, setPasoActual] = useState(1);
-    const [, setmuestrasSeleccionado] = useState(null);
+    const [, setTipoMuestrasSeleccionada] = useState(null);
+    const [, setPacienteSeleccionado] = useState(null);
 
     const avanzarPaso = () => setPasoActual(prev => prev +1);
     const retrocederPaso = () => setPasoActual(prev => prev -1);
@@ -44,12 +47,34 @@ const ModalMuestras = ({ onClose }) => {
     <div className='modal-overlay'>
       <div className='scale-in-hor-center'>
         <div className='modal-content'>
-          <h2>Registrar nueva muestra </h2>
+          <p className='titulo'>Registrar nueva muestra </p>
           <button className='close-btn' onClick={onClose}>X</button>
           {pasoActual ===1 &&(
             <div>
-              <p className='titulo'></p>
-
+              <p>Seleccione el paciente:</p>
+              <PacientesAlta/>
+              <button className='btn' onClick={paciente => {
+                setPacienteSeleccionado (paciente);
+                avanzarPaso();
+              }}>Siguiente</button>
+            </div>
+          )}
+          {pasoActual === 2 &&(
+            <div>
+              <p>Selecione el tipo de muestra:</p>
+              <DetallesPacienteAlta />
+              <button className='btn'
+              tipos={["Biometria Hepatica", "Pruebas de sangre"]}
+              onClick={tipo => {
+                setTipoMuestrasSeleccionada(tipo);
+                avanzarPaso();
+              }}> Siguiente</button>
+              <button className='btn' onClick={retrocederPaso}>Regresar</button>
+            </div>
+          )}
+          {pasoActual === 3 &&(
+            <div>
+              <AgregarMuestra />
             </div>
           )}
         </div>

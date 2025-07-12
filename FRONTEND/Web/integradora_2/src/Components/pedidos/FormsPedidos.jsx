@@ -1,8 +1,12 @@
-import React from 'react'
-import Swal from "sweetalert2";
-import { useState } from "react";
+//import React from 'react'
+import FormBiometrica from './FormBiometrica';
+import FormSanguinea from './FormSanguinea';
+//import Swal from "sweetalert2";
+//import { useState } from "react";
 
-const FormsPedidos = ({onClose}) => {
+const FormsPedidos = ({ pacienteId, tipoPrueba }) => {
+    /*
+    {onClose} en los parentesis
     const [formData, setFormData]= useState({
             pedido:'',
             tipoMuestra: '',
@@ -30,11 +34,22 @@ const FormsPedidos = ({onClose}) => {
         });
         onClose();
         }
-    };
+    };*/
+    if (!tipoPrueba) return null;
 
-    return (
-        <div >
-            <div className='scale-in-hor-center'>
+    switch (tipoPrueba) {
+        case 'qs':
+        return <FormBiometrica pacienteId={pacienteId} />;
+        case 'bh':
+        return <FormSanguinea pacienteId={pacienteId} />;
+        default:
+        return <p>Tipo de prueba no soportado.</p>;
+    }
+}
+
+export default FormsPedidos
+/*
+<div className='scale-in-hor-center'>
                 <div >
                     <h2>registrar nuevo pedido</h2>
                     
@@ -79,9 +94,4 @@ const FormsPedidos = ({onClose}) => {
                     </form>
                 </div>
             </div>
-        </div>
-        
-    );
-}
-
-export default FormsPedidos
+*/

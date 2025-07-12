@@ -3,14 +3,14 @@ import Swal from 'sweetalert2';
 import { requireTokenOrRedirect } from "../../utils/auth";
 import CargaBarras from '../elementos/CargaBarras';
 
-const PacientesAlta = () => {
+const PacientesAlta = ({seleccionado,onSelect}) => {
     const [pacientes, setPacientes] = useState([]);
     const [, setRawResponse] = useState(null);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
     const apiUrl = process.env.REACT_APP_API_URL;
     const [token, setToken] = useState(null);
-    const [pacienteSeleccionado, setPacienteSeleccionado] = useState(null);
+    //const [pacienteSeleccionado, setPacienteSeleccionado] = useState(null);
 
     
 
@@ -144,9 +144,9 @@ const PacientesAlta = () => {
         );
     if (error) return <div>{error}</div>;
     
-    const handleSeleccionarPaciente = (paciente) => {
+    /*const handleSeleccionarPaciente = (paciente) => {
     setPacienteSeleccionado(paciente);
-    };
+    };*/
     //onClick={() => handleSeleccionarPaciente(paciente)} para reutilizarlo en pasitos
 
 
@@ -162,18 +162,23 @@ const PacientesAlta = () => {
                     <pre>{JSON.stringify(pacientes, null, 2)}</pre>
                 </div>
                 */}
-                {pacientesFiltrados.map((paciente, index) => {
-                    const nombreCompleto = `${paciente.nombre} ${paciente.apellidoPaterno} ${paciente.apellidoMaterno}`;
-                    const inicial = paciente.nombre.charAt(0);
-                    const isSelected = pacienteSeleccionado === paciente._id;
+                {pacientesFiltrados.map((p, index) => {
+                    const nombreCompleto = `${p.nombre} ${p.apellidoPaterno} ${p.apellidoMaterno}`;
+                    const inicial = p.nombre.charAt(0);
+                    //const isSelected = pacienteSeleccionado === p._id;
+                    const isSelected = seleccionado === p._id;
+                    console.log("Paciente selecionado:", isSelected);
                     return(
-                        <div key={paciente._id || index} className={`prueba_tabla ${isSelected ? 'seleccionado' : ''}`} onClick={() => handleSeleccionarPaciente(paciente._id)} >
+                        <div 
+                        key={p._id || index} 
+                        className={`prueba_tabla ${isSelected ? 'seleccionado' : ''}`} 
+                        onClick={() => onSelect(p._id)} >
                             <div className='inicial-circulo'>
                                 <p className='letra-circulo'>{inicial}</p>
                             </div>
                             <div>
                                 <div className='acomodar-iconos'>
-                                    <img src="/basura.png" alt="borrar" className='icono-borrar' onClick={(e) =>{e.stopPropagation(); handleAlert(paciente._id)} }/>
+                                    <img src="/basura.png" alt="borrar" className='icono-borrar' onClick={(e) =>{e.stopPropagation(); handleAlert(p._id)} }/>
                                 </div>
                                 <p className='prueba-name'>{nombreCompleto}</p>
                             </div>
