@@ -1,7 +1,8 @@
 import React, {useState}from 'react'
-import { FilterBar,/* SampleBox, SampleModal,*/ SearchBar } from '../Components';
-import { ListaMuestras } from '../Components';
+import { SearchBar } from '../Components';
+
 import ModalMuestras from '../Components/muestras/ModalMuestras';
+import { OpcionesMuestras } from '../Components';
 
 
 //import {SearchBar, FilterBar, SampleBoxes} from "../Components";
@@ -18,10 +19,20 @@ const Muestras =() =>{
                 {modalAbierto && <ModalMuestras onClose={() => setModalAbierto(false)} />}
                 <SearchBar />
             </div>
+            <div className='contenedor_pedidos'>
                 <div className='opciones'>
-                    <FilterBar />
+                    <OpcionesMuestras />
                 </div>
-            <div>
+            </div>
+        </div>
+    )
+}
+
+export default Muestras;
+//    <SampleModal/>
+//    <SampleBox/>
+/*
+<div>
                 <div className='contenedor_pedidos'>
                     <div className='margen'>
                         <div className='Box-muestras'>
@@ -32,11 +43,4 @@ const Muestras =() =>{
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    )
-}
-
-export default Muestras;
-//    <SampleModal/>
-//    <SampleBox/>
+            </div> */

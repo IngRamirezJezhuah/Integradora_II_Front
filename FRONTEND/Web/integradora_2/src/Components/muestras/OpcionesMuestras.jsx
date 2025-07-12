@@ -1,11 +1,9 @@
 import React, { useState } from 'react'
-//import EnProcesoPedidos from './EnProcesoPedidos';
-import ListaPedidos from './ListaPedidos';
-import PedidosCancelados from './PedidosCancelados';
+import ListaMuestras from './ListaMuestras';
+import MuestrasCanceladas from './MuestrasCanceladas';
 
-
-const OpcionesPedidos = ({ buttonLabels = [ 'Completadas', 'Canceladas'] }) => {
-    const [activeButton, setActiveButton] = useState(buttonLabels[0]);
+const OpcionesMuestras = ({ buttonLabels = [ 'Completadas', 'Canceladas'] }) => {
+const [activeButton, setActiveButton] = useState(buttonLabels[0]);
 
     const handleButtonClick = (label) => {
         setActiveButton(label);
@@ -29,28 +27,18 @@ const OpcionesPedidos = ({ buttonLabels = [ 'Completadas', 'Canceladas'] }) => {
                 <div>
                     {activeButton === buttonLabels[0] ? (
                         <div>
-                            <p className='texto'>Pedidos completados</p>
                             <div className='margen'>
                                 <div className='scale-up-ver-center'>
-                                    <ListaPedidos/>
+                                    <ListaMuestras />
                                 </div>
                             </div>
                         </div>
                     ) : activeButton === buttonLabels[1] ? (
-                        <PedidosCancelados />
+                        <MuestrasCanceladas  />
                     ) : null}
                 </div>
         </div>
     );
-};
+}
 
-export default OpcionesPedidos
-/*
-activeButton === buttonLabels[0] ? (
-                        <div className='margen'>
-                            <div className='scale-up-ver-center'>
-                                <EnProcesoPedidos/>
-                            </div>
-                        </div>
-                    ) : 
-*/
+export default OpcionesMuestras

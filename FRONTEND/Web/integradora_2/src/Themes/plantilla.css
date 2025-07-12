@@ -26,7 +26,7 @@
     
 }
 
-.caja_1,.caja_2,.caja_pedidos{
+.caja_1,.caja_2,.caja_pedidos, .pedidos-form{
     box-shadow: -10px 11px 30px -7px rgba(39,39,39,0.51);
     -webkit-box-shadow: -10px 11px 30px -7px rgba(39, 39, 39, 0.381);
     -moz-box-shadow: -10px 11px 30px -7px rgba(39,39,39,0.51);
@@ -151,7 +151,9 @@
     padding: 2vw;
     margin: 1rem;
     width: 30vw;
-    height: 30vw;   
+    height: 35vw;
+    background-color: #f0f0f0;
+    border-radius: 2rem;
 }
 
 .registrar-user{

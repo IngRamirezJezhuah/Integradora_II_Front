@@ -1,5 +1,7 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom'
 import Swal from 'sweetalert2'
+import ReciboPedidos from './ReciboPedidos';
 
 const ListaPedidos = () => {
     const pedidos = [
@@ -62,7 +64,8 @@ const ListaPedidos = () => {
         });
 
     }
-    
+    const [modalAbierto, setModalAbierto] = useState(false);
+
     return (
         <div className='scroll_pruebas'>
             {filas.map((fila, i) => ( 
@@ -76,9 +79,9 @@ const ListaPedidos = () => {
                         <p className='texto'>{pedido.descripcion}</p>
                         <p className='texto'>{pedido.paciente}</p>
                         <div className='margen'>
-                            <Link to='/RecibosPedidos'>
-                                <img src="/editar.png" alt="editar" className='iconos' />
-                            </Link>
+                            
+                            <img src="/editar.png" alt="editar" className='iconos'  onClick={() => setModalAbierto(true)} />
+                            
                             <Link to='/Analisis'>
                                 <img src="/detalles.png" alt="detalles" className='iconos' />
                             </Link>
@@ -88,6 +91,8 @@ const ListaPedidos = () => {
                 ))}
                 </div>
             ))}
+            {modalAbierto && <ReciboPedidos onClose={() => setModalAbierto(false)} />}
+        
         </div>
 
     );

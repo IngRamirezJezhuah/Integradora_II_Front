@@ -1,11 +1,12 @@
 import React from 'react'
 
 const DetallesPedidos = () => {
-    const nombres = ["David Jezhuah Ramirez Alvarado"];
+    //const nombres = ["David Jezhuah Ramirez Alvarado"];
     return (
         <div className='pedidos-form'>
-                    <h1 className='titulo'>Detalles</h1>
+                    <p className='titulo'>Detalles</p>
                     <div>
+                        {/*
                         <div className=''>
                             {nombres.map((nombreCompleto,index) => {
                                 const inicial = nombreCompleto.charAt(0);
@@ -21,8 +22,7 @@ const DetallesPedidos = () => {
                                         );
                                     })}
                         </div>
-                        <p>fecha de toma:</p>
-                        <p>21/02/2025</p>
+                        */}
                         <form>
                             <label>Total</label>
                             <input
