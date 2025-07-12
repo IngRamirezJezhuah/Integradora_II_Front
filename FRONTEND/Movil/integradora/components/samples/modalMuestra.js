@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
 import Modal from 'react-native-modal';
 import { Ionicons } from '@expo/vector-icons';
+import QRCode from 'react-native-qrcode-svg';
 import PropTypes from 'prop-types';
 import {QuimSangResultados,BiomHemResultados } from '../../components';
 
-const ModalMuestra = ({ visible, sample, onClose }) => {
+const ModalMuestra = ({ visible, sample, onClose, showRegisterButton = true }) => {
   const [showQuimModal, setShowQuimModal] = useState(false);
   const [showBiomModal, setShowBiomModal] = useState(false);
   const formatDate = (dateString) => {
@@ -97,11 +98,19 @@ const ModalMuestra = ({ visible, sample, onClose }) => {
               <Text style={styles.value}>{sample.pedidoId}</Text>
             </>
           )}
+          {sample._id && (
+            <View style={{ alignItems: 'center', marginVertical: 20 }}>
+              <Text style={styles.label}>Código QR</Text>
+              <QRCode value={sample._id} size={150} />
+            </View>
+          )}
         </ScrollView>
         
-        <TouchableOpacity style={styles.button} onPress={handleRegistrarResultado}>
-          <Text style={styles.buttonText}>Registrar Resultado</Text>
-        </TouchableOpacity>
+        {showRegisterButton && (
+          <TouchableOpacity style={styles.button} onPress={handleRegistrarResultado}>
+            <Text style={styles.buttonText}>Registrar Resultado</Text>
+          </TouchableOpacity>
+        )}
 
         {/* Modales de resultados */}
         <QuimSangResultados
@@ -193,7 +202,8 @@ ModalMuestra.propTypes = {
     observaciones: PropTypes.string,
     pedidoId: PropTypes.string
   }),
-  onClose: PropTypes.func.isRequired
+  onClose: PropTypes.func.isRequired,
+  showRegisterButton: PropTypes.bool
 };
 
 export default ModalMuestra;

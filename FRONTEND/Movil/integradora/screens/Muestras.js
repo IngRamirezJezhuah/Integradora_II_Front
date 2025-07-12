@@ -92,7 +92,7 @@ const filteredData = getFilteredData();
 
 return (
   <SafeAreaView>
-      <Header title="Muestras" />
+        <Header title="Muestras" />
         <SearchBar placeholder={"Buscar Muestras"} searchText={searchText} onChangeSearch={setSearchText} />
         <FilterBar activeFilter={filter} setFilter={setFilter} filters={customFilters} />
         <TablaMuestras data={filteredData} onView={handleView} onDelete={handleDelete} />

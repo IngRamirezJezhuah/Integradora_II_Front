@@ -6,13 +6,10 @@ import Fontisto from '@expo/vector-icons/Fontisto';
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 import { AppState } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {Dashboard, Pedidos} from '../screens';
+import {Dashboard, Escaner, Pedidos} from '../screens';
 import MuestrasScreen from '../screens/Muestras';
-import PatientStack from './PatientStack';
 import AuthStack from './AuthStack';
-//import Porfile from '../screens/porfile';
-// import {  Escaner, Pedidos } from '../screens';
-// import  Escaner  from '../screens/Escaner';
+// import PatientStack from './PatientStack';
 
 
 const Tab = createBottomTabNavigator();
@@ -112,7 +109,7 @@ const TabNavigator = () => {
                     <Fontisto name="test-tube" size={26} color={'#DA0C15'}/>
                 )
             }}/>
-            <Tab.Screen name="Escaner" component={PatientStack} 
+            <Tab.Screen name="Escaner" component={Escaner} 
             options={{
                 tabBarIcon: () =>(
                     <MaterialIcons name="qr-code-scanner" size={30} color={'#DA0C15'} />

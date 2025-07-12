@@ -4,6 +4,7 @@ export {default as InfoPaciente} from './elements/infoPaciente';
 export {default as InputGroup} from './elements/inputGroup';
 export {default as MenuPerfil} from './elements/menuPerfil';
 export {default as SearchBar} from './elements/searchBar';
+export {default as ModalCodigo} from './samples/modalCodigo';
 
 
 export {default as ModalPedido} from './orders/modalPedido';

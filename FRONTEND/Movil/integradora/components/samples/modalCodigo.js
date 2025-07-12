@@ -22,10 +22,7 @@ return (
             />
             <TouchableOpacity
                 style={styles.button}
-                onPress={() => {
-                    onSubmit(codigo);
-                    setCodigo('');
-                }}
+                onPress={() => {onSubmit(codigo);setCodigo('');}}
             >
                 <Text style={{ color: 'white', fontWeight: 'bold' }}>Enviar</Text>
             </TouchableOpacity>
