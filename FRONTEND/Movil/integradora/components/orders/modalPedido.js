@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, ScrollView, Alert } from 'react-native';
 import Modal from 'react-native-modal';
 import { Ionicons } from '@expo/vector-icons';
 import PropTypes from 'prop-types';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { API_URL } from '@env';
 import NuevaMuestra from '../samples/nuevaMuestra';
 
 const ModalPedido = ({ visible, order, onClose, onNuevaMuestra }) => {
@@ -29,6 +31,102 @@ const ModalPedido = ({ visible, order, onClose, onNuevaMuestra }) => {
     }
     
     setShowNuevaMuestraModal(false);
+  };
+
+  // Función para completar el pedido
+  const handleCompletarPedido = () => {
+    Alert.alert(
+      "Completar Pedido",
+      `¿Estás seguro de que quieres marcar este pedido como completado?\n\nPedido: #${order._id?.slice(-8) || 'N/A'}\nCliente: ${
+        order.usuarioId && typeof order.usuarioId === 'object' && order.usuarioId.nombre ? 
+        `${order.usuarioId.nombre || ''} ${order.usuarioId.apellidoPaterno || ''} ${order.usuarioId.apellidoMaterno || ''}`.trim()
+        : 'Sin nombre'
+      }\nTotal: $${order.total || 0}\n\nEsta acción cambiará el estado del pedido a "pagado".`,
+      [
+        {
+          text: "Cancelar",
+          style: "cancel"
+        },
+        {
+          text: "Completar",
+          style: "default",
+          onPress: () => updatePedidoEstado("pagado")
+        }
+      ]
+    );
+  };
+
+  // Función para cancelar el pedido
+  const handleCancelarPedido = () => {
+    Alert.alert(
+      "Cancelar Pedido",
+      `¿Estás seguro de que quieres cancelar este pedido?\n\nPedido: #${order._id?.slice(-8) || 'N/A'}\nCliente: ${
+        order.usuarioId && typeof order.usuarioId === 'object' && order.usuarioId.nombre ? 
+        `${order.usuarioId.nombre || ''} ${order.usuarioId.apellidoPaterno || ''} ${order.usuarioId.apellidoMaterno || ''}`.trim()
+        : 'Sin nombre'
+      }\nTotal: $${order.total || 0}\n\nEsta acción cambiará el estado del pedido a "cancelado".`,
+      [
+        {
+          text: "No cancelar",
+          style: "cancel"
+        },
+        {
+          text: "Cancelar pedido",
+          style: "destructive",
+          onPress: () => updatePedidoEstado("cancelado")
+        }
+      ]
+    );
+  };
+
+  // Función para actualizar el estado del pedido
+  const updatePedidoEstado = async (nuevoEstado) => {
+    try {
+      // Obtener el token de autenticación
+      const token = await AsyncStorage.getItem('userToken');
+      if (!token) {
+        Alert.alert('Error', 'No se encontró token de autenticación');
+        return;
+      }
+
+      console.log(` Actualizando pedido ${order._id} a estado: ${nuevoEstado}`);
+
+      const response = await fetch(`${API_URL}/pedidos/${order._id}`, {
+        method: 'PUT',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          estado: nuevoEstado
+        }),
+      });
+
+      if (response.ok) {
+        const estadoTexto = nuevoEstado === 'pagado' ? 'completado' : 'cancelado';
+        Alert.alert(
+          'Éxito', 
+          `El pedido ha sido ${estadoTexto} correctamente`,
+          [
+            {
+              text: 'OK',
+              onPress: () => {
+                // Cerrar el modal después de la actualización exitosa
+                onClose();
+              }
+            }
+          ]
+        );
+      } else {
+        const errorData = await response.json();
+        const errorMessage = errorData.message || 'Error al actualizar el estado del pedido';
+        console.error('❌ Error del servidor:', errorData);
+        Alert.alert('Error del servidor', errorMessage);
+      }
+    } catch (error) {
+      console.error('❌ Error al actualizar pedido:', error);
+      Alert.alert('Error', 'Error de conexión al actualizar el pedido');
+    }
   };
 
   return (
@@ -129,7 +227,20 @@ const ModalPedido = ({ visible, order, onClose, onNuevaMuestra }) => {
           </Text>
         </ScrollView>
 
-        <TouchableOpacity style={styles.button} onPress={handleNuevaMuestra}>
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity style={styles.completarButton} onPress={handleCompletarPedido}>
+            <Ionicons name="checkmark-circle" size={20} color="white" style={styles.buttonIcon} />
+            <Text style={styles.buttonText}>Completado</Text>
+          </TouchableOpacity>
+          
+          <TouchableOpacity style={styles.cancelarButton} onPress={handleCancelarPedido}>
+            <Ionicons name="close-circle" size={20} color="white" style={styles.buttonIcon} />
+            <Text style={styles.buttonText}>Cancelar</Text>
+          </TouchableOpacity>
+        </View>
+
+        <TouchableOpacity style={styles.registrarButton} onPress={handleNuevaMuestra}>
+          <Ionicons name="add-circle" size={20} color="white" style={styles.buttonIcon} />
           <Text style={styles.buttonText}>Registrar muestra</Text>
         </TouchableOpacity>
       </View>
@@ -239,6 +350,44 @@ const styles = StyleSheet.create({
   completed: {
     color: '#10B981',
     fontWeight: '600',
+  },
+  buttonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: 15,
+    marginBottom: 10,
+  },
+  completarButton: {
+    backgroundColor: '#10B981',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 15,
+    borderRadius: 10,
+    flex: 1,
+    marginRight: 5,
+  },
+  cancelarButton: {
+    backgroundColor: '#EF4444',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 15,
+    borderRadius: 10,
+    flex: 1,
+    marginLeft: 5,
+  },
+  registrarButton: {
+    backgroundColor: '#B91C1C',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 15,
+    borderRadius: 10,
+    marginTop: 5,
+  },
+  buttonIcon: {
+    marginRight: 8,
   },
   button: {
     backgroundColor: '#B91C1C',

@@ -45,8 +45,8 @@ const PacienteInicio = () => {
         if (response.ok) {
           const data = await response.json();
           // Filtrar solo las muestras que deben mostrarse al cliente
-          const muestrasVisibles = data.muestrasList?.filter(muestra => 
-            muestra.statusShowClient === true && muestra.status === true
+          const muestrasVisibles = data.muestras?.filter(muestra => 
+            muestra.statusShowClient === true
           ) || [];
           setMuestras(muestrasVisibles);
           console.log('Muestras del usuario cargadas:', muestrasVisibles);
@@ -109,8 +109,8 @@ const PacienteInicio = () => {
 
         if (response.ok) {
           const data = await response.json();
-          const muestrasVisibles = data.muestrasList?.filter(muestra => 
-            muestra.statusShowClient === true && muestra.status === true
+          const muestrasVisibles = data.muestras?.filter(muestra => 
+            muestra.statusShowClient === true
           ) || [];
           setMuestras(muestrasVisibles);
         } else {

@@ -122,7 +122,7 @@ const getFilteredData = () => {
   if (filter === 'En proceso') {
     filtered = filtered.filter(item => item.estado === 'pendiente');
   } else if (filter === 'Completado') {
-    filtered = filtered.filter(item => item.estado === 'completado');
+    filtered = filtered.filter(item => item.estado === 'pagado');
   } else if (filter === 'Cancelado') {
     filtered = filtered.filter(item => item.estado === 'cancelado');
   }

@@ -4,7 +4,7 @@ import Modal from 'react-native-modal';
 import { Ionicons } from '@expo/vector-icons';
 import QRCode from 'react-native-qrcode-svg';
 import PropTypes from 'prop-types';
-import {QuimSangResultados,BiomHemResultados } from '../../components';
+import {QuimSangResultados,BiomHemResultados, ResultadosView } from '../../components';
 
 const ModalMuestra = ({ visible, sample, onClose, showRegisterButton = true }) => {
   const [showQuimModal, setShowQuimModal] = useState(false);
@@ -104,6 +104,9 @@ const ModalMuestra = ({ visible, sample, onClose, showRegisterButton = true }) =
               <QRCode value={sample._id} size={150} />
             </View>
           )}
+
+          {/* Mostrar resultados si están disponibles */}
+          <ResultadosView sample={sample} />
         </ScrollView>
         
         {showRegisterButton && (
