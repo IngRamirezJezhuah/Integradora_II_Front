@@ -1,12 +1,82 @@
-import React from 'react';
-import { FlatList, View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import React, { useState } from 'react';
+import { FlatList, View, Text, StyleSheet, TouchableOpacity, Image, Alert } from 'react-native';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import PropTypes from 'prop-types';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { API_URL } from '@env';
+import ModalMuestra from './modalMuestra';
 
-const TablaMuestrasPaciente = ({ data, onView, onDelete }) => {
+const TablaMuestrasPaciente = ({ data, onView }) => {
+  const [selectedSample, setSelectedSample] = useState(null);
+  const [modalVisible, setModalVisible] = useState(false);
+
   const handleViewSample = (sample) => {
+    setSelectedSample(sample);
+    setModalVisible(true);
+    // También ejecutar la función onView si existe
     if (onView) {
       onView(sample);
+    }
+  };
+
+  const handleCloseModal = () => {
+    setModalVisible(false);
+    setSelectedSample(null);
+  };
+
+  const handleSendEmail = async (sample) => {
+    try {
+      const token = await AsyncStorage.getItem('userToken');
+      
+      if (!token) {
+        Alert.alert('Error', 'No se encontró token de autenticación');
+        return;
+      }
+
+      console.log(`📧 Enviando resultados por correo para muestra: ${sample._id}`);
+      
+      const response = await fetch(`${API_URL}/muestras/resultados/enviar/${sample._id}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        },
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log('✅ Correo enviado exitosamente:', data);
+        
+        // Verificar si los resultados estaban listos
+        if (sample.status === true) {
+          Alert.alert(
+            '✅ Éxito', 
+            'Resultados enviados a correo electrónico',
+            [{ text: 'OK' }]
+          );
+        } else {
+          Alert.alert(
+            '⚠️ Información', 
+            'Resultados aún se encuentran no disponibles',
+            [{ text: 'OK' }]
+          );
+        }
+      } else {
+        console.error('❌ Error al enviar correo - Status:', response.status);
+        Alert.alert(
+          'Error', 
+          'No se pudo enviar el correo. Intenta nuevamente.',
+          [{ text: 'OK' }]
+        );
+      }
+    } catch (error) {
+      console.error('❌ Error enviando correo:', error);
+      Alert.alert(
+        'Error', 
+        'Error de conexión al enviar correo',
+        [{ text: 'OK' }]
+      );
     }
   };
 
@@ -70,14 +140,25 @@ const TablaMuestrasPaciente = ({ data, onView, onDelete }) => {
             </View>
             <View style={styles.actionsContainer}>
               <TouchableOpacity style={styles.actionButton} onPress={() => handleViewSample(item)}>
-                <Ionicons name="search-outline" size={25} color="#DA0C15" />
+                <MaterialCommunityIcons name="file-search-outline" size={25} color="#DA0C15" />
               </TouchableOpacity>
-              <TouchableOpacity style={styles.actionButton} onPress={() => onDelete(item)}>
-                <Ionicons name="download-outline" size={25} color="#DA0C15" />
-              </TouchableOpacity>
+              {/* Solo mostrar botón de envío si los resultados están listos */}
+              {item.status === true && (
+                <TouchableOpacity style={styles.actionButton} onPress={() => handleSendEmail(item)}>
+                  <MaterialCommunityIcons name="email-send-outline" size={25} color="#DA0C15" />
+                </TouchableOpacity>
+              )}
             </View>
           </View>
         )}
+      />
+      
+      {/* Modal para mostrar detalles de la muestra */}
+      <ModalMuestra
+        visible={modalVisible}
+        sample={selectedSample}
+        onClose={handleCloseModal}
+        showRegisterButton={false}
       />
     </View>
   );
@@ -156,9 +237,9 @@ TablaMuestrasPaciente.propTypes = {
     id: PropTypes.string,
     tipoMuestra: PropTypes.string,
     createDate: PropTypes.string,
+    status: PropTypes.bool,
   })).isRequired,
   onView: PropTypes.func.isRequired,
-  onDelete: PropTypes.func.isRequired,
 };
 
 export default TablaMuestrasPaciente;

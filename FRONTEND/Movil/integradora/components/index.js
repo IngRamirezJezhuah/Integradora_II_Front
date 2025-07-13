@@ -19,3 +19,4 @@ export {default as QuimSangResultados} from './samples/quimSangResultados';
 export {default as TablaMuestras} from './samples/tablaMuestras'
 export {default as TablaMuestrasPaciente} from './samples/pacienteMuestra';
 export {default as ModalMuestra} from './samples/modalMuestra';
+export {default as ResultadosView} from './samples/resultadosView';

@@ -1,7 +1,9 @@
 import React from 'react';
-import { FlatList, View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { FlatList, View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import PropTypes from 'prop-types';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { API_URL } from '@env';
 import ModalPedido from './modalPedido';
 
 const TablaPedidos = ({ data, onView, onDelete, refreshing, onRefresh }) => {
@@ -14,6 +16,80 @@ const TablaPedidos = ({ data, onView, onDelete, refreshing, onRefresh }) => {
 
   const handleCloseModal = () => {
     setSelectedOrder(null);
+  };
+
+  const handleDelete = async (item) => {
+    // Mostrar alerta de confirmación
+    Alert.alert(
+      "Confirmar eliminación",
+      `¿Estás seguro de que quieres eliminar este pedido?\n\nPedido: #${item._id?.slice(-8) || 'N/A'}\nCliente: ${
+        item.usuarioId && typeof item.usuarioId === 'object' && item.usuarioId.nombre ? 
+        `${item.usuarioId.nombre || ''} ${item.usuarioId.apellidoPaterno || ''} ${item.usuarioId.apellidoMaterno || ''}`.trim()
+        : 'Sin nombre'
+      }\nTotal: $${item.total || 0}\n\nEsta acción no se puede deshacer.`,
+      [
+        {
+          text: "Cancelar",
+          style: "cancel"
+        },
+        {
+          text: "Eliminar",
+          style: "destructive",
+          onPress: () => deletePedido(item._id)
+        }
+      ]
+    );
+  };
+
+  const deletePedido = async (pedidoId) => {
+    try {
+      // Obtener el token de autenticación
+      const token = await AsyncStorage.getItem('userToken');
+      if (!token) {
+        Alert.alert('Error', 'No se encontró token de autenticación');
+        return;
+      }
+
+      console.log(`🗑️ Eliminando pedido con ID: ${pedidoId}`);
+
+      const response = await fetch(`${API_URL}/pedidos/${pedidoId}`, {
+        method: 'DELETE',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (response.ok) {
+        Alert.alert(
+          'Éxito', 
+          'El pedido ha sido eliminado correctamente',
+          [
+            {
+              text: 'OK',
+              onPress: () => {
+                // Llamar al callback de eliminación del componente padre si existe
+                if (onDelete) {
+                  onDelete(pedidoId);
+                }
+                // Refrescar la lista si la función existe
+                if (onRefresh) {
+                  onRefresh();
+                }
+              }
+            }
+          ]
+        );
+      } else {
+        const errorData = await response.json();
+        const errorMessage = errorData.message || 'Error al eliminar el pedido';
+        console.error('❌ Error del servidor:', errorData);
+        Alert.alert('Error del servidor', errorMessage);
+      }
+    } catch (error) {
+      console.error('❌ Error al eliminar pedido:', error);
+      Alert.alert('Error', 'Error de conexión al eliminar el pedido');
+    }
   };
 
   return (
@@ -39,7 +115,7 @@ const TablaPedidos = ({ data, onView, onDelete, refreshing, onRefresh }) => {
             <TouchableOpacity style={styles.actionButton} onPress={() => handleView(item)}>
               <MaterialCommunityIcons name="file-search-outline" size={30} color="#DA0C15" />
             </TouchableOpacity>
-            <TouchableOpacity style={styles.actionButton} onPress={() => onDelete(item)}>
+            <TouchableOpacity style={styles.actionButton} onPress={() => handleDelete(item)}>
               <MaterialCommunityIcons name="trash-can" size={30} color="#DA0C15" />
             </TouchableOpacity>
           </View>
