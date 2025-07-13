@@ -1,139 +1,194 @@
 
 import Swal from 'sweetalert2'
-import {useState}from 'react'
-import EditarMuestras from './EditarMuestras';
+import {useEffect, useState}from 'react'
 import { Link } from 'react-router-dom';
+import { requireTokenOrRedirect } from '../../utils/auth';
+import CargaBarras from '../elementos/CargaBarras';
+import EditarMuestras from './EditarMuestras';
 
 const ListaMuestras = () => {
-    const muestras = [
-        { id: 'M1321', descripcion: 'Análisis de sangre', paciente: 'Mario Alberto Lira Zamora' },
-        { id: 'M1322', descripcion: 'Biometría Hepática', paciente: 'David Jezhuah Ramirez Alvarado' },
-        { id: 'M1323', descripcion: 'Análisis de sangre', paciente: 'Ricardo Luna Unzueta' },
-        { id: 'M1324', descripcion: 'Análisis de sangre', paciente: 'Mario Alberto Lira Zamora' },
-        { id: 'M1325', descripcion: 'Biometría Hepática', paciente: 'David Jezhuah Ramirez Alvarado' },
-        { id: 'M1326', descripcion: 'Análisis de sangre', paciente: 'Ricardo Luna Unzueta' },
-        // puedes agregar más...
-        ];
+    const [muestras, setMuestras] = useState([])
+    const [loading, setLoading] = useState(null)
+    const [error, setError] = useState(null)
+    const [ModalAbierto, setModalAbierto] = useState(null)
+    const [token, setToken] = useState(null)
+    const apiUrl = process.env.REACT_APP_API_URL
 
-    function dividirEnFilas(data, tam) {
-        const filas = [];
-        for (let i = 0; i < data.length; i += tam) {
-            filas.push(data.slice(i, i + tam));
-        } return filas;
-    }
+    /*____________________Obtener token____________________*/
+    useEffect(() => {
+        const tk = requireTokenOrRedirect();
+        setToken(tk);
+    }, []);
 
-    const filas = dividirEnFilas(muestras, 3);
+/*    useEffect(() => {
+        if (!token) return;
+        const fetchMuestras = async () => {
+            setLoading(true);
+            setError(null);
+            try{
+                const res = await fetch(`${apiUrl}/muestras`,{
+                    headers:{
+                        'Contnet-Type': 'application/json',
+                        Authorization : `Bearer ${token}`,
+                    },
+                });
+                if (res.status===401) {
+                    setError('Sesion Espirada redirigiendo…');
+                    setTimeout(() => (window.location.href ='/'), 1500);
+                    return;
+                }
+                if ( !res.ok ) throw new Error('Error al obtener muestras');
+                //const {data} = await res.json();
+                //setMuestras(ArrayBuffer.isArray(data) ? data : []);
+                const {muestrasList} = res.json;
+                setMuestras(Array.isArray(muestrasList) ? muestrasList : []);
+            } catch(err){
+                setError(err.message || 'Error al obtener muestras');
+            } finally{
+                setLoading(false);
+            }
+        };
+        fetchMuestras();
+    },[apiUrl,token]);*/
 
-    function hanldeAlert(e) {
+    useEffect(() => {
+    if (!token) return;
+
+    const fetchMuestras = async () => {
+        setLoading(true);
+        setError(null);
+        try {
+        const res = await fetch(`${apiUrl}/muestras`, {
+            headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+            },
+        });
+
+        if (res.status === 401) {
+            setError('Sesión expirada, redirigiendo…');
+            setTimeout(() => (window.location.href = '/'), 1500);
+            return;
+        }
+        if (!res.ok) throw new Error('Error al obtener muestras');
+
+        const { muestrasList } = await res.json();
+        setMuestras(Array.isArray(muestrasList) ? muestrasList : []);
+        } catch (err) {
+        setError(err.message || 'Error al obtener muestras');
+        } finally {
+        setLoading(false);
+        }
+    };
+
+    fetchMuestras();
+    }, [apiUrl, token]);
+
+    /*____________________Borrar Muestras____________________*/
+    function handleAlert() {
         const swalWithBootstrapButtons = Swal.mixin({
-            customClass: {
+            customClass:{
                 confirmButton: "btn btn-success",
                 cancelButton: "btn btn-danger"
             },
-            buttonStyling:false
+            buttonsStyling: false
         });
-        swalWithBootstrapButtons.fire({
-            title: "¿Estas seguro de borrarlo?",
-            text: "!!No podras revertirlo una vez lo borres!!",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonText: "Si, borralo!",
-            cancelButtonText: "No, cancelar!",
-            reverseButtons: true
-        }).then((result) => {
-            if (result.isConfirmed) {
-                swalWithBootstrapButtons.fire({
-                    title: "!Borrado Exitosamente¡",
-                    text: "Tu muestra ha sido borrada correctamente",
-                    icon: "success",
-                    timer : 1300,
-                    showConfirmButton: false
+            swalWithBootstrapButtons.fire({
+                title: "¿Estas aseguro de  borarlo?",
+                text:"!no podras revertirlo una vez lo borres¡",
+                icon : "warning",
+                showCancelButton: true,
+                confirmButtonText:"!Si, Borrarlo¡",
+                cancelButtonText:"!No, cancelar¡",
+                reverseButtons: true
+        }).then(async (result) => {
+            if ( !result.isConfirmed || !token) return;
+            try{
+                setLoading(true);
+                const headers={
+                    'Content-type': 'application/json',
+                    Authorization: `Beares ${token}`,
+                };
+                const res = await fetch(`${apiUrl}/muestras/`,{
+                    method: 'DELETE',
+                    headers,
+                    body: JSON.stringify({ status:false }),
                 });
-            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                if (!res.ok) throw new Error();
+                setMuestras((prev) => prev.filter((p) => p._id));
                 swalWithBootstrapButtons.fire({
-                    title: "!Cancelado¡",
-                    text: "Regresando...",
+                title: "!Borrado Exitosamente¡",
+                text: "Tu pedido ha sido borrado correctamente",
+                icon: "success",
+                timer : 1300,
+                showConfirmButton: false
+                });                    
+            }catch {
+                swalWithBootstrapButtons.fire({
+                    title:"!Cancelado",
+                    text: "Regresando a la pagina",
                     icon: "success",
                     timer : 1000,
                     showConfirmButton: false
                 });
+            } finally {
+                setLoading(false);
             }
-        })
+        });
     }
+    /* ──────────────────── coso para acomodar 3 por fila──────────────────── */
+    const agrupar = ( arr, tam = 3) =>
+        arr.reduce((rows, item, idx) =>{
+            const rowIdx = Math.floor(idx / tam);
+            rows[rowIdx] = [...(rows[rowIdx] || []), item];
+            //rows[rowIdx] = [...EditarMuestras(rows[rowIdx] || []), item];
+            return rows;
+        }, []);
+    /*_________________________ vista de cargando_________________________*/
+    if (loading)
+    return (
+        <div className="scale-up-ver-center">
+        <br />
+        <CargaBarras />
+        </div>
+    );
 
-    const [modalAbierto, setModalAbierto] = useState(false);
+        if ( error ) return <div className='error'>{error}</div>
+
 
     return (
         <div className='scroll_pruebas'>
-            {filas.map((fila, i) => ( 
-                <div key={i} className='fila'> {/*Primer .map(): recorre cada fila de pedidos (es decir, cada array de 3 pedidos) i es el índice de la fila. */}
-                {fila.map((muestras, j) => (
-                    <div key={j} className='caja_pedidos'>
+            {agrupar(muestras).map((fila,i) =>(
+                <div key={i} className='fila3'>
+                {fila.map((p,j) =>(
+                        <div key={j} className='caja_pedidos'>
                         <div className='titulo'>
-                            <img src="/bioHem.png" alt="ajustes" className='imgMuestra'/>
+                            <img src="/quimica.png" alt="quimica" className='imgMuestra' />
                         </div>
-                            <h1 className='centrar'>{muestras.id}</h1>
-                            <p className='texto'>{muestras.descripcion}</p>
-                            <p className='texto'>{muestras.paciente}</p>
+                        <p className='centrar'>
+                            {(p._id || p._id || "--").toString().slice(-6).toUpperCase()}{/* */}
+                        </p>
+                        <p className='texto'>
+                            {p.tipoMuestra || '--'}
+                        </p>
+                        <p className='texto'>
+                            {p.nombrePaciente}
+                        </p>
                         <div className='margen'>
-                            
-                            <img src="/editar.png" alt="editar" className='iconos' onClick={() => setModalAbierto(true)} />
-                            <Link to={'/Analisis'}>
-                                <img src="/detalles.png" alt="detalles" className='iconos'/>
-                            </Link>
-                            
-                            
-                            <img src="/basura.png" alt="detalles" className='iconos' onClick={hanldeAlert} />
-                            
+                            <img src="/editar.png" alt="editar" className='iconos'  onClick={()=> setModalAbierto(true)}/>
+                        <Link to={'/Analisis'}>
+                        <   img src="/detalles.png" alt="edtalles"  className='iconos'/>
+                        </Link>
+                            <img src="/basura.png" alt="borrar" className='iconos' onClick={() => handleAlert(p._id)}/>                        
                         </div>
                     </div>
                 ))}
                 </div>
             ))}
-            {modalAbierto && <EditarMuestras onClose={() => setModalAbierto(false)} />}
+            {ModalAbierto && <EditarMuestras onClose={() => setModalAbierto(false)} />}
         </div>
         );
     };
     
 
-export default ListaMuestras
-
-/*
-<div className='scroll_pruebas'>
-            <div>
-                <div className='caja_pedidos'>
-                    <div className='titulo'>
-                        <img src="/bioHem.png" alt="ajustes" className='imgMuestra'/>
-                    </div>
-                    <h1 className='centrar'>P-123</h1>
-                    <p className='texto'>analisis de sangre</p>
-                    <p className='texto'>Mario Alberto Lira Zamora</p>
-                    <Link to='/RecibosPedidos'>
-                        <img src="/ajustes.png" alt="ajustes" className='iconos' />
-                    </Link>
-                </div>
-                <div className='caja_pedidos'>
-                    <div className='titulo'>
-                        <img src="/prueba-de-sangre.png" alt="ajustes" className='imgMuestra'/>
-                    </div>
-                    <h1 className='centrar'>P-123</h1>
-                    <p className='texto'>Biometrica Hepatica</p>
-                    <p className='texto'>David Jezhuah Ramirez Alvarado</p>
-                    <Link to='/RecibosPedidos'>
-                        <img src="/ajustes.png" alt="ajustes" className='iconos' />
-                    </Link>
-                </div>
-                <div className='caja_pedidos'>
-                    <div className='titulo'>
-                        <img src="/quimica.png" alt="ajustes" className='imgMuestra'/>
-                    </div>
-                    <h1 className='centrar'>P-123</h1>
-                    <p className='texto'>analisis de sangre</p>
-                    <p className='texto'>Ricardo Luna Unzueta</p>
-                    <Link to='/RecibosPedidos'>
-                        <img src="/ajustes.png" alt="ajustes" className='iconos' />
-                    </Link>
-                </div>
-            </div>
-        </div>
-*/
+export default ListaMuestras;

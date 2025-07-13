@@ -39,6 +39,8 @@
     height: 17vw;
     background-color: #f0f0f0;
     border-radius: 2rem;
+    flex: 1 1 calc(33.333% - 1rem); /* 3 por fila, se encogen si falta espacio */
+    max-width: calc(33.333% - 1rem);
 }
 
 .contenedor_pedidos{
@@ -61,6 +63,10 @@
     display: flex;
     gap: 1rem;
     margin-bottom: 1rem;
+}
+.fila3 {        /* <–– agrega esto a tu CSS */
+    display: flex;
+    gap: 1rem;    /* espacio entre tarjetas */
 }
 
 

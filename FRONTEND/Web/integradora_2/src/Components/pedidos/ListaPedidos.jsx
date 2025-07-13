@@ -31,50 +31,27 @@ const ListaPedidos = () => {
                         'Content-Type': 'application/json',
                         Authorization: `Bearer ${token}`,
                     },
-                    });
-                    if (res.status === 401) {
-                    setError('Sesión expirada — redirigiendo…');
-                    setTimeout(() => (window.location.href = '/'), 1500);
-                    return;
-                    }
-                    if (!res.ok) throw new Error('Error al obtener pedidos');
-                    const { data } = await res.json();
-                    setPedidos(Array.isArray(data) ? data : []);
-                } catch (err) {
-                    setError(err.message || 'Error al obtener pedidos');
-                } finally {
-                    setLoading(false);
-                }
-                /*
-                const headers = {
-                    'Content-Type': 'application/json',
-                    Authorization: `Bearer $(token)`,
-                };
-                const res = await fetch(`${apiUrl}/pedidos/`, { 
-                    method: 'GET',
-                    headers
                 });
-                const raw = await res.text();
-                if (res.status===401) {
-                    setError('sesion expirada, redirigiendo ...');
-                    setTimeout(() => {window.location.href = '/'}, 1500 );//1500
-                    return;
+                if (res.status === 401) {
+                setError('Sesión expirada redirigiendo…');
+                setTimeout(() => (window.location.href = '/'), 1500);
+                return;
                 }
-                if (!res.ok) throw new Error("Error al obtener pedidos");
-                const parsed = JSON.parse(raw);
-                setPedidos(Array.isArray(parsed.data)? parsed.data : []);
-            } catch (err){
-                setError(err.message||'Error al obtener pedido');
+                if (!res.ok) throw new Error('Error al obtener pedidos');
+                const { data } = await res.json();
+                setPedidos(Array.isArray(data) ? data : []);
+            } catch (err) {
+                setError(err.message || 'Error al obtener pedidos');
             } finally {
                 setLoading(false);
-            }*/
+            }
         };
         fecthPedidos();
     }, [apiUrl,token]);
 
     /*_____________________Borrar pedido __________________*/
     //sweet alert
-    function handleAlert(pedidoId) {
+    function handleAlert() {
         const swalWithBootstrapButtons = Swal.mixin({
         customClass: {
             confirmButton: "btn btn-success",
@@ -87,8 +64,8 @@ const ListaPedidos = () => {
             text: "!No podras revertirlo una vez lo borres¡",
             icon: "warning",
             showCancelButton: true,
-            confirmButtonText: "Si, borralo!",
-            cancelButtonText: "No, cancelar!",
+            confirmButtonText: "!Si, borralo¡",
+            cancelButtonText: "!No, cancelar¡",
             reverseButtons: true
         }).then(async (result) => {
             if (!result.isConfirmed || !token) return;
@@ -101,7 +78,7 @@ const ListaPedidos = () => {
                 const res = await fetch(`${apiUrl}/pedidos/`,{
                     method:'DELETE',
                     headers,
-                    body: JSON.stringify({ status:false}),
+                    body: JSON.stringify({ status:false }),
                 });
                 if (!res.ok) throw new Error();
                 setPedidos((prev) => prev.filter((p) => p._id));
@@ -126,29 +103,22 @@ const ListaPedidos = () => {
             }
         });
     }
-    
-    /*function dividirEnFilas(data, tam) {
-        const filas = [];
-        for (let i = 0; i < data.length; i += tam) {
-            filas.push(data.slice(i, i + tam));
-        } return filas;
-    }
-    const filas = dividirEnFilas(pedidos, 3);*/
+
     /* ──────────────────── coso para acomodar 3 por fila──────────────────── */
     const agrupar = (arr, tam = 3) =>
         arr.reduce((rows, item, idx) => {
-        const rowIdx = Math.floor(idx / tam);
-        rows[rowIdx] = [...(rows[rowIdx] || []), item];
-        return rows;
+            const rowIdx = Math.floor(idx / tam);
+            rows[rowIdx] = [...(rows[rowIdx] || []), item];
+            return rows;
         }, []);
     /* ──────────────────── vista de cargando ──────────────────── */
     if (loading)
     return (
         <div className='scale-up-ver-center'>
-        <div className='caja_1 margen'>
-            <br />
-            <CargaBarras />
-        </div>
+            <div >
+                <br />
+                <CargaBarras  className='plantilla'/>
+            </div>
         </div>
     );
     if (error) return <div className='error'>{error}</div>;
@@ -162,8 +132,12 @@ const ListaPedidos = () => {
                         <div className='titulo'>{/*key={i} y key={j} son importantes en React para que sepa cómo actualizar el DOM eficientemente. */}
                             <img src="/quimica.png" alt="química" className='imgMuestra' />
                         </div>
-                        <h1 className='centrar'>{(p._id || p.id || '--').toString().slice(-6).toUpperCase()}</h1>{/*p.id.slice(-6).toUpperCase()*/}
-                        <p className='texto'>{p.analisis?.[0]?.nombre || '--'}</p>
+                        <h1 className='centrar'>
+                            {(p._id || p.id || '--').toString().slice(-6).toUpperCase()}
+                        </h1>{/*p.id.slice(-6).toUpperCase()*/}
+                        <p className='texto'>
+                            {p.analisis?.[0]?.nombre || '--'}
+                        </p>
                         {/*esta madre no supe hacerla se la pedi a chat segun el id que tienes agarra el dato y te lo muestra ya que es lista*/}
                         <p className='texto'>
                             {/*p.paciente*/}
@@ -174,7 +148,7 @@ const ListaPedidos = () => {
                             <Link to='/Analisis'>
                                 <img src="/detalles.png" alt="detalles" className='iconos' />
                             </Link>
-                                <img src="/basura.png" alt="detalles" className='iconos' onClick={handleAlert(p._id)}/>
+                                <img src="/basura.png" alt="borrar" className='iconos' onClick={() => handleAlert(p._id)}/>
                         </div>
                     </div>
                 ))}

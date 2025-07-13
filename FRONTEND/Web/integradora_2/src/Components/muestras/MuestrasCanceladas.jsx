@@ -1,4 +1,4 @@
-import React from 'react'
+
 import CargaBarras from '../elementos/CargaBarras'
 
 const MuestrasCanceladas = () => {

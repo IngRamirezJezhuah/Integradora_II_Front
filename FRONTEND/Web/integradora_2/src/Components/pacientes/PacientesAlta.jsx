@@ -91,7 +91,7 @@ const PacientesAlta = ({seleccionado,onSelect = () => {}}) => {
                         'Content-Type': 'application/json',
                         'Authorization': `Bearer ${token}`
                     };
-                    const response = await fetch(`http://vps-5127231-x.dattaweb.com:3500/usuarios/${pacienteId}`, {
+                    const response = await fetch(`${apiUrl}/usuarios/${pacienteId}`, {
                         method: 'DELETE',
                         headers,
                         body: JSON.stringify({ status: false }),
@@ -108,6 +108,7 @@ const PacientesAlta = ({seleccionado,onSelect = () => {}}) => {
                         timer : 1300,
                         showConfirmButton: false
                     });
+                    return;
                 } catch (error) {
                     swalWithBootstrapButtons.fire({
                         title: "Error!",
@@ -116,6 +117,7 @@ const PacientesAlta = ({seleccionado,onSelect = () => {}}) => {
                         timer : 1300,
                         showConfirmButton: false
                     });
+                    return;
                 }
             } else if(result.dismiss === Swal.DismissReason.cancel) {
                 swalWithBootstrapButtons.fire({

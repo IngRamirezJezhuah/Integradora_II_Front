@@ -43,7 +43,7 @@ const DetallesPacienteAlta = ({seleccionado,onSelect = () => {}}) => {
                 <div
                     key={p.id}
                     className={`prueba_tabla ${isSelected ? 'seleccionado' : ''}`}
-                    onClick={() => onSelect(p.id)}  
+                    onClick={(e) =>{e.stopPropagation(); onSelect(p.id)} }  
                 >   
                     <div className="icono">
                     <img src="/prueba-de-sangre.png" alt="prueba" className="imagen-prueba" />
