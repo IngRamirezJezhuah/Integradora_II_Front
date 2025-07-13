@@ -1,62 +1,23 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
 import Modal from 'react-native-modal';
 import { Ionicons } from '@expo/vector-icons';
 import QRCode from 'react-native-qrcode-svg';
 import PropTypes from 'prop-types';
-import {QuimSangResultados,BiomHemResultados, ResultadosView } from '../../components';
+import { QuimSangResultados, BiomHemResultados, ResultadosView } from '../../components';
+import { useModalMuestra } from '../../hooks';
 
 const ModalMuestra = ({ visible, sample, onClose, showRegisterButton = true }) => {
-  const [showQuimModal, setShowQuimModal] = useState(false);
-  const [showBiomModal, setShowBiomModal] = useState(false);
-  const formatDate = (dateString) => {
-    const date = new Date(dateString);
-    return date.toLocaleDateString('es-ES', {
-      day: '2-digit',
-      month: '2-digit',
-      year: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit'
-    });
-  };
+  const {
+    showQuimModal,
+    showBiomModal,
+    sampleData,
+    handleRegistrarResultado,
+    handleCloseQuimModal,
+    handleCloseBiomModal
+  } = useModalMuestra(sample);
 
-  const getStatusColor = (status) => {
-    return status ? '#28A745' : '#FFC107';
-  };
-
-  const getStatusText = (status) => {
-    return status ? 'Completado' : 'En Proceso';
-  };
-
-  const handleRegistrarResultado = () => {
-    if (!sample || !sample.tipoMuestra) {
-      console.warn('No se puede determinar el tipo de muestra');
-      return;
-    }
-
-    const tipo = sample.tipoMuestra.toLowerCase().replace(/\s+/g, '');
-    
-    if (tipo.includes('quimicasanguinea') || tipo.includes('quimica')) {
-      setShowQuimModal(true);
-      // console.log('Abriendo modal de Química Sanguínea para:', sample._id);
-    } else if (tipo.includes('biometriahematica') || tipo.includes('biometria')) {
-      setShowBiomModal(true);
-      // console.log('Abriendo modal de Biometría Hemática para:', sample._id);
-    } else {
-      console.warn('Tipo de muestra no reconocido:', sample.tipoMuestra);
-    }
-  };
-  //acomodar imagen biometiahematica y quimicasanguinea
-
-  const handleCloseQuimModal = () => {
-    setShowQuimModal(false);
-  };
-
-  const handleCloseBiomModal = () => {
-    setShowBiomModal(false);
-  };
-
-  if (!sample) return null;
+  if (!sampleData) return null;
 
   return (
     <Modal isVisible={visible} onBackdropPress={onClose} swipeDirection="down" style={styles.modal}>
@@ -68,40 +29,41 @@ const ModalMuestra = ({ visible, sample, onClose, showRegisterButton = true }) =
         <ScrollView>
           <View style={styles.iconContainer}>
             <Ionicons name="flask" size={48} color="#DA0C15" />
-            <Text style={styles.idText}>ID: {sample._id ? sample._id.slice(-8) : 'N/A'}</Text>
+            <Text style={styles.idText}>ID: {sampleData.id}</Text>
           </View>
 
           <Text style={styles.label}>Paciente</Text>
-          <Text style={styles.value}>{sample.nombrePaciente || 'N/A'}</Text>
+          <Text style={styles.value}>{sampleData.nombrePaciente}</Text>
 
           <Text style={styles.label}>Tipo de Muestra</Text>
-          <Text style={styles.value}>{sample.tipoMuestra || 'N/A'}</Text>
+          <Text style={styles.value}>{sampleData.tipoMuestra}</Text>
 
           <Text style={styles.label}>Estado</Text>
-          <View style={[styles.statusBadge, { backgroundColor: getStatusColor(sample.status) }]}>
-            <Text style={styles.statusText}>{getStatusText(sample.status)}</Text>
+          <View style={[styles.statusBadge, { backgroundColor: sampleData.statusColor }]}>
+            <Text style={styles.statusText}>{sampleData.statusText}</Text>
           </View>
 
           <Text style={styles.label}>Fecha de Creación</Text>
-          <Text style={styles.value}>{formatDate(sample.createDate)}</Text>
+          <Text style={styles.value}>{sampleData.createDate}</Text>
 
-          {sample.observaciones && (
+          {sampleData.hasObservaciones && (
             <>
               <Text style={styles.label}>Observaciones</Text>
-              <Text style={styles.value}>{sample.observaciones}</Text>
+              <Text style={styles.value}>{sampleData.observaciones}</Text>
             </>
           )}
 
-          {sample.pedidoId && (
+          {sampleData.hasPedidoId && (
             <>
               <Text style={styles.label}>ID del Pedido</Text>
-              <Text style={styles.value}>{sample.pedidoId}</Text>
+              <Text style={styles.value}>{sampleData.pedidoId}</Text>
             </>
           )}
-          {sample._id && (
+          
+          {sampleData.hasQrCode && (
             <View style={{ alignItems: 'center', marginVertical: 20 }}>
               <Text style={styles.label}>Código QR</Text>
-              <QRCode value={sample._id} size={150} />
+              <QRCode value={sampleData.qrValue} size={150} />
             </View>
           )}
 

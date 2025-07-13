@@ -60,53 +60,30 @@ const Escaner = () => {
         },
       });
 
-      // Obtener el texto de la respuesta para debuggear
-      const responseText = await response.text();
+      console.log(`📊 Respuesta del servidor - Status: ${response.status}`);
 
       if (response.ok) {
-        // Intentar parsear el JSON solo si hay contenido
-        if (responseText && responseText.trim() !== '') {
-          try {
-            const data = JSON.parse(responseText);
-            setCurrentSample(data.muestra || data);
-            setSampleModalVisible(true);
-          } catch (parseError) {   
-            console.error(' Error al parsear JSON:', parseError);
-            Alert.alert('Error', 'Respuesta del servidor inválida');
-          }
-        } else {
-          console.error(' Respuesta vacía del servidor');
-          Alert.alert('Error', 'El servidor devolvió una respuesta vacía');
-        }
+        const data = await response.json();
+        console.log('✅ Muestra encontrada:', data);
+        setCurrentSample(data.muestra || data);
+        setSampleModalVisible(true);
       } else {
-        // Manejar errores HTTP
-        let errorMessage = `Error ${response.status}: ${response.statusText}`;
-        
-        if (response.status === 405) {
-          errorMessage = 'Método no permitido. Verificar endpoint de la API.';
-        } else if (response.status === 404) {
-          errorMessage = 'Muestra no encontrada';
-        } else if (response.status === 401) {
-          errorMessage = 'Token de autenticación inválido';
-        }
-
-        // Intentar obtener más detalles del error si hay contenido
-        if (responseText && responseText.trim() !== '') {
-          try {
-            const errorData = JSON.parse(responseText);
-            errorMessage = errorData.message || errorMessage;
-            console.error(' Error del servidor:', errorData);
-          } catch {
-            console.error(' Respuesta de error no es JSON válido:', responseText);
-          }
+        // Intenta obtener el mensaje de error del servidor
+        let errorMessage = 'No se encontró la muestra con ese ID';
+        try {
+          const errorData = await response.json();
+          errorMessage = errorData.message || errorMessage;
+          console.error('❌ Error del servidor:', errorData);
+        } catch (e) {
+          console.error('❌ Error al parsear respuesta de error:', e);
         }
         
-        Alert.alert('Error', errorMessage);
-        console.error(' Error al buscar muestra - Status:', response.status);
+        Alert.alert('Error', `${errorMessage} (Código: ${response.status})`);
+        console.error('❌ Error al buscar muestra - Status:', response.status);
       }
     } catch (error) {
       Alert.alert('Error', 'Error de conexión al buscar la muestra');
-      console.error(' Error de conexión al buscar muestra:', error);
+      console.error('❌ Error de conexión al buscar muestra:', error);
     } finally {
       setLoading(false);
     }
@@ -189,7 +166,7 @@ const Escaner = () => {
         visible={sampleModalVisible}
         sample={currentSample}
         onClose={handleCloseSampleModal}
-        showRegisterButton={true}
+        showRegisterButton={false}
       />
     </View>
   );

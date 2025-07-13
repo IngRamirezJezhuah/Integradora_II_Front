@@ -1,116 +1,21 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, ScrollView, TextInput,Image, Alert } from 'react-native';
+import React from 'react';
+import { View, Text, TouchableOpacity, StyleSheet, ScrollView, TextInput, Image } from 'react-native';
 import Modal from 'react-native-modal';
 import { Ionicons } from '@expo/vector-icons';
 import PropTypes from 'prop-types';
-import { useFocusField } from '../../hooks';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { API_URL } from '@env';
+import { useFocusField, useQuimicaSanguinea } from '../../hooks';
 
 const QuimSangResultados = ({ visible, sample, onClose }) => {
-  const [resultados, setResultados] = useState({
-    glucosa: '',
-    glucosaPost: '',
-    acidoUrico: '',
-    urea: '',
-    creatinina: '',
-    colesterol: '',
-    LDR: '',
-    gGT: '',
-    trigliceridos: '',
-    observaciones: ''
-  });
-
-  const [loading, setLoading] = useState(false);
-
   // Usar el hook personalizado para manejar el focus
   const { setFocus, clearFocus, getFieldStyle } = useFocusField();
-
-  // Cargar datos existentes cuando se abre el modal
-  useEffect(() => {
-    if (visible && sample?.quimicaSanguinea) {
-      const quimicaData = sample.quimicaSanguinea;
-      setResultados({
-        glucosa: quimicaData.glucosa?.toString() || '',
-        glucosaPost: quimicaData.glucosaPost?.toString() || '',
-        acidoUrico: quimicaData.acidoUrico?.toString() || '',
-        urea: quimicaData.urea?.toString() || '',
-        creatinina: quimicaData.creatinina?.toString() || '',
-        colesterol: quimicaData.colesterol?.toString() || '',
-        LDR: quimicaData.LDR?.toString() || '',
-        gGT: quimicaData.gGT?.toString() || '',
-        trigliceridos: quimicaData.trigliceridos?.toString() || '',
-        observaciones: quimicaData.observaciones || ''
-      });
-    }
-  }, [visible, sample]);
-
-  const handleInputChange = (field, value) => {
-    setResultados(prev => ({
-      ...prev,
-      [field]: value
-    }));
-  };
-
-  const handleSubmit = async () => {
-    if (!sample?._id) {
-      Alert.alert('Error', 'No se encontró el ID de la muestra');
-      return;
-    }
-
-    setLoading(true);
-    try {
-      const token = await AsyncStorage.getItem('userToken');
-      
-      if (!token) {
-        Alert.alert('Error', 'No se encontró el token de autenticación');
-        setLoading(false);
-        return;
-      }
-
-      // Convertir strings a números donde sea necesario
-      const formattedResults = {
-        quimicaSanguinea: {
-          glucosa: resultados.glucosa ? parseFloat(resultados.glucosa) : null,
-          glucosaPost: resultados.glucosaPost ? parseFloat(resultados.glucosaPost) : null,
-          acidoUrico: resultados.acidoUrico ? parseFloat(resultados.acidoUrico) : null,
-          urea: resultados.urea ? parseFloat(resultados.urea) : null,
-          creatinina: resultados.creatinina ? parseFloat(resultados.creatinina) : null,
-          colesterol: resultados.colesterol ? parseFloat(resultados.colesterol) : null,
-          LDR: resultados.LDR ? parseFloat(resultados.LDR) : null,
-          gGT: resultados.gGT ? parseFloat(resultados.gGT) : null,
-          trigliceridos: resultados.trigliceridos ? parseFloat(resultados.trigliceridos) : null,
-          observaciones: resultados.observaciones || ''
-        }
-      };
-
-      const response = await fetch(`${API_URL}/muestras/resultados/${sample._id}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-          'Authorization': `Bearer ${token}`,
-        },
-        body: JSON.stringify(formattedResults),
-      });
-
-      if (response.ok) {
-        const responseData = await response.json();
-        console.log('Resultados guardados exitosamente:', responseData);
-        Alert.alert('Éxito', 'Los resultados se han guardado correctamente');
-        onClose();
-      } else {
-        const errorData = await response.json();
-        console.error('Error al guardar resultados:', errorData);
-        Alert.alert('Error', 'No se pudieron guardar los resultados');
-      }
-    } catch (error) {
-      console.error('Error al guardar resultados:', error);
-      Alert.alert('Error', 'Error de conexión al guardar los resultados');
-    } finally {
-      setLoading(false);
-    }
-  };
+  
+  // Usar el hook para manejo de química sanguínea
+  const {
+    resultados,
+    loading,
+    handleInputChange,
+    handleSubmit,
+  } = useQuimicaSanguinea(visible, sample, onClose);
 
   if (!sample) return null;
 

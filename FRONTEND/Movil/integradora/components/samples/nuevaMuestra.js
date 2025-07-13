@@ -1,161 +1,32 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Alert } from 'react-native';
+import React from 'react';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import Modal from 'react-native-modal';
 import { Ionicons } from '@expo/vector-icons';
 import PropTypes from 'prop-types';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import ComboBoxSample from './comboBoxSample';
 import { InputGroup } from '../';
-import { useFocusField } from '../../hooks';
-import { API_URL } from '@env';
+import { useFocusField, useNuevaMuestra } from '../../hooks';
 
 const nuevaMuestra = ({ isVisible, onClose, onSubmit, orderData }) => {
-  const [selectedTipo, setSelectedTipo] = useState('');
-  const [pedido, setPedido] = useState('');
-  const [pacienteId, setPacienteId] = useState('');
-  const [nombre, setNombre] = useState('');
-  const [observaciones, setObservaciones] = useState('');
-  const [loading, setLoading] = useState(false);
+  // Hook para manejar la lógica de nueva muestra
+  const {
+    selectedTipo,
+    pedido,
+    pacienteId,
+    nombre,
+    observaciones,
+    loading,
+    setSelectedTipo,
+    setObservaciones,
+    enviarMuestra,
+  } = useNuevaMuestra(isVisible, orderData);
 
   // Hook para manejar el focus de los campos
   const { setFocus, clearFocus, getFieldStyle } = useFocusField();
 
-  // Función para determinar el tipo de muestra basado en el análisis
-  const determinarTipoMuestra = (analisis) => {
-    if (!analisis || analisis.length === 0) return '';
-    
-    // Si solo hay un análisis, devolver su tipo
-    if (analisis.length === 1) {
-      const nombreAnalisis = analisis[0].nombre;
-      if (nombreAnalisis === 'Quimica Sanguinea') return 'Quimica Sanguinea';
-      if (nombreAnalisis === 'Biometria Hematica') return 'Biometria Hematica';
-      return nombreAnalisis;
-    }
-    
-    // Si hay múltiples análisis, priorizar según algún criterio
-    // Por ejemplo, si hay Química Sanguínea, priorizarla
-    const tieneQuimica = analisis.some(a => a.nombre === 'Quimica Sanguinea');
-    const tieneBiometria = analisis.some(a => a.nombre === 'Biometria Hematica');
-    
-    if (tieneQuimica && tieneBiometria) {
-      // Si tiene ambos, usar Química Sanguínea por defecto
-      return 'Quimica Sanguinea';
-    }
-    
-    if (tieneQuimica) return 'Quimica Sanguinea';
-    if (tieneBiometria) return 'Biometria Hematica';
-    
-    // Si no hay ninguno de los dos tipos conocidos, usar el primero
-    return analisis[0].nombre;
-  };
-
-  // Efecto para llenar los campos cuando se reciben datos del pedido
-  useEffect(() => {
-    if (orderData && isVisible) {
-      // Determinar tipo de muestra basado en el análisis
-      const tipoMuestra = determinarTipoMuestra(orderData.analisis);
-      setSelectedTipo(tipoMuestra);
-      
-      // Llenar pedido ID
-      setPedido(orderData._id || '');
-      
-      // Llenar paciente ID
-      setPacienteId(orderData.usuarioId?._id || '');
-      
-      // Llenar nombre del paciente (solo el campo nombre)
-      setNombre(orderData.usuarioId?.nombre || '');
-      
-      // Limpiar observaciones
-      setObservaciones('');
-    }
-  }, [orderData, isVisible]);
-
-  // Limpiar campos cuando se cierra el modal
-  useEffect(() => {
-    if (!isVisible) {
-      setSelectedTipo('');
-      setPedido('');
-      setPacienteId('');
-      setNombre('');
-      setObservaciones('');
-    }
-  }, [isVisible]);
-
+  // Función para manejar el envío del formulario
   const handleSubmit = async () => {
-    // Validaciones
-    if (!selectedTipo) {
-      Alert.alert('Error', 'Por favor, selecciona un tipo de muestra');
-      return;
-    }
-    
-    if (!pedido || !pacienteId || !nombre) {
-      Alert.alert('Error', 'Faltan datos del pedido o paciente');
-      return;
-    }
-
-    setLoading(true);
-
-    try {
-      // Obtener el token del AsyncStorage
-      const token = await AsyncStorage.getItem('userToken');
-      
-      if (!token) {
-        Alert.alert('Error', 'No se encontró token de autenticación');
-        setLoading(false);
-        return;
-      }
-
-      // Mapear el tipo de muestra al formato del backend
-      const tipoMuestraMap = {
-        'Quimica Sanguinea': 'quimicaSanguinea',
-        'Biometria Hematica': 'biometriaHematica',
-        'quimicaSanguinea': 'quimicaSanguinea',
-        'biometriaHematica': 'biometriaHematica'
-      };
-
-      const tipoMuestraBackend = tipoMuestraMap[selectedTipo] || selectedTipo;
-
-      // Preparar los datos para enviar al backend
-      const muestraData = {
-        observaciones: observaciones || '',
-        nombrePaciente: nombre,
-        idusuario: pacienteId,
-        tipoMuestra: tipoMuestraBackend,
-        pedidoId: pedido
-      };
-
-      // Enviar petición al backend
-      const response = await fetch(`${API_URL}/muestras`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-          'Authorization': `Bearer ${token}`,
-        },
-        body: JSON.stringify(muestraData),
-      });
-
-      if (response.ok) {
-        await response.json(); // Consumir la respuesta
-        Alert.alert('Éxito', 'Muestra registrada correctamente');
-        
-        // Llamar al callback original si existe
-        if (onSubmit) {
-          onSubmit({ selectedTipo, pedido, pacienteId, nombre, observaciones });
-        }
-        
-        onClose();
-      } else {
-        const errorData = await response.text();
-        console.error('Error response:', errorData);
-        Alert.alert('Error', 'Error al registrar la muestra. Intenta de nuevo.');
-      }
-    } catch (error) {
-      console.error('Error al enviar muestra:', error);
-      Alert.alert('Error', 'Error de conexión. Intenta de nuevo.');
-    } finally {
-      setLoading(false);
-    }
+    await enviarMuestra(onSubmit, onClose);
   };
 
   return (
@@ -179,7 +50,6 @@ const nuevaMuestra = ({ isVisible, onClose, onSubmit, orderData }) => {
         <InputGroup
           labelTitle="Pedido"
           value={pedido}
-          onChangeText={setPedido}
           placeholder="ID del pedido"
           onFocus={() => setFocus('pedido')}
           onBlur={clearFocus}
@@ -194,7 +64,6 @@ const nuevaMuestra = ({ isVisible, onClose, onSubmit, orderData }) => {
         <InputGroup
           labelTitle="ID del Paciente"
           value={pacienteId}
-          onChangeText={setPacienteId}
           placeholder="Identificador del paciente"
           onFocus={() => setFocus('pacienteId')}
           onBlur={clearFocus}
@@ -209,7 +78,6 @@ const nuevaMuestra = ({ isVisible, onClose, onSubmit, orderData }) => {
         <InputGroup
           labelTitle="Nombre del Paciente"
           value={nombre}
-          onChangeText={setNombre}
           placeholder="Nombre completo del paciente"
           onFocus={() => setFocus('nombre')}
           onBlur={clearFocus}

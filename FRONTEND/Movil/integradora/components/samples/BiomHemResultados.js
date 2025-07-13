@@ -1,144 +1,22 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity,Image, StyleSheet, ScrollView, Alert } from 'react-native';
+import React from 'react';
+import { View, Text, TouchableOpacity, Image, StyleSheet, ScrollView } from 'react-native';
 import Modal from 'react-native-modal';
 import { Ionicons } from '@expo/vector-icons';
 import PropTypes from 'prop-types';
 import { InputGroup } from '../';
-import { useFocusField } from '../../hooks';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { API_URL } from '@env';
+import { useFocusField, useBiometriaHematica } from '../../hooks';
 
 const BiomHemResultados = ({ visible, sample, onClose }) => {
-  const [resultados, setResultados] = useState({
-    hemoglobina: '',
-    hematocrito: '',
-    eritrocitos: '',
-    conMediaHb: '',
-    volGlobularMedia: '',
-    HBCorpuscularMedia: '',
-    plaquetas: '',
-    cuentaLeucocitaria: '',
-    linfocitos: '',
-    monocitos: '',
-    segmentados: '',
-    enBanda: '',
-    neutrofilosT: '',
-    eosinofilos: '',
-    basofilos: '',
-    observaciones: ''
-  });
-
-  const [loading, setLoading] = useState(false);
-
   // Usar el hook personalizado para manejar el focus
   const { setFocus, clearFocus, getFieldStyle } = useFocusField();
-
-  // Cargar datos existentes cuando se abre el modal
-  useEffect(() => {
-    if (visible && sample?.biometriaHematica) {
-      const bioData = sample.biometriaHematica;
-      const formulaRoja = bioData.formulaRoja || {};
-      const formulaBlanca = bioData.formulaBlanca || {};
-      
-      setResultados({
-        // Fórmula Roja
-        hemoglobina: formulaRoja.hemoglobina?.toString() || '',
-        hematocrito: formulaRoja.hematocrito?.toString() || '',
-        eritrocitos: formulaRoja.eritrocitos?.toString() || '',
-        conMediaHb: formulaRoja.conMediaHb?.toString() || '',
-        volGlobularMedia: formulaRoja.volGlobularMedia?.toString() || '',
-        HBCorpuscularMedia: formulaRoja.HBCorpuscularMedia?.toString() || '',
-        plaquetas: formulaRoja.plaqutas?.toString() || '', // Nota: el API usa "plaqutas" sin 'e'
-        // Fórmula Blanca
-        cuentaLeucocitaria: formulaBlanca.cuentaLeucocitaria?.toString() || '',
-        linfocitos: formulaBlanca.linfocitos?.toString() || '',
-        monocitos: formulaBlanca.monocitos?.toString() || '',
-        segmentados: formulaBlanca.segmentados?.toString() || '',
-        enBanda: formulaBlanca.enBanda?.toString() || '',
-        neutrofilosT: formulaBlanca.neutrofilosT?.toString() || '',
-        eosinofilos: formulaBlanca.eosinofilos?.toString() || '',
-        basofilos: formulaBlanca.basofilos?.toString() || '',
-        observaciones: bioData.observaciones || ''
-      });
-    }
-  }, [visible, sample]);
-
-  const handleInputChange = (field, value) => {
-    setResultados(prev => ({
-      ...prev,
-      [field]: value
-    }));
-  };
-
-  const handleSubmit = async () => {
-    if (!sample?._id) {
-      Alert.alert('Error', 'No se encontró el ID de la muestra');
-      return;
-    }
-
-    setLoading(true);
-    try {
-      const token = await AsyncStorage.getItem('userToken');
-      
-      if (!token) {
-        Alert.alert('Error', 'No se encontró el token de autenticación');
-        setLoading(false);
-        return;
-      }
-
-      // Formatear los resultados según la estructura esperada por el API
-      const formattedResults = {
-        biometriaHematica: {
-          formulaRoja: {
-            hemoglobina: resultados.hemoglobina ? parseFloat(resultados.hemoglobina) : null,
-            hematocrito: resultados.hematocrito ? parseFloat(resultados.hematocrito) : null,
-            eritrocitos: resultados.eritrocitos ? parseFloat(resultados.eritrocitos) : null,
-            conMediaHb: resultados.conMediaHb ? parseFloat(resultados.conMediaHb) : null,
-            volGlobularMedia: resultados.volGlobularMedia ? parseFloat(resultados.volGlobularMedia) : null,
-            HBCorpuscularMedia: resultados.HBCorpuscularMedia ? parseFloat(resultados.HBCorpuscularMedia) : null,
-            plaqutas: resultados.plaquetas ? parseFloat(resultados.plaquetas) : null // Nota: API usa "plaqutas" sin 'e'
-          },
-          formulaBlanca: {
-            cuentaLeucocitaria: resultados.cuentaLeucocitaria ? parseFloat(resultados.cuentaLeucocitaria) : null,
-            linfocitos: resultados.linfocitos ? parseFloat(resultados.linfocitos) : null,
-            monocitos: resultados.monocitos ? parseFloat(resultados.monocitos) : null,
-            segmentados: resultados.segmentados ? parseFloat(resultados.segmentados) : null,
-            enBanda: resultados.enBanda ? parseFloat(resultados.enBanda) : null,
-            neutrofilosT: resultados.neutrofilosT ? parseFloat(resultados.neutrofilosT) : null,
-            eosinofilos: resultados.eosinofilos ? parseFloat(resultados.eosinofilos) : null,
-            basofilos: resultados.basofilos ? parseFloat(resultados.basofilos) : null
-          },
-          observaciones: resultados.observaciones || ''
-        }
-      };
-
-      const response = await fetch(`${API_URL}/muestras/resultados/${sample._id}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-          'Authorization': `Bearer ${token}`,
-        },
-        body: JSON.stringify(formattedResults),
-      });
-
-      if (response.ok) {
-        const responseData = await response.json();
-        console.log('Resultados guardados exitosamente:', responseData);
-        Alert.alert('Éxito', 'Los resultados se han guardado correctamente');
-        onClose();
-      } else {
-        const errorData = await response.json();
-        console.error('Error al guardar resultados:', errorData);
-        Alert.alert('Error', 'No se pudieron guardar los resultados');
-      }
-    } catch (error) {
-      console.error('Error al guardar resultados:', error);
-      Alert.alert('Error', 'Error de conexión al guardar los resultados');
-    } finally {
-      setLoading(false);
-    }
-  };
+  
+  // Usar el hook para manejo de biometría hemática
+  const {
+    resultados,
+    loading,
+    handleInputChange,
+    handleSubmit,
+  } = useBiometriaHematica(visible, sample, onClose);
 
   if (!sample) return null;
 
