@@ -1,7 +1,7 @@
 
 //import React, { useState } from 'react'
 
-const DetallesPacienteAlta = ({seleccionado,onSelect}) => {
+const DetallesPacienteAlta = ({seleccionado,onSelect = () => {}}) => {
     /*const pruebas = [
         "Quimica sanguinea",
         "Biometrica Hepatica"

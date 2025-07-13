@@ -29,7 +29,6 @@ const OpcionesPedidos = ({ buttonLabels = [ 'Completadas', 'Canceladas'] }) => {
                 <div>
                     {activeButton === buttonLabels[0] ? (
                         <div>
-                            <p className='texto'>Pedidos completados</p>
                             <div className='margen'>
                                 <div className='scale-up-ver-center'>
                                     <ListaPedidos/>

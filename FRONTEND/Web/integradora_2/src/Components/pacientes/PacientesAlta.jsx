@@ -3,7 +3,7 @@ import Swal from 'sweetalert2';
 import { requireTokenOrRedirect } from "../../utils/auth";
 import CargaBarras from '../elementos/CargaBarras';
 
-const PacientesAlta = ({seleccionado,onSelect}) => {
+const PacientesAlta = ({seleccionado,onSelect = () => {}}) => {
     const [pacientes, setPacientes] = useState([]);
     const [, setRawResponse] = useState(null);
     const [error, setError] = useState(null);
@@ -124,6 +124,7 @@ const PacientesAlta = ({seleccionado,onSelect}) => {
                     timer : 1000,
                     showConfirmButton: false
                 });
+                return;
             }
         })
     }
@@ -172,7 +173,7 @@ const PacientesAlta = ({seleccionado,onSelect}) => {
                         <div 
                         key={p._id || index} 
                         className={`prueba_tabla ${isSelected ? 'seleccionado' : ''}`} 
-                        onClick={() => onSelect(p._id)} >
+                        onClick={() => typeof onSelect==='function'&& onSelect(p._id)} >
                             <div className='inicial-circulo'>
                                 <p className='letra-circulo'>{inicial}</p>
                             </div>
