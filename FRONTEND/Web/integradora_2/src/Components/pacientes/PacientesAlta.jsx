@@ -12,13 +12,12 @@ const PacientesAlta = ({seleccionado,onSelect = () => {}}) => {
     const [token, setToken] = useState(null);
     //const [pacienteSeleccionado, setPacienteSeleccionado] = useState(null);
 
-    
-
+    /*________________obtener token________________*/
     useEffect(() => {
         const tk = requireTokenOrRedirect();
         setToken(tk);
     }, []);
-
+    /*__________________Peticion a pacientes__________________*/
     useEffect(() => {
         if (!token) return;
         const fetchPacientes = async () => {
@@ -70,6 +69,7 @@ const PacientesAlta = ({seleccionado,onSelect = () => {}}) => {
             },
             buttonsStyling: false
         });
+        /*___________Aqui empieza el estilo de swal_____________ */
         swalWithBootstrapButtons.fire({
             title: "Estas Seguro de darlo de baja?",
             text: "No podras Revertirlo una vez lo des de baja!",
@@ -84,6 +84,7 @@ const PacientesAlta = ({seleccionado,onSelect = () => {}}) => {
                 setLoading(true);
                 setError(null);
                 try {
+                    /*___________madre de validacion de token_____________ */
                     console.log("API URL:", apiUrl);
                     console.log("TOKEN:", token);
                     const headers = {

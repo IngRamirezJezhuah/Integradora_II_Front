@@ -73,8 +73,8 @@ const Component=() => {
                 <div className={`sidebar ${showMenu ? 'sidebar-open' : 'sidebar-closed'}`}>
                     <img className='menu' src="/logo-iic.png" alt='icon-menu' onClick={HandleMenuDinamico}/>
                     <nav className="nav">
-                        <Link className="nav-link">
-                        <div>
+                        
+                        <div className="nav-link">
                             <li className={`bordes ${isActive('/') ? 'active' : ''}`}>
                                 <div className='inicial-circulo'>
                                     <img
@@ -91,7 +91,7 @@ const Component=() => {
                                         <Link to={'/Perfil'} className="paciente-link">
                                         <p>Ver Pedidos</p>
                                         </Link>
-                                        <Link to={'/Perfil'} className="paciente-link">
+                                        <Link to={'/'} className="paciente-link">
                                         <p>Editar info</p>
                                         </Link>
                                         <select name="" id="">
@@ -101,7 +101,7 @@ const Component=() => {
                                 </div>
                             </li>
                         </div>
-                        </Link>
+                        
                         <Link to="/Dashboard" className="nav-link">
                             <li className={`bordes ${isActive('/Dashboard') ? 'active' : ''}`}>
                                 <img className='iconos' src="/dash.png" alt="" />

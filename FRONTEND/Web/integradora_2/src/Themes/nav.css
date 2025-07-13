@@ -82,7 +82,7 @@ a{
 
 .nav-link:hover {
     background-color: #e9727293;
-    padding: 0.1vw 0.1vw 0.1vw 0.1vw ;
+    padding: 0vw 0vw 0vw 0vw ;
     transition: background 0.2s;
 
 }
@@ -123,17 +123,19 @@ a{
 
 .bordes{
     display: flex;
-    padding: 1.5vh;
+    padding: 1.5vh 0vh 2vh 4vh;
     height: 2vmin;
     height: 2.5vmax;
     width: 7vmin;
-    width: 11vmax;
+    width: 10vmax;
     font-size: 2vmin;
     font-size: 1vmax;
     margin-bottom: 0%;
     border-radius: 1vh;
+
 }
 .bordes.active {
     color: rgb(255, 255, 255);
     background-color: rgb(231, 65, 65);
+    border-radius: 1vh;
 }
