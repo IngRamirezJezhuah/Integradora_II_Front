@@ -26,11 +26,34 @@ const ListaPedidos = () => {
             setLoading(true);
             setError(null);
             try{
+                const res = await fetch(`${apiUrl}/pedidos/`, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${token}`,
+                    },
+                    });
+                    if (res.status === 401) {
+                    setError('Sesión expirada — redirigiendo…');
+                    setTimeout(() => (window.location.href = '/'), 1500);
+                    return;
+                    }
+                    if (!res.ok) throw new Error('Error al obtener pedidos');
+                    const { data } = await res.json();
+                    setPedidos(Array.isArray(data) ? data : []);
+                } catch (err) {
+                    setError(err.message || 'Error al obtener pedidos');
+                } finally {
+                    setLoading(false);
+                }
+                /*
                 const headers = {
                     'Content-Type': 'application/json',
                     Authorization: `Bearer $(token)`,
                 };
-                const res = await fetch(`${apiUrl}/pedidos`, { method: 'GET',headers});
+                const res = await fetch(`${apiUrl}/pedidos/`, { 
+                    method: 'GET',
+                    headers
+                });
                 const raw = await res.text();
                 if (res.status===401) {
                     setError('sesion expirada, redirigiendo ...');
@@ -44,7 +67,7 @@ const ListaPedidos = () => {
                 setError(err.message||'Error al obtener pedido');
             } finally {
                 setLoading(false);
-            }
+            }*/
         };
         fecthPedidos();
     }, [apiUrl,token]);
@@ -139,7 +162,7 @@ const ListaPedidos = () => {
                         <div className='titulo'>{/*key={i} y key={j} son importantes en React para que sepa cómo actualizar el DOM eficientemente. */}
                             <img src="/quimica.png" alt="química" className='imgMuestra' />
                         </div>
-                        <h1 className='centrar'>{p.id.slice(-6).toUpperCase()}</h1>
+                        <h1 className='centrar'>{(p._id || p.id || '--').toString().slice(-6).toUpperCase()}</h1>{/*p.id.slice(-6).toUpperCase()*/}
                         <p className='texto'>{p.analisis?.[0]?.nombre || '--'}</p>
                         {/*esta madre no supe hacerla se la pedi a chat segun el id que tienes agarra el dato y te lo muestra ya que es lista*/}
                         <p className='texto'>
