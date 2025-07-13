@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 import Swal from 'sweetalert2';
 import { CargaBolita } from '../Components';
+import CargaBarras from '../Components/elementos/CargaBarras';
 
 const Dashboard=()=> {
     const [ldrData, setLdrData] = useState(null);
@@ -51,47 +52,31 @@ const Dashboard=()=> {
     if (!ldrData || !tempData) {
         return (
         <div>
-            <p className='titulo'>Dashboard </p>
-            <div className='contenedor_pedidos'>
-                <div className='scale-in-hor-center'>
-                    
-                    <div className='div-graficas'>
-                        <p>Temperatura del Laboratorio</p>
-                        <p>25% c</p>
-                        <div className='div-grafica'>
-                            
-                                <CargaBolita/>  
-                        </div>
-                    </div>
-                    <div className='div-graficas'>
-                        <p>Humedad del Laboratorio</p>
-                        <p>25% c</p>
-                        <div className='div-grafica'>
-                            <CargaBolita/>  
-                        </div>
+        <p className='titulo'>Dashboard </p>
+        <div>
+            <div className='margen'>
+                <div className='div-graficas'>
+                    <p>Temperatura del Laboratorio</p>
+                    <div>
+                        <br /><br /><br />
+                        <CargaBolita/> 
                     </div>
                 </div>
-                <div className='scale-up-center'>
-                    <div onClick={handleEasterEgg}>
-
-                        <div className='div-muestra'>
-                            <p className='centrar'>Pedidos Pendientes</p>
-                            <br /><br />
+                <div className='div-graficas'>
+                    <p>Humedad del Laboratorio</p>
+                    <div>
+                        <br /><br /><br />
                         <CargaBolita/> 
-                        </div>
-                    </div>
-                    <div className='div-muestra-2'>
-                        <p className='centrar'>muestras en preocesamiento</p>
-                        <br /><br />
-                        <CargaBolita/> 
-                    </div>
-                    <div className='div-muestra-3'>
-                        <p className='centrar'>Contenedor esp32c3_001</p>
-                        <br /><br />
-                        <CargaBolita/>  
                     </div>
                 </div>
             </div>
+            <div>
+                <div className='div-graficas'>
+                    <CargaBarras/> 
+                    
+                </div>
+            </div>
+        </div>
     </div>
     )
     }
@@ -99,37 +84,29 @@ const Dashboard=()=> {
     return (
     <div>
         <p className='titulo'>Dashboard </p>
-        <div className='margen'>
-            <div>
+        <div>
+            <div className='margen'>
                 <div className='div-graficas'>
                     <p>Temperatura del Laboratorio</p>
                     <p>{tempData.dht11_temp}°C</p>
-                    <div className='div-grafica'>
+                    <div>
                         < MuestrasHechas tempData={tempData}/>
                     </div>
                 </div>
                 <div className='div-graficas'>
                     <p>Humedad del Laboratorio</p>
                     <p>{tempData.dht11_hum}%</p>
-                    <div className='div-grafica'>
+                    <div>
                         <SampleChart tempData={tempData}/>
                     </div>
                 </div>
             </div>
             <div>
-                <div onClick={handleEasterEgg}>
-                    <div className='div-muestra'>
-                        <p className='centrar'>Pedidos Pendientes</p>
-                        <p className='texto-dash'>12</p>
-                    </div>
-                </div>
-                <div className='div-muestra-2'>
-                    <p className='centrar'>muestras en preocesamiento</p>
-                    <p className='texto-dash'>15</p>
-                </div>
-                <div className={status.clase}>
-                    <p className='centrar'>Contenedor {ldrData.id}</p>
-                    <p className='centrar'>{status.estado}</p>
+                <div className={status.clase} onClick={handleEasterEgg}>
+                    
+                    <p className='centrar'>Contenedor:</p><br />
+                    <p className='texto-dash'>{ldrData.id}</p><br />
+                    <p className='centrar'>{status.estado}</p><br />
                     <p className='texto-dash'>LDR:{ldrData.ldr}</p>
                 </div>
             </div>

@@ -75,14 +75,14 @@ a{
     align-items: center;
     gap: 1vw;
     width: 100%;
-    padding: 0.5vw 1vw;
+    padding: 0.1vw 0.1vw 0.1vw 0.1vw;
     transition: background 0.2s;
     border-radius: 1vw;
 }
 
 .nav-link:hover {
     background-color: #e9727293;
-    padding: 0.5vw 1vw;
+    padding: 0.1vw 0.1vw 0.1vw 0.1vw ;
     transition: background 0.2s;
 
 }
@@ -119,4 +119,21 @@ a{
 .logout-btn img {
             width: 2.5rem;
             height: 2.5rem;
+}
+
+.bordes{
+    display: flex;
+    padding: 1.5vh;
+    height: 2vmin;
+    height: 2.5vmax;
+    width: 7vmin;
+    width: 11vmax;
+    font-size: 2vmin;
+    font-size: 1vmax;
+    margin-bottom: 0%;
+    border-radius: 1vh;
+}
+.bordes.active {
+    color: rgb(255, 255, 255);
+    background-color: rgb(231, 65, 65);
 }

@@ -4,14 +4,15 @@
 }
 
 .div-graficas {
-    color: white;
+    color: rgb(0, 0, 0);
     padding: 2vw;
     margin: 1rem;
     width: 32vw;
     height: 17vw;
-    background-color: #FF4E4E;
+    background-color: #f0f0f0;
     border-radius: 2rem;
 }
+
 
 .div-grafica {
     padding: 1vw;
@@ -63,7 +64,7 @@
     background-color: #FFC7BC;
 }
 .div-muestra-3 {
-  background-color: #a3d8f9; /* azul claro para "En peligro" */
+  background-color: #f9dca3; /* azul claro para "En peligro" */
     padding: 2vw;
     margin: 1rem;
     width: 20vw;

@@ -81,9 +81,7 @@
     justify-content: space-between;
     margin: 0 auto; 
 }
-.texto-cargando{ 
-    padding-top:20px
-}
+
 .cargando span{
     font-size: 20px;
     text-transform: uppercase;
@@ -116,18 +114,11 @@ border-radius: 50%
 @import url('//fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,900&display=swap');
 
 
-.cargando-barra{ 
-    position: relative; 
-    color: #dd5050;
-    margin-top: 2em;
-    letter-spacing: 0.08em;
-    text-transform: uppercase
-}
+
 .contenedor-barra{  
     height: 6em;
 }
 #contenedor-barra{ 
-    /*background-color: #fff;*/ 
     display: grid;
     place-content: center;
     height: 30vh;

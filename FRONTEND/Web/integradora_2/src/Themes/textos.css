@@ -57,6 +57,19 @@
     text-align: center;
 }
 
+.cargando-barra{ 
+    position: relative; 
+    color: #660000;
+    margin-top: 2em;
+    letter-spacing: 0.08em;
+    text-transform: uppercase
+}
+
+.texto-cargando{ 
+    padding-top:20px;
+    color:#330000;
+} 
+
 .inicial-circulo {
     margin-bottom: 1vh;
     padding: 1vw;

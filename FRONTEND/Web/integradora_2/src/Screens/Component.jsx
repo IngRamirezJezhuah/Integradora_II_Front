@@ -73,34 +73,35 @@ const Component=() => {
                 <div className={`sidebar ${showMenu ? 'sidebar-open' : 'sidebar-closed'}`}>
                     <img className='menu' src="/logo-iic.png" alt='icon-menu' onClick={HandleMenuDinamico}/>
                     <nav className="nav">
-                            <div>
-                                <li className={`bordes ${isActive('/') ? 'active' : ''}`}>
-                                    <div className='inicial-circulo'>
-                                        <img
-                                        src={img.image}
-                                        alt={img.name}
-                                        className='iconos'
-                                        />
-                                    </div>
+                        <Link className="nav-link">
+                        <div>
+                            <li className={`bordes ${isActive('/') ? 'active' : ''}`}>
+                                <div className='inicial-circulo'>
+                                    <img
+                                    src={img.image}
+                                    alt={img.name}
+                                    className='iconos'
+                                    />
+                                </div>
+                                <div className='dropdown'>
                                     <div className='dropdown'>
-                                        <div className='dropdown'>
-                                        {showMenu && <span className='bordes'> Perfil</span>}
-                                        </div>
-                                        <div className='dropdown-content'>
-                                            <Link to={'/Perfil'} className="paciente-link">
-                                            <p>Ver Pedidos</p>
-                                            </Link>
-                                            <Link to={'/Perfil'} className="paciente-link">
-                                            <p>Editar info</p>
-                                            </Link>
-                                            <select name="" id="">
-                                                <option value="">modo Oscuro</option>
-                                            </select>
-                                        </div>
+                                    {showMenu && <span className='bordes'> Perfil</span>}
                                     </div>
-                                </li>
-                            </div>
-                        
+                                    <div className='dropdown-content'>
+                                        <Link to={'/Perfil'} className="paciente-link">
+                                        <p>Ver Pedidos</p>
+                                        </Link>
+                                        <Link to={'/Perfil'} className="paciente-link">
+                                        <p>Editar info</p>
+                                        </Link>
+                                        <select name="" id="">
+                                            <option value="">modo Oscuro</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </li>
+                        </div>
+                        </Link>
                         <Link to="/Dashboard" className="nav-link">
                             <li className={`bordes ${isActive('/Dashboard') ? 'active' : ''}`}>
                                 <img className='iconos' src="/dash.png" alt="" />
