@@ -20,37 +20,6 @@ const ListaMuestras = () => {
         setToken(tk);
     }, []);
 
-/*    useEffect(() => {
-        if (!token) return;
-        const fetchMuestras = async () => {
-            setLoading(true);
-            setError(null);
-            try{
-                const res = await fetch(`${apiUrl}/muestras`,{
-                    headers:{
-                        'Contnet-Type': 'application/json',
-                        Authorization : `Bearer ${token}`,
-                    },
-                });
-                if (res.status===401) {
-                    setError('Sesion Espirada redirigiendo…');
-                    setTimeout(() => (window.location.href ='/'), 1500);
-                    return;
-                }
-                if ( !res.ok ) throw new Error('Error al obtener muestras');
-                //const {data} = await res.json();
-                //setMuestras(ArrayBuffer.isArray(data) ? data : []);
-                const {muestrasList} = res.json;
-                setMuestras(Array.isArray(muestrasList) ? muestrasList : []);
-            } catch(err){
-                setError(err.message || 'Error al obtener muestras');
-            } finally{
-                setLoading(false);
-            }
-        };
-        fetchMuestras();
-    },[apiUrl,token]);*/
-
     useEffect(() => {
     if (!token) return;
 
@@ -165,9 +134,7 @@ const ListaMuestras = () => {
                         <div className='titulo'>
                             <img src="/quimica.png" alt="quimica" className='imgMuestra' />
                         </div>
-                        <p className='centrar'>
-                            {(p._id || p._id || "--").toString().slice(-6).toUpperCase()}{/* */}
-                        </p>
+                        <p className='centrar'>{(p._id || p._id || "--").toString().slice(-6).toUpperCase()}</p>
                         <p className='texto'>
                             {p.tipoMuestra || '--'}
                         </p>

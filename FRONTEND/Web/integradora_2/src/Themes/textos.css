@@ -50,6 +50,13 @@
     font-weight: bold;
 }
 
+.texto_pedidos{
+    padding-right: 2vh;
+    margin-right: 2vh;
+    font-size: .5vmin;
+    font-size: 1vmax;
+}
+
 .texto-dash{
     padding: 0;
     font-size: 1vmin;

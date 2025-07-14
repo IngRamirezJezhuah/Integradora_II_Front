@@ -126,29 +126,31 @@ const ListaPedidos = () => {
     return (
         <div className='scroll_pruebas'>
             {agrupar(pedidos).map((fila, i) => ( 
-                <div key={i} className='fila'> {/*Primer .map(): recorre cada fila de pedidos (es decir, cada array de 3 pedidos) i es el índice de la fila. */}
+                <div key={i} className='fila3'> {/*Primer .map(): recorre cada fila de pedidos (es decir, cada array de 3 pedidos) i es el índice de la fila. */}
                 {fila.map((p, j) => (
+
                     <div key={j} className='caja_pedidos'>{/*Segundo .map(): recorre cada pedido individual dentro de esa fila ,j es el índice dentro de la fila. */}
                         <div className='titulo'>{/*key={i} y key={j} son importantes en React para que sepa cómo actualizar el DOM eficientemente. */}
                             <img src="/quimica.png" alt="química" className='imgMuestra' />
                         </div>
-                        <h1 className='centrar'>
-                            {(p._id || p.id || '--').toString().slice(-6).toUpperCase()}
-                        </h1>{/*p.id.slice(-6).toUpperCase()*/}
-                        <p className='texto'>
+                        <p className='centrar'>{(p._id || p.id || '--').toString().slice(-6).toUpperCase()}</p>{/*p.id.slice(-6).toUpperCase()*/}
+                        <p className='texto_pedidos'>
                             {p.analisis?.[0]?.nombre || '--'}
                         </p>
                         {/*esta madre no supe hacerla se la pedi a chat segun el id que tienes agarra el dato y te lo muestra ya que es lista*/}
-                        <p className='texto'>
+                        <p className='texto_pedidos'>
                             {/*p.paciente*/}
                             {`${p.usuarioId?.nombre} ${p.usuarioId?.apellidoPaterno} ${p.usuarioId?.apellidoMaterno}`}
                         </p>
+                        <p>
+                            Estado:{p.estado}
+                        </p>
                         <div className='margen'>
                             <img src="/editar.png" alt="editar" className='iconos'  onClick={() => setModalAbierto(true)} />
-                            <Link to='/Analisis'>
-                                <img src="/detalles.png" alt="detalles" className='iconos' />
-                            </Link>
-                                <img src="/basura.png" alt="borrar" className='iconos' onClick={() => handleAlert(p._id)}/>
+                        <Link to='/Analisis'>
+                            <img src="/detalles.png" alt="detalles" className='iconos' />
+                        </Link>
+                            <img src="/basura.png" alt="borrar" className='iconos' onClick={() => handleAlert(p._id)}/>
                         </div>
                     </div>
                 ))}

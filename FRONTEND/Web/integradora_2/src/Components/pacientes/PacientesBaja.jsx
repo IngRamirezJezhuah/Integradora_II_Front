@@ -133,6 +133,14 @@ const PacientesBaja = () => {
     if (error) return <div>{error}</div>;
     return(
         <div className='caja_1'>
+            {pacientes.length === 0 && 
+            <div className="fila3">
+                <div className="caja_1">
+                    <br /><br /><br /><br /><br /><br />
+                    <p className="centrar">No hay pedidos cancelados.</p>
+                </div>
+            </div>
+            }
             <div className='scroll'>
                 {/*
                 esto es para ver si funciona correctamente
