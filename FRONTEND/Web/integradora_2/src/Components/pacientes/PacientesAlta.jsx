@@ -156,7 +156,7 @@ const PacientesAlta = ({seleccionado,onSelect = () => {}}) => {
 
     return (
         <div className='caja_1'>
-            <div className='scroll_pruebas'>
+            <div className='scroll'>
                 {/*
                 esto es para ver si funciona correctamente
                 <div>

@@ -4,6 +4,8 @@ import Swal from "sweetalert2";
 import { requireTokenOrRedirect } from "../../utils/auth";
 
 const FormResultadosBH = ({ muestraId, onSuccess }) => {
+    
+    
     /* —— valores por defecto —— */
     const [roja, setRoja]     = useState({
         hemoglobina: "", hematocrito: "", eritrocitos: "",
