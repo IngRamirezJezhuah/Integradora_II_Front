@@ -36,7 +36,7 @@ const PacientesAlta = ({seleccionado,onSelect = () => {}}) => {
                 });
                 const text = await response.text();
                 setRawResponse(text);
-                console.log("Raw response:", text); //esto muestra el arreglo de pacientes
+                //console.log("Raw response:", text); //esto muestra el arreglo de pacientes
                 if (response.status === 401) {
                     <div>
 
@@ -156,7 +156,7 @@ const PacientesAlta = ({seleccionado,onSelect = () => {}}) => {
 
     return (
         <div className='caja_1'>
-            <div className='scroll'>
+            <div className='scroll_pruebas'>
                 {/*
                 esto es para ver si funciona correctamente
                 <div>

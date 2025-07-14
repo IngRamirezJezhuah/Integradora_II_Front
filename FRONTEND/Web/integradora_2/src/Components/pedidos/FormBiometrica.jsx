@@ -3,13 +3,13 @@ import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { requireTokenOrRedirect } from "../../utils/auth";
 
-const FormBiometrica = () => {
+const FormBiometrica = ({ fixedUserId }) => {
     /* ——— state ——— */
-    const [usuarioId, setUsuarioId]           = useState("");
-    const [notas, setNotas]                   = useState("");
-    const [anticipo, setAnticipo]             = useState("");
-    const [porcentaje, setPorcentaje]         = useState(0);
-    const [error, setError]                   = useState(null);
+    const [usuarioId, setUsuarioId]= useState(fixedUserId ?? "");
+    const [notas, setNotas]= useState('');
+    const [anticipo, setAnticipo]= useState('');
+    const [porcentaje, setPorcentaje]= useState(0);
+    const [error, setError]= useState(null);
 
     /* ——— constantes fijas del análisis ——— */
     const ANALISIS_ID   = "686734c0dbf9fa679be0958c"; 
@@ -73,7 +73,7 @@ const FormBiometrica = () => {
         <h2>Nuevo pedido · Biometría hemática</h2>
 
         <form onSubmit={handleSubmit}>
-            {/* ——— PACIENTE ——— */}
+            {/* ——— PACIENTE ——— 
             <div className="form-field">
             <label>ID Paciente (usuarioId)</label>
             <input
@@ -83,6 +83,18 @@ const FormBiometrica = () => {
                 placeholder="68635e1f2122030410801823"
             />
             </div>
+            */}
+            {!fixedUserId && (          // ← oculta input si llega prefijado
+            <div className="form-field">
+                <label>ID Paciente (usuarioId)</label>
+                <input
+                type="text"
+                value={usuarioId}
+                onChange={(e) => setUsuarioId(e.target.value)}
+                placeholder="68635e1f2122030410801823"
+                />
+            </div>
+            )}
 
             {/* ——— NOTAS ——— */}
             <div className="form-field">

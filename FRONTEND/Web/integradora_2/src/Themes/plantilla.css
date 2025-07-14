@@ -138,13 +138,10 @@
 }
 
 .scroll_pruebas{
-    .scroll_pruebas{
     width: 70vw;
     height: 38vw;
     overflow-y: auto;
-    display: block;
-}
-
+    display: flexbox;
 }
 .scroll_pruebas ::after{
     content: "";    
