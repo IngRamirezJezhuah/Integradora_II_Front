@@ -1,7 +1,9 @@
 import { useState } from "react";
 import PacientesAlta from "../pacientes/PacientesAlta"
 import DetallesPacienteAlta from "../pacientes/DetallesPacienteAlta";
-import FormsPedidos from "./FormsPedidos";
+//import FormsPedidos from "./FormsPedidos";
+//import FormBiometrica from "./FormBiometrica";
+import FormSanguinea from "./FormSanguinea";
 
 
 
@@ -57,7 +59,11 @@ const ModalPedidos = ({onClose}) => {
                         <p className='titulo'>Registrar Pedido</p>
                         <button className="close-btn" onClick={onClose}>x</button>
                             <div>
-                            <FormsPedidos/>
+                            {/*
+                            <FormsPedidos/> 
+                            <FormBiometrica/>
+                            */}
+                            <FormSanguinea />;
                             </div>
                         <button className="btn" onClick={retrocederPaso}>
                             Regresar

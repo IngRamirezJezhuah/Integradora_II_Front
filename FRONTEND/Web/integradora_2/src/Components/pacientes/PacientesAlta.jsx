@@ -36,7 +36,7 @@ const PacientesAlta = ({seleccionado,onSelect = () => {}}) => {
                 });
                 const text = await response.text();
                 setRawResponse(text);
-                //console.log("Raw response:", text); //esto muestra el arreglo de pacientes
+                console.log("Raw response:", text); //esto muestra el arreglo de pacientes
                 if (response.status === 401) {
                     <div>
 

@@ -31,6 +31,10 @@ export {default as EditarMuestras } from './muestras/EditarMuestras'
 export {default as OpcionesMuestras } from './muestras/OpcionesMuestras'
 export {default as MuestrasCanceladas } from './muestras/MuestrasCanceladas'
 export {default as ModalMuestras } from './muestras/ModalMuestras'
+export {default as FormMuestras } from './muestras/FormMuestras'
+export {default as FromMuesBiometira } from './muestras/FormMuesBiometira'
+export {default as FormMuesSangre } from './muestras/FormMuesSangre'
+
 
 //_____________pedidos_____________
 export {default as DetallesPedidos } from './pedidos/DetallesPedidos'
