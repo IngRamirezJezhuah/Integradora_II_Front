@@ -1,129 +1,13 @@
 import { View, StyleSheet, ActivityIndicator, Text, TouchableOpacity, SafeAreaView} from "react-native";
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import {TablaMuestrasPaciente, InfoPaciente, Header} from "../components";
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { API_URL } from '@env';
 import { Ionicons } from '@expo/vector-icons';
+import { useMuestrasPaciente, usePacienteActions } from '../hooks';
 
 const PacienteInicio = () => {
-  const [muestras, setMuestras] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+    const { muestras, loading, error, handleRetry } = useMuestrasPaciente();
+    const { handleView, handleDelete } = usePacienteActions();
 
-  useEffect(() => {
-    const fetchMuestrasUsuario = async () => {
-      try {
-        setError(null); // Reset error state
-        const token = await AsyncStorage.getItem('userToken');
-        const userData = await AsyncStorage.getItem('userData');
-        
-        if (!token || !userData) {
-          setError('No se encontró información de autenticación');
-          setLoading(false);
-          return;
-        }
-
-        const user = JSON.parse(userData);
-        const usuarioId = user._id || user.id;
-
-        if (!usuarioId) {
-          setError('No se encontró ID de usuario');
-          setLoading(false);
-          return;
-        }
-
-        const response = await fetch(`${API_URL}/muestras/usuario/${usuarioId}`, {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
-            'Authorization': `Bearer ${token}`,
-          },
-        });
-
-        if (response.ok) {
-          const data = await response.json();
-          // Filtrar solo las muestras que deben mostrarse al cliente
-          const muestrasVisibles = data.muestras?.filter(muestra => 
-            muestra.statusShowClient === true
-          ) || [];
-          setMuestras(muestrasVisibles);
-          console.log('Muestras del usuario cargadas:', muestrasVisibles);
-        } else {
-          setError(`Error del servidor: ${response.status}`);
-          console.error('Error al obtener muestras del usuario:', response.status);
-        }
-      } catch (error) {
-        setError('Error de conexión al obtener las muestras');
-        console.error('Error al obtener muestras del usuario:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchMuestrasUsuario();
-  }, []);
-
-  const handleView = (item) => {
-    console.log('View muestra', item);
-  };
-
-  const handleDelete = (item) => {
-    console.log('Delete/Download muestra', item);
-  };
-
-  const handleRetry = () => {
-    setLoading(true);
-    setError(null);
-    // Re-trigger the fetch by updating a dependency or calling fetch directly
-    const fetchMuestrasUsuario = async () => {
-      try {
-        setError(null);
-        const token = await AsyncStorage.getItem('userToken');
-        const userData = await AsyncStorage.getItem('userData');
-        
-        if (!token || !userData) {
-          setError('No se encontró información de autenticación');
-          setLoading(false);
-          return;
-        }
-
-        const user = JSON.parse(userData);
-        const usuarioId = user._id || user.id;
-
-        if (!usuarioId) {
-          setError('No se encontró ID de usuario');
-          setLoading(false);
-          return;
-        }
-
-        const response = await fetch(`${API_URL}/muestras/usuario/${usuarioId}`, {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
-            'Authorization': `Bearer ${token}`,
-          },
-        });
-
-        if (response.ok) {
-          const data = await response.json();
-          const muestrasVisibles = data.muestras?.filter(muestra => 
-            muestra.statusShowClient === true
-          ) || [];
-          setMuestras(muestrasVisibles);
-        } else {
-          setError(`Error del servidor: ${response.status}`);
-        }
-      } catch (err) {
-        setError('Error de conexión al obtener las muestras', err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchMuestrasUsuario();
-  };
     // Loading state
     if (loading) {
         return (
@@ -196,7 +80,8 @@ const PacienteInicio = () => {
             <TablaMuestrasPaciente data={muestras} onView={handleView} onDelete={handleDelete} />
         </View>
     );
-    }
+};
+
 const styles = StyleSheet.create({
     container: {    
         flex: 1,
@@ -296,4 +181,5 @@ const styles = StyleSheet.create({
         marginLeft: 6,
     },
 });
+
 export default PacienteInicio;

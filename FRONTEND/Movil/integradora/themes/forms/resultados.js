@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-export const resultadosStyles = StyleSheet.create({
+export const muestrasFormStyles = StyleSheet.create({
   modal: {
     justifyContent: 'flex-end',
     margin: 0,
@@ -73,12 +73,15 @@ export const resultadosStyles = StyleSheet.create({
     alignItems: 'center',
   },
   cancelButton: {
-    backgroundColor: '#6c757d',
+    borderWidth: 1,
+    borderColor: '#DA0C15',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
     padding: 15,
     borderRadius: 10,
     flex: 1,
     marginRight: 10,
-    alignItems: 'center',
   },
   buttonDisabled: {
     backgroundColor: '#ccc',
@@ -94,7 +97,7 @@ export const resultadosStyles = StyleSheet.create({
     fontSize: 16,
   },
   cancelButtonText: {
-    color: 'white',
+    color: '#DA0C15',
     fontWeight: '600',
     fontSize: 16,
   },

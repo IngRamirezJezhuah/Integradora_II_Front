@@ -2,6 +2,7 @@ import React from 'react';
 import { SafeAreaView, View, Text, ActivityIndicator } from 'react-native';
 import { SearchBar, FilterBar, TablaPedidos, Header } from '../components';
 import { usePedidos, usePedidosFilter, usePedidosActions } from '../hooks';
+import { displayStyles } from '../themes';
 
 const OrdersScreen = () => {
   // Hook para datos de pedidos
@@ -39,13 +40,13 @@ const OrdersScreen = () => {
 
   if (error) {
     return (
-      <SafeAreaView style={{ flex: 1 }}>
+      <SafeAreaView style={displayStyles.safeArea}>
         <Header title="Pedidos" />
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', paddingHorizontal: 20 }}>
-          <Text style={{ color: '#d32f2f', fontSize: 16, textAlign: 'center', marginBottom: 20 }}>
+        <View style={displayStyles.errorContainer}>
+          <Text style={displayStyles.errorText}>
             {error}
           </Text>
-          <Text style={{ color: '#666', fontSize: 14, textAlign: 'center' }}>
+          <Text style={displayStyles.errorSubtext}>
             Toca para intentar nuevamente
           </Text>
         </View>
@@ -54,7 +55,7 @@ const OrdersScreen = () => {
   }
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView style={displayStyles.safeArea}>
       <Header title="Pedidos" />
       <SearchBar 
         placeholder="Buscar Pedidos" 
@@ -68,22 +69,22 @@ const OrdersScreen = () => {
       />
       
       {/* Indicador de estado de filtros */}
-      <View style={{ paddingHorizontal: 10, paddingBottom: 8 }}>
-        <Text style={{ color: '#666', fontSize: 14, fontStyle: 'italic' }}>
+      <View style={displayStyles.filterStatusContainer}>
+        <Text style={displayStyles.filterStatusText}>
           {getFilterStatusText()}
         </Text>
       </View>
 
       {loading ? (
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', paddingTop: 50 }}>
+        <View style={displayStyles.loadingContainer}>
           <ActivityIndicator size="large" color="#0066CC" />
-          <Text style={{ marginTop: 10, color: '#666' }}>Cargando pedidos...</Text>
+          <Text style={displayStyles.loadingText}>Cargando pedidos...</Text>
         </View>
       ) : (
         <>
           {filteredData.length === 0 ? (
-            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', paddingTop: 50 }}>
-              <Text style={{ color: '#666', fontSize: 16, textAlign: 'center' }}>
+            <View style={displayStyles.emptyContainer}>
+              <Text style={displayStyles.emptyText}>
                 {pedidos.length === 0 ? 'No hay pedidos disponibles' : 'No se encontraron pedidos con los filtros aplicados'}
               </Text>
             </View>

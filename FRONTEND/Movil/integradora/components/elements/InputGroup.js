@@ -1,6 +1,7 @@
 import React from 'react';
-import { View, Text, TextInput, StyleSheet } from 'react-native';
+import { View, Text, TextInput } from 'react-native';
 import PropTypes from 'prop-types';
+import {styles} from '../../themes';
 
 const InputGroup = ({ 
   labelTitle, 
@@ -36,38 +37,6 @@ const InputGroup = ({
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  inputGroup: {
-    marginBottom: 15,
-  },
-  label: {
-    fontSize: 18,
-    fontWeight: '500',
-    marginBottom: 5,
-  },
-  input: {
-    borderWidth: 1,
-    borderColor: '#ddd',
-    borderRadius: 8,
-    padding: 12,
-    fontSize: 16,
-    backgroundColor: '#f9f9f9',
-  },
-  inputFocus: {
-    borderColor: '#BF1E2D',
-    borderWidth: 2,
-    backgroundColor: '#fff',
-  },
-  inputDisabled: {
-    backgroundColor: '#f0f0f0',
-    color: '#666',
-  },
-  textArea: {
-    height: 80,
-    textAlignVertical: 'top',
-  },
-});
 
 // PropTypes para validación de props
 InputGroup.propTypes = {

@@ -1,11 +1,12 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
+import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
 import Modal from 'react-native-modal';
 import { Ionicons } from '@expo/vector-icons';
 import QRCode from 'react-native-qrcode-svg';
 import PropTypes from 'prop-types';
 import { QuimSangResultados, BiomHemResultados, ResultadosView } from '../../components';
 import { useModalMuestra } from '../../hooks';
+import { modalStyles } from '../../themes/elements/modal';
 
 const ModalMuestra = ({ visible, sample, onClose, showRegisterButton = true }) => {
   const {
@@ -17,52 +18,58 @@ const ModalMuestra = ({ visible, sample, onClose, showRegisterButton = true }) =
     handleCloseBiomModal
   } = useModalMuestra(sample);
 
+  // Verificación defensiva para modalStyles
+  if (!modalStyles || !modalStyles.modal) {
+    console.error('❌ modalStyles no está definido correctamente');
+    return null;
+  }
+
   if (!sampleData) return null;
 
   return (
-    <Modal isVisible={visible} onBackdropPress={onClose} swipeDirection="down" style={styles.modal}>
-      <View style={styles.container}>
-        <TouchableOpacity onPress={onClose} style={styles.backArrow}>
+    <Modal isVisible={visible} onBackdropPress={onClose} swipeDirection="down" style={modalStyles.modal}>
+      <View style={modalStyles.container}>
+        <TouchableOpacity onPress={onClose} style={modalStyles.backArrow}>
           <Ionicons name="arrow-back" size={24} color="black" />
         </TouchableOpacity>
 
         <ScrollView>
-          <View style={styles.iconContainer}>
+          <View style={modalStyles.iconContainer}>
             <Ionicons name="flask" size={48} color="#DA0C15" />
-            <Text style={styles.idText}>ID: {sampleData.id}</Text>
+            <Text style={modalStyles.idText}>ID: {sampleData.id}</Text>
           </View>
 
-          <Text style={styles.label}>Paciente</Text>
-          <Text style={styles.value}>{sampleData.nombrePaciente}</Text>
+          <Text style={modalStyles.label}>Paciente</Text>
+          <Text style={modalStyles.value}>{sampleData.nombrePaciente}</Text>
 
-          <Text style={styles.label}>Tipo de Muestra</Text>
-          <Text style={styles.value}>{sampleData.tipoMuestra}</Text>
+          <Text style={modalStyles.label}>Tipo de Muestra</Text>
+          <Text style={modalStyles.value}>{sampleData.tipoMuestra}</Text>
 
-          <Text style={styles.label}>Estado</Text>
-          <View style={[styles.statusBadge, { backgroundColor: sampleData.statusColor }]}>
-            <Text style={styles.statusText}>{sampleData.statusText}</Text>
+          <Text style={modalStyles.label}>Estado</Text>
+          <View style={[modalStyles.statusBadge, { backgroundColor: sampleData.statusColor }]}>
+            <Text style={modalStyles.statusText}>{sampleData.statusText}</Text>
           </View>
 
-          <Text style={styles.label}>Fecha de Creación</Text>
-          <Text style={styles.value}>{sampleData.createDate}</Text>
+          <Text style={modalStyles.label}>Fecha de Creación</Text>
+          <Text style={modalStyles.value}>{sampleData.createDate}</Text>
 
           {sampleData.hasObservaciones && (
             <>
-              <Text style={styles.label}>Observaciones</Text>
-              <Text style={styles.value}>{sampleData.observaciones}</Text>
+              <Text style={modalStyles.label}>Observaciones</Text>
+              <Text style={modalStyles.value}>{sampleData.observaciones}</Text>
             </>
           )}
 
           {sampleData.hasPedidoId && (
             <>
-              <Text style={styles.label}>ID del Pedido</Text>
-              <Text style={styles.value}>{sampleData.pedidoId}</Text>
+              <Text style={modalStyles.label}>ID del Pedido</Text>
+              <Text style={modalStyles.value}>{sampleData.pedidoId}</Text>
             </>
           )}
           
           {sampleData.hasQrCode && (
             <View style={{ alignItems: 'center', marginVertical: 20 }}>
-              <Text style={styles.label}>Código QR</Text>
+              <Text style={modalStyles.label}>Código QR</Text>
               <QRCode value={sampleData.qrValue} size={150} />
             </View>
           )}
@@ -72,8 +79,8 @@ const ModalMuestra = ({ visible, sample, onClose, showRegisterButton = true }) =
         </ScrollView>
         
         {showRegisterButton && (
-          <TouchableOpacity style={styles.button} onPress={handleRegistrarResultado}>
-            <Text style={styles.buttonText}>Registrar Resultado</Text>
+          <TouchableOpacity style={modalStyles.button} onPress={handleRegistrarResultado}>
+            <Text style={modalStyles.buttonText}>Registrar Resultado</Text>
           </TouchableOpacity>
         )}
 
@@ -93,67 +100,6 @@ const ModalMuestra = ({ visible, sample, onClose, showRegisterButton = true }) =
     </Modal>
   );
 };
-
-const styles = StyleSheet.create({
-  modal: {
-    justifyContent: 'flex-end',
-    margin: 0,
-  },
-  container: {
-    backgroundColor: 'white',
-    padding: 20,
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
-    maxHeight: '90%',
-  },
-  backArrow: {
-    marginBottom: 10,
-  },
-  iconContainer: {
-    alignItems: 'center',
-    marginBottom: 20,
-  },
-  idText: {
-    fontSize: 22,
-    fontWeight: 'bold',
-    marginTop: 10,
-  },
-  label: {
-    fontWeight: '600',
-    fontSize: 16,
-    marginTop: 10,
-    color: '#333',
-  },
-  value: {
-    fontSize: 15,
-    marginBottom: 5,
-    color: '#555',
-  },
-  button: {
-    backgroundColor: '#DA0C15',
-    padding: 15,
-    borderRadius: 10,
-    alignItems: 'center',
-    marginTop: 15,
-  },
-  buttonText: {
-    color: 'white',
-    fontWeight: '600',
-    fontSize: 16,
-  },
-  statusBadge: {
-    paddingHorizontal: 8,
-    paddingVertical: 3,
-    borderRadius: 12,
-    alignSelf: 'flex-start',
-    marginBottom: 10,
-  },
-  statusText: {
-    fontSize: 12,
-    fontWeight: 'bold',
-    color: '#FFFFFF',
-  },
-});
 
 // PropTypes para validación de props
 ModalMuestra.propTypes = {

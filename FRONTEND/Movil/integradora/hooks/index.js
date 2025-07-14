@@ -2,7 +2,7 @@
 export {useFocusField, useLoginForm, useAuth, usePasswordRecovery} from './login';
 
 // Auth hooks
-export { useEditarPerfil, usePerfilValidationComponents } from './auth';
+export { useEditarPerfil, usePerfilValidationComponents, useMenuPerfil } from './auth';
 
 // Dashboard hooks
 export { useSensorData, useLdrStatus } from './dashboard';
@@ -11,4 +11,13 @@ export { useSensorData, useLdrStatus } from './dashboard';
 export { usePedidos, usePedidosFilter, usePedidosActions, useNuevaMuestra, useTablaPedidos, useModalPedido } from './pedidos';
 
 // Muestras hooks
-export { useMuestras, useMuestrasFilter, useMuestrasActions, useMuestrasResultados, useQuimicaSanguinea, useBiometriaHematica, useResultadosView, useComboBoxSample, useModalMuestra } from './muestras';
+export { useMuestras, useMuestrasFilter, useMuestrasActions, useMuestrasResultados, useQuimicaSanguinea, useBiometriaHematica, useResultadosView, useComboBoxSample, useModalMuestra, useModalMuestrasAdmin, useDeleteMuestra, useMuestrasUtils } from './muestras';
+
+// UI hooks
+export { useFilterBar, useInfoPaciente } from './ui';
+
+// Patient hooks
+export { useMuestrasPaciente, usePacienteActions, useModalMuestraPaciente, useEmailPaciente, useFormatUtils } from './patients';
+
+// Scanner hooks
+export { useCameraPermissions, useCameraFocus, useSampleFetch, useScannerModals, useBarcodeScanner } from './scanner';

@@ -117,8 +117,57 @@ export const useTablaPedidos = (onDelete, onRefresh) => {
   }, [onDelete, onRefresh]);
 
   // Función para formatear información de estado y total
-  const getStatusText = useCallback((order) => {
+  const getOrderInfo = useCallback((order) => {
     return `Estado: ${order.estado || 'Sin estado'} | Total: $${order.total || 0}`;
+  }, []);
+
+  // Función para obtener el color según el estado del pedido
+  const getStatusColor = useCallback((estado) => {
+    if (!estado) return '#6C757D'; // Gris para estado desconocido
+    
+    const estadoLower = estado.toLowerCase();
+    
+    if (estadoLower.includes('pagado') || estadoLower.includes('completado')) {
+      return '#28A745'; // Verde para pagado/completado
+    } else if (estadoLower.includes('cancelado') || estadoLower.includes('cancel')) {
+      return '#DA0C15'; // Rojo para cancelado
+    } else if (estadoLower.includes('pendiente') || estadoLower.includes('proceso')) {
+      return '#FFC107'; // Amarillo para pendiente/en proceso
+    } else {
+      return '#6C757D'; // Gris para otros estados
+    }
+  }, []);
+
+  // Función para obtener el texto del estado del pedido
+  const getStatusText = useCallback((estado) => {
+    if (!estado) return 'Sin estado';
+    
+    const estadoLower = estado.toLowerCase();
+    
+    if (estadoLower.includes('pagado') || estadoLower.includes('completado')) {
+      return 'Pagado';
+    } else if (estadoLower.includes('cancelado') || estadoLower.includes('cancel')) {
+      return 'Cancelado';
+    } else if (estadoLower.includes('pendiente') || estadoLower.includes('proceso')) {
+      return 'Pendiente';
+    } else {
+      return estado; // Devolver el estado original si no coincide con ninguno
+    }
+  }, []);
+
+  // Función para formatear fecha en formato dd/mm/AA
+  const formatDate = useCallback((dateString) => {
+    if (!dateString) return 'Sin fecha';
+    
+    try {
+      const date = new Date(dateString);
+      const day = date.getDate().toString().padStart(2, '0');
+      const month = (date.getMonth() + 1).toString().padStart(2, '0');
+      const year = date.getFullYear().toString().slice(-2);
+      return `${day}/${month}/${year}`;
+    } catch {
+      return 'Fecha inválida';
+    }
   }, []);
 
   console.log('📋 TablaPedidos: Estado actual:', {
@@ -133,6 +182,9 @@ export const useTablaPedidos = (onDelete, onRefresh) => {
     handleDelete,
     getClientDisplayName,
     getStatusText,
+    getStatusColor,
+    getOrderInfo,
+    formatDate,
     setSelectedOrder
   };
 };

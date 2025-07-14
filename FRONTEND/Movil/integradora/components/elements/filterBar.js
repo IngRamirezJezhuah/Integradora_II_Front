@@ -1,29 +1,23 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import PropTypes from 'prop-types';
+import { useFilterBar } from '../../hooks';
+import { filterStyles } from '../../themes';
 
 const FilterBar = ({ activeFilter, setFilter, filters }) => {
-  const handleFilterPress = (filter) => {
-    // Si el filtro ya está activo, lo desactivamos (setFilter a null)
-    // Si no está activo, lo activamos
-    if (activeFilter === filter) {
-      setFilter(null); // Desactivar filtro
-    } else {
-      setFilter(filter); // Activar filtro
-    }
-  };
+  const { handleFilterPress, isFilterActive } = useFilterBar(activeFilter, setFilter);
 
   return (
-    <View style={styles.container}>
+    <View style={filterStyles.container}>
       {filters.map((filter, index) => {
-        const isActive = filter === activeFilter;
+        const isActive = isFilterActive(filter);
         return (
           <TouchableOpacity
             key={index}
             onPress={() => handleFilterPress(filter)}
-            style={[styles.button, isActive ? styles.active : styles.inactive]}
+            style={[filterStyles.button, isActive ? filterStyles.active : filterStyles.inactive]}
           >
-            <Text style={isActive ? styles.textActive : styles.textInactive}>
+            <Text style={isActive ? filterStyles.textActive : filterStyles.textInactive}>
               {filter}
             </Text>
           </TouchableOpacity>
@@ -32,35 +26,6 @@ const FilterBar = ({ activeFilter, setFilter, filters }) => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'flex-start',
-    marginHorizontal: 10,
-    marginBottom: 12,
-    gap: 8,
-  },
-  button: {
-    paddingHorizontal: 16,
-    paddingVertical: 8,
-    borderRadius: 14,
-  },
-  active: {
-    backgroundColor: '#DA0C15',
-  },
-  inactive: {
-    backgroundColor: '#F0F0F0',
-  },
-  textActive: {
-    color: '#fff',
-    fontWeight: 'bold',
-  },
-  textInactive: {
-    color: '#888',
-  },
-});
 
 FilterBar.propTypes = {
   activeFilter: PropTypes.string,

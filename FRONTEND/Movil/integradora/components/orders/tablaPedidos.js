@@ -1,7 +1,8 @@
 import React from 'react';
-import { FlatList, View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { FlatList, View, Text, TouchableOpacity } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import PropTypes from 'prop-types';
+import { tableStyles } from '../../themes';
 import ModalPedido from './modalPedido';
 import { useTablaPedidos } from '../../hooks';
 
@@ -12,7 +13,9 @@ const TablaPedidos = ({ data, onView, onDelete, refreshing, onRefresh }) => {
     handleCloseModal,
     handleDelete,
     getClientDisplayName,
-    getStatusText
+    getStatusText,
+    getStatusColor,
+    formatDate
   } = useTablaPedidos(onDelete, onRefresh);
 
   // Función para manejar la visualización con callback opcional
@@ -29,20 +32,27 @@ const TablaPedidos = ({ data, onView, onDelete, refreshing, onRefresh }) => {
         refreshing={refreshing}
         onRefresh={onRefresh}
         renderItem={({ item }) => (
-          <View style={styles.row}>
+          <View style={tableStyles.row}>
             <MaterialCommunityIcons name="test-tube" size={30} color="#DA0C15" />
-            <View style={styles.orderInfo}>
-              <Text style={styles.orderText}>
+            <View style={tableStyles.orderInfo}>
+              <Text style={tableStyles.orderText}>
                 {getClientDisplayName(item)}
               </Text>
-              <Text style={styles.statusText}>
-                {getStatusText(item)}
-              </Text>
+              
+              <View style={tableStyles.infoRow}>
+                <View style={[tableStyles.statusBadgeP, { backgroundColor: getStatusColor(item.estado) }]}>
+                  <Text style={tableStyles.statusTextM}>{getStatusText(item.estado)}</Text>
+                </View>
+                <Text style={tableStyles.dateText}>
+                  {formatDate(item.fechaCreacion)}
+                </Text>
+              </View>
+            
             </View>
-            <TouchableOpacity style={styles.actionButton} onPress={() => handleViewWithCallback(item)}>
+            <TouchableOpacity style={tableStyles.actionButton} onPress={() => handleViewWithCallback(item)}>
               <MaterialCommunityIcons name="file-search-outline" size={30} color="#DA0C15" />
             </TouchableOpacity>
-            <TouchableOpacity style={styles.actionButton} onPress={() => handleDelete(item)}>
+            <TouchableOpacity style={tableStyles.actionButton} onPress={() => handleDelete(item)}>
               <MaterialCommunityIcons name="trash-can" size={30} color="#DA0C15" />
             </TouchableOpacity>
           </View>
@@ -58,43 +68,6 @@ const TablaPedidos = ({ data, onView, onDelete, refreshing, onRefresh }) => {
     </>
   );
 };
-
-const styles = StyleSheet.create({
-  row: {
-    flexDirection: 'row',
-    alignItems: 'flex-start',
-    padding: 15,
-    borderBottomColor: '#E0E0E0',
-    borderBottomWidth: 1,
-    backgroundColor: '#FFFFFF',
-    marginHorizontal: 10,
-    marginVertical: 5,
-    borderRadius: 8,
-    elevation: 2,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.1,
-    shadowRadius: 2,
-  },
-  orderInfo: {
-    flex: 1,
-    marginLeft: 10,
-  },
-  orderText: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: '#333',
-  },
-  statusText: {
-    fontSize: 14,
-    color: '#666',
-    marginTop: 4,
-  },
-  actionButton: {
-    padding: 8,
-    marginVertical: 2,
-  },
-});
 
 // PropTypes para validación de props
 TablaPedidos.propTypes = {

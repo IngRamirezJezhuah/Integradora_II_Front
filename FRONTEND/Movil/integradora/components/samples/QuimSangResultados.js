@@ -3,9 +3,9 @@ import { View, Text, TouchableOpacity, ScrollView, Image } from 'react-native';
 import Modal from 'react-native-modal';
 import { Ionicons } from '@expo/vector-icons';
 import PropTypes from 'prop-types';
-import { InputGroup } from '../elements/inputGroup';
+import InputGroup from '../elements/inputGroup';
 import { useFocusField, useQuimicaSanguinea } from '../../hooks';
-import { resultadosStyles } from '../../themes';
+import { muestrasFormStyles } from '../../themes';
 
 const QuimSangResultados = ({ visible, sample, onClose }) => {
   // Usar el hook personalizado para manejar el focus
@@ -22,23 +22,23 @@ const QuimSangResultados = ({ visible, sample, onClose }) => {
   if (!sample) return null;
 
   return (
-    <Modal isVisible={visible} onBackdropPress={onClose} swipeDirection="down" style={resultadosStyles.modal}>
-      <View style={resultadosStyles.container}>
-        <TouchableOpacity onPress={onClose} style={resultadosStyles.backArrow}>
+    <Modal isVisible={visible} onBackdropPress={onClose} swipeDirection="down" style={muestrasFormStyles.modal}>
+      <View style={muestrasFormStyles.container}>
+        <TouchableOpacity onPress={onClose} style={muestrasFormStyles.backArrow}>
           <Ionicons name="arrow-back" size={24} color="black" />
         </TouchableOpacity>
 
         <ScrollView>
-          <View style={resultadosStyles.iconContainer}>
+          <View style={muestrasFormStyles.iconContainer}>
             <Image
               // eslint-disable-next-line
               source={require('../../assets/quimicasanguinea.png')}
-              style={resultadosStyles.image}
+              style={muestrasFormStyles.image}
               resizeMode="cover"
             />
-            <Text style={resultadosStyles.title}>Química Sanguínea</Text>
-            <Text style={resultadosStyles.subtitle}>ID: {sample._id ? sample._id.slice(-8) : 'N/A'}</Text>
-            <Text style={resultadosStyles.subtitle}>Paciente: {sample.nombrePaciente}</Text>
+            <Text style={muestrasFormStyles.title}>Química Sanguínea</Text>
+            <Text style={muestrasFormStyles.subtitle}>ID: {sample._id ? sample._id.slice(-8) : 'N/A'}</Text>
+            <Text style={muestrasFormStyles.subtitle}>Paciente: {sample.nombrePaciente}</Text>
           </View>
 
           <InputGroup
@@ -49,7 +49,7 @@ const QuimSangResultados = ({ visible, sample, onClose }) => {
             keyboardType="numeric"
             onFocus={() => setFocus('glucosa')}
             onBlur={clearFocus}
-            style={getFieldStyle('glucosa', {}, resultadosStyles.inputFocus)}
+            style={getFieldStyle('glucosa', {}, muestrasFormStyles.inputFocus)}
           />
 
           <InputGroup
@@ -60,7 +60,7 @@ const QuimSangResultados = ({ visible, sample, onClose }) => {
             keyboardType="numeric"
             onFocus={() => setFocus('glucosaPost')}
             onBlur={clearFocus}
-            style={getFieldStyle('glucosaPost', {}, resultadosStyles.inputFocus)}
+            style={getFieldStyle('glucosaPost', {}, muestrasFormStyles.inputFocus)}
           />
 
           <InputGroup
@@ -71,7 +71,7 @@ const QuimSangResultados = ({ visible, sample, onClose }) => {
             keyboardType="numeric"
             onFocus={() => setFocus('acidoUrico')}
             onBlur={clearFocus}
-            style={getFieldStyle('acidoUrico', {}, resultadosStyles.inputFocus)}
+            style={getFieldStyle('acidoUrico', {}, muestrasFormStyles.inputFocus)}
           />
 
           <InputGroup
@@ -82,7 +82,7 @@ const QuimSangResultados = ({ visible, sample, onClose }) => {
             keyboardType="numeric"
             onFocus={() => setFocus('urea')}
             onBlur={clearFocus}
-            style={getFieldStyle('urea', {}, resultadosStyles.inputFocus)}
+            style={getFieldStyle('urea', {}, muestrasFormStyles.inputFocus)}
           />
 
           <InputGroup
@@ -93,7 +93,7 @@ const QuimSangResultados = ({ visible, sample, onClose }) => {
             keyboardType="numeric"
             onFocus={() => setFocus('creatinina')}
             onBlur={clearFocus}
-            style={getFieldStyle('creatinina', {}, resultadosStyles.inputFocus)}
+            style={getFieldStyle('creatinina', {}, muestrasFormStyles.inputFocus)}
           />
 
           <InputGroup
@@ -104,7 +104,7 @@ const QuimSangResultados = ({ visible, sample, onClose }) => {
             keyboardType="numeric"
             onFocus={() => setFocus('colesterol')}
             onBlur={clearFocus}
-            style={getFieldStyle('colesterol', {}, resultadosStyles.inputFocus)}
+            style={getFieldStyle('colesterol', {}, muestrasFormStyles.inputFocus)}
           />
 
           <InputGroup
@@ -115,7 +115,7 @@ const QuimSangResultados = ({ visible, sample, onClose }) => {
             keyboardType="numeric"
             onFocus={() => setFocus('LDR')}
             onBlur={clearFocus}
-            style={getFieldStyle('LDR', {}, resultadosStyles.inputFocus)}
+            style={getFieldStyle('LDR', {}, muestrasFormStyles.inputFocus)}
           />
 
           <InputGroup
@@ -126,7 +126,7 @@ const QuimSangResultados = ({ visible, sample, onClose }) => {
             keyboardType="numeric"
             onFocus={() => setFocus('gGT')}
             onBlur={clearFocus}
-            style={getFieldStyle('gGT', {}, resultadosStyles.inputFocus)}
+            style={getFieldStyle('gGT', {}, muestrasFormStyles.inputFocus)}
           />
 
           <InputGroup
@@ -137,7 +137,7 @@ const QuimSangResultados = ({ visible, sample, onClose }) => {
             keyboardType="numeric"
             onFocus={() => setFocus('trigliceridos')}
             onBlur={clearFocus}
-            style={getFieldStyle('trigliceridos', {}, resultadosStyles.inputFocus)}
+            style={getFieldStyle('trigliceridos', {}, muestrasFormStyles.inputFocus)}
           />
 
           <InputGroup
@@ -149,20 +149,20 @@ const QuimSangResultados = ({ visible, sample, onClose }) => {
             numberOfLines={4}
             onFocus={() => setFocus('observaciones')}
             onBlur={clearFocus}
-            style={getFieldStyle('observaciones', {}, resultadosStyles.inputFocus)}
+            style={getFieldStyle('observaciones', {}, muestrasFormStyles.inputFocus)}
           />
         </ScrollView>
 
-        <View style={resultadosStyles.buttonContainer}>
-          <TouchableOpacity style={[resultadosStyles.button, resultadosStyles.cancelButton]} onPress={onClose}>
-            <Text style={resultadosStyles.cancelButtonText}>Cancelar</Text>
+        <View style={muestrasFormStyles.buttonContainer}>
+          <TouchableOpacity style={[muestrasFormStyles.cancelButton]} onPress={onClose}>
+            <Text style={muestrasFormStyles.cancelButtonText}>Cancelar</Text>
           </TouchableOpacity>
           <TouchableOpacity 
-            style={[resultadosStyles.button, loading && resultadosStyles.buttonDisabled]} 
+            style={[muestrasFormStyles.button, loading && muestrasFormStyles.buttonDisabled]} 
             onPress={handleSubmit}
             disabled={loading}
           >
-            <Text style={resultadosStyles.buttonText}>
+            <Text style={muestrasFormStyles.buttonText}>
               {loading ? 'Guardando...' : 'Guardar'}
             </Text>
           </TouchableOpacity>

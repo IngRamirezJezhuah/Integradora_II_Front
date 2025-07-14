@@ -2,6 +2,7 @@ import React from 'react';
 import { SafeAreaView, View, Text, ActivityIndicator } from 'react-native';
 import { SearchBar, FilterBar, TablaMuestras, Header, ModalMuestra } from '../components';
 import { useMuestras, useMuestrasFilter, useMuestrasActions } from '../hooks';
+import { displayStyles } from '../themes';
 
 
 const MuestrasScreen = () => {
@@ -37,13 +38,13 @@ const MuestrasScreen = () => {
 
   if (error) {
     return (
-      <SafeAreaView style={{ flex: 1 }}>
+      <SafeAreaView style={displayStyles.safeArea}>
         <Header title="Muestras" />
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', paddingHorizontal: 20 }}>
-          <Text style={{ color: '#d32f2f', fontSize: 16, textAlign: 'center', marginBottom: 20 }}>
+        <View style={displayStyles.errorContainer}>
+          <Text style={displayStyles.errorText}>
             {error}
           </Text>
-          <Text style={{ color: '#666', fontSize: 14, textAlign: 'center' }}>
+          <Text style={displayStyles.errorSubtext}>
             Toca para intentar nuevamente
           </Text>
         </View>
@@ -52,7 +53,7 @@ const MuestrasScreen = () => {
   }
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView style={displayStyles.safeArea}>
       <Header title="Muestras" />
       <SearchBar 
         placeholder="Buscar Muestras" 
@@ -66,22 +67,22 @@ const MuestrasScreen = () => {
       />
       
       {/* Indicador de estado de filtros */}
-      <View style={{ paddingHorizontal: 10, paddingBottom: 8 }}>
-        <Text style={{ color: '#666', fontSize: 14, fontStyle: 'italic' }}>
+      <View style={displayStyles.filterStatusContainer}>
+        <Text style={displayStyles.filterStatusText}>
           {getFilterStatusText()}
         </Text>
       </View>
 
       {loading ? (
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', paddingTop: 50 }}>
+        <View style={displayStyles.loadingContainer}>
           <ActivityIndicator size="large" color="#DA0C15" />
-          <Text style={{ marginTop: 10, color: '#666' }}>Cargando muestras...</Text>
+          <Text style={displayStyles.loadingText}>Cargando muestras...</Text>
         </View>
       ) : (
         <>
           {filteredData.length === 0 ? (
-            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', paddingTop: 50 }}>
-              <Text style={{ color: '#666', fontSize: 16, textAlign: 'center' }}>
+            <View style={displayStyles.emptyContainer}>
+              <Text style={displayStyles.emptyText}>
                 {muestras.length === 0 ? 'No hay muestras disponibles' : 'No se encontraron muestras con los filtros aplicados'}
               </Text>
             </View>
@@ -99,7 +100,7 @@ const MuestrasScreen = () => {
       
       {/* Modal para detalles generales de muestra */}
       <ModalMuestra
-        isVisible={showSampleModal}
+        visible={showSampleModal}
         sample={selectedSample}
         onClose={handleCloseModal}
       />

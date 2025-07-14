@@ -1,8 +1,9 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
+import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
 import PropTypes from 'prop-types';
 import { InputGroup } from '../components/';
 import { useFocusField, useEditarPerfil, usePerfilValidationComponents } from '../hooks';
+import { perfilStyles } from '../themes';
 
 const EditarPerfil = ({ onSave, onClose }) => {
   // Hooks principales
@@ -21,9 +22,9 @@ const EditarPerfil = ({ onSave, onClose }) => {
   const { ValidationIndicator, PasswordValidationList } = usePerfilValidationComponents();
 
   return (
-    <View style={styles.container}>
-      <ScrollView contentContainerStyle={styles.scroll}>
-        <Text style={styles.title}>Editar Perfil</Text>
+    <View style={perfilStyles.container}>
+      <ScrollView contentContainerStyle={perfilStyles.scroll}>
+        <Text style={perfilStyles.title}>Editar Perfil</Text>
         
         <InputGroup
           labelTitle="Email"
@@ -34,8 +35,8 @@ const EditarPerfil = ({ onSave, onClose }) => {
           onFocus={() => setFocus('email')}
           onBlur={clearFocus}
           style={[
-            getFieldStyle('email', {}, styles.inputFocus),
-            validationErrors.email ? styles.inputError : {}
+            getFieldStyle('email', {}, perfilStyles.inputFocus),
+            validationErrors.email ? perfilStyles.inputError : {}
           ]}
         />
         <ValidationIndicator 
@@ -43,7 +44,7 @@ const EditarPerfil = ({ onSave, onClose }) => {
           isValidating={isValidating.email} 
         />
         {validationErrors.email ? (
-          <Text style={styles.errorText}>{validationErrors.email}</Text>
+          <Text style={perfilStyles.errorText}>{validationErrors.email}</Text>
         ) : null}
 
         <InputGroup
@@ -56,8 +57,8 @@ const EditarPerfil = ({ onSave, onClose }) => {
           onFocus={() => setFocus('oldPassword')}
           onBlur={clearFocus}
           style={[
-            getFieldStyle('oldPassword', {}, styles.inputFocus),
-            validationErrors.oldPassword ? styles.inputError : {}
+            getFieldStyle('oldPassword', {}, perfilStyles.inputFocus),
+            validationErrors.oldPassword ? perfilStyles.inputError : {}
           ]}
         />
         <ValidationIndicator 
@@ -65,7 +66,7 @@ const EditarPerfil = ({ onSave, onClose }) => {
           isValidating={isValidating.oldPassword} 
         />
         {validationErrors.oldPassword ? (
-          <Text style={styles.errorText}>{validationErrors.oldPassword}</Text>
+          <Text style={perfilStyles.errorText}>{validationErrors.oldPassword}</Text>
         ) : null}
 
         <InputGroup
@@ -78,13 +79,13 @@ const EditarPerfil = ({ onSave, onClose }) => {
           onFocus={() => setFocus('newPassword')}
           onBlur={clearFocus}
           style={[
-            getFieldStyle('newPassword', {}, styles.inputFocus),
-            validationErrors.newPassword ? styles.inputError : {}
+            getFieldStyle('newPassword', {}, perfilStyles.inputFocus),
+            validationErrors.newPassword ? perfilStyles.inputError : {}
           ]}
         />
         <PasswordValidationList password={formData.newPassword} />
         {validationErrors.newPassword ? (
-          <Text style={styles.errorText}>{validationErrors.newPassword}</Text>
+          <Text style={perfilStyles.errorText}>{validationErrors.newPassword}</Text>
         ) : null}
 
         <InputGroup
@@ -97,8 +98,8 @@ const EditarPerfil = ({ onSave, onClose }) => {
           onFocus={() => setFocus('confirmPassword')}
           onBlur={clearFocus}
           style={[
-            getFieldStyle('confirmPassword', {}, styles.inputFocus),
-            validationErrors.confirmPassword ? styles.inputError : {}
+            getFieldStyle('confirmPassword', {}, perfilStyles.inputFocus),
+            validationErrors.confirmPassword ? perfilStyles.inputError : {}
           ]}
         />
         <ValidationIndicator 
@@ -106,22 +107,22 @@ const EditarPerfil = ({ onSave, onClose }) => {
           isValidating={isValidating.confirmPassword} 
         />
         {validationErrors.confirmPassword ? (
-          <Text style={styles.errorText}>{validationErrors.confirmPassword}</Text>
+          <Text style={perfilStyles.errorText}>{validationErrors.confirmPassword}</Text>
         ) : null}
 
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity style={styles.cancelButton} onPress={handleCancel}>
-            <Text style={styles.cancelButtonText}>Cancelar</Text>
+        <View style={perfilStyles.buttonContainerRow}>
+          <TouchableOpacity style={perfilStyles.cancelButton} onPress={handleCancel}>
+            <Text style={perfilStyles.cancelButtonText}>Cancelar</Text>
           </TouchableOpacity>
           <TouchableOpacity 
             style={[
-              styles.submitButton,
-              loading ? styles.submitButtonDisabled : {}
+              perfilStyles.submitButton,
+              loading ? perfilStyles.submitButtonDisabled : {}
             ]} 
             onPress={handleSave}
             disabled={loading}
           >
-            <Text style={styles.submitButtonText}>
+            <Text style={perfilStyles.submitButtonText}>
               {loading ? 'Guardando...' : 'Guardar cambios'}
             </Text>
           </TouchableOpacity>
@@ -131,79 +132,7 @@ const EditarPerfil = ({ onSave, onClose }) => {
   ); 
 };
 
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: 'white',
-    padding: 20,
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
-    maxHeight: '95%',
-  },
-  scroll: {
-    flexGrow: 1,
-    paddingBottom: 20,
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginTop: 10,
-    color: '#333',
-    marginBottom: 20,
-  },
-  inputFocus: {
-    borderColor: '#BF1E2D',
-    borderWidth: 2,
-    backgroundColor: '#fff',
-  },
-  inputError: {
-    borderColor: '#ff4444',
-    borderWidth: 2,
-    backgroundColor: '#fff5f5',
-  },
-  errorText: {
-    color: '#ff4444',
-    fontSize: 12,
-    marginTop: -15,
-    marginBottom: 10,
-    marginLeft: 5,
-    fontStyle: 'italic',
-  },
-  buttonContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginTop: 20,
-  },
-  cancelButton: {
-    backgroundColor: '#6c757d',
-    padding: 15,
-    borderRadius: 10,
-    flex: 1,
-    marginRight: 10,
-    alignItems: 'center',
-  },
-  cancelButtonText: {
-    color: 'white',
-    fontWeight: '600',
-    fontSize: 16,
-  },
-  submitButton: {
-    backgroundColor: '#DA0C15',
-    padding: 15,
-    borderRadius: 10,
-    flex: 1,
-    marginLeft: 10,
-    alignItems: 'center',
-  },
-  submitButtonDisabled: {
-    backgroundColor: '#ccc',
-    opacity: 0.7,
-  },
-  submitButtonText: {
-    color: 'white',
-    fontWeight: '600',
-    fontSize: 16,
-  },
-});
+
 
 // PropTypes para validación de props
 EditarPerfil.propTypes = {

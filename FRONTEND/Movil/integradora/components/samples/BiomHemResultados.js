@@ -3,9 +3,9 @@ import { View, Text, TouchableOpacity, Image, ScrollView } from 'react-native';
 import Modal from 'react-native-modal';
 import { Ionicons } from '@expo/vector-icons';
 import PropTypes from 'prop-types';
-import { InputGroup } from '../elements/inputGroup';
+import InputGroup from '../elements/inputGroup';
 import { useFocusField, useBiometriaHematica } from '../../hooks';
-import { resultadosStyles,  } from '../../themes';
+import { muestrasFormStyles } from '../../themes';
 
 const BiomHemResultados = ({ visible, sample, onClose }) => {
   // Usar el hook personalizado para manejar el focus
@@ -22,23 +22,23 @@ const BiomHemResultados = ({ visible, sample, onClose }) => {
   if (!sample) return null;
 
   return (
-    <Modal isVisible={visible} onBackdropPress={onClose} swipeDirection="down" style={resultadosStyles.modal}>
-      <View style={resultadosStyles.container}>
-        <TouchableOpacity onPress={onClose} style={resultadosStyles.backArrow}>
+    <Modal isVisible={visible} onBackdropPress={onClose} swipeDirection="down" style={muestrasFormStyles.modal}>
+      <View style={muestrasFormStyles.container}>
+        <TouchableOpacity onPress={onClose} style={muestrasFormStyles.backArrow}>
           <Ionicons name="arrow-back" size={24} color="black" />
         </TouchableOpacity>
 
         <ScrollView>
-          <View style={resultadosStyles.iconContainer}>
+          <View style={muestrasFormStyles.iconContainer}>
             <Image
             // eslint-disable-next-line
               source={require('../../assets/biometriahematica.png')}
-              style={resultadosStyles.image}
+              style={muestrasFormStyles.image}
               resizeMode="contain"
             />
-            <Text style={resultadosStyles.title}>Biometría Hemática</Text>
-            <Text style={resultadosStyles.subtitle}>ID: {sample._id ? sample._id.slice(-8) : 'N/A'}</Text>
-            <Text style={resultadosStyles.subtitle}>Paciente: {sample.nombrePaciente}</Text>
+            <Text style={muestrasFormStyles.title}>Biometría Hemática</Text>
+            <Text style={muestrasFormStyles.subtitle}>ID: {sample._id ? sample._id.slice(-8) : 'N/A'}</Text>
+            <Text style={muestrasFormStyles.subtitle}>Paciente: {sample.nombrePaciente}</Text>
           </View>
 
           <InputGroup
@@ -48,7 +48,7 @@ const BiomHemResultados = ({ visible, sample, onClose }) => {
             placeholder="12.0 - 15.5"
             onFocus={() => setFocus('hemoglobina')}
             onBlur={clearFocus}
-            style={getFieldStyle('hemoglobina', {}, resultadosStyles.inputFocus)}
+            style={getFieldStyle('hemoglobina', {}, muestrasFormStyles.inputFocus)}
           />
 
           <InputGroup
@@ -58,7 +58,7 @@ const BiomHemResultados = ({ visible, sample, onClose }) => {
             placeholder="36 - 46"
             onFocus={() => setFocus('hematocrito')}
             onBlur={clearFocus}
-            style={getFieldStyle('hematocrito', {}, resultadosStyles.inputFocus)}
+            style={getFieldStyle('hematocrito', {}, muestrasFormStyles.inputFocus)}
           />
 
           <InputGroup
@@ -68,7 +68,7 @@ const BiomHemResultados = ({ visible, sample, onClose }) => {
             placeholder="4.2 - 5.4"
             onFocus={() => setFocus('eritrocitos')}
             onBlur={clearFocus}
-            style={getFieldStyle('eritrocitos', {}, resultadosStyles.inputFocus)}
+            style={getFieldStyle('eritrocitos', {}, muestrasFormStyles.inputFocus)}
           />
 
           <InputGroup
@@ -78,7 +78,7 @@ const BiomHemResultados = ({ visible, sample, onClose }) => {
             placeholder="32 - 36"
             onFocus={() => setFocus('conMediaHb')}
             onBlur={clearFocus}
-            style={getFieldStyle('conMediaHb', {}, resultadosStyles.inputFocus)}
+            style={getFieldStyle('conMediaHb', {}, muestrasFormStyles.inputFocus)}
           />
 
           <InputGroup
@@ -88,7 +88,7 @@ const BiomHemResultados = ({ visible, sample, onClose }) => {
             placeholder="80 - 100"
             onFocus={() => setFocus('volGlobularMedia')}
             onBlur={clearFocus}
-            style={getFieldStyle('volGlobularMedia', {}, resultadosStyles.inputFocus)}
+            style={getFieldStyle('volGlobularMedia', {}, muestrasFormStyles.inputFocus)}
           />
 
           <InputGroup
@@ -98,7 +98,7 @@ const BiomHemResultados = ({ visible, sample, onClose }) => {
             placeholder="27 - 32"
             onFocus={() => setFocus('HBCorpuscularMedia')}
             onBlur={clearFocus}
-            style={getFieldStyle('HBCorpuscularMedia', {}, resultadosStyles.inputFocus)}
+            style={getFieldStyle('HBCorpuscularMedia', {}, muestrasFormStyles.inputFocus)}
           />
 
           <InputGroup
@@ -108,7 +108,7 @@ const BiomHemResultados = ({ visible, sample, onClose }) => {
             placeholder="150 - 450"
             onFocus={() => setFocus('plaquetas')}
             onBlur={clearFocus}
-            style={getFieldStyle('plaquetas', {}, resultadosStyles.inputFocus)}
+            style={getFieldStyle('plaquetas', {}, muestrasFormStyles.inputFocus)}
           />
 
           <InputGroup
@@ -118,7 +118,7 @@ const BiomHemResultados = ({ visible, sample, onClose }) => {
             placeholder="4.5 - 11.0"
             onFocus={() => setFocus('cuentaLeucocitaria')}
             onBlur={clearFocus}
-            style={getFieldStyle('cuentaLeucocitaria', {}, resultadosStyles.inputFocus)}
+            style={getFieldStyle('cuentaLeucocitaria', {}, muestrasFormStyles.inputFocus)}
           />
 
           <InputGroup
@@ -128,7 +128,7 @@ const BiomHemResultados = ({ visible, sample, onClose }) => {
             placeholder="20 - 40"
             onFocus={() => setFocus('linfocitos')}
             onBlur={clearFocus}
-            style={getFieldStyle('linfocitos', {}, resultadosStyles.inputFocus)}
+            style={getFieldStyle('linfocitos', {}, muestrasFormStyles.inputFocus)}
           />
 
           <InputGroup
@@ -138,7 +138,7 @@ const BiomHemResultados = ({ visible, sample, onClose }) => {
             placeholder="2 - 8"
             onFocus={() => setFocus('monocitos')}
             onBlur={clearFocus}
-            style={getFieldStyle('monocitos', {}, resultadosStyles.inputFocus)}
+            style={getFieldStyle('monocitos', {}, muestrasFormStyles.inputFocus)}
           />
 
           <InputGroup
@@ -148,7 +148,7 @@ const BiomHemResultados = ({ visible, sample, onClose }) => {
             placeholder="50 - 70"
             onFocus={() => setFocus('segmentados')}
             onBlur={clearFocus}
-            style={getFieldStyle('segmentados', {}, resultadosStyles.inputFocus)}
+            style={getFieldStyle('segmentados', {}, muestrasFormStyles.inputFocus)}
           />
 
           <InputGroup
@@ -158,7 +158,7 @@ const BiomHemResultados = ({ visible, sample, onClose }) => {
             placeholder="0 - 5"
             onFocus={() => setFocus('enBanda')}
             onBlur={clearFocus}
-            style={getFieldStyle('enBanda', {}, resultadosStyles.inputFocus)}
+            style={getFieldStyle('enBanda', {}, muestrasFormStyles.inputFocus)}
           />
 
           <InputGroup
@@ -168,7 +168,7 @@ const BiomHemResultados = ({ visible, sample, onClose }) => {
             placeholder="50 - 75"
             onFocus={() => setFocus('neutrofilosT')}
             onBlur={clearFocus}
-            style={getFieldStyle('neutrofilosT', {}, resultadosStyles.inputFocus)}
+            style={getFieldStyle('neutrofilosT', {}, muestrasFormStyles.inputFocus)}
           />
 
           <InputGroup
@@ -178,7 +178,7 @@ const BiomHemResultados = ({ visible, sample, onClose }) => {
             placeholder="1 - 4"
             onFocus={() => setFocus('eosinofilos')}
             onBlur={clearFocus}
-            style={getFieldStyle('eosinofilos', {}, resultadosStyles.inputFocus)}
+            style={getFieldStyle('eosinofilos', {}, muestrasFormStyles.inputFocus)}
           />
 
           <InputGroup
@@ -188,7 +188,7 @@ const BiomHemResultados = ({ visible, sample, onClose }) => {
             placeholder="0 - 1"
             onFocus={() => setFocus('basofilos')}
             onBlur={clearFocus}
-            style={getFieldStyle('basofilos', {}, resultadosStyles.inputFocus)}
+            style={getFieldStyle('basofilos', {}, muestrasFormStyles.inputFocus)}
           />
 
           <InputGroup
@@ -200,21 +200,21 @@ const BiomHemResultados = ({ visible, sample, onClose }) => {
             numberOfLines={4}
             onFocus={() => setFocus('observaciones')}
             onBlur={clearFocus}
-            style={getFieldStyle('observaciones', {}, resultadosStyles.inputFocus)}
+            style={getFieldStyle('observaciones', {}, muestrasFormStyles.inputFocus)}
           />
         </ScrollView>
 
-        <View style={resultadosStyles.buttonContainer}>
-          <TouchableOpacity style={resultadosStyles.cancelButton} onPress={onClose}>
-            <Text style={resultadosStyles.cancelButtonText}>Cancelar</Text>
+        <View style={muestrasFormStyles.buttonContainer}>
+          <TouchableOpacity style={muestrasFormStyles.cancelButton} onPress={onClose}>
+            <Text style={muestrasFormStyles.cancelButtonText}>Cancelar</Text>
           </TouchableOpacity>
           <TouchableOpacity 
-            style={[resultadosStyles.submitButton, loading && resultadosStyles.buttonDisabled]} 
+            style={[muestrasFormStyles.submitButton, loading && muestrasFormStyles.buttonDisabled]} 
             onPress={handleSubmit}
             disabled={loading}
           >
-            <Text style={resultadosStyles.submitButtonText}>
-              {loading ? 'Guardando...' : 'Guardar Resultados'}
+            <Text style={muestrasFormStyles.submitButtonText}>
+              {loading ? 'Guardando...' : 'Guardar'}
             </Text>
           </TouchableOpacity>
         </View>

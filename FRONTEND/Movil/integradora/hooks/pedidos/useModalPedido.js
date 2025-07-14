@@ -10,14 +10,18 @@ export const useModalPedido = (order, onClose) => {
   const orderInfo = useMemo(() => {
     if (!order) return null;
 
+    console.log('🔍 ModalPedido: Procesando order:', order);
+
     const orderId = order._id?.slice(-8) || 'N/A';
     
     // Información del cliente
-    const clientInfo = order.usuarioId && typeof order.usuarioId === 'object' && order.usuarioId.nombre ? 
-      `${order.usuarioId.nombre || ''} ${order.usuarioId.apellidoPaterno || ''} ${order.usuarioId.apellidoMaterno || ''}`.trim()
-      : 'Sin nombre';
+    const clientInfo = order.usuarioId && typeof order.usuarioId === 'object' ? 
+      `${order.usuarioId.nombre || ''} ${order.usuarioId.apellidoPaterno || ''} ${order.usuarioId.apellidoMaterno || ''}`.trim() || 'Sin nombre'
+      : 'No disponible';
 
     const clientEmail = order.usuarioId?.correo || 'No disponible';
+
+    console.log('👤 ModalPedido: Cliente procesado:', { clientInfo, clientEmail });
 
     // Información financiera
     const financial = {
@@ -41,6 +45,7 @@ export const useModalPedido = (order, onClose) => {
     console.log('📊 ModalPedido: Información procesada para pedido:', orderId);
 
     return {
+      _id: order._id, // ID original para compatibilidad
       id: orderId,
       clientInfo,
       clientEmail,

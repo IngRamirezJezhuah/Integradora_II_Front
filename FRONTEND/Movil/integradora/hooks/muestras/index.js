@@ -7,3 +7,6 @@ export { useBiometriaHematica } from './useBiometriaHematica';
 export { useResultadosView } from './useResultadosView';
 export { useComboBoxSample } from './useComboBoxSample';
 export { useModalMuestra } from './useModalMuestra';
+export { useModalMuestrasAdmin } from './useModalMuestrasAdmin';
+export { useDeleteMuestra } from './useDeleteMuestra';
+export { useMuestrasUtils } from './useMuestrasUtils';
