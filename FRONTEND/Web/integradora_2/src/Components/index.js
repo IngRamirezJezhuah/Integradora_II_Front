@@ -34,6 +34,7 @@ export {default as ModalMuestras } from './muestras/ModalMuestras'
 export {default as FormMuestras } from './muestras/FormMuestras'
 export {default as FromMuesBiometira } from './muestras/FormMuesBiometira'
 export {default as FormMuesSangre } from './muestras/FormMuesSangre'
+export {default as IdPedidos } from './muestras/IdPedidos'
 
 
 //_____________pedidos_____________

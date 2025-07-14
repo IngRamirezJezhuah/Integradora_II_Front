@@ -2,6 +2,7 @@
 import { useState } from "react";
 import Swal from "sweetalert2";
 import { requireTokenOrRedirect } from "../../utils/auth";
+import CargaBarras from "../elementos/CargaBarras";
 
 const FormResultadosBH = ({ muestraId, onSuccess }) => {
     
@@ -66,6 +67,16 @@ const FormResultadosBH = ({ muestraId, onSuccess }) => {
         <input type="number" step="any" value={grupo === "roja" ? roja[campo] : blanca[campo]} onChange={handleChange(grupo, campo)} />
         </div>
     );
+
+    if (!muestraId) return 
+    <div className='scale-up-ver-center'>
+        <div >
+            <br />
+            <CargaBarras  className='plantilla'/>
+        </div>
+    </div>
+    ;
+
 
     return (
         <div className="card">

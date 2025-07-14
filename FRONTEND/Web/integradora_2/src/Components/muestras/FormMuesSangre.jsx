@@ -2,6 +2,7 @@
 import { useState } from "react";
 import Swal from "sweetalert2";
 import { requireTokenOrRedirect } from "../../utils/auth";
+import CargaBarras from "../elementos/CargaBarras";
 
 const FormResultadosQS = ({ muestraId, onSuccess }) => {
     /* —— campos —— */
@@ -48,6 +49,9 @@ const FormResultadosQS = ({ muestraId, onSuccess }) => {
         },
         };
 
+        if (!muestraId) return <p>Cargando…</p>;
+
+
         try {
         const res = await fetch(`${apiUrl}/muestras/resultados/${muestraId}`, {
             method : "POST",
@@ -74,6 +78,16 @@ const FormResultadosQS = ({ muestraId, onSuccess }) => {
         setError(err.message);
         }
     };
+
+    if (!muestraId) return 
+    <div className='scale-up-ver-center'>
+        <div >
+            <br />
+            <CargaBarras  className='plantilla'/>
+        </div>
+    </div>
+    ;
+
 
     /* —— UI —— */
     return (
