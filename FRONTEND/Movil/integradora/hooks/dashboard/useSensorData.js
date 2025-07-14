@@ -34,7 +34,7 @@ export const useSensorData = () => {
         setLdrData(ldrResult);
         console.log('✅ Datos LDR obtenidos:', ldrResult);
       } else {
-        console.error('❌ Error al obtener datos LDR:', ldrResponse.status);
+        console.error(' Error al obtener datos LDR:', ldrResponse.status);
         setError(`Error LDR: ${ldrResponse.status}`);
       }
 
@@ -49,12 +49,12 @@ export const useSensorData = () => {
         setTempData(tempResult);
         console.log('✅ Datos de temperatura obtenidos:', tempResult);
       } else {
-        console.error('❌ Error al obtener datos de temperatura:', tempResponse.status);
+        console.error(' Error al obtener datos de temperatura:', tempResponse.status);
         setError(`Error Temperatura: ${tempResponse.status}`);
       }
 
     } catch (error) {
-      console.error('❌ Error al obtener datos de sensores:', error);
+      console.error(' Error al obtener datos de sensores:', error);
       setError('Error de conexión con los sensores');
     } finally {
       setLoading(false);

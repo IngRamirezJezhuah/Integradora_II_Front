@@ -85,7 +85,7 @@ export const useQuimicaSanguinea = (visible, sample, onClose) => {
         'Campos Requeridos', 
         `Los siguientes campos son obligatorios: ${fieldNames}`
       );
-      console.log('❌ Validación fallida - Campos vacíos:', emptyFields.map(f => f.key));
+      console.log(' Validación fallida - Campos vacíos:', emptyFields.map(f => f.key));
       return false;
     }
 
@@ -150,11 +150,11 @@ export const useQuimicaSanguinea = (visible, sample, onClose) => {
         onClose();
       } else {
         const errorData = await response.json();
-        console.error('❌ Error al guardar resultados de química sanguínea:', errorData);
+        console.error(' Error al guardar resultados de química sanguínea:', errorData);
         Alert.alert('Error', 'No se pudieron guardar los resultados');
       }
     } catch (error) {
-      console.error('❌ Error de conexión al guardar química sanguínea:', error);
+      console.error(' Error de conexión al guardar química sanguínea:', error);
       Alert.alert('Error', 'Error de conexión al guardar los resultados');
     } finally {
       setLoading(false);

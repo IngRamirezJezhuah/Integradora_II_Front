@@ -184,12 +184,12 @@ export const useNuevaMuestra = (isVisible, orderData) => {
         return true;
       } else {
         const errorData = await response.text();
-        console.error('❌ Error response:', errorData);
+        console.error(' Error response:', errorData);
         Alert.alert('Error', 'Error al registrar la muestra. Intenta de nuevo.');
         return false;
       }
     } catch (error) {
-      console.error('❌ Error al enviar muestra:', error);
+      console.error(' Error al enviar muestra:', error);
       Alert.alert('Error', 'Error de conexión. Intenta de nuevo.');
       return false;
     } finally {

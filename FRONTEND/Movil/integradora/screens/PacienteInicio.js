@@ -1,10 +1,9 @@
-import { View, StyleSheet, ActivityIndicator, Text, TouchableOpacity} from "react-native";
+import { View, StyleSheet, ActivityIndicator, Text, TouchableOpacity, SafeAreaView} from "react-native";
 import React, { useState, useEffect } from 'react';
 import {TablaMuestrasPaciente, InfoPaciente, Header} from "../components";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { API_URL } from '@env';
 import { Ionicons } from '@expo/vector-icons';
-import { SafeAreaView } from "react-native-safe-area-context";
 
 const PacienteInicio = () => {
   const [muestras, setMuestras] = useState([]);

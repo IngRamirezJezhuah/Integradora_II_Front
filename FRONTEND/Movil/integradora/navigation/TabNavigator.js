@@ -50,7 +50,7 @@ const TabNavigator = () => {
             console.log('👤 Datos de usuario encontrados:', userData ? 'Sí' : 'No');
             
             if (!token) {
-                console.log('❌ No hay token - usuario no autenticado');
+                console.log(' No hay token - usuario no autenticado');
                 setIsAuthenticated(false);
                 setUserRole(null);
                 return;
@@ -65,7 +65,7 @@ const TabNavigator = () => {
                     console.log('👤 Rol del usuario:', role);
                     setUserRole(role);
                 } catch (error) {
-                    console.error('❌ Error parsing userData:', error);
+                    console.error(' Error parsing userData:', error);
                     setUserRole(null);
                 }
             }
@@ -95,7 +95,7 @@ const TabNavigator = () => {
                 console.log('🎉 Usuario autenticado - mostrando aplicación');
             }
         } catch (error) {
-            console.error('❌ Error checking auth status:', error);
+            console.error(' Error checking auth status:', error);
             setIsAuthenticated(false);
             // En caso de error, también limpiar el storage por seguridad
             await AsyncStorage.removeItem('userToken');
@@ -112,7 +112,7 @@ const TabNavigator = () => {
             
             // Verificación simple del formato JWT y expiración
             if (!token || !token.includes('.')) {
-                console.log('❌ Token inválido - formato incorrecto');
+                console.log(' Token inválido - formato incorrecto');
                 return false;
             }
 
@@ -122,14 +122,14 @@ const TabNavigator = () => {
                 const currentTime = Math.floor(Date.now() / 1000);
                 
                 if (payload.exp && payload.exp < currentTime) {
-                    console.log('❌ Token expirado');
+                    console.log(' Token expirado');
                     return false;
                 }
                 
                 console.log('✅ Token válido (verificación local)');
                 return true;
             } catch (decodeError) {
-                console.error('❌ Error decodificando token:', decodeError);
+                console.error(' Error decodificando token:', decodeError);
                 return false;
             }
 
@@ -146,11 +146,11 @@ const TabNavigator = () => {
             //     console.log('✅ Token válido');
             //     return true;
             // } else {
-            //     console.log('❌ Token inválido - Status:', response.status);
+            //     console.log(' Token inválido - Status:', response.status);
             //     return false;
             // }
         } catch (error) {
-            console.error('❌ Error verificando token:', error);
+            console.error(' Error verificando token:', error);
             // En caso de error de red, asumir que el token es válido temporalmente
             // para evitar desloguear al usuario por problemas de conectividad
             return true;
@@ -163,7 +163,7 @@ const TabNavigator = () => {
         
         const token = await AsyncStorage.getItem('userToken');
         if (!token) {
-            console.log('❌ No hay token al cambiar pestaña');
+            console.log(' No hay token al cambiar pestaña');
             setIsAuthenticated(false);
             e.preventDefault(); // Prevenir el cambio de pestaña
             return;
@@ -171,7 +171,7 @@ const TabNavigator = () => {
 
         const isValidToken = await verifyTokenWithServer(token);
         if (!isValidToken) {
-            console.log('❌ Token inválido al cambiar pestaña');
+            console.log(' Token inválido al cambiar pestaña');
             setIsAuthenticated(false);
             await AsyncStorage.removeItem('userToken');
             await AsyncStorage.removeItem('userData');
@@ -252,7 +252,7 @@ const TabNavigator = () => {
 
     // Si no hay pestañas permitidas, mostrar mensaje o redirigir
     if (allowedTabs.length === 0) {
-        console.log('❌ No hay pestañas permitidas para este rol');
+        console.log(' No hay pestañas permitidas para este rol');
         return <AuthStack onLoginSuccess={handleLoginSuccess} />;
     }
 
@@ -287,7 +287,7 @@ export const logout = async () => {
         await AsyncStorage.removeItem('userData');
         return true;
     } catch (error) {
-        console.error('❌ Error during logout:', error);
+        console.error(' Error during logout:', error);
         return false;
     }
 };

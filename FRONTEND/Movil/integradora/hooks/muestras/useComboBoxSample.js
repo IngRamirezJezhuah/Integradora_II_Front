@@ -35,7 +35,6 @@ export const useComboBoxSample = (onSelect, selectedValue) => {
     // Buscar en las opciones disponibles
     for (const option of options) {
       if (option.alternativeNames.includes(nombreAnalisis)) {
-        console.log(`✅ ComboBox: "${nombreAnalisis}" -> "${option.value}"`);
         return option.value;
       }
     }

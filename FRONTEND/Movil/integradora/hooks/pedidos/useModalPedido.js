@@ -88,7 +88,7 @@ export const useModalPedido = (order, onClose) => {
         {
           text: "Cancelar",
           style: "cancel",
-          onPress: () => console.log('❌ ModalPedido: Completar pedido cancelado por el usuario')
+          onPress: () => console.log(' ModalPedido: Completar pedido cancelado por el usuario')
         },
         {
           text: "Completar",
@@ -109,7 +109,7 @@ export const useModalPedido = (order, onClose) => {
         {
           text: "No cancelar",
           style: "cancel",
-          onPress: () => console.log('❌ ModalPedido: Cancelar pedido cancelado por el usuario')
+          onPress: () => console.log(' ModalPedido: Cancelar pedido cancelado por el usuario')
         },
         {
           text: "Cancelar pedido",
@@ -130,7 +130,7 @@ export const useModalPedido = (order, onClose) => {
       // Obtener el token de autenticación
       const token = await AsyncStorage.getItem('userToken');
       if (!token) {
-        console.error('❌ ModalPedido: No se encontró token de autenticación');
+        console.error(' ModalPedido: No se encontró token de autenticación');
         Alert.alert('Error', 'No se encontró token de autenticación');
         return;
       }
@@ -166,11 +166,11 @@ export const useModalPedido = (order, onClose) => {
       } else {
         const errorData = await response.json();
         const errorMessage = errorData.message || 'Error al actualizar el estado del pedido';
-        console.error('❌ ModalPedido: Error del servidor:', errorData);
+        console.error(' ModalPedido: Error del servidor:', errorData);
         Alert.alert('Error del servidor', errorMessage);
       }
     } catch (error) {
-      console.error('❌ ModalPedido: Error de conexión al actualizar pedido:', error);
+      console.error(' ModalPedido: Error de conexión al actualizar pedido:', error);
       Alert.alert('Error', 'Error de conexión al actualizar el pedido');
     }
   }, [order, onClose]);

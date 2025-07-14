@@ -1,7 +1,8 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
+import { View, Text, TouchableOpacity, Image } from 'react-native';
 import PropTypes from 'prop-types';
 import { useComboBoxSample } from '../../hooks';
+import { comboBoxStyles } from '../../themes';
 
 const ComboBoxSample = ({ onSelect, selectedValue }) => {
   const {
@@ -24,22 +25,22 @@ const ComboBoxSample = ({ onSelect, selectedValue }) => {
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.label}>Tipo de Prueba</Text>
-      <View style={styles.comboBox}>
+    <View style={comboBoxStyles.container}>
+      <Text style={comboBoxStyles.label}>Tipo de Prueba</Text>
+      <View style={comboBoxStyles.comboBox}>
         {options.map((option) => (
           <TouchableOpacity
             key={option.key}
             style={[
-              styles.option,
-              getOptionStyles(option.value, styles.selected, styles.unselected)
+              comboBoxStyles.option,
+              getOptionStyles(option.value, comboBoxStyles.selected, comboBoxStyles.unselected)
             ]}
             onPress={() => handleSelect(option.value)}
           >
-            <Image source={getImage(option.imagePath)} style={styles.icon} />
+            <Image source={getImage(option.imagePath)} style={comboBoxStyles.icon} />
             <Text style={[
-              styles.optionText,
-              getTextStyles(option.value, styles.textSelected, styles.textUnselected)
+              comboBoxStyles.optionText,
+              getTextStyles(option.value, comboBoxStyles.textSelected, comboBoxStyles.textUnselected)
             ]}>
               {option.label}
             </Text>
@@ -49,39 +50,6 @@ const ComboBoxSample = ({ onSelect, selectedValue }) => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: { marginBottom: 20 },
-  label: { textAlign: 'center', fontWeight: 'bold', fontSize: 16, marginBottom: 10 },
-  comboBox: { flexDirection: 'row', justifyContent: 'space-around' },
-  option: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    padding: 10,
-    borderRadius: 8,
-    paddingHorizontal: 10,
-    marginHorizontal: 2,
-  },
-  selected: {
-    backgroundColor: '#BF1E2D'
-  },
-  unselected: {
-    backgroundColor: '#E0E0E0'
-  },
-  textSelected: {
-    color: 'white'
-  },
-  textUnselected: {
-    color: '#333'
-  },
-  optionText: {
-    marginLeft: 8
-  },
-  icon: {
-    width: 20,
-    height: 20
-  }
-});
 
 ComboBoxSample.propTypes = {
   onSelect: PropTypes.func.isRequired,

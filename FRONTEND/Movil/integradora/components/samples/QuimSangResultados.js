@@ -1,9 +1,11 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, ScrollView, TextInput, Image } from 'react-native';
+import { View, Text, TouchableOpacity, ScrollView, Image } from 'react-native';
 import Modal from 'react-native-modal';
 import { Ionicons } from '@expo/vector-icons';
 import PropTypes from 'prop-types';
+import { InputGroup } from '../elements/inputGroup';
 import { useFocusField, useQuimicaSanguinea } from '../../hooks';
+import { resultadosStyles } from '../../themes';
 
 const QuimSangResultados = ({ visible, sample, onClose }) => {
   // Usar el hook personalizado para manejar el focus
@@ -20,147 +22,147 @@ const QuimSangResultados = ({ visible, sample, onClose }) => {
   if (!sample) return null;
 
   return (
-    <Modal isVisible={visible} onBackdropPress={onClose} swipeDirection="down" style={styles.modal}>
-      <View style={styles.container}>
-        <TouchableOpacity onPress={onClose} style={styles.backArrow}>
+    <Modal isVisible={visible} onBackdropPress={onClose} swipeDirection="down" style={resultadosStyles.modal}>
+      <View style={resultadosStyles.container}>
+        <TouchableOpacity onPress={onClose} style={resultadosStyles.backArrow}>
           <Ionicons name="arrow-back" size={24} color="black" />
         </TouchableOpacity>
 
         <ScrollView>
-          <View style={styles.iconContainer}>
+          <View style={resultadosStyles.iconContainer}>
             <Image
               // eslint-disable-next-line
               source={require('../../assets/quimicasanguinea.png')}
-              style={styles.image}
+              style={resultadosStyles.image}
               resizeMode="cover"
             />
-            <Text style={styles.title}>Química Sanguínea</Text>
-            <Text style={styles.subtitle}>ID: {sample._id ? sample._id.slice(-8) : 'N/A'}</Text>
-            <Text style={styles.subtitle}>Paciente: {sample.nombrePaciente}</Text>
+            <Text style={resultadosStyles.title}>Química Sanguínea</Text>
+            <Text style={resultadosStyles.subtitle}>ID: {sample._id ? sample._id.slice(-8) : 'N/A'}</Text>
+            <Text style={resultadosStyles.subtitle}>Paciente: {sample.nombrePaciente}</Text>
           </View>
 
-          <Text style={styles.label}>Glucosa (mg/dL)</Text>
-          <TextInput
-            style={getFieldStyle('glucosa', styles.input, styles.inputFocus)}
+          <InputGroup
+            labelTitle="Glucosa (mg/dL)"
             value={resultados.glucosa}
             onChangeText={(value) => handleInputChange('glucosa', value)}
-            onFocus={() => setFocus('glucosa')}
-            onBlur={clearFocus}
             placeholder="70-100"
             keyboardType="numeric"
+            onFocus={() => setFocus('glucosa')}
+            onBlur={clearFocus}
+            style={getFieldStyle('glucosa', {}, resultadosStyles.inputFocus)}
           />
 
-          <Text style={styles.label}>Glucosa Post (mg/dL)</Text>
-          <TextInput
-            style={getFieldStyle('glucosaPost', styles.input, styles.inputFocus)}
+          <InputGroup
+            labelTitle="Glucosa Post (mg/dL)"
             value={resultados.glucosaPost}
             onChangeText={(value) => handleInputChange('glucosaPost', value)}
-            onFocus={() => setFocus('glucosaPost')}
-            onBlur={clearFocus}
             placeholder="< 140"
             keyboardType="numeric"
+            onFocus={() => setFocus('glucosaPost')}
+            onBlur={clearFocus}
+            style={getFieldStyle('glucosaPost', {}, resultadosStyles.inputFocus)}
           />
 
-          <Text style={styles.label}>Ácido Úrico (mg/dL)</Text>
-          <TextInput
-            style={getFieldStyle('acidoUrico', styles.input, styles.inputFocus)}
+          <InputGroup
+            labelTitle="Ácido Úrico (mg/dL)"
             value={resultados.acidoUrico}
             onChangeText={(value) => handleInputChange('acidoUrico', value)}
-            onFocus={() => setFocus('acidoUrico')}
-            onBlur={clearFocus}
             placeholder="3.5-7.2"
             keyboardType="numeric"
+            onFocus={() => setFocus('acidoUrico')}
+            onBlur={clearFocus}
+            style={getFieldStyle('acidoUrico', {}, resultadosStyles.inputFocus)}
           />
 
-          <Text style={styles.label}>Urea (mg/dL)</Text>
-          <TextInput
-            style={getFieldStyle('urea', styles.input, styles.inputFocus)}
+          <InputGroup
+            labelTitle="Urea (mg/dL)"
             value={resultados.urea}
             onChangeText={(value) => handleInputChange('urea', value)}
-            onFocus={() => setFocus('urea')}
-            onBlur={clearFocus}
             placeholder="15-40"
             keyboardType="numeric"
+            onFocus={() => setFocus('urea')}
+            onBlur={clearFocus}
+            style={getFieldStyle('urea', {}, resultadosStyles.inputFocus)}
           />
 
-          <Text style={styles.label}>Creatinina (mg/dL)</Text>
-          <TextInput
-            style={getFieldStyle('creatinina', styles.input, styles.inputFocus)}
+          <InputGroup
+            labelTitle="Creatinina (mg/dL)"
             value={resultados.creatinina}
             onChangeText={(value) => handleInputChange('creatinina', value)}
-            onFocus={() => setFocus('creatinina')}
-            onBlur={clearFocus}
             placeholder="0.6-1.2"
             keyboardType="numeric"
+            onFocus={() => setFocus('creatinina')}
+            onBlur={clearFocus}
+            style={getFieldStyle('creatinina', {}, resultadosStyles.inputFocus)}
           />
 
-          <Text style={styles.label}>Colesterol Total (mg/dL)</Text>
-          <TextInput
-            style={getFieldStyle('colesterol', styles.input, styles.inputFocus)}
+          <InputGroup
+            labelTitle="Colesterol Total (mg/dL)"
             value={resultados.colesterol}
             onChangeText={(value) => handleInputChange('colesterol', value)}
-            onFocus={() => setFocus('colesterol')}
-            onBlur={clearFocus}
             placeholder="< 200"
             keyboardType="numeric"
+            onFocus={() => setFocus('colesterol')}
+            onBlur={clearFocus}
+            style={getFieldStyle('colesterol', {}, resultadosStyles.inputFocus)}
           />
 
-          <Text style={styles.label}>LDR (mg/dL)</Text>
-          <TextInput
-            style={getFieldStyle('LDR', styles.input, styles.inputFocus)}
+          <InputGroup
+            labelTitle="LDR (mg/dL)"
             value={resultados.LDR}
             onChangeText={(value) => handleInputChange('LDR', value)}
-            onFocus={() => setFocus('LDR')}
-            onBlur={clearFocus}
             placeholder="< 100"
             keyboardType="numeric"
+            onFocus={() => setFocus('LDR')}
+            onBlur={clearFocus}
+            style={getFieldStyle('LDR', {}, resultadosStyles.inputFocus)}
           />
 
-          <Text style={styles.label}>GGT (U/L)</Text>
-          <TextInput
-            style={getFieldStyle('gGT', styles.input, styles.inputFocus)}
+          <InputGroup
+            labelTitle="GGT (U/L)"
             value={resultados.gGT}
             onChangeText={(value) => handleInputChange('gGT', value)}
-            onFocus={() => setFocus('gGT')}
-            onBlur={clearFocus}
             placeholder="9-48"
             keyboardType="numeric"
+            onFocus={() => setFocus('gGT')}
+            onBlur={clearFocus}
+            style={getFieldStyle('gGT', {}, resultadosStyles.inputFocus)}
           />
 
-          <Text style={styles.label}>Triglicéridos (mg/dL)</Text>
-          <TextInput
-            style={getFieldStyle('trigliceridos', styles.input, styles.inputFocus)}
+          <InputGroup
+            labelTitle="Triglicéridos (mg/dL)"
             value={resultados.trigliceridos}
             onChangeText={(value) => handleInputChange('trigliceridos', value)}
-            onFocus={() => setFocus('trigliceridos')}
-            onBlur={clearFocus}
             placeholder="< 150"
             keyboardType="numeric"
+            onFocus={() => setFocus('trigliceridos')}
+            onBlur={clearFocus}
+            style={getFieldStyle('trigliceridos', {}, resultadosStyles.inputFocus)}
           />
 
-          <Text style={styles.label}>Observaciones</Text>
-          <TextInput
-            style={getFieldStyle('observaciones', [styles.input, styles.textArea], styles.inputFocus)}
+          <InputGroup
+            labelTitle="Observaciones"
             value={resultados.observaciones}
             onChangeText={(value) => handleInputChange('observaciones', value)}
+            placeholder="Observaciones adicionales..."
+            multiline={true}
+            numberOfLines={4}
             onFocus={() => setFocus('observaciones')}
             onBlur={clearFocus}
-            placeholder="Observaciones adicionales..."
-            multiline
-            numberOfLines={4}
+            style={getFieldStyle('observaciones', {}, resultadosStyles.inputFocus)}
           />
         </ScrollView>
 
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity style={[styles.button, styles.cancelButton]} onPress={onClose}>
-            <Text style={styles.cancelButtonText}>Cancelar</Text>
+        <View style={resultadosStyles.buttonContainer}>
+          <TouchableOpacity style={[resultadosStyles.button, resultadosStyles.cancelButton]} onPress={onClose}>
+            <Text style={resultadosStyles.cancelButtonText}>Cancelar</Text>
           </TouchableOpacity>
           <TouchableOpacity 
-            style={[styles.button, loading && styles.buttonDisabled]} 
+            style={[resultadosStyles.button, loading && resultadosStyles.buttonDisabled]} 
             onPress={handleSubmit}
             disabled={loading}
           >
-            <Text style={styles.buttonText}>
+            <Text style={resultadosStyles.buttonText}>
               {loading ? 'Guardando...' : 'Guardar'}
             </Text>
           </TouchableOpacity>
@@ -169,97 +171,6 @@ const QuimSangResultados = ({ visible, sample, onClose }) => {
     </Modal>
   );
 };
-
-const styles = StyleSheet.create({
-  modal: {
-    justifyContent: 'flex-end',
-    margin: 0,
-  },
-  container: {
-    backgroundColor: 'white',
-    padding: 20,
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
-    maxHeight: '90%',
-  },
-  image: {
-    alignSelf: 'center',
-    width: 80,
-    height: 80,
-    marginVertical: 10,
-  },
-  backArrow: {
-    marginBottom: 10,
-  },
-  iconContainer: {
-    alignItems: 'center',
-    marginBottom: 20,
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    marginTop: 10,
-    color: '#333',
-  },
-  subtitle: {
-    fontSize: 14,
-    color: '#666',
-    marginTop: 5,
-  },
-  label: {
-    fontWeight: '600',
-    fontSize: 16,
-    marginTop: 15,
-    marginBottom: 5,
-    color: '#333',
-  },
-  input: {
-    borderWidth: 1,
-    borderColor: '#ddd',
-    borderRadius: 8,
-    padding: 12,
-    fontSize: 16,
-    backgroundColor: '#f9f9f9',
-  },
-  inputFocus: {
-    borderColor: '#DA0C15',
-    borderWidth: 2,
-    backgroundColor: '#fff',
-  },
-  textArea: {
-    height: 80,
-    textAlignVertical: 'top',
-  },
-  buttonContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginTop: 20,
-  },
-  button: {
-    backgroundColor: '#DA0C15',
-    padding: 15,
-    borderRadius: 10,
-    alignItems: 'center',
-    flex: 1,
-    marginHorizontal: 5,
-  },
-  buttonDisabled: {
-    backgroundColor: '#ccc',
-  },
-  cancelButton: {
-    backgroundColor: '#666',
-  },
-  buttonText: {
-    color: 'white',
-    fontWeight: '600',
-    fontSize: 16,
-  },
-  cancelButtonText: {
-    color: 'white',
-    fontWeight: '600',
-    fontSize: 16,
-  },
-});
 
 QuimSangResultados.propTypes = {
   visible: PropTypes.bool.isRequired,

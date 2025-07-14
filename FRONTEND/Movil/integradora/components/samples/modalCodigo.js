@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
   label: {
     fontSize: 18,
     marginBottom: 12,
-    fontWeight: 'bold',
+    fontWeight: '500',
   },
   input: {
     borderWidth: 1,
@@ -60,6 +60,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     alignItems: 'center',
     marginTop: 15,
+    marginHorizontal: 5,
   },
 });
 

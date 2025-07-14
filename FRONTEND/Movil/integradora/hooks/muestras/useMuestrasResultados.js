@@ -48,18 +48,16 @@ export const useMuestrasResultados = () => {
       });
 
       if (response.ok) {
-        const responseData = await response.json();
-        console.log('✅ Resultados de química sanguínea guardados exitosamente:', responseData);
         Alert.alert('Éxito', 'Los resultados se han guardado correctamente');
         return true;
       } else {
         const errorData = await response.json();
-        console.error('❌ Error al guardar resultados:', errorData);
+        console.error(' Error al guardar resultados:', errorData);
         Alert.alert('Error', 'No se pudieron guardar los resultados');
         return false;
       }
     } catch (error) {
-      console.error('❌ Error al guardar resultados:', error);
+      console.error(' Error al guardar resultados:', error);
       Alert.alert('Error', 'Error de conexión al guardar los resultados');
       return false;
     } finally {
@@ -125,12 +123,12 @@ export const useMuestrasResultados = () => {
         return true;
       } else {
         const errorData = await response.json();
-        console.error('❌ Error al guardar resultados:', errorData);
+        console.error(' Error al guardar resultados:', errorData);
         Alert.alert('Error', 'No se pudieron guardar los resultados');
         return false;
       }
     } catch (error) {
-      console.error('❌ Error al guardar resultados:', error);
+      console.error(' Error al guardar resultados:', error);
       Alert.alert('Error', 'Error de conexión al guardar los resultados');
       return false;
     } finally {
@@ -164,11 +162,11 @@ export const useMuestrasResultados = () => {
         console.log('✅ Resultados obtenidos:', data);
         return data;
       } else {
-        console.error('❌ Error al obtener resultados:', response.status);
+        console.error(' Error al obtener resultados:', response.status);
         return null;
       }
     } catch (error) {
-      console.error('❌ Error al obtener resultados:', error);
+      console.error(' Error al obtener resultados:', error);
       return null;
     }
   };

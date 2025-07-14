@@ -66,23 +66,23 @@ export const usePedidos = () => {
           
           setPedidos(responseData.data);
         } else {
-          console.error('❌ Estructura de respuesta inesperada:', responseData);
+          console.error(' Estructura de respuesta inesperada:', responseData);
           const errorMsg = 'La respuesta del servidor no tiene el formato esperado';
           setError(errorMsg);
           Alert.alert('Error', errorMsg);
         }
       } else {
         const errorData = await response.text();
-        console.error('❌ Error response:', errorData);
+        console.error(' Error response:', errorData);
         const errorMsg = `Error al obtener pedidos: ${response.status} - ${response.statusText}`;
         setError(errorMsg);
         Alert.alert('Error', errorMsg);
       }
     } catch (error) {
-      console.error('❌ Error completo:', error);
-      console.error('❌ Error name:', error.name);
-      console.error('❌ Error message:', error.message);
-      console.error('❌ Error stack:', error.stack);
+      console.error(' Error completo:', error);
+      console.error(' Error name:', error.name);
+      console.error(' Error message:', error.message);
+      console.error(' Error stack:', error.stack);
       
       let errorMsg = `Error de conexión: ${error.message}`;
       
@@ -129,12 +129,12 @@ export const usePedidos = () => {
       } else {
         const errorData = await response.json();
         const errorMessage = errorData.message || 'Error al eliminar el pedido';
-        console.error('❌ Error del servidor:', errorData);
+        console.error(' Error del servidor:', errorData);
         Alert.alert('Error del servidor', errorMessage);
         return false;
       }
     } catch (error) {
-      console.error('❌ Error al eliminar pedido:', error);
+      console.error(' Error al eliminar pedido:', error);
       Alert.alert('Error', 'Error de conexión al eliminar el pedido');
       return false;
     }
@@ -175,12 +175,12 @@ export const usePedidos = () => {
       } else {
         const errorData = await response.json();
         const errorMessage = errorData.message || 'Error al actualizar el estado del pedido';
-        console.error('❌ Error del servidor:', errorData);
+        console.error(' Error del servidor:', errorData);
         Alert.alert('Error del servidor', errorMessage);
         return false;
       }
     } catch (error) {
-      console.error('❌ Error al actualizar pedido:', error);
+      console.error(' Error al actualizar pedido:', error);
       Alert.alert('Error', 'Error de conexión al actualizar el pedido');
       return false;
     }

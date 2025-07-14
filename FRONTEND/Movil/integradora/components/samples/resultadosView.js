@@ -20,7 +20,7 @@ const ResultadosView = ({ sample }) => {
 
     return (
       <View style={styles.resultsContainer}>
-        <Text style={styles.resultsTitle}>🧪 Resultados - Química Sanguínea</Text>
+        <Text style={styles.resultsTitle}> Resultados - Química Sanguínea</Text>
         <View style={styles.resultsGrid}>
           {data.resultados.map((resultado) => (
             <View key={resultado.key} style={styles.resultItem}>
@@ -44,7 +44,7 @@ const ResultadosView = ({ sample }) => {
 
     return (
       <View style={styles.resultsContainer}>
-        <Text style={styles.resultsTitle}>🩸 Resultados - Biometría Hemática</Text>
+        <Text style={styles.resultsTitle}>Resultados - Biometría Hemática</Text>
         
         {data.formulaRoja.length > 0 && (
           <View style={styles.formulaSection}>

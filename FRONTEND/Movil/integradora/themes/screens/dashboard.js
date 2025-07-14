@@ -1,30 +1,5 @@
 import { StyleSheet } from "react-native";
 
-export const Styles = StyleSheet.create({
-    container:{
-        flex: 1,
-        justifyContent:'center',
-        alignItems:'center',
-        backgroundColor:'#c3e1f7',
-    },
-    header: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        paddingHorizontal: 20,
-        paddingTop: 40,
-        paddingBottom: 20,
-        backgroundColor: '#fff',
-        borderBottomWidth: 1,
-        borderBottomColor: '#E0E0E0',
-    },
-    headerTitle: {
-        fontSize: 24,
-        fontWeight: 'bold',
-        color: '#2C3E50',
-    },
-})
-
 export const DashboardStyles = StyleSheet.create({
     container:{
         flex: 1,
@@ -69,13 +44,4 @@ export const DashboardStyles = StyleSheet.create({
         fontWeight:'bold',
         textDecorationStyle:'double',
     }
-})
-
-export const muestras = StyleSheet.create({
-    container:{
-        flex: 1,
-        justifyContent:'center',
-        alignItems:'center',
-        backgroundColor:'#c3e1f7',
-    },
 })

@@ -45,25 +45,23 @@ const TablaMuestrasPaciente = ({ data, onView }) => {
       });
 
       if (response.ok) {
-        const data = await response.json();
-        console.log('✅ Correo enviado exitosamente:', data);
         
         // Verificar si los resultados estaban listos
         if (sample.status === true) {
           Alert.alert(
-            '✅ Éxito', 
+            'Éxito', 
             'Resultados enviados a correo electrónico',
             [{ text: 'OK' }]
           );
         } else {
           Alert.alert(
-            '⚠️ Información', 
+            'Información', 
             'Resultados aún se encuentran no disponibles',
             [{ text: 'OK' }]
           );
         }
       } else {
-        console.error('❌ Error al enviar correo - Status:', response.status);
+        console.error(' Error al enviar correo - Status:', response.status);
         Alert.alert(
           'Error', 
           'No se pudo enviar el correo. Intenta nuevamente.',
@@ -71,7 +69,7 @@ const TablaMuestrasPaciente = ({ data, onView }) => {
         );
       }
     } catch (error) {
-      console.error('❌ Error enviando correo:', error);
+      console.error(' Error enviando correo:', error);
       Alert.alert(
         'Error', 
         'Error de conexión al enviar correo',
@@ -135,7 +133,7 @@ const TablaMuestrasPaciente = ({ data, onView }) => {
               <Text style={styles.patientName}>Paciente: {item.nombrePaciente || 'N/A'}</Text>
               <Text style={styles.dateText}>Fecha: {formatDate(item.createDate)}</Text>
               <Text style={styles.statusText}>
-                Estado: {item.status ? '✅ Completado' : '⏳ Pendiente'}
+                Estado: {item.status ? ' Completado' : '⏳ Pendiente'}
               </Text>
             </View>
             <View style={styles.actionsContainer}>

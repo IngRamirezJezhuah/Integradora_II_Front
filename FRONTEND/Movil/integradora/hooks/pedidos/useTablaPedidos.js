@@ -50,7 +50,7 @@ export const useTablaPedidos = (onDelete, onRefresh) => {
         {
           text: "Cancelar",
           style: "cancel",
-          onPress: () => console.log('❌ TablaPedidos: Eliminación cancelada por el usuario')
+          onPress: () => console.log(' TablaPedidos: Eliminación cancelada por el usuario')
         },
         {
           text: "Eliminar",
@@ -69,7 +69,7 @@ export const useTablaPedidos = (onDelete, onRefresh) => {
       // Obtener el token de autenticación
       const token = await AsyncStorage.getItem('userToken');
       if (!token) {
-        console.error('❌ TablaPedidos: No se encontró token de autenticación');
+        console.error(' TablaPedidos: No se encontró token de autenticación');
         Alert.alert('Error', 'No se encontró token de autenticación');
         return;
       }
@@ -107,11 +107,11 @@ export const useTablaPedidos = (onDelete, onRefresh) => {
       } else {
         const errorData = await response.json();
         const errorMessage = errorData.message || 'Error al eliminar el pedido';
-        console.error('❌ TablaPedidos: Error del servidor:', errorData);
+        console.error(' TablaPedidos: Error del servidor:', errorData);
         Alert.alert('Error del servidor', errorMessage);
       }
     } catch (error) {
-      console.error('❌ TablaPedidos: Error de conexión al eliminar pedido:', error);
+      console.error(' TablaPedidos: Error de conexión al eliminar pedido:', error);
       Alert.alert('Error', 'Error de conexión al eliminar el pedido');
     }
   }, [onDelete, onRefresh]);

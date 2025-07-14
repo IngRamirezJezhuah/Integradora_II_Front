@@ -26,7 +26,6 @@ export const useMuestras = () => {
         return;
       }
 
-      console.log('📡 Solicitando muestras...');
       const response = await fetch(`${API_URL}/muestras`, {
         method: 'GET',
         headers: {
@@ -44,43 +43,26 @@ export const useMuestras = () => {
 
       if (response.ok) {
         const data = await response.json();
-        console.log('✅ Respuesta completa:', data);
         
         // Verificar si la respuesta tiene la estructura esperada
         if (data && data.muestrasList && Array.isArray(data.muestrasList)) {
-          console.log('📋 Datos recibidos:', data.muestrasList);
-          console.log('📊 Número de muestras:', data.muestrasList.length);
-          
-          // Verificar la estructura de cada muestra
-          data.muestrasList.forEach((muestra, index) => {
-            console.log(`🧪 Muestra ${index + 1}:`, {
-              id: muestra._id,
-              nombrePaciente: muestra.nombrePaciente,
-              tipoMuestra: muestra.tipoMuestra,
-              status: muestra.status,
-              createDate: muestra.createDate
-            });
-          });
           
           setMuestras(data.muestrasList);
         } else {
-          console.error('❌ Estructura de respuesta inesperada:', data);
           const errorMsg = 'La respuesta del servidor no tiene el formato esperado';
           setError(errorMsg);
           Alert.alert('Error', errorMsg);
         }
       } else {
-        const errorData = await response.text();
-        console.error('❌ Error response:', errorData);
         const errorMsg = `Error al obtener muestras: ${response.status} - ${response.statusText}`;
         setError(errorMsg);
         Alert.alert('Error', errorMsg);
       }
     } catch (error) {
-      console.error('❌ Error completo:', error);
-      console.error('❌ Error name:', error.name);
-      console.error('❌ Error message:', error.message);
-      console.error('❌ Error stack:', error.stack);
+      console.error(' Error completo:', error);
+      console.error(' Error name:', error.name);
+      console.error(' Error message:', error.message);
+      console.error(' Error stack:', error.stack);
       
       let errorMsg = `Error de conexión: ${error.message}`;
       
@@ -120,19 +102,18 @@ export const useMuestras = () => {
       });
 
       if (response.ok) {
-        console.log('✅ Muestra eliminada exitosamente');
         // Remover la muestra del estado local
         setMuestras(prevMuestras => prevMuestras.filter(muestra => muestra._id !== muestraId));
         return true;
       } else {
         const errorData = await response.json();
         const errorMessage = errorData.message || 'Error al eliminar la muestra';
-        console.error('❌ Error del servidor:', errorData);
+        console.error(' Error del servidor:', errorData);
         Alert.alert('Error del servidor', errorMessage);
         return false;
       }
     } catch (error) {
-      console.error('❌ Error al eliminar muestra:', error);
+      console.error(' Error al eliminar muestra:', error);
       Alert.alert('Error', 'Error de conexión al eliminar la muestra');
       return false;
     }
@@ -145,9 +126,6 @@ export const useMuestras = () => {
         Alert.alert('Error', 'No se encontró token de autenticación');
         return false;
       }
-
-      console.log(`🔄 Actualizando muestra ${muestraId} a status: ${nuevoStatus}`);
-
       const response = await fetch(`${API_URL}/muestras/${muestraId}`, {
         method: 'PUT',
         headers: {
@@ -160,7 +138,6 @@ export const useMuestras = () => {
       });
 
       if (response.ok) {
-        console.log('✅ Status de la muestra actualizado exitosamente');
         // Actualizar la muestra en el estado local
         setMuestras(prevMuestras => 
           prevMuestras.map(muestra => 
@@ -173,12 +150,12 @@ export const useMuestras = () => {
       } else {
         const errorData = await response.json();
         const errorMessage = errorData.message || 'Error al actualizar el status de la muestra';
-        console.error('❌ Error del servidor:', errorData);
+        console.error(' Error del servidor:', errorData);
         Alert.alert('Error del servidor', errorMessage);
         return false;
       }
     } catch (error) {
-      console.error('❌ Error al actualizar muestra:', error);
+      console.error(' Error al actualizar muestra:', error);
       Alert.alert('Error', 'Error de conexión al actualizar la muestra');
       return false;
     }

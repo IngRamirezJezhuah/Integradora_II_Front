@@ -65,7 +65,6 @@ const TablaMuestras = ({ data, onView, onDelete }) => {
             });
 
             if (response.ok) {
-                console.log('✅ Muestra eliminada exitosamente');
                 Alert.alert(
                     'Éxito', 
                     'La muestra ha sido eliminada correctamente',
@@ -84,11 +83,11 @@ const TablaMuestras = ({ data, onView, onDelete }) => {
             } else {
                 const errorData = await response.json();
                 const errorMessage = errorData.message || 'Error al eliminar la muestra';
-                console.error('❌ Error del servidor:', errorData);
+                console.error(' Error del servidor:', errorData);
                 Alert.alert('Error del servidor', errorMessage);
             }
         } catch (error) {
-            console.error('❌ Error al eliminar muestra:', error);
+            console.error(' Error al eliminar muestra:', error);
             Alert.alert('Error', 'Error de conexión al eliminar la muestra');
         }
     };

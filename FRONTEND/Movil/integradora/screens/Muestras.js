@@ -12,7 +12,6 @@ const MuestrasScreen = () => {
     refreshing,
     error,
     deleteMuestra,
-    updateMuestraStatus,
     onRefresh,
   } = useMuestras();
 
@@ -34,7 +33,7 @@ const MuestrasScreen = () => {
     handleView,
     handleCloseModal,
     handleDelete,
-  } = useMuestrasActions(deleteMuestra, updateMuestraStatus);
+  } = useMuestrasActions(deleteMuestra);
 
   if (error) {
     return (

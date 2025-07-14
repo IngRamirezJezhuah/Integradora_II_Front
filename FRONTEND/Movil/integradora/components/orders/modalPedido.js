@@ -130,8 +130,8 @@ const ModalPedido = ({ visible, order, onClose, onNuevaMuestra }) => {
           </TouchableOpacity>
           
           <TouchableOpacity style={styles.cancelarButton} onPress={handleCancelarPedido}>
-            <Ionicons name="close-circle" size={20} color="white" style={styles.buttonIcon} />
-            <Text style={styles.buttonText}>Cancelar</Text>
+            <Ionicons name="close-circle" size={20} color="#DA0C15" style={styles.buttonIcon} />
+            <Text style={{...styles.buttonTextCancelar, color:"#DA0C15"}}>Cancelar</Text>
           </TouchableOpacity>
         </View>
 
@@ -180,7 +180,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginTop: 20,
     marginBottom: 10,
-    color: '#B91C1C',
+    color: '#DA0C15',
     borderBottomWidth: 1,
     borderBottomColor: '#E5E5E5',
     paddingBottom: 5,
@@ -211,7 +211,7 @@ const styles = StyleSheet.create({
   analysisPrice: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: '#B91C1C',
+    color: '#DA0C15',
     marginBottom: 4,
   },
   analysisDescription: {
@@ -233,7 +233,7 @@ const styles = StyleSheet.create({
   totalValue: {
     fontWeight: 'bold',
     fontSize: 16,
-    color: '#B91C1C',
+    color: '#DA0C15',
   },
   pending: {
     color: '#F59E0B',
@@ -254,7 +254,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   completarButton: {
-    backgroundColor: '#10B981',
+    backgroundColor: '#28A745',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
@@ -264,7 +264,8 @@ const styles = StyleSheet.create({
     marginRight: 5,
   },
   cancelarButton: {
-    backgroundColor: '#EF4444',
+    borderWidth: 1,
+    borderColor: '#DA0C15',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
@@ -274,7 +275,7 @@ const styles = StyleSheet.create({
     marginLeft: 5,
   },
   registrarButton: {
-    backgroundColor: '#B91C1C',
+    backgroundColor: '#DA0C15',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
@@ -286,7 +287,7 @@ const styles = StyleSheet.create({
     marginRight: 8,
   },
   button: {
-    backgroundColor: '#B91C1C',
+    backgroundColor: '#DA0C15',
     padding: 15,
     borderRadius: 10,
     alignItems: 'center',

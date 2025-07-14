@@ -53,7 +53,6 @@ export const useBiometriaHematica = (visible, sample, onClose) => {
         basofilos: formulaBlanca.basofilos?.toString() || '',
         observaciones: bioData.observaciones || ''
       });
-      console.log('✅ Datos de biometría hemática cargados');
     } else if (visible) {
       // Reset form if no existing data
       setResultados({
@@ -114,11 +113,10 @@ export const useBiometriaHematica = (visible, sample, onClose) => {
         'Campos Requeridos', 
         `Los siguientes campos son obligatorios: ${fieldNames}`
       );
-      console.log('❌ Validación fallida - Campos vacíos:', emptyFields.map(f => f.key));
+      console.log(' Validación fallida - Campos vacíos:', emptyFields.map(f => f.key));
       return false;
     }
 
-    console.log('✅ Validación exitosa - Todos los campos requeridos completados');
     return true;
   };
 
@@ -183,17 +181,15 @@ export const useBiometriaHematica = (visible, sample, onClose) => {
       });
 
       if (response.ok) {
-        const responseData = await response.json();
-        console.log('✅ Resultados de biometría hemática guardados exitosamente:', responseData);
         Alert.alert('Éxito', 'Los resultados se han guardado correctamente');
         onClose();
       } else {
         const errorData = await response.json();
-        console.error('❌ Error al guardar resultados de biometría hemática:', errorData);
+        console.error(' Error al guardar resultados de biometría hemática:', errorData);
         Alert.alert('Error', 'No se pudieron guardar los resultados');
       }
     } catch (error) {
-      console.error('❌ Error de conexión al guardar biometría hemática:', error);
+      console.error(' Error de conexión al guardar biometría hemática:', error);
       Alert.alert('Error', 'Error de conexión al guardar los resultados');
     } finally {
       setLoading(false);

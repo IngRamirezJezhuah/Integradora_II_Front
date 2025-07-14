@@ -1,25 +1,19 @@
 import { useState } from 'react';
 
-/**
- * Hook simple para manejar el estado del formulario de login
- * @returns {Object} - Estado y funciones del formulario
- */
+//Hook simple para manejar el estado del formulario de login/
 const useLoginForm = () => {
   const [correo, setCorreo] = useState('');
   const [contraseña, setContraseña] = useState('');
 
-  /**
-   * Limpiar todos los campos del formulario
-   */
+  //Limpiar todos los campos del formulario
   const clearForm = () => {
     setCorreo('');
     setContraseña('');
   };
 
-  /**
-   * Validar que los campos no estén vacíos
-   * @returns {boolean} - True si los campos son válidos
-   */
+  
+// Validar que los campos no estén vacíos
+
   const isFormValid = () => {
     return correo.trim() !== '' && contraseña.trim() !== '';
   };

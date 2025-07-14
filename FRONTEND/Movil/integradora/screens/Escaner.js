@@ -196,8 +196,17 @@ const Escaner = () => {
 };
 
 const styles = StyleSheet.create({
-  container: { flex: 1, padding: 20, backgroundColor: 'white' },
-  header: { fontSize: 22, fontWeight: 'bold', textAlign: 'center', marginBottom: 20 },
+  container: { 
+    flex: 1, 
+    padding: 20,
+    backgroundColor: 'white'
+  },
+  header: { 
+    fontSize: 22, 
+    fontWeight: 'bold', 
+    textAlign: 'center', 
+    marginBottom: 20
+  },
   cameraContainer: { 
     width: '100%', 
     height: 300, 
@@ -220,8 +229,17 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '500',
   },
-  button: { marginTop: 20, backgroundColor: '#BF1E2D', padding: 14, borderRadius: 10 },
-  buttonText: { color: '#fff', textAlign: 'center', fontWeight: 'bold' },
+  button: {
+    marginTop: 20, 
+    backgroundColor: '#DA0C15',
+    padding: 14, 
+    borderRadius: 10 
+  },
+  buttonText: { 
+    color: '#fff', 
+    textAlign: 'center', 
+    fontWeight: 'bold' 
+  },
   loadingContainer: {
     marginTop: 20,
     padding: 15,

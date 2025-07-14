@@ -29,7 +29,7 @@ export const useResultadosView = (sample) => {
       return 'biometria';
     }
 
-    console.log('❌ Tipo de muestra no reconocido:', tipoMuestra);
+    console.log(' Tipo de muestra no reconocido:', tipoMuestra);
     return null;
   }, [sample?.tipoMuestra]);
 

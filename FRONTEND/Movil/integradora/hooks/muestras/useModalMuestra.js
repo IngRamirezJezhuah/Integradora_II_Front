@@ -18,7 +18,7 @@ export const useModalMuestra = (sample) => {
         minute: '2-digit'
       });
     } catch (error) {
-      console.error('❌ Error al formatear fecha:', error);
+      console.error(' Error al formatear fecha:', error);
       return 'Fecha inválida';
     }
   }, []);
@@ -128,13 +128,6 @@ export const useModalMuestra = (sample) => {
       hasActiveModal: showQuimModal || showBiomModal
     };
   }, [showQuimModal, showBiomModal]);
-
-  console.log('🎯 ModalMuestra: Estado actual:', {
-    sampleValid: sampleInfo.isValid,
-    tipo: sampleInfo.tipo,
-    canRegister: sampleInfo.canRegisterResults,
-    modalsOpen: modalStates.hasActiveModal
-  });
 
   return {
     // Estados de modales
