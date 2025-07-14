@@ -10,7 +10,7 @@ export const useLdrStatus = () => {
       };
     }
 
-    if (ldr <= 600) {
+    if (ldr <= 300) {
       return { 
         estado: 'En peligro', 
         style: DashboardStyles.cprecaucion,
@@ -18,7 +18,7 @@ export const useLdrStatus = () => {
       };
     }
     
-    if (ldr <= 1500) {
+    if (ldr <= 0) {
       return { 
         estado: 'Protegida', 
         style: DashboardStyles.cmuestra,

@@ -1,12 +1,5 @@
-export { useMuestras } from './useMuestras';
-export { useMuestrasFilter } from './useMuestrasFilter';
-export { useMuestrasActions } from './useMuestrasActions';
-export { useMuestrasResultados } from './useMuestrasResultados';
-export { useQuimicaSanguinea } from './useQuimicaSanguinea';
-export { useBiometriaHematica } from './useBiometriaHematica';
-export { useResultadosView } from './useResultadosView';
-export { useComboBoxSample } from './useComboBoxSample';
-export { useModalMuestra } from './useModalMuestra';
-export { useModalMuestrasAdmin } from './useModalMuestrasAdmin';
-export { useDeleteMuestra } from './useDeleteMuestra';
-export { useMuestrasUtils } from './useMuestrasUtils';
+export { useMuestrasResultados, useModalMuestra, useModalMuestrasAdmin, useDeleteMuestra, useResultadosView, useComboBoxSample } from './modalMuestra';
+
+export { useMuestras, useMuestrasActions, useMuestrasFilter, useMuestrasUtils } from './tablaMuestra';
+
+export {useQuimicaSanguinea, useBiometriaHematica} from './tipoMuestra';

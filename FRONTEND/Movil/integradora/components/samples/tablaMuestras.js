@@ -13,9 +13,7 @@ const TablaMuestras = ({ data, onDelete }) => {
     // Hooks para utilidades de formato
     const { getImageSource, getStatusColor, getStatusText, formatDate } = useMuestrasUtils();
 
-
-
-return (
+    return (
     <>
         <FlatList
             data={data}

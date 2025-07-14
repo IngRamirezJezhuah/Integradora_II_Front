@@ -4,20 +4,20 @@ export const useMuestrasUtils = () => {
   const getImageSource = useCallback((tipoMuestra) => {
     if (!tipoMuestra) {
       // eslint-disable-next-line
-      return require('../../assets/biometriahematica.png'); // imagen por defecto
+      return require('../../../assets/biometriahematica.png'); // imagen por defecto
     }
     
     const tipo = tipoMuestra.toLowerCase().replace(/\s+/g, '');
     
     if (tipo.includes('quimicasanguinea') || tipo.includes('quimica')) {
       // eslint-disable-next-line
-      return require('../../assets/quimicasanguinea.png');
+      return require('../../../assets/quimicasanguinea.png');
     } else if (tipo.includes('biometriahematica') || tipo.includes('biometria')) {
       // eslint-disable-next-line
-      return require('../../assets/biometriahematica.png');
+      return require('../../../assets/biometriahematica.png');
     } else {
       // eslint-disable-next-line
-      return require('../../assets/biometriahematica.png'); // imagen por defecto
+      return require('../../../assets/biometriahematica.png'); // imagen por defecto
     }
   }, []);
 

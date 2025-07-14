@@ -1,5 +1,5 @@
 import { useState, useMemo } from 'react';
-import { filterData } from '../../utils/filterUtils';
+import { filterData } from '../../../utils/filterUtils';
 
 export const useMuestrasFilter = (muestras) => {
   const [searchText, setSearchText] = useState('');

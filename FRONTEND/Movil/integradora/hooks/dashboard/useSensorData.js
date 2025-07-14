@@ -39,7 +39,7 @@ export const useSensorData = () => {
       }
 
       // Fetch Temperature and Humidity data
-      const tempResponse = await fetch(`${API_URL}/tempwet/esp32c3_001`, {
+      const tempResponse = await fetch(`${API_URL}/tempwet/tempWetController_001`, {
         method: 'GET',
         headers,
       });
