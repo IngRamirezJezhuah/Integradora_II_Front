@@ -33,7 +33,6 @@ function App() {
           <Route path="/" element={<Component /> } >
             <Route path="/Dashboard" element={<Dashboard />} />
             <Route path="/Pacientes" element={<Pacientes />} />
-            <Route path='/EditarInfoPaciente' element={<RegistrarPaceinte />} />
             
             <Route path="/Pedidos" element={<Pedidos />} />
             <Route path="/RecibosPedidos" element={<ReciboPedidos/>} />
@@ -50,6 +49,7 @@ function App() {
             <Route path='/SampleModal' element={<SampleModal/>}/>
             
           </Route>
+            <Route path='/EditarInfoPaciente' element={<RegistrarPaceinte />} />
             <Route path='/Perfil' element={<PerfilPaciente/>}/>
       </Routes>
     </Router>

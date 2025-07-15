@@ -81,6 +81,7 @@ const Dashboard=()=> {
     )
     }
     const status = getLdrStatus(ldrData.ldr)
+    
     return (
     <div>
         <p className='titulo'>Dashboard </p>

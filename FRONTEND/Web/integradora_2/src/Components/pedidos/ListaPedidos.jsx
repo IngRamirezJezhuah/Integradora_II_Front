@@ -51,7 +51,7 @@ const ListaPedidos = () => {
 
     /*_____________________Borrar pedido __________________*/
     //sweet alert
-    function handleAlert() {
+    function handleAlert(id) {
         const swalWithBootstrapButtons = Swal.mixin({
         customClass: {
             confirmButton: "btn btn-success",
@@ -75,13 +75,13 @@ const ListaPedidos = () => {
                     'Content-Type': 'application/json',
                     Authorization: `Bearer ${token}`,
                 };
-                const res = await fetch(`${apiUrl}/pedidos/`,{
+                const res = await fetch(`${apiUrl}/pedidos/${id}`,{
                     method:'DELETE',
                     headers,
                     body: JSON.stringify({ status:false }),
                 });
                 if (!res.ok) throw new Error();
-                setPedidos((prev) => prev.filter((p) => p._id));
+                setPedidos((prev) => prev.filter((p) => p._id !== id));
                 /*___________Aqui empieza el estilo de swal_____________ */
                 swalWithBootstrapButtons.fire({
                 title: "!Borrado Exitosamente¡",

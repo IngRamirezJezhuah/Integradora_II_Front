@@ -20,7 +20,7 @@ const PedidosCancelados = () => {
             if(!res.ok) throw new Error("Error al obtener pedidos");
             const { pedidosList = [] , data = [] } = await res.json();   // por si tu backend retorna otra llave
             const lista = pedidosList.length ? pedidosList : data;
-            setPedidos(lista.filter(p => p.status === false || p.status === "false"));
+            setPedidos(lista.filter(p => p.estado === 'cancelado' || p.estado === "Cancelado"));
         }catch(err){
             setError(err.message);
         }finally{
@@ -64,7 +64,7 @@ const PedidosCancelados = () => {
                 <p className="centrar">{p._id.slice(-6).toUpperCase()}</p>
                 {/* primer nombre de muestra si existe */}
                 <p className="texto_pedidos">
-                    {p.muestras?.[0]?.tipoMuestra || p.muestras?.[0]?.nombre || "--"}
+                    Estado: { p.estado|| "--"}
                 </p>
                 {/* nombre cliente si lo traes poblado */}
                 <p className="texto_pedidos">

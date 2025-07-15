@@ -44,9 +44,9 @@ const RegistrarPaciente = () => {
     }
 
     return (
-        <div className='plantilla'>
-            <div className='scale-up-center'>
-                <div className='margen'>
+        <div>
+            <div >
+                <div>
                     <form onSubmit={handleSubmit}>
                         <label className='precios' htmlFor="nombre">Nombre(s):</label>
                         <input className='label-form' type="text" name="nombre" value={formData.nombre} onChange={handleChange} required  placeholder="David Jezhuah" />

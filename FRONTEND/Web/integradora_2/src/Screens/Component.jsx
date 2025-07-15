@@ -97,7 +97,7 @@ const Component=() => {
                                         <Link to={'/Perfil'} className="paciente-link">
                                         <p>Ver Pedidos</p>
                                         </Link>
-                                        <Link to={'/'} className="paciente-link">
+                                        <Link to={'/EditarInfoPaciente'} className="paciente-link">
                                         <p>Editar info</p>
                                         </Link>
                                         <select name="" id="">
