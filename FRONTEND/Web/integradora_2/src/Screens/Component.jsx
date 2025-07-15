@@ -9,46 +9,6 @@ const Component=() => {
     const isActive = (path) => location.pathname === path;
     const apiUrl = process.env.REACT_APP_API_URL;
 
-    /*function handleAlert(e) {
-            const swalWithBootstrapButtons = Swal.mixin({
-                customClass: {
-                    confirmButton: "btn btn-success",
-                    cancelButton: "btn btn-danger"
-                },
-                buttonsStyling: false
-            });
-            swalWithBootstrapButtons.fire({
-                title: "Estas Seguro de Salir?",
-                text: "Tendras que iniciar sesion nuevamente!",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonText: "Si, Salir!",
-                cancelButtonText: "No, Quedarme!",
-                reverseButtons: true
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    swalWithBootstrapButtons.fire({
-                        title: "Bye bye ( >v°)!",
-                        text: "Redirigiendo a la pagina de inicio de sesion...",
-                        icon: "success",
-                        timer : 1000,
-                        showConfirmButton: false
-                    }).then(() => {
-                        navigate('/'); 
-                    });
-                } else if (result.dismiss === Swal.DismissReason.cancel) {
-                    swalWithBootstrapButtons.fire({
-                    title: "!Cancelado!",
-                    text: "Regresando a la pagina",
-                    icon: "success",
-                    timer : 1000,
-                    showConfirmButton: false
-                });
-                }
-            })
-                
-        }*/
-
     function handleAlert() {
     const swal = Swal.mixin({
         customClass: {
@@ -90,17 +50,6 @@ const Component=() => {
         image: '/dash.png',
     });
     /* ——— LOGOUT ——— */
-    /*
-    const handleLogout = async () => {
-        const token = localStorage.getItem('token');
-        await fetch(`${apiUrl}/usuarios/logout`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`,
-                },
-            });
-    };*/
     const handleLogout = async () => {
     const token = localStorage.getItem('token');
     if (!token) return;
@@ -190,12 +139,6 @@ const Component=() => {
                             </li>
                         </Link>
                         <Link className="nav-link" onClick={handleAlert}>
-                            {/*
-                            <li className='bordes' onClick={handleLogout}>
-                                <img className='iconos' src="/salida.png" alt="Salir" />
-                                {showMenu && <span className='bordes'>Salir</span>}
-                            </li>
-                            */}
                             <li className="bordes" onClick={handleAlert}>
                                 <img className="iconos" src="/salida.png" alt="Salir" />
                                 {showMenu && <span className="bordes">Salir</span>}
