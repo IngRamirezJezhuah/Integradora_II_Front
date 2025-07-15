@@ -1,12 +1,14 @@
 
 import Swal from 'sweetalert2'
 import {useEffect, useState}from 'react'
-import { Link } from 'react-router-dom';
 import { requireTokenOrRedirect } from '../../utils/auth';
 import CargaBarras from '../elementos/CargaBarras';
 import EditarMuestras from './EditarMuestras';
+import InfoMuestras from './InfoMuestras';
 
 const ListaMuestras = () => {
+    const [muestraSelecionada, setmuestrasSelecionadas] = useState(null)
+    const [ModalDetallesAbierto, setModalDetallesAbierto] = useState(null)
     const [muestras, setMuestras] = useState([])
     const [loading, setLoading] = useState(null)
     const [error, setError] = useState(null)
@@ -124,7 +126,7 @@ const ListaMuestras = () => {
 
         if ( error ) return <div className='error'>{error}</div>
 
-
+    
     return (
         <div className='scroll_pruebas'>
             {agrupar(muestras).map((fila,i) =>(
@@ -142,17 +144,24 @@ const ListaMuestras = () => {
                             {p.nombrePaciente}
                         </p>
                         <div className='margen'>
-                            <img src="/editar.png" alt="editar" className='iconos'  onClick={()=> setModalAbierto(true)}/>
-                        <Link to={'/Analisis'}>
-                        <   img src="/detalles.png" alt="edtalles"  className='iconos'/>
-                        </Link>
+                            <img src="/editar.png" alt="editar" className='iconos'  onClick={()=> {setmuestrasSelecionadas(p);setModalAbierto(true)}}/>
+                            
+                            <img src="/detalles.png" alt="edtalles"  className='iconos' onClick={() =>{setmuestrasSelecionadas(p);setModalDetallesAbierto(true)}}/>
+                            
                             <img src="/basura.png" alt="borrar" className='iconos' onClick={() => handleAlert(p._id)}/>                        
                         </div>
                     </div>
                 ))}
                 </div>
             ))}
-            {ModalAbierto && <EditarMuestras onClose={() => setModalAbierto(false)} />}
+            {ModalDetallesAbierto && <InfoMuestras muestra={muestraSelecionada} onClose={() => setModalDetallesAbierto(false)}/>}
+            
+            {ModalAbierto && muestraSelecionada &&(
+                <EditarMuestras muestra={muestraSelecionada} 
+                onClose={() => setModalAbierto(false)}
+                onUpdated={(muestraAcutalizada) => setMuestras((prev) => prev.map((x)=> x._id === muestraSelecionada._id ? muestraAcutalizada._id : x))}
+                />
+            )}
         </div>
         );
     };
