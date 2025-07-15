@@ -15,7 +15,9 @@ const MuestrasCanceladas = () => {
         const fetchData = async () => {
         try{
             const res = await fetch(`${apiUrl}/muestras`,{
-            headers:{ 'Content-Type':'application/json', Authorization:`Bearer ${token}`}
+            headers:{ 
+                'Content-Type':'application/json', 
+                Authorization:`Bearer ${token}`}
             });
             if(!res.ok) throw new Error('Error al obtener muestras');
             const { muestrasList } = await res.json();

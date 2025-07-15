@@ -61,7 +61,7 @@ const ModalMuestras = ({ onClose }) => {//, muestraId, analisisIdInicial
 
     /* campos para “tomar muestra” */
     const [observaciones, setObs]       = useState("");
-    const [pedidoId, setPedidoId]       = useState("");
+    const [pedidoId, setPedidoId]       = useState([]);
 
     const apiUrl = process.env.REACT_APP_API_URL;
     const token  = requireTokenOrRedirect();
