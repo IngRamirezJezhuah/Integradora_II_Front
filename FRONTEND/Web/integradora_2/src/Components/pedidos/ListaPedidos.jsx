@@ -1,15 +1,17 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom'
 import Swal from 'sweetalert2'
 import ReciboPedidos from './ReciboPedidos';
 import { requireTokenOrRedirect } from '../../utils/auth';
 import CargaBarras from '../elementos/CargaBarras';
+import DetallesPedidos from './DetallesPedidos';
 
 const ListaPedidos = () => {
     const [pedidos, setPedidos] = useState([])
+    const [pedidoSeleccionado, setPedidoSeleccionado] = useState(null);
     const [loading, setLoading] = useState(null)
     const [error, setError] = useState(null)
     const [modalAbierto, setModalAbierto] = useState(null)
+    const [modalDetallesAbierto, setModalDetallesAbierto] = useState(null)
     const [token, setToken] = useState(null)
     const apiUrl = process.env.REACT_APP_API_URL
 
@@ -110,7 +112,7 @@ const ListaPedidos = () => {
             const rowIdx = Math.floor(idx / tam);
             rows[rowIdx] = [...(rows[rowIdx] || []), item];
             return rows;
-        }, []);
+        }, []); //ya se para que es esto, para que siga jalando si algo falla
     /* ──────────────────── vista de cargando ──────────────────── */
     if (loading)
     return (
@@ -122,7 +124,7 @@ const ListaPedidos = () => {
         </div>
     );
     if (error) return <div className='error'>{error}</div>;
-
+    
     return (
         <div className='scroll_pruebas'>
             {agrupar(pedidos).map((fila, i) => ( 
@@ -146,18 +148,24 @@ const ListaPedidos = () => {
                             Estado:{p.estado}
                         </p>
                         <div className='margen'>
-                            <img src="/editar.png" alt="editar" className='iconos'  onClick={() => setModalAbierto(true)} />
-                        <Link to='/Analisis'>
-                            <img src="/detalles.png" alt="detalles" className='iconos' />
-                        </Link>
+                            <img src="/editar.png" alt="editar" className='iconos'  onClick={() => { setPedidoSeleccionado(p);setModalAbierto(true)}} />
+                        
+                            <img src="/detalles.png" alt="detalles" className='iconos' onClick={() =>{setPedidoSeleccionado(p);setModalDetallesAbierto(true)}}/>
+                        
                             <img src="/basura.png" alt="borrar" className='iconos' onClick={() => handleAlert(p._id)}/>
                         </div>
                     </div>
                 ))}
                 </div>
             ))}
-            {modalAbierto && <ReciboPedidos onClose={() => setModalAbierto(false)} />}
-        
+            {/*modalAbierto && <ReciboPedidos onClose={() => setModalAbierto(false)} />*/}
+            {modalDetallesAbierto && <DetallesPedidos pedido={pedidoSeleccionado} onClose={() => setModalDetallesAbierto(false)} />}
+
+            {modalAbierto && pedidoSeleccionado && (
+            <ReciboPedidos pedido={pedidoSeleccionado}
+                onClose={() => {setModalAbierto(false);setPedidoSeleccionado(null);}}
+                onUpdated={(pedidoActualizado) =>setPedidos((prev) => prev.map((x) => x._id === pedidoActualizado._id ? pedidoActualizado : x))}/>
+            )}
         </div>
     );
 };

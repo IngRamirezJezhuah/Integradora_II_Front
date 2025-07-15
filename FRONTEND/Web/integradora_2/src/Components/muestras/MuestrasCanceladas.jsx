@@ -1,9 +1,8 @@
-
 import { useEffect, useState } from 'react';
 import CargaBarras from '../elementos/CargaBarras'
 import { requireTokenOrRedirect } from '../../utils/auth';
-const MuestrasCanceladas = () => {
 
+const MuestrasCanceladas = () => {
     function useMuestras(statusWanted = true) {
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -32,6 +31,14 @@ const MuestrasCanceladas = () => {
 
     const {data:muestras, loading, error} = useMuestras(false);
 
+    const agrupar = ( arr, tam = 3) =>
+        arr.reduce((rows, item, idx) =>{
+            const rowIdx = Math.floor(idx / tam);
+            rows[rowIdx] = [...(rows[rowIdx] || []), item];
+            //rows[rowIdx] = [...EditarMuestras(rows[rowIdx] || []), item];
+            return rows;
+        }, []);
+
     if (loading) return <CargaBarras/>;
     if (error)   return <p className="error">{error}</p>;
 
@@ -45,14 +52,26 @@ const MuestrasCanceladas = () => {
             </div>
         </div>
         }
-        {muestras.map(p => (
+        {agrupar(muestras).map((fila, i) => (
+        <div key={i} className="fila3">
+            {fila.map((p) => (
             <div key={p._id} className="caja_pedidos">
-            <img src="/quimica.png" alt="" className="imgMuestra"/>
-            <p className="centrar">{p._id.slice(-6).toUpperCase()}</p>
-            <p className="texto_pedidos">{p.tipoMuestra}</p>
-            <p className="texto_pedidos">{p.nombrePaciente}</p>
+                <img src="/quimica.png" alt="" className="imgMuestra"/>
+                <p className="centrar">{p._id.slice(-6).toUpperCase()}</p>
+                <p className="texto_pedidos">{p.tipoMuestra}</p>
+                <p className="texto_pedidos">{p.nombrePaciente}</p>
             </div>
+            ))}
+        </div>
         ))}
+        {/*muestras.map(p => (
+            <div key={p._id} className="caja_pedidos">
+                <img src="/quimica.png" alt="" className="imgMuestra"/>
+                <p className="centrar">{p._id.slice(-6).toUpperCase()}</p>
+                <p className="texto_pedidos">{p.tipoMuestra}</p>
+                <p className="texto_pedidos">{p.nombrePaciente}</p>
+            </div>
+        ))*/}
         </div>
     );
     };

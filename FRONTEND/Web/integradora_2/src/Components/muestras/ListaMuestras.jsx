@@ -54,7 +54,7 @@ const ListaMuestras = () => {
     }, [apiUrl, token]);
 
     /*____________________Borrar Muestras____________________*/
-    function handleAlert() {
+    function handleAlert(id) {
         const swalWithBootstrapButtons = Swal.mixin({
             customClass:{
                 confirmButton: "btn btn-success",
@@ -78,13 +78,13 @@ const ListaMuestras = () => {
                     'Content-type': 'application/json',
                     Authorization: `Beares ${token}`,
                 };
-                const res = await fetch(`${apiUrl}/muestras/`,{
+                const res = await fetch(`${apiUrl}/muestras/${id}`,{
                     method: 'DELETE',
                     headers,
                     body: JSON.stringify({ status:false }),
                 });
                 if (!res.ok) throw new Error();
-                setMuestras((prev) => prev.filter((p) => p._id));
+                setMuestras((prev) => prev.filter((p) => p._id !== id));
                 swalWithBootstrapButtons.fire({
                 title: "!Borrado Exitosamente¡",
                 text: "Tu pedido ha sido borrado correctamente",

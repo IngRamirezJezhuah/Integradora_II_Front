@@ -110,8 +110,7 @@ const Analisis=()=> {
                             <h2 className='prueba-name'>Dias de espera</h2>
                             <h2 className='prueba-name'>Descripcion</h2>
                             <p className='descr-tex'>
-                                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Expedita facilis fugit inventore laborum suscipit architecto ullam ab vero et quisquam labore magni nobis aspernatur molestias ipsam, dignissimos perspiciatis temporibus soluta.
-                                Suscipit quo corrupti illum a sed quas eius as nisi asperiores ratione quos ipsum repellendus ut pariatur. Adipisci delectus blanditiis error quibusdam voluptas, hic, tempore deleniti deserunt ullam esse sunt ipsam aliquid!
+                                    venir en ayunas
                             </p>
                         </div>
                     </div>

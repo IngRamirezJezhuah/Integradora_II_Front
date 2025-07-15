@@ -33,19 +33,20 @@
 }
 
 .caja_pedidos{
-    flex: 0 0 calc(33% - 23vh);    /*3 por fila - respeta el gap */
-    max-width: 30vh;
-    /*min-height: 240px;*/
+    flex: 0 0 calc(33% - 2rem); /* 3 por fila, ajustando el espacio */
+    max-width: 18vw;
+    height: 20vw;
 
     background: #f5f5f5;
     border-radius: 2rem;
     padding: 1rem;
-    box-shadow: -10px 11px 30px -7px rgba(39,39,39,0.51);
-
+    margin-left: 1.5vw;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
+
+    box-shadow: -10px 11px 30px -7px rgba(39,39,39,0.51);
 }
 
 .contenedor_pedidos{
@@ -73,8 +74,8 @@
     display: flex;
     gap: 1rem;
     flex-wrap: nowrap; 
-    justify-content: flex-start;
-    margin-bottom: 1rem;
+    justify-content: space-between;
+    margin-bottom: 2rem;
 }
 
 
@@ -215,7 +216,8 @@
     @media (max-width: 600px){
     .caja_pedidos{
         flex: 0 0 100%; 
-        max-width: 100%;
+        max-width: 90vw;
+        height: auto;
     }
 }
 
