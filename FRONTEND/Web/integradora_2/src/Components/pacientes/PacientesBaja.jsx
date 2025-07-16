@@ -116,7 +116,7 @@ const PacientesBaja = () => {
     }
 
     const pacientesFiltrados = pacientes.filter(
-        p => p.status === false || p.status === 'false'
+        p => (p.status === false || p.status === 'false') && p.rol === 'patient'
     );
     if (loading) return (
         <div className='scale-up-ver-center'>
