@@ -1,4 +1,4 @@
-import { SearchBar , OpcionesPaciente, ModalPaciente} from '../Components';
+import { OpcionesPaciente, ModalPaciente} from '../Components';
 import {  useState } from 'react';
 
 const Pacientes =() => {
@@ -7,16 +7,11 @@ const Pacientes =() => {
     return (
             <div>
                 <p className='titulo'>Pacientes </p>
-                <div className='buscador'>
+                    <div className='opciones'>
                     <button className='btn-agregar' onClick={() => setModalAbierto(true)}>+Agregar</button>
                     {modalAbierto && <ModalPaciente onClose={() => setModalAbierto(false)} />}
-                    < SearchBar />
-                </div>
-                <div className='contenedor_pedidos'>
-                    <div className='opciones'>
                         <OpcionesPaciente/>
                     </div>
-                </div>
             </div>
     )
 }

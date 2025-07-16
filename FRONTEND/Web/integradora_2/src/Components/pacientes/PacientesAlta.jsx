@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Swal from 'sweetalert2';
 import { requireTokenOrRedirect } from "../../utils/auth";
 import CargaBarras from '../elementos/CargaBarras';
+import SearchBar from '../elementos/searchBar';
 
 const PacientesAlta = ({seleccionado,onSelect = () => {}}) => {
     const [pacientes, setPacientes] = useState([]);
@@ -10,6 +11,7 @@ const PacientesAlta = ({seleccionado,onSelect = () => {}}) => {
     const [loading, setLoading] = useState(false);
     const apiUrl = process.env.REACT_APP_API_URL;
     const [token, setToken] = useState(null);
+    const [busqueda, setBusqueda] = useState('');
     //const [pacienteSeleccionado, setPacienteSeleccionado] = useState(null);
 
     /*________________obtener token________________*/
@@ -133,7 +135,8 @@ const PacientesAlta = ({seleccionado,onSelect = () => {}}) => {
     }
 
     const pacientesFiltrados = pacientes.filter(
-        p => (p.status === true || p.status === 'true') && p.rol === 'patient'
+        p => (p.nombre.toLowerCase().includes(busqueda) ) && (p.status === true || p.status === 'true') && p.rol === 'patient',
+        
     );
     
     // Log para verificar el filtrado
@@ -145,7 +148,7 @@ const PacientesAlta = ({seleccionado,onSelect = () => {}}) => {
                     <br />
                     <CargaBarras />
                 </div>
-            </div>
+            </d
         </div>
         );
     if (error) return <div>{error}</div>;
@@ -154,49 +157,57 @@ const PacientesAlta = ({seleccionado,onSelect = () => {}}) => {
     setPacienteSeleccionado(paciente);
     };*/
     //onClick={() => handleSeleccionarPaciente(paciente)} para reutilizarlo en pasitos
+    const handleBusqueda = (valor) => {
+    setBusqueda(valor.toLowerCase()); // para evitar errores de mayúsculas
+    };
+
+
 
 
     return (
-        <div className='caja_1'>
-            <div className='scroll'>
-                {/*
-                esto es para ver si funciona correctamente
-                <div>
-                    <h3>Respuesta cruda del backend:</h3>
-                    <pre>{rawResponse}</pre>
-                    <h3>Pacientes parseados:</h3>
-                    <pre>{JSON.stringify(pacientes, null, 2)}</pre>
-                </div>
-                */}
-                {pacientesFiltrados.length === 0 ? (
-                    <div style={{ textAlign: 'center', padding: '20px', color: '#666', fontStyle: 'italic', fontSize: '14px' }}>
-                        <p>No hay pacientes activos.</p>
+        <div>
+            < SearchBar onSearch={handleBusqueda} />
+            <div className='caja_1'>
+                <div className='scroll'>
+                    {/*
+                    esto es para ver si funciona correctamente
+                    <div>
+                        <h3>Respuesta cruda del backend:</h3>
+                        <pre>{rawResponse}</pre>
+                        <h3>Pacientes parseados:</h3>
+                        <pre>{JSON.stringify(pacientes, null, 2)}</pre>
                     </div>
-                ) : (
-                    pacientesFiltrados.map((p, index) => {
-                        const nombreCompleto = `${p.nombre} ${p.apellidoPaterno} ${p.apellidoMaterno}`;
-                        const inicial = p.nombre.charAt(0);
-                        //const isSelected = pacienteSeleccionado === p._id;
-                        const isSelected = seleccionado === p._id;
-                        console.log("Paciente selecionado:", isSelected);
-                        return(
-                            <div 
-                            key={p._id || index} 
-                            className={`prueba_tabla ${isSelected ? 'seleccionado' : ''}`} 
-                            onClick={() => typeof onSelect==='function'&& onSelect(p._id)} >
-                                <div className='inicial-circulo'>
-                                    <p className='letra-circulo'>{inicial}</p>
-                                </div>
-                                <div>
-                                    <div className='acomodar-iconos'>
-                                        <img src="/basura.png" alt="borrar" className='icono-borrar' onClick={(e) =>{e.stopPropagation(); handleAlert(p._id)} }/>
+                    */}
+                    {pacientesFiltrados.length === 0 ? (
+                        <div style={{ textAlign: 'center', padding: '20px', color: '#666', fontStyle: 'italic', fontSize: '14px' }}>
+                            <p>No hay pacientes activos.</p>
+                        </div>
+                    ) : (
+                        pacientesFiltrados.map((p, index) => {
+                            const nombreCompleto = `${p.nombre} ${p.apellidoPaterno} ${p.apellidoMaterno}`;
+                            const inicial = p.nombre.charAt(0);
+                            //const isSelected = pacienteSeleccionado === p._id;
+                            const isSelected = seleccionado === p._id;
+                            console.log("Paciente selecionado:", isSelected);
+                            return(
+                                <div 
+                                key={p._id || index} 
+                                className={`prueba_tabla ${isSelected ? 'seleccionado' : ''}`} 
+                                onClick={() => typeof onSelect==='function'&& onSelect(p._id)} >
+                                    <div className='inicial-circulo'>
+                                        <p className='letra-circulo'>{inicial}</p>
                                     </div>
-                                    <p className='prueba-name'>{nombreCompleto}</p>
+                                    <div>
+                                        <div className='acomodar-iconos'>
+                                            <img src="/basura.png" alt="borrar" className='icono-borrar' onClick={(e) =>{e.stopPropagation(); handleAlert(p._id)} }/>
+                                        </div>
+                                        <p className='prueba-name'>{nombreCompleto}</p>
+                                    </div>
                                 </div>
-                            </div>
-                        )
-                    })
-                )}
+                            )
+                        })
+                    )}
+                </div>
             </div>
         </div>
     )

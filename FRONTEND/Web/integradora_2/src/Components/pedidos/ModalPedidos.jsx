@@ -1,43 +1,177 @@
 import { useState } from "react";
 import PacientesAlta from "../pacientes/PacientesAlta"
 import DetallesPacienteAlta from "../pacientes/DetallesPacienteAlta";
-//import FormsPedidos from "./FormsPedidos";
 import FormBiometrica from "./FormBiometrica";
 import FormSanguinea from "./FormSanguinea";
 import { FromMuesBiometira } from "..";
 import { FormMuesSangre } from "..";
+import { requireTokenOrRedirect } from "../../utils/auth";
+import CargaBarras from "../elementos/CargaBarras";
 
-
+/* ——— helper interno ——— */
+const QS_ID = "686e0163fd380d4018dddcde";
+const BH_ID = "686734c0dbf9fa679be0958c";
 
 const ModalPedidos = ({onClose}) => {
     const [pasoActual, setPasoActual] = useState(1);
     const [pacienteSeleccionado, setPacienteSeleccionado] = useState(null);
     const [tipoPruebaSeleccionado, setTipoPruebaSeleccionado] = useState(null);
+    
+    const [/*pedidoId*/,  setPedidoId]  = useState(null); 
+    const [muestraId, setMuestraId] = useState(null); 
+    
     const avanzarPaso = () => setPasoActual(prev => prev + 1);
     const retrocederPaso = () => setPasoActual(prev => prev - 1);
 
-    
-    /* ——— helper interno ——— */
-    const QS_ID = "686e0163fd380d4018dddcde";
-    const BH_ID = "686734c0dbf9fa679be0958c";
+    /**  POST /muestras   (genera “muestra vacía”) */
+    const crearMuestraBase = async (paciente, tipo, pedidoId) => {
+        const token = requireTokenOrRedirect();
+        const apiUrl = process.env.REACT_APP_API_URL;
 
+        const body = {
+        observaciones: "",
+        nombrePaciente: paciente?.nombre || "-",
+        idusuario: paciente?._id,
+        tipoMuestra: tipo === BH_ID ? "biometriaHematica" : "quimicaSanguinea",
+        pedidoId,
+        };
+
+        const res = await fetch(`${apiUrl}/muestras`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(body),
+        });
+        if (!res.ok) throw new Error("No se pudo crear la muestra");
+
+        const { _id } = await res.json(); // ajusta según tu backend
+        return _id;
+    };
+
+    /* ---------- paso 3: formulario de pedido ---------- */
+    const renderFormPedido = () => {
+        /** callback común: 1) guarda pedido  2) crea muestra  3) pasa a paso 4 */
+        const handleSuccess = async (nuevoPedidoId) => {
+        try {
+            setPedidoId(nuevoPedidoId);
+            const id = await crearMuestraBase(
+            pacienteSeleccionado,
+            tipoPruebaSeleccionado,
+            nuevoPedidoId
+            );
+            setMuestraId(id);
+            avanzarPaso();
+        } catch (err) {
+            alert(err.message);
+        }
+        };
+
+        const commonProps = {
+        fixedUserId: pacienteSeleccionado,
+        onSuccess: handleSuccess,
+        };
+
+        switch (tipoPruebaSeleccionado) {
+        case BH_ID:
+            return <FormBiometrica {...commonProps} />;
+        case QS_ID:
+            return <FormSanguinea {...commonProps} />;
+        default:
+            return <p>Selecciona una prueba válida</p>;
+        }
+    };
+
+    /* ---------- paso 4: formulario de resultados ---------- */
+    const renderFormResultados = () => {
+        if (!muestraId) {
+        return (
+            <div className="scale-up-ver-center">
+            <CargaBarras className="plantilla" />
+            </div>
+        );
+        }
+
+        switch (tipoPruebaSeleccionado) {
+        case BH_ID:
+            return (
+            <FromMuesBiometira
+                muestraId={muestraId}
+                onSuccess={onClose}
+            />
+            );
+        case QS_ID:
+            return (
+            <FormMuesSangre
+                muestraId={muestraId}
+                onSuccess={onClose}
+            />
+            );
+        default:
+            return <p>Selecciona una prueba válida</p>;
+        }
+  };
+/*
     const renderForm = () => {
     switch (tipoPruebaSeleccionado) {
         case BH_ID:
-        return <FormBiometrica fixedUserId={pacienteSeleccionado} />;    
+        return <FormBiometrica 
+            fixedUserId={pacienteSeleccionado}
+            onSuccess={(nuevoPedidoId) => {
+            setPedidoId(nuevoPedidoId);          // ① guardamos el pedido
+            crearMuestraBase(
+                pacienteSeleccionado,
+                BH_ID,
+                nuevoPedidoId
+            ).then((id) => {
+                setMuestraId(id);                  // ② guardamos la muestra
+                avanzarPaso();                     // ③ vamos al paso 4
+            }).catch(alert);
+            }}
+        />;    
+        if (onSuccess) onSuccess(nuevoPedido._id);   // <— pasa el id al padre
         case QS_ID:
-        return <FormSanguinea fixedUserId={pacienteSeleccionado} />;    
+        return <FormSanguinea 
+            fixedUserId={pacienteSeleccionado}
+            onSuccess={(nuevoPedidoId) => {
+            setPedidoId(nuevoPedidoId);          // ① guardamos el pedido
+            crearMuestraBase(
+                pacienteSeleccionado,
+                BH_ID,
+                nuevoPedidoId
+            ).then((id) => {
+                setMuestraId(id);                  // ② guardamos la muestra
+                avanzarPaso();                     // ③ vamos al paso 4
+            }).catch(alert);
+            }}
+            
+        />; 
+        if (onSuccess) onSuccess(nuevoPedido._id);   // <— pasa el id al padre
         default:
         return <p>Selecciona una prueba válida</p>;    
+        
     }    
     };
 
     const RenderFormMuestra = () => {
+        if (!muestraId) return(
+            <div className='scale-up-ver-center'>
+                <div >
+                    <br />
+                    <CargaBarras  className='plantilla'/>
+                </div>
+            </div>
+        );
         switch (tipoPruebaSeleccionado) {
             case BH_ID:
-                return <FromMuesBiometira fixedUserId={pacienteSeleccionado}/>                
+                return <FromMuesBiometira 
+                fmuestraId={muestraId} onSuccess={onClose}
+                />                
             case QS_ID:
-            return <FormMuesSangre fixedUserId={pacienteSeleccionado} />;    
+                return <FormMuesSangre 
+                muestraId={muestraId} onSuccess={onClose}
+                />;    
             default:
             return <p>Selecciona una prueba válida</p>; 
         }
@@ -54,10 +188,13 @@ const ModalPedidos = ({onClose}) => {
     };*/
 
 
+
+
     
     return(
         <div className="modal-overlay">
             {pasoActual === 1 && (
+                
                 <div className="scale-in-hor-center">
                     <div className="modal-content">
                         <p className='titulo'>Registrar Pedido</p>
@@ -76,34 +213,46 @@ const ModalPedidos = ({onClose}) => {
                 <div className="scale-in-hor-center">
                     <div className="modal-content">
                         <p className='titulo'>Registrar Pedido</p>
+                        
                         <button className="close-btn" onClick={onClose}>x</button>
+
                         <p>Selecione el tipo de prueba:</p>
+                        
                         <DetallesPacienteAlta seleccionado={tipoPruebaSeleccionado} onSelect={prueba => setTipoPruebaSeleccionado(prueba)}/>
+                        
                         <button className="btn"
-                        tipos={["Biometría Hemática", "Pruebas de Sangre"]}
                         onClick={avanzarPaso} 
                         disabled={!tipoPruebaSeleccionado}
                         >Siguiente</button>{/*onClick={tipo => {setTipoPruebaSeleccionado(tipo); avanzarPaso();}}  */}
+                        
                         <button className="btn" onClick={retrocederPaso}>Regresar</button>
                     </div>
                 </div>
             )}
             {pasoActual === 3 && (
             <div className="scale-in-hor-center">
-                <div className="modal-content">
+            <div className="modal-content">
                 <p className="titulo">Registrar Pedido</p>
-                <button className="close-btn" onClick={onClose}>x</button>
-                {renderForm()}
-                <button className="btn" onClick={retrocederPaso}>Regresar</button>
-                </div>
+                <button className="close-btn" onClick={onClose}>
+                x
+                </button>
+
+                {renderFormPedido()}
+
+                <button className="btn" onClick={retrocederPaso}>
+                Regresar
+                </button>
             </div>
-            )}
-            {pasoActual === 4 && (
-                <div>
-                    <p className="titulo">Registrar pedidos</p>
-                    {RenderFormMuestra()}
-                </div>
-            )}
+            </div>
+        )}
+
+        {/* Paso 4 */}
+        {pasoActual === 4 && (
+            <div className="modal-content scale-in-hor-center">
+            <p className="titulo">Registrar Resultados</p>
+            {renderFormResultados()}
+            </div>
+        )}
         </div>
     )
 }
@@ -111,6 +260,21 @@ const ModalPedidos = ({onClose}) => {
 export default ModalPedidos
 
 /*
+{pasoActual === 3 && (
+<div className="scale-in-hor-center">
+    <div className="modal-content">
+    <p className="titulo">Registrar Pedido</p>
+    <button className="close-btn" onClick={onClose}>x</button>
+    <button className="btn" onClick={retrocederPaso}>Regresar</button>
+    </div>
+</div>
+)}
+{pasoActual === 4 && (
+    <div>
+        <p className="titulo">Registrar pedidos</p>
+        {RenderFormMuestra()}
+    </div>
+)}
 {pasoActual === 3 && (
     
 )}
