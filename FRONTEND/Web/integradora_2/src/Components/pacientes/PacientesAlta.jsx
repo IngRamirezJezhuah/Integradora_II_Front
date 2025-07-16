@@ -133,8 +133,10 @@ const PacientesAlta = ({seleccionado,onSelect = () => {}}) => {
     }
 
     const pacientesFiltrados = pacientes.filter(
-        p => p.status === true || p.status === 'true'
+        p => (p.status === true || p.status === 'true') && p.rol === 'patient'
     );
+    
+    // Log para verificar el filtrado
     if (loading) return (
         <div className='scale-up-ver-center'>    
             <div className='caja_1'>
@@ -166,29 +168,35 @@ const PacientesAlta = ({seleccionado,onSelect = () => {}}) => {
                     <pre>{JSON.stringify(pacientes, null, 2)}</pre>
                 </div>
                 */}
-                {pacientesFiltrados.map((p, index) => {
-                    const nombreCompleto = `${p.nombre} ${p.apellidoPaterno} ${p.apellidoMaterno}`;
-                    const inicial = p.nombre.charAt(0);
-                    //const isSelected = pacienteSeleccionado === p._id;
-                    const isSelected = seleccionado === p._id;
-                    console.log("Paciente selecionado:", isSelected);
-                    return(
-                        <div 
-                        key={p._id || index} 
-                        className={`prueba_tabla ${isSelected ? 'seleccionado' : ''}`} 
-                        onClick={() => typeof onSelect==='function'&& onSelect(p._id)} >
-                            <div className='inicial-circulo'>
-                                <p className='letra-circulo'>{inicial}</p>
-                            </div>
-                            <div>
-                                <div className='acomodar-iconos'>
-                                    <img src="/basura.png" alt="borrar" className='icono-borrar' onClick={(e) =>{e.stopPropagation(); handleAlert(p._id)} }/>
+                {pacientesFiltrados.length === 0 ? (
+                    <div style={{ textAlign: 'center', padding: '20px', color: '#666', fontStyle: 'italic', fontSize: '14px' }}>
+                        <p>No hay pacientes activos.</p>
+                    </div>
+                ) : (
+                    pacientesFiltrados.map((p, index) => {
+                        const nombreCompleto = `${p.nombre} ${p.apellidoPaterno} ${p.apellidoMaterno}`;
+                        const inicial = p.nombre.charAt(0);
+                        //const isSelected = pacienteSeleccionado === p._id;
+                        const isSelected = seleccionado === p._id;
+                        console.log("Paciente selecionado:", isSelected);
+                        return(
+                            <div 
+                            key={p._id || index} 
+                            className={`prueba_tabla ${isSelected ? 'seleccionado' : ''}`} 
+                            onClick={() => typeof onSelect==='function'&& onSelect(p._id)} >
+                                <div className='inicial-circulo'>
+                                    <p className='letra-circulo'>{inicial}</p>
                                 </div>
-                                <p className='prueba-name'>{nombreCompleto}</p>
+                                <div>
+                                    <div className='acomodar-iconos'>
+                                        <img src="/basura.png" alt="borrar" className='icono-borrar' onClick={(e) =>{e.stopPropagation(); handleAlert(p._id)} }/>
+                                    </div>
+                                    <p className='prueba-name'>{nombreCompleto}</p>
+                                </div>
                             </div>
-                        </div>
-                    )
-                })}
+                        )
+                    })
+                )}
             </div>
         </div>
     )

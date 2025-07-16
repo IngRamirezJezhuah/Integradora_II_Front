@@ -26,6 +26,9 @@ const ModalPedido = ({ visible, order, onClose, onNuevaMuestra }) => {
 
   if (!orderInfo) return null;
 
+  // Log para verificar la información del pedido que se pasa
+  console.log('📋 ModalPedido: orderInfo que se pasa a NuevaMuestra:', orderInfo);
+
   return (
     <Modal isVisible={visible} onBackdropPress={onClose} swipeDirection="down" style={modalStyles.modal}>
       <View style={modalStyles.container}>

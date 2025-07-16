@@ -42,26 +42,56 @@ export const useNuevaMuestra = (isVisible, orderData) => {
 
   // Función para llenar campos automáticamente basado en orderData
   const llenarCamposAutomaticamente = (orderData) => {
-    if (!orderData) return;
+    if (!orderData) {
+      console.log('⚠️ useNuevaMuestra: No hay orderData disponible');
+      return;
+    }
 
-    console.log('📋 Llenando campos automáticamente con orderData:', orderData);
+    console.log('📋 useNuevaMuestra: Llenando campos automáticamente con orderData:', orderData);
 
     // Determinar tipo de muestra basado en el análisis
     const tipoMuestra = determinarTipoMuestra(orderData.analisis);
-    console.log('🔬 Tipo de muestra determinado:', tipoMuestra);
+    console.log('🔬 useNuevaMuestra: Tipo de muestra determinado:', tipoMuestra);
     setSelectedTipo(tipoMuestra);
     
     // Llenar pedido ID
-    setPedido(orderData._id || '');
+    const pedidoId = orderData._id || '';
+    console.log('🆔 useNuevaMuestra: Pedido ID:', pedidoId);
+    setPedido(pedidoId);
+    
+    // Diagnosticar información del usuario
+    console.log('👤 useNuevaMuestra: Información del usuario completa:', orderData.usuarioId);
     
     // Llenar paciente ID
-    setPacienteId(orderData.usuarioId?._id || '');
+    const pacienteIdValue = orderData.usuarioId?._id || '';
+    console.log('🆔 useNuevaMuestra: Paciente ID:', pacienteIdValue);
+    setPacienteId(pacienteIdValue);
     
-    // Llenar nombre del paciente (solo el campo nombre)
-    setNombre(orderData.usuarioId?.nombre || '');
+    // Llenar nombre del paciente - intentar múltiples formas
+    let nombrePaciente = '';
+    if (orderData.usuarioId) {
+      if (orderData.usuarioId.nombre) {
+        nombrePaciente = orderData.usuarioId.nombre;
+      } else if (orderData.clientInfo) {
+        nombrePaciente = orderData.clientInfo;
+      }
+    }
+    
+    console.log('👤 useNuevaMuestra: Nombre del paciente:', nombrePaciente);
+    setNombre(nombrePaciente);
     
     // Limpiar observaciones
     setObservaciones('');
+    
+    // Logs de resumen
+    console.log('✅ useNuevaMuestra: Campos llenados:', {
+      tipoMuestra,
+      pedidoId,
+      pacienteIdValue,
+      nombrePaciente,
+      hasUsuarioId: !!orderData.usuarioId,
+      usuarioIdKeys: orderData.usuarioId ? Object.keys(orderData.usuarioId) : 'N/A'
+    });
   };
 
   // Función para limpiar todos los campos

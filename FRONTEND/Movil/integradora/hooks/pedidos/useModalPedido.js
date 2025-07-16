@@ -55,7 +55,9 @@ export const useModalPedido = (order, onClose) => {
       estado: order.estado || 'No definido',
       notas: order.notas,
       hasNotas: Boolean(order.notas),
-      hasAnalisis: Array.isArray(order.analisis) && order.analisis.length > 0
+      hasAnalisis: Array.isArray(order.analisis) && order.analisis.length > 0,
+      // Mantener la información original del usuario para compatibilidad
+      usuarioId: order.usuarioId
     };
   }, [order]);
 

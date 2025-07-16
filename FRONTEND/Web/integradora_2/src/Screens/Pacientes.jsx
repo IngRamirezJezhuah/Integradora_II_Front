@@ -1,6 +1,4 @@
-import { SearchBar } from '../Components';
-import { OpcionesPaciente } from '../Components';
-import { ModalPaciente } from '../Components';
+import { SearchBar , OpcionesPaciente, ModalPaciente} from '../Components';
 import {  useState } from 'react';
 
 const Pacientes =() => {
