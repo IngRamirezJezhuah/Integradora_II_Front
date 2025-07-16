@@ -13,6 +13,7 @@ const Analisis=()=> {
     const [error, setError] = useState(null);
     const [token, setToken] = useState(null);
     const [modalAbierto, setModalAbierto] = useState(false);
+    const [busqueda, setBusqueda] = useState('');
     const apiUrl = process.env.REACT_APP_API_URL;
 
     // Obtener token
@@ -154,6 +155,16 @@ const Analisis=()=> {
         });
     };
 
+    // Manejar la búsqueda
+    const handleBusqueda = (valor) => {
+        setBusqueda(valor.toLowerCase()); // para evitar errores de mayúsculas
+    };
+
+    // Filtrar análisis por búsqueda
+    const analisisFiltrados = analisis.filter(analisisItem =>
+        analisisItem.nombre.toLowerCase().includes(busqueda)
+    );
+
     // Vista de carga
     if (loading) {
         return (
@@ -180,38 +191,44 @@ const Analisis=()=> {
                             onAnalisisCreated={handleAnalisisCreated}
                         />
                     )}
-                    <SearchBar/>
+                    <SearchBar onSearch={handleBusqueda}/>
                 </div>
             <div className='analisis'>
                 <div className='contenedor_pedidos'>
                         <div className='scale-up-ver-center'>
                             <div className='caja_1'>
                                 <h1 className='titulo'>Pruebas</h1>
-                                    {analisis.map((analisisItem) => (
-                                        <div 
-                                            key={analisisItem._id} 
-                                            className={`prueba_tabla ${analisisSeleccionado?._id === analisisItem._id ? 'seleccionado' : ''}`}
-                                            onClick={() => setAnalisisSeleccionado(analisisItem)}
-                                            style={{ cursor: 'pointer' }}
-                                        >
-                                            <div className='icono'>
-                                                <img className='imagen-prueba' src="/prueba-de-sangre.png" alt="prueba imagen" />
-                                            </div>
-                                            <p className='prueba-name'>{analisisItem.nombre}</p> 
-                                            <div className='margen'>
-                                                <Link 
-                                                    to='/Editar-Analisis' 
-                                                    state={{ analisisSeleccionado: analisisItem }}
-                                                >
-                                                    <img src="/ajustes.png" alt="ajustes" className='iconos' />
-                                                </Link>
-                                                <img src="/basura.png" alt="editar" className='iconos' onClick={(e) => {
-                                                    e.stopPropagation(); // Prevenir que se seleccione al hacer clic en eliminar
-                                                    handleAlert(analisisItem._id);
-                                                }}/>
-                                            </div>
+                                    {analisisFiltrados.length === 0 ? (
+                                        <div style={{ textAlign: 'center', padding: '20px', color: '#666', fontStyle: 'italic', fontSize: '14px' }}>
+                                            <p>No se encontraron análisis que coincidan con la búsqueda.</p>
                                         </div>
-                                    ))}
+                                    ) : (
+                                        analisisFiltrados.map((analisisItem) => (
+                                            <div 
+                                                key={analisisItem._id} 
+                                                className={`prueba_tabla ${analisisSeleccionado?._id === analisisItem._id ? 'seleccionado' : ''}`}
+                                                onClick={() => setAnalisisSeleccionado(analisisItem)}
+                                                style={{ cursor: 'pointer' }}
+                                            >
+                                                <div className='icono'>
+                                                    <img className='imagen-prueba' src="/prueba-de-sangre.png" alt="prueba imagen" />
+                                                </div>
+                                                <p className='prueba-name'>{analisisItem.nombre}</p> 
+                                                <div className='margen'>
+                                                    <Link 
+                                                        to='/Editar-Analisis' 
+                                                        state={{ analisisSeleccionado: analisisItem }}
+                                                    >
+                                                        <img src="/ajustes.png" alt="ajustes" className='iconos' />
+                                                    </Link>
+                                                    <img src="/basura.png" alt="editar" className='iconos' onClick={(e) => {
+                                                        e.stopPropagation(); // Prevenir que se seleccione al hacer clic en eliminar
+                                                        handleAlert(analisisItem._id);
+                                                    }}/>
+                                                </div>
+                                            </div>
+                                        ))
+                                    )}
                                 <div className='prueba_tabla'>
                                 </div>
                                 <hr />
