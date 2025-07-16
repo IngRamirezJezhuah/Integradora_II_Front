@@ -159,10 +159,15 @@ const ListaMuestras = () => {
                             </div>
                             <p className='centrar'>{(p._id || p._id || "--").toString().slice(-6).toUpperCase()}</p>
                             <p className='texto'>
-                                {p.tipoMuestra || '--'}
+                                 {p.tipoMuestra === 'quimicaSanguinea' ? 'Quimica Sanguinea' : 
+                                    p.tipoMuestra === 'biometriaHematica' ? 'Biometria Hematica' : 
+                                    p.tipoMuestra || '--'}
                             </p>
                             <p className='texto'>
                                 {p.nombrePaciente}
+                            </p>
+                            <p className='texto'>
+                                {(p.createDate).slice(0, 10)}
                             </p>
                             <div className='margen'>
                                 <img src="/editar.png" alt="editar" className='iconos'  onClick={()=> {setmuestrasSelecionadas(p);setModalAbierto(true)}}/>
