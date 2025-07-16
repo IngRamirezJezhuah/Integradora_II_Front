@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { Alert } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { API_URL } from '@env';
 
 export const useMuestrasActions = (deleteMuestra) => {
   const [selectedSample, setSelectedSample] = useState(null);
@@ -30,9 +32,36 @@ export const useMuestrasActions = (deleteMuestra) => {
           text: "Eliminar",
           style: "destructive",
           onPress: async () => {
-            const success = await deleteMuestra(item._id);
-            if (success) {
-              Alert.alert('Éxito', 'La muestra ha sido eliminada correctamente');
+            try {
+              const token = await AsyncStorage.getItem('userToken');
+              if (!token) {
+                Alert.alert('Error', 'No se encontró token de autenticación');
+                return;
+              }
+
+              const response = await fetch(`${API_URL}/muestras/${item.id}`, {
+                method: 'DELETE',
+                headers: {
+                  'Authorization': `Bearer ${token}`,
+                  'Content-Type': 'application/json',
+                },
+              });
+
+              if (response.ok) {
+                Alert.alert('Éxito', 'La muestra ha sido eliminada correctamente');
+                // Llamar a la función original para actualizar el estado local
+                if (deleteMuestra) {
+                  await deleteMuestra(item._id);
+                }
+              } else {
+                const errorData = await response.json();
+                const errorMessage = errorData.message || 'Error al eliminar la muestra';
+                console.error('❌ Error del servidor:', errorData);
+                Alert.alert('Error del servidor', errorMessage);
+              }
+            } catch (error) {
+              console.error('❌ Error al eliminar muestra:', error);
+              Alert.alert('Error', 'Error de conexión al eliminar la muestra');
             }
           }
         }

@@ -100,9 +100,6 @@ const Component=() => {
                                         <Link to={'/EditarInfoPaciente'} className="paciente-link">
                                         <p>Editar info</p>
                                         </Link>
-                                        <select name="" id="">
-                                            <option value="">modo Oscuro</option>
-                                        </select>
                                     </div>  
                                 </div>
                             </li>
