@@ -39,7 +39,6 @@ const agrupar = ( arr, tam = 3) =>
     arr.reduce((rows, item, idx) =>{
         const rowIdx = Math.floor(idx / tam);
         rows[rowIdx] = [...(rows[rowIdx] || []), item];
-        //rows[rowIdx] = [...EditarMuestras(rows[rowIdx] || []), item];
         return rows;
     }, []);
     

@@ -207,7 +207,25 @@
     line-height: 24px; /* 150% */
 }
 
-/* ===== RESPONSIVE ===== */
+.color-status-pagado{
+    padding: .5vw;
+    border-radius: 2vw;
+    background-color: #c1ec9b;
+}
+
+.color-status-pendiente{
+    padding: .5vw;
+    border-radius: 2vw;
+    background-color: #f0ff7b;
+}
+
+.color-status-cancelado{
+    padding: .5vw;
+    border-radius: 2vw;
+    background-color: #f25454;
+}
+
+/*______________RESPONSIVE_________________*/
 @media (max-width: 1024px){
     .caja_pedidos{
         flex: 0 0 calc(50% - 1rem);

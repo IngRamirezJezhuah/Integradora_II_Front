@@ -141,10 +141,16 @@ const ListaPedidos = () => {
         nombreCompleto.includes(filtro) ||
         analisis.includes(filtro) ||
         id.includes(filtro)
-    );
-});
+        );
+    });
 
-    
+    const getPedidos = (pedidos) => {
+        if (pedidos ===  "cancelado") return {estado :"cancelado", clase: 'color-status-pendiente'}
+        if (pedidos ===  "pendiente") return {estado :"pendiente", clase: 'color-status-pendiente'}
+        return {estado : 'pagado', clase: 'color-status-pagado'}
+    }
+
+    const status = getPedidos(pedidos.estado)
     return (
         <div>
             <SearchBar placeholder="Buscar pedido por ID, análisis o nombre" onSearch={handleSearch}/>
@@ -166,7 +172,7 @@ const ListaPedidos = () => {
                                 {/*p.paciente*/}
                                 {`${p.usuarioId?.nombre} ${p.usuarioId?.apellidoPaterno} ${p.usuarioId?.apellidoMaterno}`}
                             </p>
-                            <p>
+                            <p className={status.clase}>
                                 Estado:{p.estado}
                             </p>
                             <div className='margen'>
