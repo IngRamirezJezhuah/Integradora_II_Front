@@ -22,15 +22,59 @@ import { AgregarMuestra, EditarAnalisisForm, NuevoAnalisisForm,  RegistrarPacein
 import { ReciboPedidos } from './Components/index.js';
 import PerfilPaciente from './Screens/PerfilPaciente.jsx';
 import { EditarMuestras } from './Components/index.js';
+//import RutaPrivada from './utils/RutaPrivada.jsx';
 
+import RutaPrivada from './utils/RutaPrivada'; 
 
+function App() {
+  return (
+    <Router>
+      <Routes>
+        {/* Rutas públicas */}
+        <Route path="/" element={<Login />} />
+        <Route path="/Recuperacion" element={<Recuperacion />} />
+
+        {/* Rutas protegidas */}
+        <Route element={<RutaPrivada />}>
+          {/* Layout principal para el dashboard */}
+          <Route element={<Component />}>
+            <Route path="/Dashboard" element={<Dashboard />} />
+            <Route path="/Pacientes" element={<Pacientes />} />
+
+            <Route path="/Pedidos" element={<Pedidos />} />
+            <Route path="/RecibosPedidos" element={<ReciboPedidos />} />
+
+            <Route path="/Muestras" element={<Muestras />} />
+            <Route path="/AgregarMuestras" element={<AgregarMuestra />} />
+            <Route path="/EditarMuestras" element={<EditarMuestras />} />
+
+            <Route path="/Analisis" element={<Analisis />} />
+            <Route path="/Nuevo-Analisis" element={<NuevoAnalisisForm />} />
+            <Route path="/Editar-Analisis" element={<EditarAnalisisForm />} />
+
+            <Route path="/SampleBox" element={<SampleBox />} />
+            <Route path="/SampleModal" element={<SampleModal />} />
+          </Route>
+
+          {/* Otras pantallas protegidas que no usan <Component /> como layout */}
+          <Route path="/EditarInfoPaciente" element={<RegistrarPaceinte />} />
+          <Route path="/Perfil" element={<PerfilPaciente />} />
+        </Route>
+      </Routes>
+    </Router>
+  );
+}
+
+export default App;
+/*
 function App() {
   return (
     <Router>
       <Routes>
         <Route path="/Recuperacion" element={<Recuperacion />} />
         <Route path="/" element={<Login />} />
-          <Route path="/" element={<Component /> } >
+
+          <Route path="/" element={ <Component />}>
             <Route path="/Dashboard" element={<Dashboard />} />
             <Route path="/Pacientes" element={<Pacientes />} />
             
@@ -56,4 +100,4 @@ function App() {
   );
 }
 //
-export default App;
+export default App;*/

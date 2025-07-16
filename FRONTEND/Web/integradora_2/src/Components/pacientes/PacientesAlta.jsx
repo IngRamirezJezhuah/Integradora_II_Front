@@ -148,7 +148,7 @@ const PacientesAlta = ({seleccionado,onSelect = () => {}}) => {
                     <br />
                     <CargaBarras />
                 </div>
-            </d
+            </div>
         </div>
         );
     if (error) return <div>{error}</div>;
