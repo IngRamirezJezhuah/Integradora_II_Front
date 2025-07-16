@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { requireTokenOrRedirect } from '../../utils/auth';
+import Swal from 'sweetalert2';
 
 const EditarAnalisisForm = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const analisisData = location.state?.analisisSeleccionado;
   const [formData, setFormData] = useState({
     nombre: '',
     costo: '',
@@ -10,31 +14,89 @@ const EditarAnalisisForm = () => {
     descripcion: '',
   });
   const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [token, setToken] = useState(null);
+  const apiUrl = process.env.REACT_APP_API_URL;
+
+  // Obtener token
+  useEffect(() => {
+    const tk = requireTokenOrRedirect();
+    setToken(tk);
+  }, []);
 
   useEffect(() => {
-    // Simulate initial data fetch
-    const initialData = {
-      nombre: 'Análisis de Sangre',
-      costo: '500.00',
-      diasEspera: '2',
-      descripcion: '',
-    };
-    setFormData(initialData);
-  }, []);
+    // Precargar datos del análisis seleccionado
+    if (analisisData) {
+      setFormData({
+        nombre: analisisData.nombre || '',
+        costo: analisisData.costo || '',
+        diasEspera: analisisData.diasEspera || '',
+        descripcion: analisisData.descripcion || '',
+      });
+    } else {
+      // Si no hay datos, redirigir a la página de análisis
+      navigate('/Analisis');
+    }
+  }, [analisisData, navigate]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!formData.nombre || !formData.costo || !formData.diasEspera) {
       setError('Por favor, completa todos los campos requeridos');
-    } else {
-      setError('');
-      console.log('Datos enviados:', formData);
-      // Here you would typically send data to a backend
+      return;
+    }
+    
+    if (!analisisData?._id) {
+      setError('No se encontró el ID del análisis');
+      return;
+    }
+
+    setError('');
+    setLoading(true);
+
+    try {
+      const response = await fetch(`${apiUrl}/analisis/${analisisData._id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify(formData)
+      });
+
+      if (!response.ok) {
+        if (response.status === 401) {
+          setError('Sesión expirada, redirigiendo...');
+          setTimeout(() => (window.location.href = '/'), 1500);
+          return;
+        }
+        throw new Error('Error al actualizar el análisis');
+      }
+
+      const result = await response.json();
+      console.log('Análisis actualizado:', result);
+
+      await Swal.fire({
+        title: "¡Actualizado Correctamente!",
+        text: "El análisis ha sido actualizado exitosamente",
+        icon: "success",
+        timer: 1500,
+        showConfirmButton: false
+      });
+
+      // Redirigir a la página de análisis
+      navigate('/Analisis');
+
+    } catch (error) {
+      console.error('Error:', error);
+      setError(error.message || 'Error al actualizar el análisis');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -98,7 +160,9 @@ const EditarAnalisisForm = () => {
           />
 
           <div className="buttons">
-            <button type="submit" className="btn submit">Enviar</button>
+            <button type="submit" className="btn submit" disabled={loading}>
+              {loading ? 'Actualizando...' : 'Actualizar'}
+            </button>
           </div>
         </form>
       </div>

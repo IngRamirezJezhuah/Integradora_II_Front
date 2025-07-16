@@ -48,11 +48,13 @@ const Analisis=()=> {
 
                 const data = await response.json();
                 const analisisList = Array.isArray(data.analisysList) ? data.analisysList : [];
-                setAnalisis(analisisList);
+                // Filtrar solo los análisis con status: true
+                const analisisFiltrados = analisisList.filter(analisis => analisis.status === true);
+                setAnalisis(analisisFiltrados);
                 
                 // Seleccionar el primer análisis por defecto
-                if (analisisList.length > 0) {
-                    setAnalisisSeleccionado(analisisList[0]);
+                if (analisisFiltrados.length > 0) {
+                    setAnalisisSeleccionado(analisisFiltrados[0]);
                 }
             } catch (err) {
                 setError(err.message || 'Error al obtener análisis');
@@ -65,73 +67,80 @@ const Analisis=()=> {
     }, [apiUrl, token]);
 
     function handleAlert(AnalisisId) {
-            const swalWithBootstrapButtons = Swal.mixin({
-                customClass: {
-                    confirmButton: "btn btn-success",
-                    cancelButton: "btn btn-danger"
-                },
-                buttonsStyling: false
-            });
-            swalWithBootstrapButtons.fire({
-                title: "Estas Seguro de borrarlo?",
-                text: "No podras Revertirlo una vez lo borres!",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonText: "Si, borralo!",
-                cancelButtonText: "No, cancelar!",
-                reverseButtons: true
-            }).then(async (result) => {
-                if (result.isConfirmed) {
-                    try {
-                        const headers = {
-                            'Content-Type': 'application/json',
-                            'Authorization': `Bearer ${token}`
-                        };
-                        const response = await fetch(`${apiUrl}/analisis/${AnalisisId}`, {
-                            method: 'DELETE',
-                            headers
-                        });
-                        if (!response.ok) {
-                            throw new Error('Error al borrar análisis');
-                        }
-                        
-                        // Actualizar el estado local
-                        setAnalisis(prev => {
-                            const nuevaLista = prev.filter(analisis => analisis._id !== AnalisisId);
-                            // Si el análisis eliminado era el seleccionado, seleccionar el primero de la nueva lista
-                            if (analisisSeleccionado?._id === AnalisisId) {
-                                setAnalisisSeleccionado(nuevaLista.length > 0 ? nuevaLista[0] : null);
-                            }
-                            return nuevaLista;
-                        });
-                        
-                        swalWithBootstrapButtons.fire({
-                            title: "Borrado Exitosamente!",
-                            text: "El análisis ha sido borrado correctamente",
-                            icon: "success",
-                            timer : 1300,
-                            showConfirmButton: false
-                        });
-                    } catch (error) {
-                        swalWithBootstrapButtons.fire({
-                            title: "Error!",
-                            text: "No se pudo borrar el Análisis",
-                            icon: "error",
-                            timer : 1300,
-                            showConfirmButton: false
-                        });
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+                confirmButton: "btn btn-success",
+                cancelButton: "btn btn-danger"
+            },
+            buttonsStyling: false
+        });
+        swalWithBootstrapButtons.fire({
+            title: "Estas Seguro de borrarlo?",
+            text: "No podras Revertirlo una vez lo borres!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Si, borralo!",
+            cancelButtonText: "No, cancelar!",
+            reverseButtons: true
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                try {
+                    if (!token) {
+                        throw new Error('No se encontró token de autenticación');
                     }
-                } else if(result.dismiss === Swal.DismissReason.cancel) {
+                    const headers = {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    };
+                                     const response = await fetch(`${apiUrl}/analisis/${AnalisisId}`, {
+                        method: 'DELETE',
+                        headers
+                    });
+                    
+                    console.log('📨 Respuesta del servidor:', response.status, response.statusText);
+                    
+                    if (!response.ok) {
+                        const errorText = await response.text();
+                        throw new Error(`Error ${response.status}: ${errorText}`);
+                    }
+                    
+                    // Actualizar el estado local
+                    setAnalisis(prev => {
+                        const nuevaLista = prev.filter(analisis => analisis._id !== AnalisisId);
+                        // Si el análisis eliminado era el seleccionado, seleccionar el primero de la nueva lista
+                        if (analisisSeleccionado?._id === AnalisisId) {
+                            setAnalisisSeleccionado(nuevaLista.length > 0 ? nuevaLista[0] : null);
+                        }
+                        return nuevaLista;
+                    });
+                    
                     swalWithBootstrapButtons.fire({
-                        title: "!Cancelado!",
-                        text: "Regresando a la pagina",
+                        title: "Borrado Exitosamente!",
+                        text: "El análisis ha sido borrado correctamente",
                         icon: "success",
-                        timer : 1000,
+                        timer : 1300,
+                        showConfirmButton: false
+                    });
+                } catch (error) {
+                    swalWithBootstrapButtons.fire({
+                        title: "Error!",
+                        text: `No se pudo borrar el Análisis: ${error.message}`,
+                        icon: "error",
+                        timer : 3000,
                         showConfirmButton: false
                     });
                 }
-            })
-        }
+            } else if(result.dismiss === Swal.DismissReason.cancel) {
+                swalWithBootstrapButtons.fire({
+                    title: "!Cancelado!",
+                    text: "Regresando a la pagina",
+                    icon: "success",
+                    timer : 1000,
+                    showConfirmButton: false
+                });
+            }
+        })
+    }
     
     // Manejar cuando se agrega un nuevo análisis
     const handleAnalisisCreated = (nuevoAnalisis) => {
@@ -190,7 +199,10 @@ const Analisis=()=> {
                                             </div>
                                             <p className='prueba-name'>{analisisItem.nombre}</p> 
                                             <div className='margen'>
-                                                <Link to='/Editar-Analisis'>
+                                                <Link 
+                                                    to='/Editar-Analisis' 
+                                                    state={{ analisisSeleccionado: analisisItem }}
+                                                >
                                                     <img src="/ajustes.png" alt="ajustes" className='iconos' />
                                                 </Link>
                                                 <img src="/basura.png" alt="editar" className='iconos' onClick={(e) => {
