@@ -1,14 +1,18 @@
 import { useState } from 'react'
 import Swal from 'sweetalert2'
+import { requireTokenOrRedirect } from '../../utils/auth'
 
-const ModalAnalisis = ({onClose}) => {
+const ModalAnalisis = ({onClose, onAnalisisCreated}) => {
     const [formData, setFormData]= useState({
+        nombre: '',
         tipoPrueba:'',
         costo: '',
         diasEspera: '',
         descripcion: '',
     });
     const [error, setError] = useState('');
+    const [loading, setLoading] = useState(false);
+    const apiUrl = process.env.REACT_APP_API_URL;
 
     const handleChange = (e) => {
         const {name,value} = e.target;
@@ -16,18 +20,66 @@ const ModalAnalisis = ({onClose}) => {
     }
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (!formData.tipoPrueba || !formData.costo || !formData.diasEspera || !formData.descripcion) {
-        setError('Por favor, completa todos los campos requeridos');
-        } else {
-        setError('');
-        console.log('Datos enviados:', formData);
-        await Swal.fire({
-        title: "¡ Envidao Correctamente !",
-        icon: "success",
-        timer : 1500,
-        showConfirmButton: false
+        
+        console.log('Datos del formulario:', formData);
+        console.log('Validación:', {
+            nombre: !!formData.nombre,
+            costo: !!formData.costo,
+            diasEspera: !!formData.diasEspera,
+            descripcion: !!formData.descripcion
         });
-        onClose();
+        
+        if (!formData.nombre || !formData.costo || !formData.diasEspera || !formData.descripcion) {
+            setError('Por favor, completa todos los campos requeridos');
+            return;
+        }
+        
+        setError('');
+        setLoading(true);
+        
+        try {
+            const token = requireTokenOrRedirect();
+            
+            const response = await fetch(`${apiUrl}/analisis`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify(formData)
+            });
+
+            if (!response.ok) {
+                if (response.status === 401) {
+                    setError('Sesión expirada, redirigiendo...');
+                    setTimeout(() => (window.location.href = '/'), 1500);
+                    return;
+                }
+                throw new Error('Error al crear el análisis');
+            }
+
+            const result = await response.json();
+            console.log('Análisis creado:', result);
+            
+            // Llamar a la función para actualizar la lista
+            if (onAnalisisCreated && typeof onAnalisisCreated === 'function') {
+                onAnalisisCreated(result);
+            }
+            
+            await Swal.fire({
+                title: "¡ Enviado Correctamente !",
+                icon: "success",
+                timer: 1500,
+                showConfirmButton: false
+            });
+            
+            onClose();
+            
+        } catch (error) {
+            console.error('Error:', error);
+            setError(error.message || 'Error al crear el análisis');
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -39,20 +91,20 @@ const ModalAnalisis = ({onClose}) => {
                     <button className='close-btn' onClick={onClose}>X</button>
                     <form onSubmit={handleSubmit}>
                         {error && <p className="error-msg">{error}</p>}
-                        <label>
-                            TipoPrueba:{''}
-                            <select name='tipoPrueba' value={formData.tipoPrueba} onChange={handleChange}>
-                                <option value="">Selecciona una opción</option>
-                                <option value="BiometriaHepatica">Biometria hepatica</option>
-                                <option value="PruebaSangre">Prueba Sangre</option>
-                            </select>
-                        </label>
+                        <label>Nombre</label>
+                        <input
+                            className="input-field"
+                            type="text"
+                            name="nombre"
+                            value={formData.nombre}
+                            onChange={handleChange}
+                        />
                         <label>Costo</label>
                         <input
                             type="text"
                             name="costo"
                             className="input-field"
-                            placeholder="350$"
+                            placeholder="costo del analisis $MXN"
                             value={formData.costo}
                             onChange={handleChange}
                         />
@@ -61,7 +113,7 @@ const ModalAnalisis = ({onClose}) => {
                             type="text"
                             name="diasEspera"
                             className="input-field"
-                            placeholder="2"
+                            placeholder="dias de espera para el analisis"
                             value={formData.diasEspera}
                             onChange={handleChange}
                         />
@@ -70,11 +122,13 @@ const ModalAnalisis = ({onClose}) => {
                             type="text"
                             name="descripcion"
                             className="input-field textarea"
-                            placeholder="muestras de biometria del paciente"
+                            placeholder="muestras del paciente para estudio"
                             value={formData.descripcion}
                             onChange={handleChange}
                         />
-                        <button type='sumbit'>Enviar</button>
+                        <button type='submit' disabled={loading}>
+                            {loading ? 'Enviando...' : 'Enviar'}
+                        </button>
                     </form>
                 </div>
             </div>
