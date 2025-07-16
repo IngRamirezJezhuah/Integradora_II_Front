@@ -3,6 +3,9 @@
     "name": "integradora",
     "slug": "integradora",
     "version": "1.0.0",
+    "platforms": [
+      "android"
+    ],
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -25,10 +28,18 @@
       },
       "edgeToEdgeEnabled": true,
       "package": "com.diegodiaz_05.integradora",
-      "permissions": ["CAMERA"]
+      "permissions": [
+        "CAMERA"
+      ],
+      "versionCode": 1
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "59ab508b-52d2-4514-8d10-c1e71d1d60b0"
+      }
     }
   }
 }

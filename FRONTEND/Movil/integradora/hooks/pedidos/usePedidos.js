@@ -60,11 +60,16 @@ export const usePedidos = () => {
               usuarioId: pedido.usuarioId,
               analisis: pedido.analisis,
               total: pedido.total,
-              fechaCreacion: pedido.fechaCreacion
+              fechaCreacion: pedido.fechaCreacion,
+              status: pedido.status
             });
           });
           
-          setPedidos(responseData.data);
+          // Filtrar solo los pedidos con status: true
+          const pedidosActivos = responseData.data.filter(pedido => pedido.status === true);
+          console.log('🔍 Pedidos filtrados (status: true):', pedidosActivos.length, 'de', responseData.data.length);
+          
+          setPedidos(pedidosActivos);
         } else {
           console.error(' Estructura de respuesta inesperada:', responseData);
           const errorMsg = 'La respuesta del servidor no tiene el formato esperado';

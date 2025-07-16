@@ -43,11 +43,12 @@ export const useMuestrasPaciente = () => {
 
       if (response.ok) {
         const data = await response.json();
-        // Filtrar solo las muestras que deben mostrarse al cliente
+        // Filtrar solo las muestras que deben mostrarse al cliente y que estén activas
         const muestrasVisibles = data.muestras?.filter(muestra => 
-          muestra.statusShowClient === true
+          muestra.statusShowClient === true && muestra.status === true
         ) || [];
         
+        console.log('🔍 Muestras filtradas (statusShowClient: true, status: true):', muestrasVisibles.length, 'de', data.muestras?.length || 0);
         setMuestras(muestrasVisibles);
         console.log('✅ Muestras del usuario cargadas:', muestrasVisibles.length);
       } else {

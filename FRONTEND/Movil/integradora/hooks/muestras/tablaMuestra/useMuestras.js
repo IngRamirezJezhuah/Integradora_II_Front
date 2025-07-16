@@ -46,8 +46,10 @@ export const useMuestras = () => {
         
         // Verificar si la respuesta tiene la estructura esperada
         if (data && data.muestrasList && Array.isArray(data.muestrasList)) {
-          
-          setMuestras(data.muestrasList);
+          // Filtrar solo las muestras con status: true
+          const muestrasActivas = data.muestrasList.filter(muestra => muestra.status === true);
+          console.log('🔍 Muestras filtradas (status: true):', muestrasActivas.length, 'de', data.muestrasList.length);
+          setMuestras(muestrasActivas);
         } else {
           const errorMsg = 'La respuesta del servidor no tiene el formato esperado';
           setError(errorMsg);

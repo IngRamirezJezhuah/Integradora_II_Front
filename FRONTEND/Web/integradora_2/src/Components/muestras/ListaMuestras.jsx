@@ -139,10 +139,11 @@ const ListaMuestras = () => {
         const nombre = m.nombrePaciente?.toLowerCase() || '';
         const id = m._id?.toLowerCase() || '';
         return (
-            tipo.includes(filtro) ||
+            (m.status === true) && // Solo muestras con status: true
+            (tipo.includes(filtro) ||
             nombre.includes(filtro) ||
-            id.includes(filtro)
-    );
+            id.includes(filtro))
+        );
     });
 
     
