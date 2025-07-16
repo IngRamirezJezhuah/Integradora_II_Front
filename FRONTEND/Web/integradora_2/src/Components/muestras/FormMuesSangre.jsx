@@ -93,7 +93,7 @@ const FormResultadosQS = ({ muestraId, onSuccess }) => {
     return (
         <div className="card">
         <h3>Resultados · Química sanguínea</h3>
-        <form onSubmit={handleSubmit} className="grid-form">
+        <form onSubmit={handleSubmit} className="grid-form form">
             {input("glucosa", "Glucosa (mg/dL)")}
             {input("glucosaPost", "Glucosa post‑prandial")}
             {input("acidoUrico", "Ácido úrico")}

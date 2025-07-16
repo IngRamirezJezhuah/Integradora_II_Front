@@ -225,3 +225,142 @@
 
 .grid-form{ display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:1rem; }
 .small input{ width:100%; }
+
+/* ───── MEDIA QUERIES PERSONALIZADAS ───── */
+
+/* Hasta 800px: podría ajustar paddings o compactar caja */
+@media (max-width: 800px) {
+    .scroll_pruebas {
+        width: 90vw;
+        height: auto;
+    }
+
+    .scroll {
+        width: 90vw;
+        height: auto;
+    }
+
+    .fila3 {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .caja_pedidos {
+        flex: 0 0 calc(45% - 1rem); 
+        max-width: 45%;
+        height: auto;
+    }
+
+    .search-bar {
+        width: 80vw;
+    }
+}
+
+/* Hasta 735px: mostrar 2 por fila */
+@media (max-width: 735px) {
+    .fila3 {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .caja_pedidos {
+        flex: 0 0 calc(50% - 1rem); 
+        max-width: 90%;
+        margin: 0.5rem auto;
+    }
+
+    .scroll {
+        width: 95vw;
+        height: auto;
+    }
+
+    .scroll_pruebas {
+        width: 95vw;
+        height: auto;
+    }
+
+    .btn-agregar {
+        margin-left: 50vw;
+    }
+}
+
+/* Hasta 600px: 1 por fila */
+@media (max-width: 600px) {
+    .fila3 {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .caja_pedidos {
+        flex: 0 0 100%;
+        max-width: 90vw;
+        height: auto;
+        margin: 0.5rem auto;
+    }
+
+    .search-bar {
+        width: 90vw;
+    }
+
+    .pedidos-form {
+        width: 90vw;
+        height: auto;
+    }
+
+    .caja_1,
+    .caja_2 {
+        width: 90vw;
+        height: auto;
+    }
+
+    .scroll,
+    .scroll_pruebas {
+        width: 100vw;
+        height: auto;
+    }
+
+    .btn-agregar {
+        margin-left: 10vw;
+        font-size: 14px;
+        padding: 0.5rem 1rem;
+    }
+}
+
+/* Hasta 400px: compactar aún más */
+@media (max-width: 400px) {
+    .caja_pedidos {
+        padding: 0.5rem;
+        border-radius: 1rem;
+    }
+
+    .imgMuestra {
+        width: 40px;
+        height: 40px;
+    }
+
+    .search-bar {
+        height: 5vh;
+        font-size: 12px;
+    }
+
+    .search-bar input {
+        font-size: 12px;
+    }
+
+    .btn-agregar {
+        margin-left: 5vw;
+        padding: 0.4rem 0.8rem;
+        font-size: 12px;
+    }
+
+    .label-form {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    .scroll_pruebas,
+    .scroll {
+        width: 100%;
+        height: auto;
+    }
+}

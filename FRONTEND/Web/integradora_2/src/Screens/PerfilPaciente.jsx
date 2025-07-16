@@ -72,7 +72,9 @@ const PerfilPaciente = () => {
                         <Link to={'/Dashboard'}>
                             <button className='btn'>Regresar</button>
                         </Link>
+                        <Link to={'/EditarInfoPaciente'}>
                         <button className='btn'>Editar</button>
+                        </Link>
                     </div>
                 <div>
                 <p>09/12/2004</p>
