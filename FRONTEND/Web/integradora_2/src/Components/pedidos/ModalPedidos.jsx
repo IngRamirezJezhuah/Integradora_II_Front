@@ -4,6 +4,8 @@ import DetallesPacienteAlta from "../pacientes/DetallesPacienteAlta";
 //import FormsPedidos from "./FormsPedidos";
 import FormBiometrica from "./FormBiometrica";
 import FormSanguinea from "./FormSanguinea";
+import { FromMuesBiometira } from "..";
+import { FormMuesSangre } from "..";
 
 
 
@@ -29,6 +31,17 @@ const ModalPedidos = ({onClose}) => {
         return <p>Selecciona una prueba válida</p>;    
     }    
     };
+
+    const RenderFormMuestra = () => {
+        switch (tipoPruebaSeleccionado) {
+            case BH_ID:
+                return <FromMuesBiometira fixedUserId={pacienteSeleccionado}/>                
+            case QS_ID:
+            return <FormMuesSangre fixedUserId={pacienteSeleccionado} />;    
+            default:
+            return <p>Selecciona una prueba válida</p>; 
+        }
+    }
 
     /*const renderForm = () => {
     if (tipoPruebaSeleccionado === "bh") {
@@ -84,6 +97,12 @@ const ModalPedidos = ({onClose}) => {
                 <button className="btn" onClick={retrocederPaso}>Regresar</button>
                 </div>
             </div>
+            )}
+            {pasoActual === 4 && (
+                <div>
+                    <p className="titulo">Registrar pedidos</p>
+                    {RenderFormMuestra()}
+                </div>
             )}
         </div>
     )
