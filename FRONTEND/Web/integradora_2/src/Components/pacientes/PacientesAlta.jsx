@@ -138,7 +138,6 @@ const PacientesAlta = ({seleccionado,onSelect = () => {}}) => {
         p => (p.nombre.toLowerCase().includes(busqueda) ) && (p.status === true || p.status === 'true') && p.rol === 'patient',
         
     );
-    
     // Log para verificar el filtrado
     if (loading) return (
         <div className='scale-up-ver-center'>    
@@ -152,11 +151,6 @@ const PacientesAlta = ({seleccionado,onSelect = () => {}}) => {
         </div>
         );
     if (error) return <div>{error}</div>;
-    
-    /*const handleSeleccionarPaciente = (paciente) => {
-    setPacienteSeleccionado(paciente);
-    };*/
-    //onClick={() => handleSeleccionarPaciente(paciente)} para reutilizarlo en pasitos
     const handleBusqueda = (valor) => {
     setBusqueda(valor.toLowerCase()); // para evitar errores de mayúsculas
     };
@@ -169,15 +163,6 @@ const PacientesAlta = ({seleccionado,onSelect = () => {}}) => {
             < SearchBar onSearch={handleBusqueda} />
             <div className='caja_1'>
                 <div className='scroll'>
-                    {/*
-                    esto es para ver si funciona correctamente
-                    <div>
-                        <h3>Respuesta cruda del backend:</h3>
-                        <pre>{rawResponse}</pre>
-                        <h3>Pacientes parseados:</h3>
-                        <pre>{JSON.stringify(pacientes, null, 2)}</pre>
-                    </div>
-                    */}
                     {pacientesFiltrados.length === 0 ? (
                         <div style={{ textAlign: 'center', padding: '20px', color: '#666', fontStyle: 'italic', fontSize: '14px' }}>
                             <p>No hay pacientes activos.</p>
@@ -186,7 +171,6 @@ const PacientesAlta = ({seleccionado,onSelect = () => {}}) => {
                         pacientesFiltrados.map((p, index) => {
                             const nombreCompleto = `${p.nombre} ${p.apellidoPaterno} ${p.apellidoMaterno}`;
                             const inicial = p.nombre.charAt(0);
-                            //const isSelected = pacienteSeleccionado === p._id;
                             const isSelected = seleccionado === p._id;
                             console.log("Paciente selecionado:", isSelected);
                             return(

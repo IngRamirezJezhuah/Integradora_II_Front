@@ -41,7 +41,6 @@ const OpcionesPaciente = ({buttonLabels =["Paciente Alta", "Paciente Baja"]}) =>
                         <div className='margen'>
                             <div className='scale-up-ver-center'>
                                 <PacientesBaja />
-                                    
                             </div>
                         </div>
 

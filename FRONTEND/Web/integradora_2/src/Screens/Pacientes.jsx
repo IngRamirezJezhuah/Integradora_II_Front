@@ -7,10 +7,10 @@ const Pacientes =() => {
     return (
             <div>
                 <p className='titulo'>Pacientes </p>
-                    <div className='opciones'>
+                    <div>
                     <button className='btn-agregar' onClick={() => setModalAbierto(true)}>+Agregar</button>
                     {modalAbierto && <ModalPaciente onClose={() => setModalAbierto(false)} />}
-                        <OpcionesPaciente/>
+                    <OpcionesPaciente/>
                     </div>
             </div>
     )

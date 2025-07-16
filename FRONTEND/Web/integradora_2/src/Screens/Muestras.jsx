@@ -1,6 +1,4 @@
 import React, {useState}from 'react'
-import { SearchBar } from '../Components';
-
 import ModalMuestras from '../Components/muestras/ModalMuestras';
 import { OpcionesMuestras } from '../Components';
 
@@ -14,13 +12,12 @@ const Muestras =() =>{
     return (
         <div>
             <p className='titulo'>Muestras</p>
-            <div className='buscador'>
+            <div>
                 <button className='btn-agregar'  onClick={() => setModalAbierto(true)}>+Agregar</button>
                 {modalAbierto && <ModalMuestras onClose={() => setModalAbierto(false)} />}
-                <SearchBar />
             </div>
             <div className='contenedor_pedidos'>
-                <div className='opciones'>
+                <div>
                     <OpcionesMuestras />
                 </div>
             </div>

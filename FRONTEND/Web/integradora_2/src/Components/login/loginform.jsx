@@ -12,6 +12,7 @@ const LoginForm = ({ onSubmit }) => {
   const handleSubmit = async (e) => {
   e.preventDefault();
   setError(null);
+  
 
   /* —— validación rápida —— */
   if (!username.trim() || !password.trim()) {
@@ -54,7 +55,7 @@ const LoginForm = ({ onSubmit }) => {
       timer: 1200,
       showConfirmButton: false,
     });
-    navigate("/Dashboard");
+    navigate("/Dashboard", {replace: true});
   } catch (err) {
     setError(err.message);
   }

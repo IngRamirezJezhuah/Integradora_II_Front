@@ -7,10 +7,10 @@ import { getToken } from './auth';
  * a la que el usuario intentó acceder (state.from).
  */
 const RutaPrivada = () => {
-  const location = useLocation();
-  const token = getToken();
+    const location = useLocation();
+    const token = getToken();
 
-  return token
+    return token
     ? <Outlet />                                  // pinta la sub‑ruta protegida
     : <Navigate to="/" state={{ from: location }} replace />;
 };

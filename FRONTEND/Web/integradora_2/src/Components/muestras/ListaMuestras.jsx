@@ -5,6 +5,7 @@ import { requireTokenOrRedirect } from '../../utils/auth';
 import CargaBarras from '../elementos/CargaBarras';
 import EditarMuestras from './EditarMuestras';
 import InfoMuestras from './InfoMuestras';
+import SearchBar from '../elementos/searchBar';
 
 const ListaMuestras = () => {
     const [muestraSelecionada, setmuestrasSelecionadas] = useState(null)
@@ -15,6 +16,7 @@ const ListaMuestras = () => {
     const [ModalAbierto, setModalAbierto] = useState(null)
     const [token, setToken] = useState(null)
     const apiUrl = process.env.REACT_APP_API_URL
+    const [filtro, setFiltro] = useState('');
 
     /*____________________Obtener token____________________*/
     useEffect(() => {
@@ -128,47 +130,60 @@ const ListaMuestras = () => {
 
         if ( error ) return <div className='error'>{error}</div>
 
+    const handleSearch = (texto) => {
+    setFiltro(texto.toLowerCase());
+    };
+    
+    const muestrasFiltradas = muestras.filter((m) => {
+        const tipo = m.tipoMuestra?.toLowerCase() || '';
+        const nombre = m.nombrePaciente?.toLowerCase() || '';
+        const id = m._id?.toLowerCase() || '';
+        return (
+            tipo.includes(filtro) ||
+            nombre.includes(filtro) ||
+            id.includes(filtro)
+    );
+    });
+
     
     return (
-        <div className='scroll_pruebas'>
-            {agrupar(muestras).map((fila,i) =>(
-                <div key={i} className='fila3'>
-                {fila.map((p,j) =>(
-                        <div key={j} className='caja_pedidos'>
-                        <div className='titulo'>
-                            <img src="/quimica.png" alt="quimica" className='imgMuestra' />
+        <div>
+            <SearchBar placeholder="Buscar muestra por ID, tipo o paciente" onSearch={handleSearch} />
+            <div className='scroll_pruebas'>
+                {agrupar(muestrasFiltradas).map((fila,i) =>(
+                    <div key={i} className='fila3'>
+                    {fila.map((p,j) =>(
+                            <div key={j} className='caja_pedidos'>
+                            <div className='titulo'>
+                                <img src="/quimica.png" alt="quimica" className='imgMuestra' />
+                            </div>
+                            <p className='centrar'>{(p._id || p._id || "--").toString().slice(-6).toUpperCase()}</p>
+                            <p className='texto'>
+                                {p.tipoMuestra || '--'}
+                            </p>
+                            <p className='texto'>
+                                {p.nombrePaciente}
+                            </p>
+                            <div className='margen'>
+                                <img src="/editar.png" alt="editar" className='iconos'  onClick={()=> {setmuestrasSelecionadas(p);setModalAbierto(true)}}/>
+                                
+                                <img src="/detalles.png" alt="edtalles"  className='iconos' onClick={() =>{setmuestrasSelecionadas(p);setModalDetallesAbierto(true)}}/>
+                                
+                                <img src="/basura.png" alt="borrar" className='iconos' onClick={() => handleAlert(p._id)}/>                        
+                            </div>
                         </div>
-                        <p className='centrar'>{(p._id || p._id || "--").toString().slice(-6).toUpperCase()}</p>
-                        <p className='texto'>
-                            {p.tipoMuestra === 'quimicaSanguinea' ? 'Quimica Sanguinea' : 
-                             p.tipoMuestra === 'biometriaHematica' ? 'Biometria Hematica' : 
-                             p.tipoMuestra || '--'}
-                        </p>
-                        <p className='texto'>
-                            {p.nombrePaciente}
-                        </p>
-                        <p className='texto'>
-                            {(p.createDate).slice(0, 10)}
-                        </p>
-                        <div className='margen'>
-                            <img src="/editar.png" alt="editar" className='iconos'  onClick={()=> {setmuestrasSelecionadas(p);setModalAbierto(true)}}/>
-                            
-                            <img src="/detalles.png" alt="edtalles"  className='iconos' onClick={() =>{setmuestrasSelecionadas(p);setModalDetallesAbierto(true)}}/>
-                            
-                            <img src="/basura.png" alt="borrar" className='iconos' onClick={() => handleAlert(p._id)}/>                        
-                        </div>
+                    ))}
                     </div>
                 ))}
-                </div>
-            ))}
-            {ModalDetallesAbierto && <InfoMuestras muestra={muestraSelecionada} onClose={() => setModalDetallesAbierto(false)}/>}
-            
-            {ModalAbierto && muestraSelecionada &&(
-                <EditarMuestras muestra={muestraSelecionada} 
-                onClose={() => setModalAbierto(false)}
-                onUpdated={(muestraAcutalizada) => setMuestras((prev) => prev.map((x)=> x._id === muestraSelecionada._id ? muestraAcutalizada._id : x))}
-                />
-            )}
+                {ModalDetallesAbierto && <InfoMuestras muestra={muestraSelecionada} onClose={() => setModalDetallesAbierto(false)}/>}
+                
+                {ModalAbierto && muestraSelecionada &&(
+                    <EditarMuestras muestra={muestraSelecionada} 
+                    onClose={() => setModalAbierto(false)}
+                    onUpdated={(muestraAcutalizada) => setMuestras((prev) => prev.map((x)=> x._id === muestraSelecionada._id ? muestraAcutalizada._id : x))}
+                    />
+                )}
+            </div>
         </div>
         );
     };

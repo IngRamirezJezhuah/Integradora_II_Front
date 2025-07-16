@@ -1,6 +1,5 @@
 //rafc para hacer una plantilla rapida
 import { useState } from 'react'
-import { SearchBar } from '../Components';
 import { OpcionesPedidos } from '../Components';
 import { ModalPedidos } from '../Components';
 //import Component from './Component'
@@ -13,13 +12,13 @@ const Pedidos =() => {
     return (
         <div>
             <p className='titulo'>Pedidos </p>
-            <div className='buscador'>
+            <div>
                 <button className='btn-agregar'  onClick={() => setModalAbierto(true)}>+Agregar</button>
                 {modalAbierto && <ModalPedidos onClose={() => setModalAbierto(false)} />}
-                <SearchBar />
+                
             </div>
             <div className='contenedor_pedidos'>
-                <div className='opciones'>
+                <div>
                         <OpcionesPedidos/>
                 </div>
             </div>

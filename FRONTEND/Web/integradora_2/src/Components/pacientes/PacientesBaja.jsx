@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Swal from 'sweetalert2';
 import { requireTokenOrRedirect } from "../../utils/auth";
 import CargaBarras from '../elementos/CargaBarras';
+import SearchBar from '../elementos/searchBar';
 
 
 const PacientesBaja = () => {   
@@ -9,8 +10,8 @@ const PacientesBaja = () => {
     const [error, setError] = useState(null);
     const [loading,setLoading] = useState(null);
     const [token, setToken ] = useState(null);
-    // const [setRawResponse] = useState(null);
     const apiUrl = process.env.REACT_APP_API_URL
+    const [busqueda, setBusqueda] = useState('');
 
     useEffect( () => {
         const tk = requireTokenOrRedirect();
@@ -116,59 +117,59 @@ const PacientesBaja = () => {
     }
 
     const pacientesFiltrados = pacientes.filter(
-        p => (p.status === false || p.status === 'false') && p.rol === 'patient'
+        p => (p.nombre.toLowerCase().includes(busqueda) ) && (p.status === false || p.status === 'false') && p.rol === 'patient'
     );
     if (loading) return (
         <div className='scale-up-ver-center'>
-            <div className='caja_1'>
+            <div >
                 <div className='margen'>
                     <br />
                     <br />
                     <CargaBarras />
+                </div>
+                <div  className='contenedor_pedidos'>
                 </div>
             </div>
         </div>
         );
 
     if (error) return <div>{error}</div>;
+
+    const handleBusqueda = (valor) => {
+    setBusqueda(valor.toLowerCase()); // para evitar errores de mayúsculas
+    };
+
+
     return(
-        <div className='caja_1'>
-            {pacientes.length === 0 && 
-            <div className="fila3">
-                <div className="caja_1">
-                    <br /><br /><br /><br /><br /><br />
-                    <p className="centrar">No hay pedidos cancelados.</p>
+        <div>  
+            < SearchBar onSearch={handleBusqueda} />
+            <div className='caja_1'>
+                {pacientes.length === 0 && 
+                <div style={{ textAlign: 'center', padding: '20px', color: '#666', fontStyle: 'italic', fontSize: '14px' }}>
+                    <p>No hay pacientes activos.</p>
                 </div>
-            </div>
-            }
-            <div className='scroll'>
-                {/*
-                esto es para ver si funciona correctamente
-                <div>
-                    <h3>Respuesta cruda del backend:</h3>
-                    <pre>{rawResponse}</pre>
-                    <h3>Pacientes parseados:</h3>
-                    <pre>{JSON.stringify(pacientes, null, 2)}</pre>
-                </div>
-                */}
-                {pacientesFiltrados.map((paciente, index) => {
-                    const nombreCompleto = `${paciente.nombre} ${paciente.apellidoPaterno} ${paciente.apellidoMaterno}`;
-                    const inicial = paciente.nombre.charAt(0);
-                    return(
-                        <div key={paciente._id || index} className='prueba_tabla'>
-                            <div className='inicial-circulo'>
-                                <p className='letra-circulo'>{inicial}</p>
-                            </div>
-                            <div>
-                                <div className='acomodar-iconos'>
-                                    <img src="/basura.png" alt="borrar" className='icono-borrar' onClick={() => handleAlert(paciente._id)}/>
+                }
+                <div className='scroll'>
+                    {pacientesFiltrados.map((paciente, index) => {
+                        const nombreCompleto = `${paciente.nombre} ${paciente.apellidoPaterno} ${paciente.apellidoMaterno}`;
+                        const inicial = paciente.nombre.charAt(0);
+                        return(
+                            <div key={paciente._id || index} className='prueba_tabla'>
+                                <div className='inicial-circulo'>
+                                    <p className='letra-circulo'>{inicial}</p>
                                 </div>
-                                <p className='prueba-name'>{nombreCompleto}</p>
+                                <div>
+                                    <div className='acomodar-iconos'>
+                                        <img src="/basura.png" alt="borrar" className='icono-borrar' onClick={() => handleAlert(paciente._id)}/>
+                                    </div>
+                                    <p className='prueba-name'>{nombreCompleto}</p>
+                                </div>
                             </div>
-                        </div>
-                    )
-                })}
+                        )
+                    })}
+                </div>
             </div>
+            <div  className='contenedor_pedidos' />
         </div>
     )
 }
