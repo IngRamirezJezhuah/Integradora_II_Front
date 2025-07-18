@@ -71,18 +71,6 @@ const FormSanguinea = ({ fixedUserId }) => {
         <h2>Nuevo pedido · Análisis sanguíneo</h2>
 
         <form onSubmit={handleSubmit}>
-            {/* ——— PACIENTE ——— 
-            
-            <div className="form-field">
-            <label>ID Paciente (usuarioId)</label>
-            <input
-                type="text"
-                value={usuarioId}
-                onChange={(e) => setUsuarioId(e.target.value)}
-                placeholder="68635e1f2122030410801823"
-            />
-            </div>
-            */}
             {!fixedUserId && (          // ← oculta input si llega prefijado
             <div className="form-field">
                 <label>ID Paciente (usuarioId)</label>
@@ -94,7 +82,6 @@ const FormSanguinea = ({ fixedUserId }) => {
                 />
             </div>
             )}
-
             {/* ——— NOTAS ——— */}
             <div className="form-field">
             <label>Notas</label>
@@ -104,7 +91,6 @@ const FormSanguinea = ({ fixedUserId }) => {
                 placeholder="Ej. paciente en ayunas"
             />
             </div>
-
             {/* ——— DESCUENTO ——— */}
             <div className="form-field">
             <label>Descuento %</label>
@@ -117,7 +103,6 @@ const FormSanguinea = ({ fixedUserId }) => {
                 onChange={(e) => setPorcentaje(e.target.value)}
             />
             </div>
-
             {/* ——— ANTICIPO ——— */}
             <div className="form-field">
             <label>Anticipo (MXN)</label>
@@ -130,10 +115,10 @@ const FormSanguinea = ({ fixedUserId }) => {
                 placeholder="211"
             />
             </div>
-
             {error && <p style={{ color: "red" }}>{error}</p>}
-
-            <button type="submit">Guardar pedido</button>
+            <div>
+                <button className="btn" type="submit">Guardar pedido</button>
+            </div>
         </form>
         </div>
     );

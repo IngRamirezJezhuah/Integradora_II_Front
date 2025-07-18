@@ -25,11 +25,15 @@
 .right {
   justify-self: end;
 }
-
+/*
 .form {
   display: grid;
   gap: 1rem;
 }
+.form {
+  display: grid;
+  gap: 1rem;
+}*/
 
 .input-lg { /* Corrected selector */
   padding: 0.5em;
@@ -47,10 +51,6 @@
   font-weight: bold;
 }
 
-.form {
-  display: grid;
-  gap: 1rem;
-}
 
 .input-field {
   padding: 0.5em;
@@ -112,3 +112,9 @@
   }
 }
 
+@media (max-width: 768px) {
+  .btn {
+    width: 100%;
+    margin: 0.5rem 0;
+  }
+}

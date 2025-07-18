@@ -11,43 +11,6 @@ const QS_ID = "686e0163fd380d4018dddcde";
 const BH_ID = "686734c0dbf9fa679be0958c";
 
 const ModalMuestras = ({ onClose }) => {//, muestraId, analisisIdInicial
-  /*
-    const [paso, setPaso] = useState(1);
-    const [pacienteId, setPacienteId] = useState(null);
-    const [analisisId, setAnalisisId] = useState(analisisIdInicial|| null);   // ← guarda ID real
-    const [subPaso, setSubPaso] = useState("tomar"); // "tomar" | "resultados"
-    const [muestraId, setMuestraId] = useState(null);*/
-
-
-    /* ——— helpers ——— 
-    const avanzar     = () => setPaso((p) => p + 1);
-    const retroceder  = () => setPaso((p) => p - 1);
-
-    const renderForm = () => {
-      switch (analisisId) {
-        case BH_ID: return <FromMuesBiometira fixedUserId={pacienteId} muestraId={muestraId}/>;
-        case QS_ID: return <FormMuesSangre fixedUserId={pacienteId} muestraId={muestraId}/>;
-        default   : return <p>Selecciona un tipo de muestra válido</p>;
-      }
-    };
-
-      // Paso 3‑A: confirmar y tomar muestra
-  const tomarMuestra = async () => {
-    const body = {
-      observaciones,
-      nombrePaciente,      // o trae el nombre desde paciente
-      idusuario: pacienteId,
-      tipoMuestra: analisisId === BH_ID ? "biometriaHematica" : "quimicaSanguinea",
-      pedidoId,            // puedes pedirlo en un input o traerlo de props
-    };
-    const res = await fetch(`${apiUrl}/muestras`, { … });
-    const { data } = await res.json();
-    setMuestraId(data._id);     // nuevo estado
-    setSubPaso("resultados");   // ahora muestra el formulario de resultados
-  };
-
-  // Paso 3‑B: mostrar FormResultadosBH/QS con muestraId*/
-  
     /* navegación */
     const [paso, setPaso]     = useState(1);         // 1‑paciente | 2‑tipo | 3‑tomar | 4‑resultados
     const avanzar    = () => setPaso((p) => p + 1);
@@ -118,7 +81,9 @@ const ModalMuestras = ({ onClose }) => {//, muestraId, analisisIdInicial
             <>
               <p className="titulo">Paciente</p>
               <PacientesAlta seleccionado={pacienteId} onSelect={setPacienteId} />
-              <button className="btn" onClick={avanzar} disabled={!pacienteId}>Siguiente</button>
+              <div>
+                <button className="btn" onClick={avanzar} disabled={!pacienteId}>Siguiente</button>
+              </div>
             </>
           )}
 
@@ -127,8 +92,10 @@ const ModalMuestras = ({ onClose }) => {//, muestraId, analisisIdInicial
             <>
               <p className="titulo">Tipo de muestra</p>
               <DetallesPacienteAlta seleccionado={analisisId} onSelect={setAnalisisId} />
-              <button className="btn" onClick={avanzar} disabled={!analisisId}>Siguiente</button>
-              <button className="btn" onClick={retroceder}>Regresar</button>
+              <div>
+                <button className="btn" onClick={avanzar} disabled={!analisisId}>Siguiente</button>
+                <button className="btn" onClick={retroceder}>Regresar</button>
+              </div>
             </>
           )}
 
@@ -147,9 +114,10 @@ const ModalMuestras = ({ onClose }) => {//, muestraId, analisisIdInicial
                 <label>ID Pedido (opcional)</label>
                 <input value={pedidoId} onChange={(e) => setPedidoId(e.target.value)} />
               </div>
-
-              <button className="btn" onClick={tomarMuestra}>Guardar y capturar resultados</button>
-              <button className="btn" onClick={retroceder}>Regresar</button>
+              <div>
+                <button className="btn" onClick={tomarMuestra}>Guardar y capturar resultados</button>
+                <button className="btn" onClick={retroceder}>Regresar</button>
+              </div>
             </>
           )}
 

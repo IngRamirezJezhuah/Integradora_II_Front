@@ -118,14 +118,16 @@ const ModalPedidos = ({onClose}) => {
                 
                 <div className="scale-in-hor-center">
                     <div className="modal-content">
-                        <p className='titulo'>Registrar Pedido</p>
                         <button className="close-btn" onClick={onClose}>x</button>
+                        <p className='titulo'>Registrar Pedido</p>
                         <p>Selecione el paciente:</p>
                         <PacientesAlta seleccionado={pacienteSeleccionado} onSelect={id => setPacienteSeleccionado(id)}/>
-                        <button className="btn" 
-                            onClick={avanzarPaso} 
-                        disabled={!pacienteSeleccionado}
-                        >Siguiente</button>{/*onClick={paciente => {setPacienteSeleccionado(paciente); avanzarPaso();}} */} 
+                            <div>
+                                <button className="btn"
+                                    onClick={avanzarPaso} 
+                                    disabled={!pacienteSeleccionado}
+                                >Siguiente</button>
+                            </div>
                     </div>
                 </div>
             )}
@@ -139,13 +141,14 @@ const ModalPedidos = ({onClose}) => {
                         <p>Selecione el tipo de prueba:</p>
                         
                         <DetallesPacienteAlta seleccionado={tipoPruebaSeleccionado} onSelect={prueba => setTipoPruebaSeleccionado(prueba)}/>
+                        <div>
+                            <button className="btn"
+                            onClick={avanzarPaso} 
+                            disabled={!tipoPruebaSeleccionado}
+                            >Siguiente</button>{/*onClick={tipo => {setTipoPruebaSeleccionado(tipo); avanzarPaso();}}  */}
+                            <button className="btn" onClick={retrocederPaso}>Regresar</button>
+                        </div>
                         
-                        <button className="btn"
-                        onClick={avanzarPaso} 
-                        disabled={!tipoPruebaSeleccionado}
-                        >Siguiente</button>{/*onClick={tipo => {setTipoPruebaSeleccionado(tipo); avanzarPaso();}}  */}
-                        
-                        <button className="btn" onClick={retrocederPaso}>Regresar</button>
                     </div>
                 </div>
             )}
@@ -158,10 +161,9 @@ const ModalPedidos = ({onClose}) => {
                 </button>
 
                 {renderFormPedido()}
-
-                <button className="btn" onClick={retrocederPaso}>
-                Regresar
-                </button>
+                <div>
+                <button className="btn" onClick={retrocederPaso}>Regresar</button>
+                </div>
             </div>
             </div>
         )}

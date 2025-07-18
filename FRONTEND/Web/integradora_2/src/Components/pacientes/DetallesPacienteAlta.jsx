@@ -65,11 +65,6 @@ const DetallesPacienteAlta = ({ seleccionado, onSelect = () => {} }) => {
                     <img src="/prueba-de-sangre.png" alt="" className="imagen-prueba" />
                 </div>
                 <p className="prueba-name">{p.nombre}</p>
-                <div className="acomodar-iconos-2">
-                    {/*
-                    <img src="/descargas.png" alt="descargar" className="icono-correo" />
-                     */}
-                </div>
                 </div>
             </div>
             );

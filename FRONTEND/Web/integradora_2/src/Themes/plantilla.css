@@ -85,8 +85,8 @@
     margin-top: 5vw;
 }
 .search-bar {
-    width: 40vw;
-    height: 6vh;
+    width: 35vw;
+    height: 3vw;
     display: flex;
     padding: 2px;
     align-items: center;
@@ -142,21 +142,26 @@
 
 .scroll_pruebas{
     width: 70vw;
-    height: 34vw;
+    height: 40vw;
     overflow-y: auto;
     display: flexbox;
 }
+
 .scroll_pruebas ::after{
     content: "";    
     height: auto;
 }
+
 .prueba_tabla{
     padding: 10px;
     display: flex;
+    padding-right: 12vw;
     align-items: flex-end;
+    border-radius: 2vw;
 }
 
 .prueba_tabla.seleccionado {
+    margin: 10px;
     background-color: #ffabab7a;
     transform: scale(1.03);
     border: 2px solid #e37878af;
@@ -247,9 +252,20 @@
 /* ───── MEDIA QUERIES PERSONALIZADAS ───── */
 
 /* Hasta 800px: podría ajustar paddings o compactar caja */
-@media (max-width: 800px) {
+
+
+@media (max-width: 1000px) {
     .scroll_pruebas {
-        width: 100vw;
+        width: 40vw;
+        height: 23rem;
+        overflow-y: visible;
+    }
+}
+
+@media (max-width: 800px) {
+    
+    .scroll_pruebas {
+        width: auto;
         height: auto;
     }
 
@@ -290,8 +306,9 @@
     .scroll {
         width: 95vw;
         height: auto;
-    }
+    }*/
 
+    
     .scroll_pruebas {
         width: 95vw;
         height: auto;
@@ -331,10 +348,11 @@
         height: auto;
     }
 
+    
     .scroll,
     .scroll_pruebas {
-        width: 100vw;
-        height: auto;
+        width: 10vw;
+        height: 10vw;
     }
 
     .btn-agregar {
@@ -376,9 +394,10 @@
         padding: 10px;
     }
 
+    
     .scroll_pruebas,
     .scroll {
-        width: 100%;
+        width: auto;
         height: auto;
     }
 }

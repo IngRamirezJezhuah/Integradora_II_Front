@@ -11,16 +11,30 @@
     justify-content: center;
     align-items: center;
     z-index: 1000;
+    padding: 1rem;
+    overflow-y: auto;
 }
 
 .modal-content {
-    background: white;
+    background-color: white;
     border-radius: 1rem;
     padding: 2rem;
-    width: 35vw;
-    height: 42vw;
+    /*max-width: 40vw;*/
+    width: 40vw;
+    height: 52vw;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.3);
     position: relative;
+    display: grid;
+    gap: 1rem;
 }
+/*
+background: white;
+border-radius: 1rem;
+padding: 2rem;
+width: 35vw;
+height: 42vw;
+position: relative;
+*/
 
 .close-btn {
     position: absolute;
@@ -66,4 +80,16 @@ input, select {
 
 .dropdown:hover .dropdown-content {
     display: block;
+}
+
+.caja-btn{
+    margin-top: 0%;
+}
+
+@media (max-width: 768px) {
+    .modal-content {
+        padding: 1.2rem;
+        max-width: 100%;
+        border-radius: 0.5rem;
+    }
 }
