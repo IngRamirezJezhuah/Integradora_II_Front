@@ -2,7 +2,6 @@ import { MuestrasHechas, SampleChart } from '../Components';
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import Swal from 'sweetalert2';
-import { CargaBolita } from '../Components';
 import CargaBarras from '../Components/elementos/CargaBarras';
 
 const Dashboard=()=> {
@@ -58,15 +57,14 @@ const Dashboard=()=> {
                 <div className='div-graficas'>
                     <p>Temperatura del Laboratorio</p>
                     <div>
-                        <br /><br /><br />
-                        <CargaBolita/> 
+                        <CargaBarras/> 
                     </div>
                 </div>
                 <div className='div-graficas'>
                     <p>Humedad del Laboratorio</p>
                     <div>
-                        <br /><br /><br />
-                        <CargaBolita/> 
+                        
+                        <CargaBarras/> 
                     </div>
                 </div>
             </div>

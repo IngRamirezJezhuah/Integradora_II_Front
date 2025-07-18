@@ -111,86 +111,7 @@ const ModalPedidos = ({onClose}) => {
         default:
             return <p>Selecciona una prueba válida</p>;
         }
-  };
-/*
-    const renderForm = () => {
-    switch (tipoPruebaSeleccionado) {
-        case BH_ID:
-        return <FormBiometrica 
-            fixedUserId={pacienteSeleccionado}
-            onSuccess={(nuevoPedidoId) => {
-            setPedidoId(nuevoPedidoId);          // ① guardamos el pedido
-            crearMuestraBase(
-                pacienteSeleccionado,
-                BH_ID,
-                nuevoPedidoId
-            ).then((id) => {
-                setMuestraId(id);                  // ② guardamos la muestra
-                avanzarPaso();                     // ③ vamos al paso 4
-            }).catch(alert);
-            }}
-        />;    
-        if (onSuccess) onSuccess(nuevoPedido._id);   // <— pasa el id al padre
-        case QS_ID:
-        return <FormSanguinea 
-            fixedUserId={pacienteSeleccionado}
-            onSuccess={(nuevoPedidoId) => {
-            setPedidoId(nuevoPedidoId);          // ① guardamos el pedido
-            crearMuestraBase(
-                pacienteSeleccionado,
-                BH_ID,
-                nuevoPedidoId
-            ).then((id) => {
-                setMuestraId(id);                  // ② guardamos la muestra
-                avanzarPaso();                     // ③ vamos al paso 4
-            }).catch(alert);
-            }}
-            
-        />; 
-        if (onSuccess) onSuccess(nuevoPedido._id);   // <— pasa el id al padre
-        default:
-        return <p>Selecciona una prueba válida</p>;    
-        
-    }    
     };
-
-    const RenderFormMuestra = () => {
-        if (!muestraId) return(
-            <div className='scale-up-ver-center'>
-                <div >
-                    <br />
-                    <CargaBarras  className='plantilla'/>
-                </div>
-            </div>
-        );
-        switch (tipoPruebaSeleccionado) {
-            case BH_ID:
-                return <FromMuesBiometira 
-                fmuestraId={muestraId} onSuccess={onClose}
-                />                
-            case QS_ID:
-                return <FormMuesSangre 
-                muestraId={muestraId} onSuccess={onClose}
-                />;    
-            default:
-            return <p>Selecciona una prueba válida</p>; 
-        }
-    }
-
-    /*const renderForm = () => {
-    if (tipoPruebaSeleccionado === "bh") {
-        return <FormBiometrica fixedUserId={pacienteSeleccionado} />;
-    }    
-    if (tipoPruebaSeleccionado === "qs") {
-        return <FormSanguinea fixedUserId={pacienteSeleccionado} />;
-    }    
-    return <p>Selecciona una prueba válida</p>;
-    };*/
-
-
-
-
-    
     return(
         <div className="modal-overlay">
             {pasoActual === 1 && (
@@ -215,7 +136,6 @@ const ModalPedidos = ({onClose}) => {
                         <p className='titulo'>Registrar Pedido</p>
                         
                         <button className="close-btn" onClick={onClose}>x</button>
-
                         <p>Selecione el tipo de prueba:</p>
                         
                         <DetallesPacienteAlta seleccionado={tipoPruebaSeleccionado} onSelect={prueba => setTipoPruebaSeleccionado(prueba)}/>

@@ -160,7 +160,7 @@ const ListaMuestras = () => {
                             </div>
                             <p className='centrar'>{(p._id || p._id || "--").toString().slice(-6).toUpperCase()}</p>
                             <p className='texto'>
-                                 {p.tipoMuestra === 'quimicaSanguinea' ? 'Quimica Sanguinea' : 
+                                 |{p.tipoMuestra === 'quimicaSanguinea' ? 'Quimica Sanguinea' : 
                                     p.tipoMuestra === 'biometriaHematica' ? 'Biometria Hematica' : 
                                     p.tipoMuestra || '--'}
                             </p>

@@ -1,11 +1,14 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Outlet, Link, useLocation, useNavigate } from 'react-router-dom'
 import Swal from 'sweetalert2';
+import { requireTokenOrRedirect } from '../utils/auth';
 
 const Component=() => {
+    const [showMenu,setShowMenu] = useState(true);
+    const [usuario, setUsuario] = useState(null)
+    const [rol, setRol] = useState(null)
     const location = useLocation();
     const navigate = useNavigate(); 
-    const [showMenu,setShowMenu] = useState(true);
     const isActive = (path) => location.pathname === path;
     const apiUrl = process.env.REACT_APP_API_URL;
 
@@ -42,36 +45,108 @@ const Component=() => {
         navigate('/', { replace: true });     // 2) redirige
         });
     }
-
-    const HandleMenuDinamico = () => setShowMenu(!showMenu) ;
-    
-    const [img] = useState({
-        name: 'Niki de Saint Phalle',
-        image: '/dash.png',
-    });
     /* ——— LOGOUT ——— */
     const handleLogout = async () => {
-    const token = localStorage.getItem('token');
-    if (!token) return;
-
-    try {
-        await fetch(`${apiUrl}/usuarios/logout`, {
-        method: 'DELETE',
-        headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
-        },
-        });
-    } catch (err) {
-        console.error('Error al cerrar sesión', err);
-        // aquí podrías mostrar un toast, pero no bloquees el logout local
-    } finally {
-        localStorage.removeItem('token');  // limpia token en cualquier caso
-    }
+        const token = localStorage.getItem('token');
+        if (!token) return;
+        
+        try {
+            await fetch(`${apiUrl}/usuarios/logout`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+        } catch (err) {
+            console.error('Error al cerrar sesión', err);
+            // aquí podrías mostrar un toast, pero no bloquees el logout local
+        } finally {
+            localStorage.removeItem('token');  // limpia token en cualquier caso
+        }
     };
+    
 
-    
-    
+    const HandleMenuDinamico = () => {
+        setShowMenu(!showMenu)
+    } ;
+
+    useEffect(() => {
+        const token = requireTokenOrRedirect();
+        const fetchUser = async () => {
+            try {
+                const res = await fetch(`${apiUrl}/usuarios/login`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+                if (res.ok) {
+                    const data = await res.json();
+                    setUsuario(data);
+                    setRol(data.rol);
+                } else {
+                    console.error('No se pudo obtener el usuario');
+                }
+            } catch (err) {
+                console.error('Error al obtener usuario:', err);
+            }
+        };
+
+        fetchUser();
+    }, []);
+
+    /*________________________Render de roles_____________________  */
+    /*const renderLinksPorRol = () => {
+        if (!rol) return null;
+
+        const linksBase = [];
+
+        if (rol === 'admin') {
+            linksBase.push(
+                { path: '/Perfil', label: 'Perfil', icon: '/usuario.png' },
+                { path: '/Dashboard', label: 'Dashboard', icon: '/dash.png' },
+                { path: '/Pacientes', label: 'Pacientes', icon: '/usuario.png' },
+                { path: '/Pedidos', label: 'Pedido', icon: '/pedido.png' },
+                { path: '/Muestras', label: 'Muestras', icon: '/muestras.png' },
+                { path: '/Analisis', label: 'Análisis', icon: '/analisis.png' }
+            );
+        }
+
+        if (rol === 'accounting') {
+            linksBase.push(
+                { path: '/Pedidos', label: 'Pedidos', icon: '/pedido.png' },
+                { path: '/Muestras', label: 'Muestras', icon: '/muestras.png' },
+                { path: '/Analisis', label: 'Análisis', icon: '/analisis.png' }
+            );
+        }
+
+        if (rol === 'laboratory') {
+            linksBase.push(
+                { path: '/Muestras', label: 'Muestras', icon: '/muestras.png' },
+                { path: '/Analisis', label: 'Análisis', icon: '/analisis.png' }
+            );
+        }
+
+        if (rol === 'patient') {
+            linksBase.push(
+                { path: '/Perfil', label: 'Perfil', icon: '/usuario.png' },
+                { path: '/EditarInfoPaciente', label: 'Editar info', icon: '/usuario.png' }
+            );
+        }
+
+        return linksBase.map(({ path, label, icon }) => (
+            <Link to={path} key={path} className="nav-link">
+                <li className={`bordes ${isActive(path) ? 'active' : ''}`}>
+                    <img className="iconos" src={icon} alt={label} />
+                    {showMenu && <span className="bordes">{label}</span>}
+                </li>
+            </Link>
+        ));
+    };*/
+
+
     return (
         <section className='contenedor'>
             {location.pathname === '/'}
@@ -84,8 +159,8 @@ const Component=() => {
                             <li className={`bordes ${isActive('/') ? 'active' : ''}`}>
                                 <div className='inicial-circulo'>
                                     <img
-                                    src={img.image}
-                                    alt={img.name}
+                                    src='/dash.png'
+                                    alt='imgperfil'
                                     className='iconos'
                                     />
                                 </div>
@@ -149,8 +224,52 @@ const Component=() => {
                 </section>
                 
             </div>
+            {/*
+                
+            <div className='contenedor'>
+                {rol === 'patient' && (
+                    <div className="nav-link">
+                        <li className={`bordes ${isActive('/') ? 'active' : ''}`}>
+                            <div className="inicial-circulo">
+                                <img src='/dash.png' alt='perfil' className="iconos" />
+                            </div>
+                            <div className="dropdown">
+                                {showMenu && <span className="bordes">Perfil</span>}
+                                <div className="dropdown-content">
+                                    <Link to={'/Perfil'} className="paciente-link"><p>Ver Pedidos</p></Link>
+                                    <Link to={'/EditarInfoPaciente'} className="paciente-link"><p>Editar info</p></Link>
+                                </div>
+                            </div>
+                        </li>
+                    </div>
+                )}
+    
+                            {renderLinksPorRol()}
+                        <section className={`plantilla ${showMenu ? 'content-expanded' : 'content-collapsed'}`}>
+                            <Outlet />
+                        </section>
+                <section className='contenedor'>
+                    <div className='tabNavigator'>
+                        <div className='nav-link'>
+                        </div>
+                    </div>
+                </section>
+                
+                <Link className="nav-link" onClick={handleAlert}>
+                    <li className="bordes">
+                        <img className="iconos" src="/salida.png" alt="Salir" />
+                        {showMenu && <span className="bordes">Salir</span>}
+                    </li>
+                </Link>
+    
+            </div>
+                */}
         </section>
     )
 }
 
 export default Component;
+
+/*
+
+*/

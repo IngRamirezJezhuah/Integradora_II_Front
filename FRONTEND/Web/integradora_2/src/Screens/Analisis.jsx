@@ -93,7 +93,7 @@ const Analisis=()=> {
                         'Content-Type': 'application/json',
                         'Authorization': `Bearer ${token}`
                     };
-                                     const response = await fetch(`${apiUrl}/analisis/${AnalisisId}`, {
+                        const response = await fetch(`${apiUrl}/analisis/${AnalisisId}`, {
                         method: 'DELETE',
                         headers
                     });
@@ -168,9 +168,12 @@ const Analisis=()=> {
     // Vista de carga
     if (loading) {
         return (
-            <div className="scale-up-ver-center">
-                <br />
-                <CargaBarras />
+            <div className='contenedor_pedidos'>
+
+                <div className="scale-up-ver-center">
+                    <br />
+                    <CargaBarras />
+                </div>
             </div>
         );
     }
