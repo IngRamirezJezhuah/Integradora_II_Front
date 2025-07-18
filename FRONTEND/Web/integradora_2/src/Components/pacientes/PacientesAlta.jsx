@@ -142,7 +142,7 @@ const PacientesAlta = ({seleccionado,onSelect = () => {}}) => {
     if (loading) return (
         <div className='scale-up-ver-center'>    
             <div className='caja_1'>
-                <div className='margen'>
+                <div className='centrar'>
                     <br />
                     <br />
                     <CargaBarras />

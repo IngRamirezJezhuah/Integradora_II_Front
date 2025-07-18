@@ -249,7 +249,7 @@
 /* Hasta 800px: podría ajustar paddings o compactar caja */
 @media (max-width: 800px) {
     .scroll_pruebas {
-        width: 90vw;
+        width: 100vw;
         height: auto;
     }
 

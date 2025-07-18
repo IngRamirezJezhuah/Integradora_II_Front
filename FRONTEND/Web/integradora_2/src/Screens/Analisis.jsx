@@ -168,12 +168,16 @@ const Analisis=()=> {
     // Vista de carga
     if (loading) {
         return (
+            <div>
+            <p className='titulo'>Analisis</p>
             <div className='contenedor_pedidos'>
-
-                <div className="scale-up-ver-center">
-                    <br />
-                    <CargaBarras />
+                <div className='scale-up-ver-center'>
+                    <div className='centrar'>
+                        <br />
+                        <CargaBarras  className='plantilla'/>
+                    </div>
                 </div>
+            </div>
             </div>
         );
     }

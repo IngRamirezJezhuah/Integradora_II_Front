@@ -176,7 +176,7 @@ const RegistrarPaciente = () => {
                     </select>
                 </div>
 
-                <div className="buttons">
+                <div className="button">
                     <button type="submit" className="btn submit">Registrar</button>
                     <Link to="/Perfil">
                         <button type="button" className="btn cancel">Regresar</button>

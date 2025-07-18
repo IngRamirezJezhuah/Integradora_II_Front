@@ -11,6 +11,7 @@ const Dashboard=()=> {
 
     useEffect(() => {
         const token = localStorage.getItem('token');
+        console.log("TOKEN:", token);
         const headers = token
             ? { Authorization: `Bearer ${token}` }
             : {};

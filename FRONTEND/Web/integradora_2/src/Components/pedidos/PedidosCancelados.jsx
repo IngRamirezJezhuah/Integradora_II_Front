@@ -46,7 +46,14 @@ const PedidosCancelados = () => {
             }, [])
         : [];
 
-    if (loading) return <CargaBarras />;
+    if (loading) return(
+        <div className='scale-up-ver-center'>
+            <div className='centrar'>
+                <br />
+                <CargaBarras  className='plantilla'/>
+            </div>
+        </div>
+    );
     if (error)   return <p className="error">{error}</p>;
 
     const handleSearch = (texto) => {

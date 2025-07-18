@@ -120,7 +120,7 @@ const ListaPedidos = () => {
     if (loading)
     return (
         <div className='scale-up-ver-center'>
-            <div >
+            <div className='centrar'>
                 <br />
                 <CargaBarras  className='plantilla'/>
             </div>

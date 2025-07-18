@@ -25,35 +25,33 @@ const ListaMuestras = () => {
     }, []);
 
     useEffect(() => {
-    if (!token) return;
-    
+        if (!token) return;
+        console.log("TOKEN:", token);
+        const fetchMuestras = async () => {
+            setLoading(true);
+            setError(null);
+            try {
+            const res = await fetch(`${apiUrl}/muestras`, {
+                headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`,
+                },
+            });
 
+            if (res.status === 401) {
+                setError('Sesión expirada, redirigiendo…');
+                setTimeout(() => (window.location.href = '/'), 1500);
+                return;
+            }
+            if (!res.ok) throw new Error('Error al obtener muestras');
 
-    const fetchMuestras = async () => {
-        setLoading(true);
-        setError(null);
-        try {
-        const res = await fetch(`${apiUrl}/muestras`, {
-            headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
-            },
-        });
-
-        if (res.status === 401) {
-            setError('Sesión expirada, redirigiendo…');
-            setTimeout(() => (window.location.href = '/'), 1500);
-            return;
-        }
-        if (!res.ok) throw new Error('Error al obtener muestras');
-
-        const { muestrasList } = await res.json();
-        setMuestras(Array.isArray(muestrasList) ? muestrasList : []);
-        } catch (err) {
-        setError(err.message || 'Error al obtener muestras');
-        } finally {
-        setLoading(false);
-        }
+            const { muestrasList } = await res.json();
+            setMuestras(Array.isArray(muestrasList) ? muestrasList : []);
+            } catch (err) {
+            setError(err.message || 'Error al obtener muestras');
+            } finally {
+            setLoading(false);
+            }
     };
 
     fetchMuestras();
@@ -122,9 +120,11 @@ const ListaMuestras = () => {
     /*_________________________ vista de cargando_________________________*/
     if (loading)
     return (
-        <div className="scale-up-ver-center">
-        <br />
-        <CargaBarras />
+        <div className='scale-up-ver-center'>
+            <div className='centrar'>
+                <br />
+                <CargaBarras  className='plantilla'/>
+            </div>
         </div>
     );
 
@@ -160,7 +160,7 @@ const ListaMuestras = () => {
                             </div>
                             <p className='centrar'>{(p._id || p._id || "--").toString().slice(-6).toUpperCase()}</p>
                             <p className='texto'>
-                                 |{p.tipoMuestra === 'quimicaSanguinea' ? 'Quimica Sanguinea' : 
+                                    {p.tipoMuestra === 'quimicaSanguinea' ? 'Quimica Sanguinea' : 
                                     p.tipoMuestra === 'biometriaHematica' ? 'Biometria Hematica' : 
                                     p.tipoMuestra || '--'}
                             </p>

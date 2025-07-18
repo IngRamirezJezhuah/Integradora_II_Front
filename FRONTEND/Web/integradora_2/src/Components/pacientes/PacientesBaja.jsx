@@ -121,13 +121,11 @@ const PacientesBaja = () => {
     );
     if (loading) return (
         <div className='scale-up-ver-center'>
-            <div >
-                <div className='margen'>
+            <div className='contenedor_pedidos'>
+                <div className='centrar'>
                     <br />
                     <br />
                     <CargaBarras />
-                </div>
-                <div  className='contenedor_pedidos'>
                 </div>
             </div>
         </div>
