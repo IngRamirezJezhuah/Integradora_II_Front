@@ -29,11 +29,14 @@ const ModalAnalisis = ({onClose, onAnalisisCreated}) => {
             descripcion: !!formData.descripcion
         });
         
-        if (!formData.nombre || !formData.costo || !formData.diasEspera || !formData.descripcion) {
+        /*if (!formData.nombre || !formData.costo || !formData.diasEspera || !formData.descripcion) {
+            setError('Por favor, completa todos los campos requeridos');
+            return;
+        }*/
+        if (!formData.nombre || !formData.tipoPrueba || !formData.costo || !formData.diasEspera || !formData.descripcion) {
             setError('Por favor, completa todos los campos requeridos');
             return;
         }
-        
         setError('');
         setLoading(true);
         

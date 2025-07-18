@@ -26,7 +26,7 @@ const PedidosCancelados = () => {
             const lista = pedidosList.length ? pedidosList : data;
 
             const cancelados = lista.filter(
-            (p) => p.estado === "cancelado" || p.status === false
+            (p) => p.estado === "cancelado" || p.status === false ||p.status === "false"
             );
             setPedidos(cancelados);
         } catch (err) {

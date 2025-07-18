@@ -49,11 +49,8 @@ const Analisis=()=> {
 
                 const data = await response.json();
                 const analisisList = Array.isArray(data.analisysList) ? data.analisysList : [];
-                // Filtrar solo los análisis con status: true
                 const analisisFiltrados = analisisList.filter(analisis => analisis.status === true);
                 setAnalisis(analisisFiltrados);
-                
-                // Seleccionar el primer análisis por defecto
                 if (analisisFiltrados.length > 0) {
                     setAnalisisSeleccionado(analisisFiltrados[0]);
                 }
@@ -145,6 +142,24 @@ const Analisis=()=> {
     
     // Manejar cuando se agrega un nuevo análisis
     const handleAnalisisCreated = (nuevoAnalisis) => {
+        const analisisLimpio = {
+            nombre: nuevoAnalisis.nombre || 'Sin nombre',
+            tipoPrueba: nuevoAnalisis.tipoPrueba || '',
+            costo: nuevoAnalisis.costo || '',
+            diasEspera: nuevoAnalisis.diasEspera || '',
+            descripcion: nuevoAnalisis.descripcion || '',
+            _id: nuevoAnalisis._id
+        };
+
+        setAnalisis(prev => {
+            const nuevaLista = [...prev, analisisLimpio];
+            if (!analisisSeleccionado) {
+                setAnalisisSeleccionado(analisisLimpio);
+            }
+            return nuevaLista;
+        });
+        };
+    /*const handleAnalisisCreated = (nuevoAnalisis) => {
         setAnalisis(prev => {
             const nuevaLista = [...prev, nuevoAnalisis];
             // Si no hay análisis seleccionado, seleccionar el nuevo
@@ -153,16 +168,16 @@ const Analisis=()=> {
             }
             return nuevaLista;
         });
-    };
+    };*/
 
     // Manejar la búsqueda
     const handleBusqueda = (valor) => {
-        setBusqueda(valor.toLowerCase()); // para evitar errores de mayúsculas
+        setBusqueda(valor); // para evitar errores de mayúsculas
     };
 
     // Filtrar análisis por búsqueda
     const analisisFiltrados = analisis.filter(analisisItem =>
-        analisisItem.nombre.toLowerCase().includes(busqueda)
+        (analisisItem.nombre||'').toLowerCase().includes(busqueda)
     );
 
     // Vista de carga
@@ -186,6 +201,7 @@ const Analisis=()=> {
     if (error) {
         return <div className='error'>{error}</div>;
     }
+    
 
     return (
         <div>
@@ -204,42 +220,42 @@ const Analisis=()=> {
                 <div className='contenedor_pedidos'>
                         <div className='scale-up-ver-center'>
                             <div className='caja_1'>
-                                <h1 className='titulo'>Pruebas</h1>
-                                    {analisisFiltrados.length === 0 ? (
-                                        <div style={{ textAlign: 'center', padding: '20px', color: '#666', fontStyle: 'italic', fontSize: '14px' }}>
-                                            <p>No se encontraron análisis que coincidan con la búsqueda.</p>
-                                        </div>
-                                    ) : (
-                                        analisisFiltrados.map((analisisItem) => (
-                                            <div 
-                                                key={analisisItem._id} 
-                                                className={`prueba_tabla ${analisisSeleccionado?._id === analisisItem._id ? 'seleccionado' : ''}`}
-                                                onClick={() => setAnalisisSeleccionado(analisisItem)}
-                                                style={{ cursor: 'pointer' }}
-                                            >
-                                                <div className='icono'>
-                                                    <img className='imagen-prueba' src="/prueba-de-sangre.png" alt="prueba imagen" />
-                                                </div>
-                                                <p className='prueba-name'>{analisisItem.nombre}</p> 
-                                                <div className='margen'>
-                                                    <Link 
-                                                        to='/Editar-Analisis' 
-                                                        state={{ analisisSeleccionado: analisisItem }}
-                                                    >
-                                                        <img src="/ajustes.png" alt="ajustes" className='iconos' />
-                                                    </Link>
-                                                    <img src="/basura.png" alt="editar" className='iconos' onClick={(e) => {
-                                                        e.stopPropagation(); // Prevenir que se seleccione al hacer clic en eliminar
-                                                        handleAlert(analisisItem._id);
-                                                    }}/>
-                                                </div>
+                                    <h1 className='titulo'>Pruebas</h1>
+                                <div className='scroll'>
+                                        {analisisFiltrados.length === 0 ? (
+                                            <div style={{ textAlign: 'center', padding: '20px', color: '#666', fontStyle: 'italic', fontSize: '14px' }}>
+                                                <p>No se encontraron análisis que coincidan con la búsqueda.</p>
                                             </div>
-                                        ))
-                                    )}
-                                <div className='prueba_tabla'>
-                                </div>
-                                <hr />
+                                        ) : (
+                                            analisisFiltrados.map((analisisItem) => (
+                                                <div 
+                                                    key={analisisItem._id} 
+                                                    className={`prueba_tabla ${analisisSeleccionado?._id === analisisItem._id ? 'seleccionado' : ''}`}
+                                                    onClick={() => setAnalisisSeleccionado(analisisItem)}
+                                                    style={{ cursor: 'pointer' }}
+                                                >
+                                                    <div className='icono'>
+                                                        <img className='imagen-prueba' src="/prueba-de-sangre.png" alt="prueba imagen" />
+                                                    </div>
+                                                    <p className='prueba-name'>{analisisItem.nombre}</p> 
+                                                    <div className='margen'>
+                                                        <Link 
+                                                            to='/Editar-Analisis' 
+                                                            state={{ analisisSeleccionado: analisisItem }}
+                                                        >
+                                                            <img src="/ajustes.png" alt="ajustes" className='iconos' />
+                                                        </Link>
+                                                        <img src="/basura.png" alt="editar" className='iconos' onClick={(e) => {
+                                                            e.stopPropagation(); // Prevenir que se seleccione al hacer clic en eliminar
+                                                            handleAlert(analisisItem._id);
+                                                        }}/>
+                                                    </div>
+                                                </div>
+                                            ))
+                                        )}
+                                
                             </div>
+                                </div>
                         </div>
                         <div className='scale-up-ver-center'>
                         <div className='caja_2'>
