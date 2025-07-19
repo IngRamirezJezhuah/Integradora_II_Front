@@ -16,6 +16,8 @@ const ModalPedidos = ({onClose}) => {
     const [pasoActual, setPasoActual] = useState(1);
     const [pacienteSeleccionado, setPacienteSeleccionado] = useState(null);
     const [tipoPruebaSeleccionado, setTipoPruebaSeleccionado] = useState(null);
+    const [loadingPedido, setLoadingPedido] = useState(false);
+
     
     const [/*pedidoId*/,  setPedidoId]  = useState(null); 
     const [muestraId, setMuestraId] = useState(null); 
@@ -49,14 +51,15 @@ const ModalPedidos = ({onClose}) => {
         const { _id } = await res.json(); // ajusta según tu backend
         return _id;
     };
-
     /*_____________________paso 3: formulario de pedido_____________________*/
     const renderFormPedido = () => {
         /** callback común: 1.- guarda pedido  2.- crea muestra  3.- pasa a paso */
         const handleSuccess = async (nuevoPedidoId) => {
         try {
+            setLoadingPedido(true);
             setPedidoId(nuevoPedidoId);
-            const id = await crearMuestraBase(
+
+        const id = await crearMuestraBase(
             pacienteSeleccionado,
             tipoPruebaSeleccionado,
             nuevoPedidoId
@@ -65,6 +68,8 @@ const ModalPedidos = ({onClose}) => {
             avanzarPaso();
         } catch (err) {
             alert(err.message);
+        } finally {
+            setLoadingPedido(false); // termina loading
         }
         };
         const commonProps = {
@@ -152,7 +157,7 @@ const ModalPedidos = ({onClose}) => {
                     </button>
                     {renderFormPedido()}
                     <div>
-                    <button className="btn" onClick={avanzarPaso} disabled={!tipoPruebaSeleccionado}>Siguiente</button>
+                    <button className="btn" onClick={avanzarPaso} disabled={!tipoPruebaSeleccionado ||loadingPedido}>{loadingPedido ? "Cargando..." : "Siguiente"}</button>
                     <button className="btn" onClick={retrocederPaso}>Regresar</button>
                     </div>
                 </div>

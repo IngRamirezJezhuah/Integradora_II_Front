@@ -68,14 +68,14 @@ const FormResultadosBH = ({ muestraId, onSuccess }) => {
         </div>
     );
 
-    if (!muestraId) return 
+    if (!muestraId) return (
     <div className='scale-up-ver-center'>
-        <div >
-            <br />
-            <CargaBarras  className='plantilla'/>
+        <div>
+        <br />
+        <CargaBarras className='plantilla' />
         </div>
     </div>
-    ;
+    );
 
 
     return (

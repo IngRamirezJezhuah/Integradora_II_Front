@@ -220,8 +220,8 @@ const Analisis=()=> {
                 <div className='contenedor_pedidos'>
                         <div className='scale-up-ver-center'>
                             <div className='caja_1'>
-                                    <h1 className='titulo'>Pruebas</h1>
                                 <div className='scroll'>
+                                <p className='titulo'>Pruebas</p>
                                         {analisisFiltrados.length === 0 ? (
                                             <div style={{ textAlign: 'center', padding: '20px', color: '#666', fontStyle: 'italic', fontSize: '14px' }}>
                                                 <p>No se encontraron análisis que coincidan con la búsqueda.</p>
