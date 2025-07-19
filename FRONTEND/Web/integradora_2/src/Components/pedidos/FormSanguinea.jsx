@@ -4,33 +4,29 @@ import Swal from "sweetalert2";
 import { requireTokenOrRedirect } from "../../utils/auth";
 
 const FormSanguinea = ({ fixedUserId }) => {
-    /* ——— state ——— */
+    /*_________Usestates para el formulario_________*/
     const [usuarioId, setUsuarioId]   = useState(fixedUserId ??  "");
     const [notas, setNotas]           = useState("");
     const [anticipo, setAnticipo]     = useState("");
     const [porcentaje, setPorcentaje] = useState(0);
     const [error, setError]           = useState(null);
-
-    /* ——— datos fijos del análisis ——— */
+    /*_________datos fijos del análisis_________*/
     const ANALISIS_INFO = {
         analisisId : "687074d5ba6041febdbcb3ca",
         nombre     : "Sanguinea",
         precio     : 211,
         descripcion: "Análisis de sangre completo",
     };
-
     const apiUrl   = process.env.REACT_APP_API_URL;
     const navigate = useNavigate();
     const token    = requireTokenOrRedirect();
 
-    /* ——— submit ——— */
+    /*_________funcion enviar info_________*/
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError(null);
-
         if (!usuarioId.trim())   { setError("Falta elegir el paciente"); return; }
         if (!anticipo || anticipo < 0) { setError("Anticipo inválido"); return; }
-
         const body = {
         usuarioId,
         analisis: [ ANALISIS_INFO ],
@@ -38,7 +34,6 @@ const FormSanguinea = ({ fixedUserId }) => {
         notas,
         anticipo: { monto: Number(anticipo) },
         };
-
         try{
         const res = await fetch(`${apiUrl}/pedidos`,{
             method : "POST",
@@ -48,12 +43,10 @@ const FormSanguinea = ({ fixedUserId }) => {
             },
             body : JSON.stringify(body),
         });
-
         if(!res.ok){
             const dataErr = await res.json().catch(() => ({}));
             throw new Error(dataErr.message || "No se pudo crear el pedido");
         }
-
         await Swal.fire({
             title: "Pedido registrado",
             icon : "success",
@@ -65,13 +58,11 @@ const FormSanguinea = ({ fixedUserId }) => {
         setError(err.message);
         }
     };
-
     return (
         <div className="card">
         <h2>Nuevo pedido · Análisis sanguíneo</h2>
-
         <form onSubmit={handleSubmit}>
-            {!fixedUserId && (          // ← oculta input si llega prefijado
+            {!fixedUserId && (          //esta funcion es para ocultar input si llega prefijado
             <div className="form-field">
                 <label>ID Paciente (usuarioId)</label>
                 <input
@@ -82,7 +73,7 @@ const FormSanguinea = ({ fixedUserId }) => {
                 />
             </div>
             )}
-            {/* ——— NOTAS ——— */}
+            {/*_________NOtas del pedido_________*/}
             <div className="form-field">
             <label>Notas</label>
             <textarea
@@ -91,7 +82,7 @@ const FormSanguinea = ({ fixedUserId }) => {
                 placeholder="Ej. paciente en ayunas"
             />
             </div>
-            {/* ——— DESCUENTO ——— */}
+            {/*_________Descuento a aplicar_________*/}
             <div className="form-field">
             <label>Descuento %</label>
             <input
@@ -103,7 +94,7 @@ const FormSanguinea = ({ fixedUserId }) => {
                 onChange={(e) => setPorcentaje(e.target.value)}
             />
             </div>
-            {/* ——— ANTICIPO ——— */}
+            {/*_________Anticipo_________*/}
             <div className="form-field">
             <label>Anticipo (MXN)</label>
             <input

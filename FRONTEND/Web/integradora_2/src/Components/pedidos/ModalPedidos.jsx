@@ -50,9 +50,9 @@ const ModalPedidos = ({onClose}) => {
         return _id;
     };
 
-    /* ---------- paso 3: formulario de pedido ---------- */
+    /*_____________________paso 3: formulario de pedido_____________________*/
     const renderFormPedido = () => {
-        /** callback común: 1) guarda pedido  2) crea muestra  3) pasa a paso 4 */
+        /** callback común: 1.- guarda pedido  2.- crea muestra  3.- pasa a paso */
         const handleSuccess = async (nuevoPedidoId) => {
         try {
             setPedidoId(nuevoPedidoId);
@@ -67,12 +67,10 @@ const ModalPedidos = ({onClose}) => {
             alert(err.message);
         }
         };
-
         const commonProps = {
         fixedUserId: pacienteSeleccionado,
         onSuccess: handleSuccess,
         };
-
         switch (tipoPruebaSeleccionado) {
         case BH_ID:
             return <FormBiometrica {...commonProps} />;
@@ -83,7 +81,7 @@ const ModalPedidos = ({onClose}) => {
         }
     };
 
-    /* ---------- paso 4: formulario de resultados ---------- */
+    /*__________________paso 4: formulario de resultados__________________*/
     const renderFormResultados = () => {
         if (!muestraId) {
         return (
@@ -92,7 +90,6 @@ const ModalPedidos = ({onClose}) => {
             </div>
         );
         }
-
         switch (tipoPruebaSeleccionado) {
         case BH_ID:
             return (
@@ -115,105 +112,62 @@ const ModalPedidos = ({onClose}) => {
     return(
         <div className="modal-overlay">
             {pasoActual === 1 && (
-                
                 <div className="scale-in-hor-center">
                     <div className="modal-content">
-                        <button className="close-btn" onClick={onClose}>x</button>
-                        <p className='titulo'>Registrar Pedido</p>
-                        <p>Selecione el paciente:</p>
-                        <PacientesAlta seleccionado={pacienteSeleccionado} onSelect={id => setPacienteSeleccionado(id)}/>
-                            <div>
-                                <button className="btn"
-                                    onClick={avanzarPaso} 
-                                    disabled={!pacienteSeleccionado}
-                                >Siguiente</button>
+                        <div >
+                            <button className="close-btn" onClick={onClose}>x</button>
+                            <p className='titulo'>Registrar Pedido</p>
+                            <p>Selecione el paciente:</p>
+                            <div className="modal-arreglado">
+                                <button className="btn-modal" onClick={avanzarPaso}disabled={!pacienteSeleccionado}>Siguiente</button>
                             </div>
+                            <PacientesAlta seleccionado={pacienteSeleccionado} onSelect={id => setPacienteSeleccionado(id)}/>
+                        </div>
                     </div>
                 </div>
             )}
-            {/* Paso 2: Selección de tipo de prueba */}
             {pasoActual === 2 && (
                 <div className="scale-in-hor-center">
                     <div className="modal-content">
                         <p className='titulo'>Registrar Pedido</p>
-                        
                         <button className="close-btn" onClick={onClose}>x</button>
                         <p>Selecione el tipo de prueba:</p>
-                        
-                        <DetallesPacienteAlta seleccionado={tipoPruebaSeleccionado} onSelect={prueba => setTipoPruebaSeleccionado(prueba)}/>
-                        <div>
-                            <button className="btn"
-                            onClick={avanzarPaso} 
-                            disabled={!tipoPruebaSeleccionado}
-                            >Siguiente</button>{/*onClick={tipo => {setTipoPruebaSeleccionado(tipo); avanzarPaso();}}  */}
+                            <div className="modal-arreglado">
+                            <button className="btn" onClick={avanzarPaso} disabled={!tipoPruebaSeleccionado}>Siguiente</button>
                             <button className="btn" onClick={retrocederPaso}>Regresar</button>
+                            </div>
+                        <div>
+                        <DetallesPacienteAlta seleccionado={tipoPruebaSeleccionado} onSelect={prueba => setTipoPruebaSeleccionado(prueba)}/>
                         </div>
                         
                     </div>
                 </div>
             )}
             {pasoActual === 3 && (
-            <div className="scale-in-hor-center">
-            <div className="modal-content">
-                <p className="titulo">Registrar Pedido</p>
-                <button className="close-btn" onClick={onClose}>
-                x
-                </button>
-
-                {renderFormPedido()}
-                <div>
-                <button className="btn" onClick={retrocederPaso}>Regresar</button>
+                <div className="scale-in-hor-center">
+                <div className="modal-content">
+                    <p className="titulo">Registrar Pedido</p>
+                    <button className="close-btn" onClick={onClose}>
+                    x
+                    </button>
+                    {renderFormPedido()}
+                    <div>
+                    <button className="btn" onClick={avanzarPaso} disabled={!tipoPruebaSeleccionado}>Siguiente</button>
+                    <button className="btn" onClick={retrocederPaso}>Regresar</button>
+                    </div>
                 </div>
+                </div>
+            )}
+            {/* Paso 4 */}
+            {pasoActual === 4 && (
+                <div className="modal-content scale-in-hor-center">
+                <button className="close-btn" onClick={onClose}>x</button>
+                <p className="titulo">Registrar muestra</p>
+                {renderFormResultados()}
+                </div>
+            )}
             </div>
-            </div>
-        )}
-
-        {/* Paso 4 */}
-        {pasoActual === 4 && (
-            <div className="modal-content scale-in-hor-center">
-            <p className="titulo">Registrar Resultados</p>
-            {renderFormResultados()}
-            </div>
-        )}
-        </div>
     )
 }
 
 export default ModalPedidos
-
-/*
-{pasoActual === 3 && (
-<div className="scale-in-hor-center">
-    <div className="modal-content">
-    <p className="titulo">Registrar Pedido</p>
-    <button className="close-btn" onClick={onClose}>x</button>
-    <button className="btn" onClick={retrocederPaso}>Regresar</button>
-    </div>
-</div>
-)}
-{pasoActual === 4 && (
-    <div>
-        <p className="titulo">Registrar pedidos</p>
-        {RenderFormMuestra()}
-    </div>
-)}
-{pasoActual === 3 && (
-    
-)}
-<div className="scale-in-hor-center">
-    <div className="modal-content">
-        <p className='titulo'>Registrar Pedido</p>
-        <button className="close-btn" onClick={onClose}>x</button>
-            <div>
-            {
-            <FormsPedidos/> 
-            <FormBiometrica/>
-            
-            <FormSanguinea />;
-            </div>
-        <button className="btn" onClick={retrocederPaso}>
-            Regresar
-        </button>
-    </div>
-</div>
-     */

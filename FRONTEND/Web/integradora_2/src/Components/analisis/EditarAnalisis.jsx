@@ -17,15 +17,14 @@ const EditarAnalisisForm = () => {
   const [loading, setLoading] = useState(false);
   const [token, setToken] = useState(null);
   const apiUrl = process.env.REACT_APP_API_URL;
-
-  // Obtener token
+  /*_________obtener token_________*/
   useEffect(() => {
     const tk = requireTokenOrRedirect();
     setToken(tk);
   }, []);
 
   useEffect(() => {
-    // Precargar datos del análisis seleccionado
+    /*_________precargar datos del análisis seleccionado_________*/
     if (analisisData) {
       setFormData({
         nombre: analisisData.nombre || '',
@@ -34,31 +33,27 @@ const EditarAnalisisForm = () => {
         descripcion: analisisData.descripcion || '',
       });
     } else {
-      // Si no hay datos, redirigir a la página de análisis
+      /*_________si no hay datos, redirigir a la página de análisis_________*/
       navigate('/Analisis');
     }
   }, [analisisData, navigate]);
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
-
+  /*_________enviar informacion_________ */
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!formData.nombre || !formData.costo || !formData.diasEspera) {
       setError('Por favor, completa todos los campos requeridos');
       return;
     }
-    
     if (!analisisData?._id) {
       setError('No se encontró el ID del análisis');
       return;
     }
-
     setError('');
     setLoading(true);
-
     try {
       const response = await fetch(`${apiUrl}/analisis/${analisisData._id}`, {
         method: 'PUT',
@@ -77,10 +72,8 @@ const EditarAnalisisForm = () => {
         }
         throw new Error('Error al actualizar el análisis');
       }
-
       const result = await response.json();
       console.log('Análisis actualizado:', result);
-
       await Swal.fire({
         title: "¡Actualizado Correctamente!",
         text: "El análisis ha sido actualizado exitosamente",
@@ -88,10 +81,8 @@ const EditarAnalisisForm = () => {
         timer: 1500,
         showConfirmButton: false
       });
-
-      // Redirigir a la página de análisis
+      /*_________Redirigir a la página de análisis_________*/
       navigate('/Analisis');
-
     } catch (error) {
       console.error('Error:', error);
       setError(error.message || 'Error al actualizar el análisis');
@@ -99,7 +90,6 @@ const EditarAnalisisForm = () => {
       setLoading(false);
     }
   };
-
   const handleCancel = () => {
     setFormData({
       nombre: '',
@@ -122,7 +112,6 @@ const EditarAnalisisForm = () => {
         </div>
         <form className="form" onSubmit={handleSubmit}>
           {error && <p className="error-msg">{error}</p>}
-
           <label>Nombre</label>
           <input
             className="input-field"

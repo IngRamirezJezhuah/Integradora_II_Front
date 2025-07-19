@@ -86,6 +86,7 @@
   margin: 1vw;
 }
 
+
 .btn.cancel {
   background-color: #DA0C15;
 }
@@ -106,7 +107,7 @@
   .container {
     padding: 1rem;
   }
-
+  
   .buttons {
     flex-direction: column;
   }

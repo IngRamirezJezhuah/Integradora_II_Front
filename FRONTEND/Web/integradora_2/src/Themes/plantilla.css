@@ -92,6 +92,7 @@
     align-items: center;
     border: 1px solid #ccc;
     border-radius: 20px;
+    margin-bottom: 1vw;
 }
 
 .search-bar input {

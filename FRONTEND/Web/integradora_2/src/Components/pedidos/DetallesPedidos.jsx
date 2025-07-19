@@ -68,9 +68,9 @@ const DetallesPedidos = ({ pedido, onClose }) => {
     return (
         <div className="modal-overlay">
         <div className="modal-content">
-            <button className="close-btn" onClick={onClose}>×</button>
 
             <div className="caja_2">
+            <button className="close-btn" onClick={onClose}>×</button>
                 <p className="detall-tex">
                 <strong>Fecha de creación:</strong>{" "}
                 {new Date(fechaCreacion).toLocaleString()}

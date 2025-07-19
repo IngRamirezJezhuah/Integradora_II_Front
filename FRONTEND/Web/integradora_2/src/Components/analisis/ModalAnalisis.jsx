@@ -20,7 +20,6 @@ const ModalAnalisis = ({onClose, onAnalisisCreated}) => {
     }
     const handleSubmit = async (e) => {
         e.preventDefault();
-        
         console.log('Datos del formulario:', formData);
         console.log('Validación:', {
             nombre: !!formData.nombre,
@@ -28,18 +27,12 @@ const ModalAnalisis = ({onClose, onAnalisisCreated}) => {
             diasEspera: !!formData.diasEspera,
             descripcion: !!formData.descripcion
         });
-        
-        /*if (!formData.nombre || !formData.costo || !formData.diasEspera || !formData.descripcion) {
-            setError('Por favor, completa todos los campos requeridos');
-            return;
-        }*/
         if (!formData.nombre || !formData.tipoPrueba || !formData.costo || !formData.diasEspera || !formData.descripcion) {
             setError('Por favor, completa todos los campos requeridos');
             return;
         }
         setError('');
         setLoading(true);
-        
         try {
             const token = requireTokenOrRedirect();
             
@@ -51,7 +44,6 @@ const ModalAnalisis = ({onClose, onAnalisisCreated}) => {
                 },
                 body: JSON.stringify(formData)
             });
-
             if (!response.ok) {
                 if (response.status === 401) {
                     setError('Sesión expirada, redirigiendo...');
@@ -60,24 +52,19 @@ const ModalAnalisis = ({onClose, onAnalisisCreated}) => {
                 }
                 throw new Error('Error al crear el análisis');
             }
-
             const result = await response.json();
             console.log('Análisis creado:', result);
-            
-            // Llamar a la función para actualizar la lista
+            /*_________Llamar a la función para actualizar la lista_________*/
             if (onAnalisisCreated && typeof onAnalisisCreated === 'function') {
                 onAnalisisCreated(result);
             }
-            
             await Swal.fire({
                 title: "¡ Enviado Correctamente !",
                 icon: "success",
                 timer: 1500,
                 showConfirmButton: false
             });
-            
             onClose();
-            
         } catch (error) {
             console.error('Error:', error);
             setError(error.message || 'Error al crear el análisis');
@@ -85,7 +72,6 @@ const ModalAnalisis = ({onClose, onAnalisisCreated}) => {
             setLoading(false);
         }
     };
-
     return (
         <div className='modal-overlay'>
             <div className='scale-in-hor-center'>

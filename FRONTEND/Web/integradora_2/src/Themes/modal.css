@@ -16,25 +16,36 @@
 }
 
 .modal-content {
-    background-color: white;
+    background: white;
     border-radius: 1rem;
     padding: 2rem;
-    /*max-width: 40vw;*/
-    width: 40vw;
-    height: 52vw;
-    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.3);
+    width: 35vw;
+    height: 42vw;
     position: relative;
-    display: grid;
-    gap: 1rem;
 }
-/*
-background: white;
-border-radius: 1rem;
-padding: 2rem;
-width: 35vw;
-height: 42vw;
-position: relative;
-*/
+
+
+/*______Modal ________*/
+
+.btn-modal{
+    padding: 0.6em 1.5em;
+    border: none;
+    border-radius: 2em;
+    background-color: #DA0C15;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    margin: 0;
+}
+
+.modal-arreglado{
+    margin: 0%;
+    padding: 0%;
+    position: absolute;
+    margin-top: 35vw;
+    margin-left: 2vw;
+}
+
 
 .close-btn {
     position: absolute;
@@ -48,14 +59,14 @@ position: relative;
     cursor: pointer;
 }
 
-input, select {
+/*input, select {
     display: block;
     width: 100%;
     padding: 0.6rem;
     margin-bottom: 1rem;
     border-radius: 0.5rem;
     border: 1px solid #ccc;
-}
+}*/
 
 .dropdown {
     position: relative;
@@ -92,4 +103,24 @@ input, select {
         max-width: 100%;
         border-radius: 0.5rem;
     }
+
+    .btn-modal{
+    padding: 0.2em .5em;
+    border: none;
+    border-radius: 2em;
+    background-color: #DA0C15;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    margin: 0;
+}
+
+.modal-arreglado{
+    margin: 0%;
+    padding: 0%;
+    position: absolute;
+    margin-top: 35vw;
+    margin-left: 2vw;
+}
+
 }

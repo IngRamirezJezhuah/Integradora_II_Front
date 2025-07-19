@@ -94,7 +94,7 @@ const RegistrarPaciente = () => {
 
     return (
         <div className="container">
-            <h1 className="title">Registrar nuevo paciente</h1>
+            <h1 className="title">Editar Información</h1>
             <form onSubmit={handleSubmit} className="form">
                 {error && <p className="error-msg">{error}</p>}
 

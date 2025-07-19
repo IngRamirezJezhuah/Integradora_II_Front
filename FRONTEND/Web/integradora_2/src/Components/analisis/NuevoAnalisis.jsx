@@ -12,7 +12,7 @@ const NuevoAnalisisForm = () => {
   const [error, setError] = useState('');
 
   useEffect(() => {
-    // Simulate initial data fetch
+    /*_________Simula el dato inicial de la informacion_________*/
     const initialData = {
       nombre: 'Análisis de Sangre',
       costo: '500.00',
@@ -21,12 +21,10 @@ const NuevoAnalisisForm = () => {
     };
     setFormData(initialData);
   }, []);
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
-
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!formData.nombre || !formData.costo || !formData.diasEspera) {
@@ -34,10 +32,8 @@ const NuevoAnalisisForm = () => {
     } else {
       setError('');
       console.log('Datos enviados:', formData);
-      // Here you would typically send data to a backend
     }
   };
-
   const handleCancel = () => {
     setFormData({
       nombre: '',
@@ -47,7 +43,6 @@ const NuevoAnalisisForm = () => {
     });
     setError('');
   };
-
   return (
     <div className="container">
       <div className='scale-in-hor-center'>
@@ -60,7 +55,6 @@ const NuevoAnalisisForm = () => {
         </div>
         <form className="form" onSubmit={handleSubmit}>
           {error && <p className="error-msg">{error}</p>}
-
           <label>Nombre</label>
           <input
             className="input-field"
@@ -69,7 +63,6 @@ const NuevoAnalisisForm = () => {
             value={formData.nombre}
             onChange={handleChange}
           />
-
           <label>Costo</label>
           <input
             className="input-field"
@@ -79,7 +72,6 @@ const NuevoAnalisisForm = () => {
             onChange={handleChange}
             step="0.01"
           />
-
           <label>Días de espera</label>
           <input
             className="input-field"
@@ -88,7 +80,6 @@ const NuevoAnalisisForm = () => {
             value={formData.diasEspera}
             onChange={handleChange}
           />
-
           <label>Descripción</label>
           <textarea
             className="input-field textarea"
@@ -96,7 +87,6 @@ const NuevoAnalisisForm = () => {
             value={formData.descripcion}
             onChange={handleChange}
           />
-
           <div className="buttons">
             <button type="submit" className="btn submit">Enviar</button>
           </div>

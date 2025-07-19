@@ -71,19 +71,7 @@ const FormBiometrica = ({ fixedUserId }) => {
     return (
         <div className="card">
         <h2>Nuevo pedido · Biometría hemática</h2>
-
         <form onSubmit={handleSubmit}>
-            {/* ——— PACIENTE ——— 
-            <div className="form-field">
-            <label>ID Paciente (usuarioId)</label>
-            <input
-                type="text"
-                value={usuarioId}
-                onChange={(e) => setUsuarioId(e.target.value)}
-                placeholder="68635e1f2122030410801823"
-            />
-            </div>
-            */}
             {!fixedUserId && (          // ← oculta input si llega prefijado
             <div className="form-field">
                 <label>ID Paciente (usuarioId)</label>
