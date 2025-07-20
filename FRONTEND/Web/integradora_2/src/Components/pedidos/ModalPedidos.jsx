@@ -152,14 +152,12 @@ const ModalPedidos = ({onClose}) => {
                 <div className="scale-in-hor-center">
                 <div className="modal-content">
                     <p className="titulo">Registrar Pedido</p>
-                    <button className="close-btn" onClick={onClose}>
-                    x
-                    </button>
-                    {renderFormPedido()}
-                    <div>
+                    <button className="close-btn" onClick={onClose}>x</button>
+                    <div className="modal-arreglado">
                     <button className="btn" onClick={avanzarPaso} disabled={!tipoPruebaSeleccionado ||loadingPedido}>{loadingPedido ? "Cargando..." : "Siguiente"}</button>
                     <button className="btn" onClick={retrocederPaso}>Regresar</button>
                     </div>
+                    {renderFormPedido()}
                 </div>
                 </div>
             )}

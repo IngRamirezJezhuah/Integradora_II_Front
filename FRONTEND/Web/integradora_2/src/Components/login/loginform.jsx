@@ -42,7 +42,7 @@ const LoginForm = ({ onSubmit }) => {
     }
     if (!data.token) {
       // si devuelve 200 pero sin token → error lógico
-      throw new Error("contraseña incorrecta vuelva a ingresarla");
+      throw new Error("contraseña/correo incorrecta vuelva a ingresarla");
     }
 
     /* —— éxito —— */

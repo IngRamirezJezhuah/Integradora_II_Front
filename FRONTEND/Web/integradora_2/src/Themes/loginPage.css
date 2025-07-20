@@ -96,10 +96,10 @@ form {
   display: grid;
   grid-template-rows: auto auto auto auto;
   max-width: 28vw;
-  margin-left: 12%;
+  margin-left: 1vw;
   padding: 2rem;
   background-color: #ffffff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
   border-radius: 0.5rem;
 }
 
@@ -111,7 +111,6 @@ form div {
 }
 
 form label {
-  
   z-index: 1;
   font-size: 0.875rem;
   font-weight: bold;
@@ -164,6 +163,13 @@ form a {
 
 form a:hover {
   text-decoration: underline;
+}
+
+form select{
+  padding: .5vw;
+  z-index: 1;
+  text-align: center;
+  text-decoration: none;
 }
 
 @media (max-width: 768px) {
