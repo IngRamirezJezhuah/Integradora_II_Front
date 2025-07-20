@@ -4,7 +4,8 @@ import DetallesPacienteAlta from '../pacientes/DetallesPacienteAlta';
 import { FromMuesBiometira } from '..';
 import { FormMuesSangre } from '..';
 import { requireTokenOrRedirect } from "../../utils/auth";
-import Swal from 'sweetalert2';
+//import Swal from 'sweetalert2';
+import CrearMuestra from './CrearMuestra';
 //import IdPedidos from './IdPedidos';
 
 const QS_ID = "686e0163fd380d4018dddcde";
@@ -69,84 +70,7 @@ const ModalMuestras = ({ onClose }) => {
   }, [apiUrl, pacienteSeleccionado, token]);
 
   // Crear muestra
-  const tomarMuestra = async () => {
-    try {
-      /*if (!pacienteSeleccionado || !pacienteSeleccionado.nombre || !pacienteSeleccionado._id) {
-        Swal.fire('Selecciona un paciente válido antes de crear la muestra');
-        return;
-      }*/
-      /*if (!pacienteSeleccionado || typeof pacienteSeleccionado !== 'object' || !pacienteSeleccionado._id) {
-        Swal.fire('Selecciona un paciente válido antes de crear la muestra');
-        return;
-      }
-
-
-      if (!pedidoId) {
-        Swal.fire("Selecciona un pedido válido antes de continuar");
-        return;
-      }
-
-      const tipoMuestra = analisisId === BH_ID ? "biometriaHematica" : "quimicaSanguinea";
-
-      const body = {
-        observaciones: observaciones,
-        nombrePaciente: pacienteSeleccionado.nombre,
-        idusuario: pacienteSeleccionado._id,
-        tipoMuestra: tipoMuestra,
-        pedidoId: pedidoId,
-      };
-
-      console.log("Body:", body);*/
-      console.log("Paciente seleccionado:", pacienteSeleccionado);
-
-      if (!pacienteSeleccionado || typeof pacienteSeleccionado !== 'object' || !pacienteSeleccionado._id) {
-        Swal.fire('Selecciona un paciente válido antes de crear la muestra');
-        return;
-      }
-
-      if (!pedidoId) {
-        Swal.fire("Selecciona un pedido válido antes de continuar");
-        return;
-      }
-
-      const tipoMuestra = analisisId === BH_ID ? "biometriaHematica" : "quimicaSanguinea";
-
-      const body = {
-        observaciones,
-        nombrePaciente: pacienteSeleccionado.nombre || "Sin nombre",
-        idusuario: pacienteSeleccionado._id,
-        tipoMuestra,
-        pedidoId,
-      };
-
-      console.log("Body:", body);
-
-      const res = await fetch(`${apiUrl}/muestras/`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify(body),
-      });
-
-      if (!res.ok) {
-        const d = await res.json().catch(() => ({}));
-        throw new Error(d.message || "No se pudo crear la muestra");
-      }
-
-      const resData = await res.json();
-      if (!resData || !resData.data || !resData.data._id) {
-        throw new Error("Respuesta inválida del servidor al crear muestra");
-      }
-
-      setMuestraId(resData.data._id);
-      await Swal.fire({ icon: "success", title: "Muestra registrada", timer: 1200, showConfirmButton: false });
-      avanzar(); // → paso 4
-    } catch (err) {
-      Swal.fire({ icon: "error", title: err.message || "Error", timer: 1500 });
-    }
-  };
+  
 
   // ✅ Mostrar resultados según tipo de análisis
   const renderResultados = () => {
@@ -190,14 +114,70 @@ const ModalMuestras = ({ onClose }) => {
           {paso === 3 && (
             <div className="form-field">
               <p className="titulo">Tomar muestra</p>
-  
+
+              <div className="form-field">
+                <label>Observaciones</label>
+                <textarea value={observaciones} onChange={(e) => setObs(e.target.value)} />
+              </div>
+
+              <div className="form-field">
+                <label>Selecciona un pedido asociado</label>
+                <select value={pedidoId} onChange={(e) => setPedidoId(e.target.value)}>
+                  <option value="">— Selecciona —</option>
+                  {pedidosPaciente.map(p => (
+                    <option key={p._id} value={p._id}>
+                      {p.analisis[0]?.nombre || `Pedido #${p._id.slice(-4)}`}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              {/* 💡 Mostrar CrearMuestra solo si todo está listo */}
+              {(pacienteSeleccionado && pedidoId && analisisId) && (
+                <CrearMuestra
+                  user={pacienteSeleccionado}
+                  pedidoId={pedidoId}
+                  tipoMuestra={analisisId === BH_ID ? "biometriaHematica" : "quimicaSanguinea"}
+                  observaciones={observaciones}
+                  onMuestraCreada={(id) => {
+                    console.log("🔄 ID de muestra capturada en Modal:", id);
+                    setMuestraId(id);
+                    avanzar(); // ir al paso 4
+                  }}
+                />
+              )}
+
+              <div style={{ marginTop: "1rem" }}>
+                <button className="btn" onClick={retroceder}>Regresar</button>
+              </div>
+            </div>
+          )}
+
+          {/* PASO 4 - Resultados */}
+          {paso === 4 && (
+            <>
+              <p className="titulo">Resultados</p>
+              {renderResultados()}
+            </>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default ModalMuestras;
+
+/*
+<div className="form-field">
+              <p className="titulo">Tomar muestra</p>
+                <FromMuesBiometira/>
                 <div className="form-field">
                   <label>Observaciones</label>
                   <textarea value={observaciones} onChange={(e) => setObs(e.target.value)} />
                 </div>
   
                 <div className="form-field">
-                  {/*<IdPedidos />*/}
                   <label>ID Pedido (opcional)</label>
                   <input  onChange={(e) => setPedidoId(e.target.value)} />
                 </div>
@@ -222,19 +202,4 @@ const ModalMuestras = ({ onClose }) => {
                 <button className="btn" onClick={avanzar} disabled={!pacienteSeleccionado}>Siguiente</button>
               </div>
             </div>
-          )}
-
-          {/* PASO 4 - Resultados */}
-          {paso === 4 && (
-            <>
-              <p className="titulo">Resultados</p>
-              {renderResultados()}
-            </>
-          )}
-        </div>
-      </div>
-    </div>
-  );
-};
-
-export default ModalMuestras;
+*/

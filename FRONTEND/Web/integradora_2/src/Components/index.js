@@ -36,6 +36,7 @@ export {default as FromMuesBiometira } from './muestras/FormMuesBiometira'
 export {default as FormMuesSangre } from './muestras/FormMuesSangre'
 export {default as IdPedidos } from './muestras/IdPedidos'
 export {default as InfoMuestras } from './muestras/InfoMuestras'
+export {default as CrearMuestra } from './muestras/CrearMuestra'
 
 //_____________pedidos_____________
 export {default as DetallesPedidos } from './pedidos/DetallesPedidos'
