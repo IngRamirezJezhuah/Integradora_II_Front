@@ -50,7 +50,7 @@ const LoginForm = ({ onSubmit }) => {
     if (onSubmit) onSubmit({ success: true, token: data.token });
 
     await Swal.fire({
-      title: "Login exitoso",
+      title: "Inicio de sesión exitoso",
       icon: "success",
       timer: 1200,
       showConfirmButton: false,

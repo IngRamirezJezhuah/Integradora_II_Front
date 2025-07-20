@@ -16,7 +16,8 @@ const IdPedidos = ({ seleccionado, analisisIdFiltro=null, onSelect = () => {} })
         if (!token) return;
         const fetchPed = async () => {
         try {
-            const res = await fetch(`${apiUrl}/pedidos`, {
+            const res = await fetch(`${apiUrl}/pedidos/`, {
+                method: "GET",
             headers: { "Content-Type":"application/json", Authorization:`Bearer ${token}` },
             });
             if (!res.ok) throw new Error("Error al obtener pedidos");
@@ -34,13 +35,17 @@ const IdPedidos = ({ seleccionado, analisisIdFiltro=null, onSelect = () => {} })
     if (loading) return <CargaBarras />;
     if (error)   return <p className="error">{error}</p>;
     /* ——— filtra si viene un id de análisis ——— */
-    const pedidosFiltrados = analisisIdFiltro
-        ? pedidos.filter(p => p.analisis?.[0]?.analisisId === analisisIdFiltro)
-        : pedidos;
+    const pedidosFiltrados = pedidos.filter(p => {
+        const coincideAnalisis = !analisisIdFiltro || p.analisis?.some(a => a.analisisId === analisisIdFiltro);
+        const coincidePaciente = seleccionado && seleccionado._id
+            ? p.usuarioId?._id === seleccionado._id
+            : false;
+        return coincideAnalisis && coincidePaciente;
+    });
 
     return (
         <div className="scroll">
-        {pedidos.map((p) => {
+        {pedidosFiltrados.map((p) => {
             const isSel = seleccionado === p._id;
             return (
             <div

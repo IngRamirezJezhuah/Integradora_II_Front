@@ -9,12 +9,25 @@ const CrearMuestra = ({ user, pedidoId, tipoMuestra, observaciones = "Sin observ
     const apiUrl = process.env.REACT_APP_API_URL;
 
     const handleCrearMuestra = async () => {
-        const body = {
+        /*const body = {
             observaciones: observaciones,
             nombrePaciente: `${user.nombre} ${user.apellidoPaterno} ${user.apellidoMaterno}`,
             idusuario: user._id,
             tipoMuestra: tipoMuestra,
             pedidoId: pedidoId,
+        };*/
+            if (!pedidoId || !user?._id) {
+            console.error("❌ Pedido o usuario no válido.");
+            Swal.fire("Error", "No se puede crear la muestra sin un pedido válido.", "error");
+            return;
+        }
+
+        const body = {
+            observaciones,
+            nombrePaciente: `${user.nombre} ${user.apellidoPaterno} ${user.apellidoMaterno}`,
+            idusuario: user._id,
+            tipoMuestra,
+            pedidoId,
         };
 
         try {
@@ -50,7 +63,7 @@ const CrearMuestra = ({ user, pedidoId, tipoMuestra, observaciones = "Sin observ
     return (
         <div>
             {!muestraId ? (
-                <button onClick={handleCrearMuestra}>Tomar muestra</button>
+                <button className="btn" onClick={handleCrearMuestra}>Tomar muestra</button>
             ) : (
                 <FormBiometrica muestraId={muestraId} onSuccess={() => console.log("Resultados guardados")} />
             )}

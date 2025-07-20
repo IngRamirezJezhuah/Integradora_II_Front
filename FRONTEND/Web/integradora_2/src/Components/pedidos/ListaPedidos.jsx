@@ -150,6 +150,9 @@ const ListaPedidos = () => {
         return {estado : 'pagado', clase: 'color-status-pagado'}
     }
 
+
+
+
     const status = getPedidos(pedidos.estado)
     return (
         <div>
